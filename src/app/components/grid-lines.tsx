@@ -17,7 +17,7 @@ export default function GridLines() {
 
     return (
         <div className="absolute inset-0 -z-0 overflow-hidden pointer-events-none">
-            <div className="absolute z-10 inset-0 bg-radial from-transparent via-black/20  to-black" />
+            <div className="absolute z-10 inset-0 bg-radial from-transparent via-background/20  to-background" />
             <svg
                 ref={svgRef}
                 onMouseMove={handleMouseMove}

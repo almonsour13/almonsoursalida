@@ -10,10 +10,10 @@ export default function Projects() {
             <div className="md:max-w-6xl w-full flex flex-col items-center min-h-screen">
                 <div className="w-full">
                     
-                    <h1 className="text-4xl md:text-7xl font-bold mb-4 leading-tight">
+                    <h1 className="text-2xl md:text-7xl font-bold mb-4 leading-tight">
                         Projects
                     </h1>
-                    <p className="text-base mb-6 text-gray-300">
+                    <p className="text-sm md:text-base mb-6 text-gray-300">
                         A selection of full stack applications showcasing my
                         ability to build responsive frontends, robust backends,
                         and seamless user experiences.
@@ -42,13 +42,13 @@ export default function Projects() {
                                     {project.tech.map((tag, Index) => (
                                         <span
                                             key={Index}
-                                            className="px-3 py-1 rounded-full text-sm font-medium bg-white/10 text-gray-300 border border-white/10"
+                                            className="px-3 py-1 rounded-full text-xs md:text-sm font-medium bg-white/10 text-gray-300 border border-white/10"
                                         >
                                             {tag}
                                         </span>
                                     ))}
                                 </div>
-                                <h3 className="text-2xl md:text-3xl font-bold text-white">
+                                <h3 className="text-xl md:text-2xl font-bold text-white">
                                     {project.title}
                                 </h3>
 
@@ -59,13 +59,13 @@ export default function Projects() {
                                 <div className="flex gap-2">
                                     <a
                                         href=""
-                                        className="flex items-center justify-between bg-white/10 px-6 py-2 border border-white/10 rounded-full text-xs"
+                                        className="flex items-center justify-between bg-white/10 px-3 py-1 border border-white/10 rounded-full text-xs"
                                     >
                                         Visit
                                     </a>
                                     <a
                                         href=""
-                                        className="flex items-center justify-between bg-white/10 px-6 py-2 border border-white/10 rounded-full  text-xs"
+                                        className="flex items-center justify-between bg-white/10 px-3 py-1 border border-white/10 rounded-full  text-xs md:"
                                     >
                                         Source Code
                                     </a>

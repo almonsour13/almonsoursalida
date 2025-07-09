@@ -15,10 +15,10 @@ export default function Skills() {
                             text="Projects"
                         />
                     </div> */}
-                    <h1 className="text-4xl md:text-7xl font-bold mb-4 leading-tight">
+                    <h1 className="text-2xl md:text-7xl font-bold mb-4 leading-tight">
                         Skills
                     </h1>
-                    <p className="text-base mb-6 text-gray-300  ">
+                    <p className="text-sm md:text-base mb-6 text-gray-300  ">
                         A selection of full stack applications showcasing my
                         ability to build responsive frontends, robust backends,
                         and seamless user experiences.

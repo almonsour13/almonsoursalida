@@ -9,10 +9,10 @@ export default function Contact() {
         >
             <div className=" md:max-w-6xl w-full flex flex-col items-center gap-12">
                 <div className="flex-1 w-full">
-                    <h1 className=" text-4xl md:text-7xl font-bold mb-4 leading-tight">
+                    <h1 className=" text-2xl md:text-7xl font-bold mb-4 leading-tight">
                         Get in touch
                     </h1>
-                    <p className="text-base mb-6 text-gray-300  ">
+                    <p className="text-sm md:text-base mb-6 text-gray-300  ">
                         Ready to bring your ideas to life? {"I'm"} always excited to
                         work on new projects and collaborate with amazing
                         people.
@@ -21,7 +21,7 @@ export default function Contact() {
                 <div className="w-full flex flex-col md:flex-row gap-8">
                     <div className="flex-1 flex flex-col gap-2 items-start justify-start">
                         <div className="flex items-center space-x-4">
-                            <div className="p-2 ">
+                            <div className="py-2 ">
                                 <Mail className="w-6 h-6" />
                             </div>
                             <div>
@@ -31,7 +31,7 @@ export default function Contact() {
                         </div>
 
                         <div className="flex items-center space-x-4">
-                            <div className="p-2 rounded-lg">
+                            <div className="py-2 rounded-lg">
                                 <Phone className="w-6 h-6" />
                             </div>
                             <div>
@@ -41,7 +41,7 @@ export default function Contact() {
                         </div>
 
                         <div className="flex items-center space-x-4">
-                            <div className="p-2 rounded-lg">
+                            <div className="py-2 rounded-lg">
                                 <MapPin className="w-6 h-6" />
                             </div>
                             <div>
@@ -54,7 +54,7 @@ export default function Contact() {
                     </div>
                     <div className="flex-1">
                         <div className="bg-white/5 backdrop-blur-lg border  border-white/10 rounded-2xl">
-                            <div className="p-8">
+                            <div className="p-4 md:p-8">
                                 <form className="space-y-6">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div>

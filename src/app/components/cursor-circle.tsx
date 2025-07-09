@@ -18,7 +18,7 @@ export default function CursorCircle() {
     return (
         <>
             <div
-                className="fixed"
+                className="fixed hidden md:block"
                 style={{
                     left: mousePosition.x - 25,
                     top: mousePosition.y - 25,
@@ -27,7 +27,7 @@ export default function CursorCircle() {
                 <div className="absolute top-[24px] left-[24px] rounded-full w-1 h-1 bg-white"/>
             </div>
             <div
-                className="fixed pointer-events-none z-50 transition-all duration-300 ease-out"
+                className="fixed hidden md:block pointer-events-none z-50 transition-all duration-300 ease-out"
                 style={{
                     left: mousePosition.x - 25,
                     top: mousePosition.y - 25,

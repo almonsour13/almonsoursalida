@@ -13,10 +13,10 @@ export default function Hero() {
             </div>
             <div className=" md:max-w-6xl w-full flex items-center min-h-screen">
                 <div className="flex-1">
-                    <h1 className=" text-4xl md:text-7xl font-bold mb-4 leading-tight">
+                    <h1 className=" text-2xl md:text-7xl font-bold mb-4 leading-tight">
                         Hi, <br /> {"I'm"} Al-Monsour Salida
                     </h1>
-                    <p className="text-base mb-6 text-gray-300">
+                    <p className="text-sm md:text-base mb-6 text-gray-300">
                         {"I'm"} a Full Stack Web Developer with experience in
                         designing, developing, and deploying dynamic web
                         applications. I specialize in JavaScript, React,
@@ -26,13 +26,13 @@ export default function Hero() {
                     <div className="flex gap-2">
                         <a
                             href="#contact"
-                            className="flex items-center justify-between bg-white/10 px-6 py-2 border border-white/10 rounded-full text-xs"
+                            className="flex items-center justify-between bg-white/10 px-3 py-1 border border-white/10 rounded-full text-xs md:text-sm"
                         >
                             Contact Me
                         </a>
                         <a
                             href=""
-                            className="flex items-center justify-between bg-white/10 px-6 py-2 border border-white/10 rounded-full  text-xs"
+                            className="flex items-center justify-between bg-white/10 px-3 py-1 border border-white/10 rounded-full  text-xs md:text-sm"
                         >
                             Download CV
                         </a>
