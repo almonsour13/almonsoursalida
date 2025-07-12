@@ -8,7 +8,7 @@ export default function SectionWrapper({
     id?: string;
 }>) {
     return (
-        <section className={`pl-6 pr-16 md:pr-8 w-full ${className}`} id={id}>
+        <section className={`px-4 w-full ${className}`} id={id}>
             {children}
         </section>
     );

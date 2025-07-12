@@ -24,7 +24,7 @@ export default function CursorCircle() {
                     top: mousePosition.y - 25,
                 }}
             >
-                <div className="absolute top-[24px] left-[24px] rounded-full w-1 h-1 bg-white"/>
+                <div className="absolute top-[24px] left-[24px] rounded-full w-1 h-1 bg-foreground" />
             </div>
             <div
                 className="fixed hidden md:block pointer-events-none z-50 transition-all duration-300 ease-out"
@@ -33,23 +33,25 @@ export default function CursorCircle() {
                     top: mousePosition.y - 25,
                 }}
             >
-                <svg width="50" height="50" className="animate-spin-slow">
+                <svg
+                    width="50"
+                    height="50"
+                    className="animate-spin-slow stroke-foreground"
+                >
                     <circle
                         cx="25"
                         cy="25"
                         r="20"
                         fill="none"
-                        stroke="rgba(255, 255, 255, 0.5)"
-                        strokeWidth="1"
+                        strokeWidth=".5"
                         strokeDasharray="10 5"
-                        className="animate-pulse"
+                        // className="animate-pulse"
                     />
                     <circle
                         cx="25"
                         cy="25"
                         r="15"
                         fill="none"
-                        stroke="rgba(255, 255, 255, 0.2)"
                         strokeWidth="0.5"
                         strokeDasharray="5 3"
                         className="animate-reverse-spin"

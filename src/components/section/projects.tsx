@@ -10,16 +10,16 @@ export default function Projects() {
             <div className="md:max-w-6xl w-full flex flex-col items-center min-h-screen">
                 <div className="w-full">
                     
-                    <h1 className="text-2xl md:text-7xl font-bold mb-4 leading-tight">
+                    <h1 className="text-3xl md:text-7xl font-bold mb-2 md:mb-4 leading-tight">
                         Projects
                     </h1>
-                    <p className="text-sm md:text-base mb-6 text-gray-300">
+                    <p className="text-sm md:text-base mb-6 text-foreground">
                         A selection of full stack applications showcasing my
                         ability to build responsive frontends, robust backends,
                         and seamless user experiences.
                     </p>
                 </div>
-                <div className="flex flex-col w-full gap-8">
+                <div className="flex flex-col w-full gap-4 md:gap-8">
                     {projects.map((project, index) => (
                         <div
                             key={index}
@@ -30,42 +30,42 @@ export default function Projects() {
                             } pt-8 overflow-hidden gap-4 bg-transparent rounded-xl`}
                         >
                             <div
-                                className={`flex-1 rounded-2xl aspect-video max-w-lg h-80 bg-white/20 ${
+                                className={`flex-1 rounded-2xl aspect-video max-w-lg h-80 bg-card ${
                                     index % 2 === 0
                                         ? "rounded-tr-2xl"
                                         : "rounded-tl-2xl"
                                 }`}
                             >
                             </div>
-                            <div className="flex-1 flex items-start justify-center flex-col gap-2  md:p-4 pt-0">
-                                <div className="flex items-center gap-3 flex-wrap">
+                            <div className="flex-1 flex items-start justify-center flex-col gap-2 md:p-4 pt-0">
+                                <div className="flex items-center gap-2 flex-wrap">
                                     {project.tech.map((tag, Index) => (
                                         <span
                                             key={Index}
-                                            className="px-3 py-1 rounded-full text-xs md:text-sm font-medium bg-white/10 text-gray-300 border border-white/10"
+                                            className="px-3 py-1 rounded-full text-xs bg-card border"
                                         >
                                             {tag}
                                         </span>
                                     ))}
                                 </div>
-                                <h3 className="text-xl md:text-2xl font-bold text-white">
+                                <h3 className="text-2xl md:text-2xl font-bold">
                                     {project.title}
                                 </h3>
 
                                 {/* Description */}
-                                <p className="text-sm text-gray-300 leading-relaxed">
+                                <p className="text-sm text-foreground leading-relaxed">
                                     {project.description}
                                 </p>
                                 <div className="flex gap-2">
                                     <a
                                         href=""
-                                        className="flex items-center justify-between bg-white/10 px-3 py-1 border border-white/10 rounded-full text-xs"
+                                        className="flex items-center justify-between px-3 py-1 bg-card border rounded-full text-xs"
                                     >
                                         Visit
                                     </a>
                                     <a
                                         href=""
-                                        className="flex items-center justify-between bg-white/10 px-3 py-1 border border-white/10 rounded-full  text-xs md:"
+                                        className="flex items-center justify-between px-3 py-1 bg-card border rounded-full  text-xs"
                                     >
                                         Source Code
                                     </a>

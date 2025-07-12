@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 
-export default function GridLines() {
+export default function GridLines2() {
     const svgRef = useRef<SVGSVGElement>(null);
     const [coords, setCoords] = useState({ x: 50, y: 50 }); // percentages
 
@@ -16,7 +16,7 @@ export default function GridLines() {
     };
     return (
         <div className="absolute -z-0 inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute -z-10 inset-0 bg-radial from-transparent via-black/40  to-black" />
+            <div className="absolute -z-10 inset-0 bg-radial from-transparent via-background/40  to-black" />
             <svg
                 ref={svgRef}
                 onMouseMove={handleMouseMove}
