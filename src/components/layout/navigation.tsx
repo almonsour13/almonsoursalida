@@ -93,7 +93,7 @@ export default function NavigationMenu() {
     return (
         <>
             <div className={`backdrop-blur-sm fixed z-30 top-4 md:top-12 left-4 md:left-46 flex items-center gap-2 transform transition duration-300 ease-in-out  ${
-                activeSection === "hero"
+                activeSection === "hero" || scrollProgress === 0 
                             ? "-translate-y-16 md:-translate-y-24"
                             : "translate-y-0"
             }`}>
