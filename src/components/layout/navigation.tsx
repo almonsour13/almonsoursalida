@@ -319,7 +319,7 @@ export default function NavigationMenu() {
                                         onClick={() =>
                                             handleSectionClick(section.id)
                                         }
-                                        className={`group relative flex items-center gap-4 w-full text-left transition-all duration-300 hover:scale-105 ${
+                                        className={`group cursor-pointer relative flex items-center gap-4 w-full text-left transition-all duration-300 hover:scale-105 ${
                                             isActive ? "" : ""
                                         }`}
                                     >

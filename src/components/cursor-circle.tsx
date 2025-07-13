@@ -34,7 +34,7 @@ export default function CursorCircle() {
         <>
             {/* Center dot */}
             <div
-                className={`fixed hidden z-50 md:block transition-all duration-200 ease-out`}
+                className={`fixed hidden md:block transition-all duration-200 ease-out`}
                 style={{
                     left: mousePosition.x - 25,
                     top: mousePosition.y - 25,
