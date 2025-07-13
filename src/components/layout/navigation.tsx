@@ -21,6 +21,7 @@ export default function NavigationMenu() {
         { id: "hero", label: "Home" },
         { id: "projects", label: "Projects" },
         { id: "skills", label: "Skills" },
+        { id: "service", label: "Service" },
         { id: "contact", label: "Contact" },
     ];
 
@@ -91,6 +92,19 @@ export default function NavigationMenu() {
 
     return (
         <>
+            <div className={`backdrop-blur-sm fixed z-30 top-4 md:top-12 left-4 md:left-46 flex items-center gap-2 transform transition duration-300 ease-in-out  ${
+                activeSection === "hero"
+                            ? "-translate-y-16 md:-translate-y-24"
+                            : "translate-y-0"
+            }`}>
+                <div className="w-12 h-12 rounded-full overflow-hidden">
+                    <img src="/image/profile.JPG" alt="" className="h-full w-full"/>
+                </div>
+                <div className="flex flex-col">
+                    <h1>Al-Monsour M. Salida</h1>
+                    <p className="text-xs text-muted-foreground">Full Stack Developer</p>
+                </div>
+            </div>
             {/* socials */}
             <div className="fixed z-50 bottom-4 md:bottom-12 left-4 flex flex-col gap-2">
                 <AnimatePresence>

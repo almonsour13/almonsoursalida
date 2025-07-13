@@ -11,7 +11,7 @@ export default function Hero() {
             id="hero"
             className="flex items-center justify-center relative"
         >
-            <div className=" md:max-w-6xl w-full flex items-center min-h-screen">
+            <div className=" md:max-w-6xl w-full flex items-center justify-center min-h-screen">
                 <div className="flex-1 flex flex-col gap-2 md:gap-4">
                     <motion.h1 
                         className="text-6xl md:text-9xl font-bold leading-tights uppercase"
@@ -121,6 +121,9 @@ export default function Hero() {
                         </div>
                     </motion.div>
                 </div>
+                {/* <div className="hidden md:block bg-red-400 w-80 h-80">
+                    <img src="/image/profile.JPG" alt="" />
+                </div> */}
             </div>
             <GridLines />
         </SectionWrapper>
