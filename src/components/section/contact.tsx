@@ -9,7 +9,7 @@ export default function Contact() {
         >
             <div className=" md:max-w-6xl w-full flex flex-col items-center gap-4">
                 <div className="flex-1 w-full">
-                    <h1 className=" text-2xl md:text-7xl font-bold mb-4 leading-tight">
+                    <h1 className=" text-6xl md:text-9xl font-bold mb-4 uppercase">
                         Get in touch
                     </h1>
                     <p className="text-sm md:text-base mb-6 text-foreground">
@@ -58,7 +58,7 @@ export default function Contact() {
                                 <form className="space-y-4 md:space-y-6 text-sm ">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block font-mediummb-2">
+                                            <label className="block mb-2">
                                                 Name
                                             </label>
                                             <input
@@ -67,7 +67,7 @@ export default function Contact() {
                                             />
                                         </div>
                                         <div>
-                                            <label className="blockmb-2">
+                                            <label className="block mb-2">
                                                 Email
                                             </label>
                                             <input
@@ -79,7 +79,7 @@ export default function Contact() {
                                     </div>
 
                                     <div>
-                                        <label className="block font-medium mb-2">
+                                        <label className="block mb-2">
                                             Subject
                                         </label>
                                         <input
@@ -89,7 +89,7 @@ export default function Contact() {
                                     </div>
 
                                     <div>
-                                        <label className="block font-medium mb-2">
+                                        <label className="block mb-2">
                                             Message
                                         </label>
                                         <textarea

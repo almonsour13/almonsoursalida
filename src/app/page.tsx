@@ -8,7 +8,7 @@ import Skills from "../components/section/skills";
 
 export default function Home() {
     return (
-        <div className="flex flex-col gap-20 w-full relative font-monos ">
+        <div className="flex flex-col gap-20 w-full relative font-sans ">
             <NavigationMenu />
             <CursorCircle />
             <Hero />

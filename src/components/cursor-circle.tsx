@@ -4,30 +4,56 @@ import { useState, useEffect } from "react";
 
 export default function CursorCircle() {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [isClicking, setIsClicking] = useState(false);
+
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
             setMousePosition({ x: e.clientX, y: e.clientY });
         };
 
+        const handleMouseDown = () => {
+            setIsClicking(true);
+        };
+
+        const handleMouseUp = () => {
+            setIsClicking(false);
+        };
+
         window.addEventListener("mousemove", handleMouseMove);
+        window.addEventListener("mousedown", handleMouseDown);
+        window.addEventListener("mouseup", handleMouseUp);
 
         return () => {
             window.removeEventListener("mousemove", handleMouseMove);
+            window.removeEventListener("mousedown", handleMouseDown);
+            window.removeEventListener("mouseup", handleMouseUp);
         };
     }, []);
+
     return (
         <>
+            {/* Center dot */}
             <div
-                className="fixed hidden md:block"
+                className={`fixed hidden z-50 md:block transition-all duration-200 ease-out`}
                 style={{
                     left: mousePosition.x - 25,
                     top: mousePosition.y - 25,
                 }}
             >
-                <div className="absolute top-[24px] left-[24px] rounded-full w-1 h-1 bg-foreground" />
+                <div
+                    className={`absolute top-[24px] left-[24px] rounded-full w-1 h-1 transition-all duration-200 ease-out ${
+                        isClicking
+                            ? "bg-foreground scale-150 shadow-lg shadow-foreground/50"
+                            : "bg-foreground scale-100"
+                    }`}
+                />
             </div>
+
+            {/* Animated circles */}
             <div
-                className="fixed hidden md:block pointer-events-none z-50 transition-all duration-300 ease-out"
+                className={`fixed hidden md:block pointer-events-none z-50 transition-all duration-300 ease-out ${
+                    isClicking ? "scale-75" : "scale-100"
+                }`}
                 style={{
                     left: mousePosition.x - 25,
                     top: mousePosition.y - 25,
@@ -36,28 +62,38 @@ export default function CursorCircle() {
                 <svg
                     width="50"
                     height="50"
-                    className="animate-spin-slow stroke-foreground"
+                    className={`transition-all duration-200 ${
+                        isClicking
+                            ? "animate-spin stroke-foreground"
+                            : "animate-spin-slow stroke-foreground"
+                    }`}
                 >
                     <circle
                         cx="25"
                         cy="25"
                         r="20"
                         fill="none"
-                        strokeWidth=".5"
+                        strokeWidth={isClicking ? "1.5" : "1"}
                         strokeDasharray="10 5"
-                        // className="animate-pulse"
-                    />
-                    <circle
-                        cx="25"
-                        cy="25"
-                        r="15"
-                        fill="none"
-                        strokeWidth="0.5"
-                        strokeDasharray="5 3"
-                        className="animate-reverse-spin"
+                        className={`transition-all duration-200 ${
+                            isClicking ? "drop-shadow-lg" : ""
+                        }`}
                     />
                 </svg>
             </div>
+
+            {/* Click ripple effect */}
+            {isClicking && (
+                <div
+                    className="fixed hidden md:block pointer-events-none z-40"
+                    style={{
+                        left: mousePosition.x - 30,
+                        top: mousePosition.y - 30,
+                    }}
+                >
+                    <div className="w-[60px] h-[60px] rounded-full border border-foreground/30 animate-ping" />
+                </div>
+            )}
         </>
     );
 }
