@@ -8,7 +8,7 @@ export default function SectionWrapper({
     id?: string;
 }>) {
     return (
-        <section className={`px-4 w-full ${className}`} id={id}>
+        <section className={`px-4 w-full flex items-center justify-center   ${className}`} id={id}>
             {children}
         </section>
     );

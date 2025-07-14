@@ -5,19 +5,22 @@ import { useState, useEffect } from "react";
 export default function CursorCircle() {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const [isClicking, setIsClicking] = useState(false);
+    const [isHoveringImageContent, setIsHoveringImageContent] = useState(false);
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
             setMousePosition({ x: e.clientX, y: e.clientY });
+
+            const element = document.elementFromPoint(e.clientX, e.clientY);
+            if (element && element.closest(".image-content")) {
+                setIsHoveringImageContent(true);
+            } else {
+                setIsHoveringImageContent(false);
+            }
         };
 
-        const handleMouseDown = () => {
-            setIsClicking(true);
-        };
-
-        const handleMouseUp = () => {
-            setIsClicking(false);
-        };
+        const handleMouseDown = () => setIsClicking(true);
+        const handleMouseUp = () => setIsClicking(false);
 
         window.addEventListener("mousemove", handleMouseMove);
         window.addEventListener("mousedown", handleMouseDown);
@@ -30,11 +33,25 @@ export default function CursorCircle() {
         };
     }, []);
 
+    // ⛔ If hovering over an image-content element, render nothing
+    if (isHoveringImageContent)
+        return (
+            <div
+                className="fixed pointer-events-none z-50 h-20 w-20 rounded-full flex items-center justify-center transition-all duration-300 ease-out text-background text-xs backdrop-invert  bg-foreground/80  border border-foreground"
+                style={{
+                    left: mousePosition.x - 40,
+                    top: mousePosition.y - 40,
+                }}
+            >
+                View
+            </div>
+        );
+
     return (
         <>
             {/* Center dot */}
             <div
-                className={`fixed hidden md:block transition-all duration-200 ease-out`}
+                className="fixed hidden md:block -z-10 transition-all duration-200 ease-out"
                 style={{
                     left: mousePosition.x - 25,
                     top: mousePosition.y - 25,
@@ -65,7 +82,7 @@ export default function CursorCircle() {
                     className={`transition-all duration-200 ${
                         isClicking
                             ? "animate-spin stroke-foreground"
-                            : "animate-spin-slow stroke-foreground"
+                            : "animate-spin-slow stroke-foreground "
                     }`}
                 >
                     <circle

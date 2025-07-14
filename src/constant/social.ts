@@ -9,7 +9,7 @@ export const socials = [
   {
     name: "Facebook",
     icon: Facebook,
-    link: "https://facebook.com/yourusername",
+    link: "https://www.facebook.com/almonsour.salida",
   },
   {
     name: "LinkedIn",
@@ -19,11 +19,11 @@ export const socials = [
   {
     name: "Instagram",
     icon: Instagram,
-    link: "https://instagram.com/yourusername",
+    link: "https://www.instagram.com/al_mnsr13/",
   },
   {
     name: "GitHub",
     icon: Github,
-    link: "https://github.com/yourusername",
+    link: "https://github.com/almonsour13",
   },
 ];
