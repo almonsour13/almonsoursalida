@@ -7,30 +7,20 @@ import SectionWrapper from "../section-wrapper";
 
 export default function Contact() {
     return (
-        <SectionWrapper
-            id="contact"
-            className="relative py-16"
-        >
+        <SectionWrapper id="contact" className="relative py-16">
             <div className="md:max-w-6xl w-full  min-h-screen">
-                {/* Magazine Header */}
-                <div className="mb-16 relative">
-                    <div className="flex items-center gap-8 mb-8">
-                        <div className="w-16 h-0.5 bg-primary"></div>
+                <div className="w-full">
+                    <div className="flex items-center gap-4 md:gap-8 mb-8">
+                        <div className="w-8 md:w-16 h-0.5 bg-primary"></div>
                         <span className="text-sm font-medium tracking-widest uppercase text-primary">
                             Contact
                         </span>
                         <div className="flex-1 h-0.5 bg-border"></div>
                     </div>
-                    
-                    <div className="grid md:grid-cols-3 gap-8 items-end">
-                        <div className="md:col-span-2">
-                            <h1 className="text-5xl md:text-8xl font-bold uppercase tracking-tight text-foreground mb-6 leading-none">
-                                Get in touch 
-                            </h1>
-                            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
-                                Ready to bring your ideas to life? {"I'm"} always excited to work on new projects and collaborate with amazing people.
-                            </p>
-                        </div>
+                    <div className="flex justify-between w-full">
+                        <h1 className="text-5xl md:text-8xl font-bold uppercase tracking-tight text-foreground mb-6 leading-none">
+                            Get in touch
+                        </h1>
                         <div className="hidden md:block">
                             <div className="text-right">
                                 <div className="text-6xl font-light text-primary/20">
@@ -42,6 +32,11 @@ export default function Contact() {
                             </div>
                         </div>
                     </div>
+                    <p className="text-sm md:text-base mb-6 text-muted-foreground">
+                        Ready to bring your ideas to life? {"I'm"} always
+                        excited to work on new projects and collaborate with
+                        amazing people.
+                    </p>
                 </div>
 
                 {/* Main Content Grid */}
@@ -59,10 +54,10 @@ export default function Contact() {
                                     Contact Info
                                 </span>
                             </div>
-                            
+
                             <div className="space-y-6">
                                 {/* Email */}
-                                <motion.div 
+                                <motion.div
                                     className="group flex items-start gap-4 p-4 rounded-2xl border hover:border-primary/20 transition-all duration-300"
                                     whileHover={{ scale: 1.02 }}
                                     initial={{ opacity: 0, x: -20 }}
@@ -73,13 +68,17 @@ export default function Contact() {
                                         <Mail className="w-5 h-5 text-primary" />
                                     </div>
                                     <div>
-                                        <p className="text-sm text-muted-foreground uppercase tracking-wide mb-1">Email</p>
-                                        <p className="text-foreground font-medium">almonsoursalida@gmail.com</p>
+                                        <p className="text-sm text-muted-foreground uppercase tracking-wide mb-1">
+                                            Email
+                                        </p>
+                                        <p className="text-foreground font-medium">
+                                            almonsoursalida@gmail.com
+                                        </p>
                                     </div>
                                 </motion.div>
 
                                 {/* Phone */}
-                                <motion.div 
+                                <motion.div
                                     className="group flex items-start gap-4 p-4 rounded-2xl border hover:border-primary/20 transition-all duration-300"
                                     whileHover={{ scale: 1.02 }}
                                     initial={{ opacity: 0, x: -20 }}
@@ -90,13 +89,17 @@ export default function Contact() {
                                         <Phone className="w-5 h-5 text-primary" />
                                     </div>
                                     <div>
-                                        <p className="text-sm text-muted-foreground uppercase tracking-wide mb-1">Phone</p>
-                                        <p className="text-foreground font-medium">+639569932496</p>
+                                        <p className="text-sm text-muted-foreground uppercase tracking-wide mb-1">
+                                            Phone
+                                        </p>
+                                        <p className="text-foreground font-medium">
+                                            +639569932496
+                                        </p>
                                     </div>
                                 </motion.div>
 
                                 {/* Location */}
-                                <motion.div 
+                                <motion.div
                                     className="group flex items-start gap-4 p-4 rounded-2xl border hover:border-primary/20 transition-all duration-300"
                                     whileHover={{ scale: 1.02 }}
                                     initial={{ opacity: 0, x: -20 }}
@@ -107,8 +110,12 @@ export default function Contact() {
                                         <MapPin className="w-5 h-5 text-primary" />
                                     </div>
                                     <div>
-                                        <p className="text-sm text-muted-foreground uppercase tracking-wide mb-1">Location</p>
-                                        <p className="text-foreground font-medium">Lupon, Davao Oriental, Philippines</p>
+                                        <p className="text-sm text-muted-foreground uppercase tracking-wide mb-1">
+                                            Location
+                                        </p>
+                                        <p className="text-foreground font-medium">
+                                            Lupon, Davao Oriental, Philippines
+                                        </p>
                                     </div>
                                 </motion.div>
                             </div>
@@ -132,8 +139,12 @@ export default function Contact() {
                                     <User className="w-5 h-5 text-primary" />
                                 </div>
                                 <div>
-                                    <p className="font-medium text-foreground">Al-Monsour Salida</p>
-                                    <p className="text-sm text-muted-foreground">Full Stack Developer</p>
+                                    <p className="font-medium text-foreground">
+                                        Al-Monsour Salida
+                                    </p>
+                                    <p className="text-sm text-muted-foreground">
+                                        Full Stack Developer
+                                    </p>
                                 </div>
                             </div>
                         </motion.div>
@@ -151,10 +162,13 @@ export default function Contact() {
                             <div className="bg-card p-6 border-b">
                                 <div className="flex items-center gap-3">
                                     <MessageSquare className="w-6 h-6 text-primary" />
-                                    <h3 className="text-xl font-semibold text-foreground">Send a Message</h3>
+                                    <h3 className="text-xl font-semibold text-foreground">
+                                        Send a Message
+                                    </h3>
                                 </div>
                                 <p className="text-sm text-muted-foreground mt-2">
-                                    Fill out the form below and {"I'll"} get back to you within 24 hours.
+                                    Fill out the form below and {"I'll"} get
+                                    back to you within 24 hours.
                                 </p>
                             </div>
 
@@ -245,11 +259,14 @@ export default function Contact() {
                 <div className="mt-16 pt-8">
                     <div className="text-center">
                         <p className="text-muted-foreground mb-4">
-                            Prefer a different way to connect? Find me on social media or send a direct email.
+                            Prefer a different way to connect? Find me on social
+                            media or send a direct email.
                         </p>
                         <div className="flex items-center justify-center gap-4">
                             <div className="w-12 h-0.5 bg-primary"></div>
-                            <span className="text-sm font-medium text-primary">{"Let's"} build something great together</span>
+                            <span className="text-sm font-medium text-primary">
+                                {"Let's"} build something great together
+                            </span>
                             <div className="w-12 h-0.5 bg-primary"></div>
                         </div>
                     </div>

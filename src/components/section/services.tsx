@@ -29,7 +29,7 @@ export default function Services() {
                 </div>
 
                 {/* Layout: Featured Left, List Right */}
-                <div className="grid md:grid-cols-12 gap-12">
+                <div className="grid md:grid-cols-12 gap-6 md:gap-12">
                     {/* Featured Service */}
                     <motion.div
                         initial={{ opacity: 0, x: -40 }}

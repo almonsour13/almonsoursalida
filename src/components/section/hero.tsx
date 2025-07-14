@@ -26,8 +26,8 @@ export default function Hero() {
                         <div className="w-8 h-0.5 bg-border"></div>
                     </div>
                 </div>
-                <div className="w-full flex flex-col md:flex-row gap-2 md:gap-4">
-                    <div className="flex-2 flex flex-col gap-2 md:gap-4">
+                <div className="w-full flex flex-col md:flex-row gap-4">
+                    <div className="flex-2 flex flex-col gap-4">
                         <motion.h1
                             className="text-6xl md:text-9xl font-bold leading-tights uppercase"
                             initial={{ opacity: 0, y: 50 }}
@@ -65,7 +65,7 @@ export default function Hero() {
                                     About Me
                                 </span>
                             </div>
-                            <p className="text-base text-muted-foreground leading-relaxed max-w-2xl">
+                            <p className="text-base text-muted-foreground max-w-2xl">
                                 {"I'm"} a Web Developer with experience in
                                 designing, developing, and deploying dynamic web
                                 applications. I specialize in JavaScript, React,
@@ -135,8 +135,8 @@ export default function Hero() {
                             <motion.a
                                 href="#contact"
                                 className={cn(
-                                    "group flex items-center gap-2 px-6 py-3 rounded-full",
-                                    "bg-primary text-primary-foreground font-medium",
+                                    "group flex items-center gap-2 px-4 py-2 rounded-full",
+                                    "bg-primary text-primary-foreground font-medium text-sm",
                                     "hover:bg-primary/90 transition-all duration-300",
                                     "hover:shadow-xl"
                                 )}
@@ -149,8 +149,8 @@ export default function Hero() {
                             <motion.a
                                 href="#"
                                 className={cn(
-                                    "group flex items-center gap-2 px-6 py-3 rounded-full",
-                                    "bg-card border text-foreground font-medium",
+                                    "group flex items-center gap-2 px-4 py-2    rounded-full",
+                                    "bg-card border text-foreground font-medium text-sm",
                                     "hover:border-primary/50 transition-all duration-300"
                                 )}
                                 whileHover={{ scale: 1.05 }}
@@ -161,7 +161,7 @@ export default function Hero() {
                             </motion.a>
                         </motion.div>
                     </div>
-                    <div className="flex-1 flex flex-col gap-4 md:gap-8 pt-4">
+                    <div className="flex-1 flex flex-col gap-4 md:gap-8 md:pt-4">
                         <motion.div
                             className="relative"
                             initial={{ opacity: 0, scale: 0.8 }}
@@ -183,6 +183,7 @@ export default function Hero() {
                                     <Image
                                         alt="profile-image"
                                         src="/image/profile.JPG"
+                                        // src="/image/anime-profile.png"
                                         className="w-full h-full"
                                         width={1000}
                                         height={1000}
@@ -213,7 +214,7 @@ export default function Hero() {
                                         key={index}
                                         href={social.link}
                                         className={cn(
-                                            "group flex items-center justify-center w-12 h-12 rounded-full",
+                                            "group flex items-center justify-center w-10 h-10 rounded-full",
                                             "bg-card border text-foreground",
                                             "hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
                                         )}

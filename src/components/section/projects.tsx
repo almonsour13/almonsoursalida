@@ -22,7 +22,7 @@ export default function Projects() {
     };
     return (
         <SectionWrapper id="projects" className="">
-            <div className="md:max-w-6xl w-full flex flex-col gap-8 items-center min-h-screen">
+            <div className="md:max-w-6xl w-full flex flex-col items-center min-h-screen">
                 <div className="w-full">
                     <div className="flex items-center gap-4 md:gap-8 mb-8">
                         <div className="w-8 md:w-16 h-0.5 bg-primary"></div>
@@ -55,7 +55,7 @@ export default function Projects() {
                         and seamless user experiences.
                     </p>
                 </div>
-                <div className="flex flex-col w-full gap-12 md:gap-16">
+                <div className="flex flex-col w-full gap-6 md:gap-12">
                     {projects.slice(0, 3).map((project, index) => (
                         <motion.article
                             key={index}
@@ -69,7 +69,7 @@ export default function Projects() {
                             } pt-8 overflow-hidden justify-between gap-4 bg-transparent rounded-xl`}
                         >
                             <div
-                                className="group image-content relative flex items-center justify-center flex-1 p-4 h-80 aspect-video max-w-lg rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 border"
+                                className="group cursor-pointer image-content relative flex items-center justify-center flex-1 p-4 h-80 aspect-video max-w-lg rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 border"
                                 onClick={() => handleImageClick(project)}
                             >
                                 <div className="absolute -z-10 top-0 left-0 text-8xl md:text-9xl font-bold text-primary/5 select-none">
@@ -110,7 +110,7 @@ export default function Projects() {
                                             onClick={() =>
                                                 handleImageClick(project)
                                             }
-                                            className="font-medium text-foreground"
+                                            className="font-medium text-foreground cursor-pointer"
                                         >
                                             View More
                                         </span>

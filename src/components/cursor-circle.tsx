@@ -37,7 +37,7 @@ export default function CursorCircle() {
     if (isHoveringImageContent)
         return (
             <div
-                className="fixed pointer-events-none z-50 h-20 w-20 rounded-full flex items-center justify-center transition-all duration-300 ease-out text-background text-xs backdrop-invert  bg-foreground/80  border border-foreground"
+                className="fixed hidden md:flex pointer-events-none z-50 h-20 w-20 rounded-full items-center justify-center transition-all duration-300 ease-out text-background text-xs backdrop-invert  bg-foreground/80  border border-foreground"
                 style={{
                     left: mousePosition.x - 40,
                     top: mousePosition.y - 40,
