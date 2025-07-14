@@ -8,7 +8,7 @@ import SectionWrapper from "../section-wrapper";
 export default function Contact() {
     return (
         <SectionWrapper id="contact" className="relative py-16">
-            <div className="md:max-w-6xl w-full  min-h-screen">
+            <div className="md:max-w-6xl w-full min-h-screen">
                 <div className="w-full">
                     <div className="flex items-center gap-4 md:gap-8 mb-8">
                         <div className="w-8 md:w-16 h-0.5 bg-primary"></div>

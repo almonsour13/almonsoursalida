@@ -88,7 +88,7 @@ export default function Projects() {
                                 className={`
                                     flex flex-col gap-4 items-start justify-center max-w-lg`}
                             >
-                                <div className="flex items-center gap-2 md:gap-4">
+                                {/* <div className="flex items-center gap-2 md:gap-4">
                                     <div className="w-4 *:md:w-8 h-0.5 bg-primary"></div>
                                     <span className="text-sm font-medium text-primary tracking-wide">
                                         PROJECT{" "}
@@ -96,7 +96,7 @@ export default function Projects() {
                                             .toString()
                                             .padStart(2, "0")}
                                     </span>
-                                </div>
+                                </div> */}
                                 <div className="flex flex-col gap-2">
                                     <h2 className="text-2xl md:text-4xl font-bold text-foreground">
                                         {project.title}

@@ -66,10 +66,7 @@ export default function Hero() {
                                 </span>
                             </div>
                             <p className="text-base text-muted-foreground max-w-2xl">
-                                {"I'm"} a Web Developer with experience in
-                                designing, developing, and deploying dynamic web
-                                applications. I specialize in JavaScript, React,
-                                Node.js, and SQL/NoSQL databases.
+                                {"I'm"} a Web Developer with a strong background in creating dynamic, responsive web applications from front to back.
                             </p>
                         </motion.div>
 

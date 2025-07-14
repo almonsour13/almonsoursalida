@@ -2,7 +2,7 @@ import { socials } from "@/constant/social";
 
 export default function Footer() {
     return (
-        <div className="w-full px-6 py-12 bg-gradient-to-t from-muted/20 to-background">
+        <div className="w-full px-6 py-12">
             <div className="md:max-w-6xl mx-auto w-full">
                 {/* Main Footer Content */}
                 <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
@@ -19,7 +19,7 @@ export default function Footer() {
                     {/* Right Section - Social Links */}
                     <div className="flex-1 w-full flex justify-start md:justify-end">
                         <div className="flex items-center gap-4">
-                            <span className="text-sm text-muted-foreground font-medium">
+                            <span className="text-sm font-medium">
                                 Connect with me
                             </span>
                             <div className="flex gap-3">
@@ -27,9 +27,9 @@ export default function Footer() {
                                     <a
                                         key={index}
                                         href={social.link}
-                                        className="group flex items-center justify-center h-10 w-10 bg-card border border-border rounded-full hover:border-primary hover:bg-primary/10 transition-all duration-300"
+                                        className="group flex items-center justify-center h-10 w-10 bg-card border border-border rounded-full hover:border-primary/50 hover:bg-primary/10 transition-all duration-300"
                                     >
-                                        <social.icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                                        <social.icon className="h-5 w-5" />
                                     </a>
                                 ))}
                             </div>

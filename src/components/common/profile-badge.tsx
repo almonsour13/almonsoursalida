@@ -2,6 +2,8 @@
 
 import { useSection } from "@/context/section-context";
 import { useScroll } from "framer-motion";
+import { Phone } from "lucide-react";
+import Image from "next/image";
 
 export default function ProfileBadge() {
     const { activeSection } = useSection();
@@ -16,19 +18,29 @@ export default function ProfileBadge() {
                 : "translate-y-0"
         }`}
         >
-            <div className="w-12 h-12 rounded-full overflow-hidden">
-                <img
-                    src="/image/profile.JPG"
-                    alt="Al-Monsour M. Salida"
-                    className="h-full w-full object-cover"
-                />
+            <div className="relative">
+                <div className="w-12 h-12 rounded-full overflow-hidden">
+                    <Image
+                        src="/image/profile.JPG"
+                        alt="Al-Monsour M. Salida"
+                        className="h-full w-full object-cover"
+                        width={800}
+                        height={800}
+                    />
+                </div>
+
+                <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-background flex items-center justify-center">
+                    <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                </div>
             </div>
             <div className="flex flex-col">
                 <h1>Al-Monsour M. Salida</h1>
-                <p className="text-xs text-muted-foreground">
-                    Web Developer
-                </p>
+                <p className="text-xs text-muted-foreground">Web Developer</p>
             </div>
+            <div className="h-8 w-px bg-border mx-1"/>
+            <a href="#contact" className="flex items-center justify-center">
+                <Phone className="w-4 h-4 text-primary" />
+            </a>
         </div>
     );
 }
