@@ -38,7 +38,7 @@ export default function Footer() {
                 </div>
 
                 {/* Divider */}
-                <div className="w-full h-px bg-card mb-6"></div>
+                <div className="w-full h-px bg-border mb-6"></div>
 
                 {/* Bottom Section */}
                 <div className="flex flex-col md:flex-row items-start justify-between gap-4 text-sm text-muted-foreground">

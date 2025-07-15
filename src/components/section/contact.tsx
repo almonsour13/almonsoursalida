@@ -58,7 +58,7 @@ export default function Contact() {
                             <div className="space-y-4">
                                 {/* Email */}
                                 <motion.div
-                                    className="group flex items-start gap-4 p-4 rounded-md border hover:border-primary/20 transition-all duration-300"
+                                    className="group bg-card flex items-start gap-4 p-4 rounded-md border hover:border-primary/20 transition-all duration-300"
                                     whileHover={{ scale: 1.02 }}
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
@@ -79,7 +79,7 @@ export default function Contact() {
 
                                 {/* Phone */}
                                 <motion.div
-                                    className="group flex items-start gap-4 p-4 rounded-md border hover:border-primary/20 transition-all duration-300"
+                                    className="group  bg-card flex items-start gap-4 p-4 rounded-md border hover:border-primary/20 transition-all duration-300"
                                     whileHover={{ scale: 1.02 }}
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
@@ -100,7 +100,7 @@ export default function Contact() {
 
                                 {/* Location */}
                                 <motion.div
-                                    className="group flex items-start gap-4 p-4 rounded-md border hover:border-primary/20 transition-all duration-300"
+                                    className="group  bg-card flex items-start gap-4 p-4 rounded-md border hover:border-primary/20 transition-all duration-300"
                                     whileHover={{ scale: 1.02 }}
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
@@ -153,7 +153,7 @@ export default function Contact() {
                     {/* Contact Form - Right Column */}
                     <div className="lg:col-span-3">
                         <motion.div
-                            className="border rounded-md overflow-hidden"
+                            className="border  bg-card rounded-md overflow-hidden"
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.6 }}
@@ -183,7 +183,7 @@ export default function Contact() {
                                             <input
                                                 type="text"
                                                 className={cn(
-                                                    "w-full px-4 py-3 rounded-md border bg-card",
+                                                    "w-full px-4 py-3 rounded border bg-card",
                                                     "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50",
                                                     "transition-all duration-300 placeholder:text-muted-foreground/50"
                                                 )}
