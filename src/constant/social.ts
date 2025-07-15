@@ -14,7 +14,7 @@ export const socials = [
   {
     name: "LinkedIn",
     icon: Linkedin,
-    link: "https://linkedin.com/in/yourusername",
+    link: "https://www.linkedin.com/in/almonsour-salida-5354011ba/",
   },
   {
     name: "Instagram",

@@ -7,10 +7,7 @@ import { cn } from "@/lib/utils";
 
 export default function Services() {
     return (
-        <SectionWrapper
-            id="services"
-            className="py-12"
-        >
+        <SectionWrapper id="services" className="py-12">
             <div className="md:max-w-6xl w-full flex flex-col gap-8  items-center justify-center md:min-h-screen">
                 <div className="w-full">
                     <div className="flex items-center gap-4 md:gap-8 mb-8">
@@ -20,65 +17,60 @@ export default function Services() {
                         </span>
                         <div className="flex-1 h-0.5 bg-border"></div>
                     </div>
-                    <h1 className="text-5xl md:text-8xl font-bold uppercase tracking-tight text-foreground mb-6 leading-none">
-                         What I Offer
-                    </h1>
-                    <p className="text-sm md:text-base mb-6 text-muted-foreground">
-                        Discover expert-crafted solutions to elevate your digital experience — from front-end finesse to back-end mastery.
-                    </p>
                 </div>
 
-                {/* Layout: Featured Left, List Right */}
-                <div className="grid md:grid-cols-12 gap-6 md:gap-12">
-                    {/* Featured Service */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -40 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="md:col-span-6 bg-gradient-to-br from-primary/10 to-primary/5 border rounded-3xl p-10 relative"
-                    >
-                        <div className="absolute top-4 right-4 px-4 py-1 rounded-full bg-primary text-primary-foreground text-xs font-medium uppercase tracking-widest">
-                            Featured
-                        </div>
-                        <div className="text-7xl font-black text-primary/10 absolute bottom-6 right-6 pointer-events-none select-none">
-                            01
-                        </div>
-                        <h3 className="text-3xl font-bold text-foreground mb-4">
-                            {services[0].title}
-                        </h3>
-                        <p className="text-lg text-muted-foreground leading-relaxed">
-                            {services[0].description}
+                <div className="grid items-start md:grid-cols-2 gap-4 w-full relative">
+                    <div className="flex flex-col stat">
+                        <h1 className="text-5xl md:text-9xl font-bold uppercase tracking-tight text-foreground mb-6 leading-none">
+                            What I Offer
+                        </h1>
+                        <p className="text-sm md:text-base mb-6 text-muted-foreground">
+                            Discover expert-crafted solutions to elevate your
+                            digital experience — from front-end finesse to
+                            back-end mastery.
                         </p>
-                    </motion.div>
+                    </div>
+                    <div className="flex flex-col gap-4">
+                        {services.map((service, index) => (
+                            <div key={index} className="group relative">
+                                <div
+                                    className={`border border-border bg-gradient-to-r from-card rounded-2xl p-6 transition-all duration-300 cursor-pointer"
+                                    `}
+                                >
+                                    <div className="flex items-center gap-4">
+                                        {/* Number */}
+                                        <service.icon className="w-20 h-20 text-muted-foreground" />
 
-                    {/* Remaining Services */}
-                    <div className="md:col-span-6 flex flex-col gap-6">
-                        {services.slice(1).map((service, index) => (
-                            <motion.div
-                                key={index + 1}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.15 }}
-                                className={cn(
-                                    "group flex items-start gap-6 border border-border rounded-2xl p-6",
-                                    "hover:border-primary/30 hover:shadow-md transition-all"
-                                )}
-                            >
-                                <div className="text-sm font-semibold text-muted-foreground">
-                                    {(index + 2).toString().padStart(2, "0")}
-                                </div>
-                                <div className="flex-1">
-                                    <div className="flex items-center gap-4 mb-2">
-                                        <service.icon className="text-2xl text-primary group-hover:scale-110 transition-transform" />
-                                        <h4 className="text-xl font-semibold text-foreground">
-                                            {service.title}
-                                        </h4>
+                                        {/* Content */}
+                                        <div className="flex-1">
+                                            <div className="flex items-center gap-3 mb-3">
+                                                {/* <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+                                                    <service.icon className="w-5 h-5 text-primary-foreground" />
+                                                </div> */}
+
+                                                <h4 className="text-xl font-bold text-foreground">
+                                                    {service.title}
+                                                </h4>
+                                            </div>
+                                            <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed mb-3">
+                                                {service.description}
+                                            </p>
+                                            {/* <div className="flex hidden flex-wrap gap-2 mb-6">
+                                                {service.features.map(
+                                                    (feature, idx) => (
+                                                        <span
+                                                            key={idx}
+                                                            className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium"
+                                                        >
+                                                            {feature}
+                                                        </span>
+                                                    )
+                                                )}
+                                            </div> */}
+                                        </div>
                                     </div>
-                                    <p className="text-sm text-muted-foreground leading-relaxed">
-                                        {service.description}
-                                    </p>
                                 </div>
-                            </motion.div>
+                            </div>
                         ))}
                     </div>
                 </div>

@@ -72,7 +72,7 @@ export default function Projects() {
                                 className="group cursor-pointer image-content relative flex items-center justify-center flex-1 p-4 h-80 aspect-video max-w-lg rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 border"
                                 onClick={() => handleImageClick(project)}
                             >
-                                <div className="absolute -z-10 top-0 left-0 text-8xl md:text-9xl font-bold text-primary/5 select-none">
+                                <div className="absolute hidden -z-10 top-0 left-0 text-8xl md:text-9xl font-bold text-primary/5 select-none">
                                     {(index + 1).toString().padStart(2, "0")}
                                 </div>
                                 <Image
