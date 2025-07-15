@@ -5,6 +5,7 @@ import { useScroll } from "framer-motion";
 import { Phone } from "lucide-react";
 import Image from "next/image";
 
+
 export default function ProfileBadge() {
     const { activeSection } = useSection();
     const { scrollYProgress } = useScroll();
@@ -13,7 +14,7 @@ export default function ProfileBadge() {
         <div
             className={`backdrop-blur-sm border rounded-3xl pr-4 bg-background/50 fixed z-30 top-4 md:top-12 left-4 md:left-46 flex items-center gap-2 transform transition duration-300 ease-in-out
         ${
-            activeSection === "hero" || scrollYProgress.get() === 0
+            (activeSection === "hero" || activeSection === "contact") || scrollYProgress.get() === 0
                 ? "-translate-y-16 md:-translate-y-24"
                 : "translate-y-0"
         }`}

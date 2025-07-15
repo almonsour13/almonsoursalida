@@ -1,11 +1,56 @@
 "use client";
-
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { Mail, MapPin, MessageSquare, Phone, Send, User } from "lucide-react";
+import { Mail, MapPin, MessageSquare, Phone, Send } from "lucide-react";
+import Image from "next/image";
+import { FormEvent, useRef, useState } from "react";
 import SectionWrapper from "../section-wrapper";
 
 export default function Contact() {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+    const formRef = useRef<HTMLFormElement>(null);
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setStatus("idle");
+
+        const form = formRef.current;
+        if (!form) return;
+
+        const formData = new FormData(form);
+        const fullName = formData.get("fullName") as string;
+        const email = formData.get("email") as string;
+        const subject = formData.get("subject") as string;
+        const message = formData.get("message") as string;
+        console.log(fullName)
+        // Simple validation
+        if (!fullName || !email || !subject || !message) {
+            setStatus("error");
+            setIsSubmitting(false);
+            return;
+        }
+
+        try {
+            // Example POST request — replace with your backend/API endpoint
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                body: JSON.stringify({ fullName, email, subject, message }),
+                headers: { "Content-Type": "application/json" },
+            });
+
+            if (!res.ok) throw new Error("Failed to send");
+
+            setStatus("success");
+            form.reset();
+        } catch (error) {
+            console.error("Submission error:", error);
+            setStatus("error");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
     return (
         <SectionWrapper id="contact" className="relative py-16">
             <div className="md:max-w-6xl w-full min-h-screen">
@@ -135,8 +180,14 @@ export default function Contact() {
                                 {`"Let's create something amazing together. Every great project starts with a conversation."`}
                             </p>
                             <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
-                                    <User className="w-5 h-5 text-primary" />
+                                <div className="w-10 h-10 rounded-full overflow-hidden">
+                                    <Image
+                                        src="/image/profile.JPG"
+                                        alt="Al-Monsour M. Salida"
+                                        className="h-full w-full object-cover"
+                                        width={800}
+                                        height={800}
+                                    />
                                 </div>
                                 <div>
                                     <p className="font-medium text-foreground">
@@ -174,7 +225,11 @@ export default function Contact() {
 
                             {/* Form Content */}
                             <div className="p-6 md:p-8">
-                                <form className="space-y-6">
+                                <form
+                                    ref={formRef}
+                                    onSubmit={handleSubmit}
+                                    className="space-y-6"
+                                >
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div className="space-y-2">
                                             <label className="block text-sm font-medium text-foreground">
@@ -182,12 +237,14 @@ export default function Contact() {
                                             </label>
                                             <input
                                                 type="text"
+                                                name="fullName"
                                                 className={cn(
-                                                    "w-full px-4 py-3 rounded border bg-card",
+                                                    "w-full px-4 py-3 rounded border bg-background",
                                                     "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50",
                                                     "transition-all duration-300 placeholder:text-muted-foreground/50"
                                                 )}
                                                 placeholder="Your full name"
+                                                required
                                             />
                                         </div>
                                         <div className="space-y-2">
@@ -196,12 +253,14 @@ export default function Contact() {
                                             </label>
                                             <input
                                                 type="email"
+                                                name="email"
                                                 className={cn(
-                                                    "w-full px-4 py-3 rounded border bg-card",
+                                                    "w-full px-4 py-3 rounded border bg-background",
                                                     "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50",
                                                     "transition-all duration-300 placeholder:text-muted-foreground/50"
                                                 )}
                                                 placeholder="your@email.com"
+                                                required
                                             />
                                         </div>
                                     </div>
@@ -212,12 +271,14 @@ export default function Contact() {
                                         </label>
                                         <input
                                             type="text"
+                                            name="subject"
                                             className={cn(
-                                                "w-full px-4 py-3 rounded border bg-card",
+                                                "w-full px-4 py-3 rounded border bg-background",
                                                 "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50",
                                                 "transition-all duration-300 placeholder:text-muted-foreground/50"
                                             )}
                                             placeholder="Project inquiry, collaboration, or general question"
+                                            required
                                         />
                                     </div>
 
@@ -226,28 +287,48 @@ export default function Contact() {
                                             Message
                                         </label>
                                         <textarea
+                                            name="message"
                                             className={cn(
-                                                "w-full px-4 py-3 rounded border bg-card min-h-[140px] resize-none",
+                                                "w-full px-4 py-3 rounded border bg-background   min-h-[140px] resize-none",
                                                 "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50",
                                                 "transition-all duration-300 placeholder:text-muted-foreground/50"
                                             )}
                                             placeholder="Tell me about your project, timeline, and any specific requirements..."
+                                            required
                                         />
                                     </div>
 
                                     <motion.button
                                         type="submit"
+                                        disabled={isSubmitting}
                                         className={cn(
-                                            "group w-full flex items-center justify-center gap-3 px-8 py-4 rounded",
-                                            "bg-primary text-primary-foreground font-medium",
+                                            "group cursor-pointer w-full flex items-center justify-center gap-3 px-8 py-4 rounded",
+                                            "bg-foreground text-primary-foreground font-medium",
                                             "hover:bg-primary/90 transition-all duration-300",
+                                            isSubmitting &&
+                                                "opacity-50 cursor-not-allowed"
                                         )}
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
                                     >
                                         <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                        <span>Send Message</span>
+                                        <span>
+                                            {isSubmitting
+                                                ? "Sending..."
+                                                : "Send Message"}
+                                        </span>
                                     </motion.button>
+                                    {status === "success" && (
+                                        <p className="text-green-600 text-sm mt-2">
+                                            Message sent successfully!
+                                        </p>
+                                    )}
+                                    {status === "error" && (
+                                        <p className="text-red-600 text-sm mt-2">
+                                            Please fill out all fields correctly
+                                            or try again.
+                                        </p>
+                                    )}
                                 </form>
                             </div>
                         </motion.div>
