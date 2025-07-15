@@ -42,7 +42,7 @@ export default function Contact() {
                 {/* Main Content Grid */}
                 <div className="grid lg:grid-cols-5 gap-12">
                     {/* Contact Information - Left Column */}
-                    <div className="lg:col-span-2 space-y-8">
+                    <div className="lg:col-span-2 space-y-4">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -55,10 +55,10 @@ export default function Contact() {
                                 </span>
                             </div>
 
-                            <div className="space-y-6">
+                            <div className="space-y-4">
                                 {/* Email */}
                                 <motion.div
-                                    className="group flex items-start gap-4 p-4 rounded-2xl border hover:border-primary/20 transition-all duration-300"
+                                    className="group flex items-start gap-4 p-4 rounded-md border hover:border-primary/20 transition-all duration-300"
                                     whileHover={{ scale: 1.02 }}
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
@@ -79,7 +79,7 @@ export default function Contact() {
 
                                 {/* Phone */}
                                 <motion.div
-                                    className="group flex items-start gap-4 p-4 rounded-2xl border hover:border-primary/20 transition-all duration-300"
+                                    className="group flex items-start gap-4 p-4 rounded-md border hover:border-primary/20 transition-all duration-300"
                                     whileHover={{ scale: 1.02 }}
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
@@ -100,7 +100,7 @@ export default function Contact() {
 
                                 {/* Location */}
                                 <motion.div
-                                    className="group flex items-start gap-4 p-4 rounded-2xl border hover:border-primary/20 transition-all duration-300"
+                                    className="group flex items-start gap-4 p-4 rounded-md border hover:border-primary/20 transition-all duration-300"
                                     whileHover={{ scale: 1.02 }}
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
@@ -123,7 +123,7 @@ export default function Contact() {
 
                         {/* Quote Section */}
                         <motion.div
-                            className="bg-card rounded-3xl p-8 border border-primary/20 relative overflow-hidden"
+                            className="bg-card rounded-md p-8 border border-primary/20 relative overflow-hidden"
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5 }}
@@ -143,7 +143,7 @@ export default function Contact() {
                                         Al-Monsour Salida
                                     </p>
                                     <p className="text-sm text-muted-foreground">
-                                        Full Stack Developer
+                                        Web Developer
                                     </p>
                                 </div>
                             </div>
@@ -153,7 +153,7 @@ export default function Contact() {
                     {/* Contact Form - Right Column */}
                     <div className="lg:col-span-3">
                         <motion.div
-                            className="border rounded-3xl overflow-hidden"
+                            className="border rounded-md overflow-hidden"
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.6 }}
@@ -183,7 +183,7 @@ export default function Contact() {
                                             <input
                                                 type="text"
                                                 className={cn(
-                                                    "w-full px-4 py-3 rounded-xl border bg-card",
+                                                    "w-full px-4 py-3 rounded-md border bg-card",
                                                     "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50",
                                                     "transition-all duration-300 placeholder:text-muted-foreground/50"
                                                 )}
@@ -197,7 +197,7 @@ export default function Contact() {
                                             <input
                                                 type="email"
                                                 className={cn(
-                                                    "w-full px-4 py-3 rounded-xl border bg-card",
+                                                    "w-full px-4 py-3 rounded border bg-card",
                                                     "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50",
                                                     "transition-all duration-300 placeholder:text-muted-foreground/50"
                                                 )}
@@ -213,7 +213,7 @@ export default function Contact() {
                                         <input
                                             type="text"
                                             className={cn(
-                                                "w-full px-4 py-3 rounded-xl border bg-card",
+                                                "w-full px-4 py-3 rounded border bg-card",
                                                 "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50",
                                                 "transition-all duration-300 placeholder:text-muted-foreground/50"
                                             )}
@@ -227,7 +227,7 @@ export default function Contact() {
                                         </label>
                                         <textarea
                                             className={cn(
-                                                "w-full px-4 py-3 rounded-xl border bg-card min-h-[140px] resize-none",
+                                                "w-full px-4 py-3 rounded border bg-card min-h-[140px] resize-none",
                                                 "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50",
                                                 "transition-all duration-300 placeholder:text-muted-foreground/50"
                                             )}
@@ -238,10 +238,9 @@ export default function Contact() {
                                     <motion.button
                                         type="submit"
                                         className={cn(
-                                            "group w-full flex items-center justify-center gap-3 px-8 py-4 rounded-xl",
+                                            "group w-full flex items-center justify-center gap-3 px-8 py-4 rounded",
                                             "bg-primary text-primary-foreground font-medium",
                                             "hover:bg-primary/90 transition-all duration-300",
-                                            "shadow-lg hover:shadow-xl"
                                         )}
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}

@@ -1,9 +1,8 @@
 "use client";
 
 import { services } from "@/constant/services";
-import SectionWrapper from "../section-wrapper";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import SectionWrapper from "../section-wrapper";
 
 export default function Services() {
     return (
@@ -34,7 +33,7 @@ export default function Services() {
                         {services.map((service, index) => (
                             <div key={index} className="group relative">
                                 <div
-                                    className={`border border-border bg-gradient-to-r from-card rounded-2xl p-6 transition-all duration-300 cursor-pointer"
+                                    className={`border border-border bg-gradient-to-r from-card rounded-md p-6 transition-all duration-300 cursor-pointer"
                                     `}
                                 >
                                     <div className="flex items-center gap-4">
@@ -52,7 +51,7 @@ export default function Services() {
                                                     {service.title}
                                                 </h4>
                                             </div>
-                                            <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed mb-3">
+                                            <p className="text-sm text-muted-foreground leading-relaxed mb-3">
                                                 {service.description}
                                             </p>
                                             {/* <div className="flex hidden flex-wrap gap-2 mb-6">
@@ -82,12 +81,12 @@ export default function Services() {
                     transition={{ duration: 0.6, delay: 0.5 }}
                     className="w-full flex flex-col md:flex-row items-center justify-between pt-8 gap-6"
                 >
-                    <p className="text-base md:text-lg text-muted-foreground">
+                    <p className="text-sm text-muted-foreground">
                         Looking to elevate your project?
                     </p>
                     <div className="flex items-center gap-4">
                         <div className="w-8 h-0.5 bg-primary" />
-                        <span className="text-sm font-semibold text-primary uppercase tracking-wide">
+                        <span className="text-sm font-semibold text-primary tracking-wide">
                             Let’s build something great together
                         </span>
                     </div>

@@ -26,10 +26,10 @@ export default function Hero() {
                         <div className="w-8 h-0.5 bg-border"></div>
                     </div>
                 </div>
-                <div className="w-full flex flex-col md:flex-row gap-4">
+                <div className="w-full flex flex-col lg:flex-row gap-4">
                     <div className="flex-2 flex flex-col gap-4">
                         <motion.h1
-                            className="text-6xl md:text-9xl font-bold leading-tights uppercase"
+                            className="text-6xl sm:text-8xl md:text-9xl font-bold leading-tights uppercase"
                             initial={{ opacity: 0, y: 50 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1, ease: "easeOut" }}
@@ -41,7 +41,7 @@ export default function Hero() {
                                 transition={{ duration: 0.8, delay: 0.4 }}
                             >
                                 {/* {"I'm"}{" "} */}
-                                <span className="text-primary">Al-Monsour</span>
+                               Al-Monsour
                             </motion.span>
                             <motion.span
                                 className="block"
@@ -49,7 +49,7 @@ export default function Hero() {
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.8, delay: 0.6 }}
                             >
-                                <span className="text-primary">Salida</span>
+                                Salida
                             </motion.span>
                         </motion.h1>
 
@@ -69,60 +69,6 @@ export default function Hero() {
                                 {"I'm"} a Web Developer with a strong background in creating dynamic, responsive web applications from front to back.
                             </p>
                         </motion.div>
-
-                        <motion.div
-                            className="hidden flex-col md:flex-row flex-wrap gap-2"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.8 }}
-                        >
-                            <div className="flex gap-2">
-                                <motion.a
-                                    href="#contact"
-                                    className="flex items-center justify-between h-8 px-3 py-1 bg-card border rounded-full text-xs md:text-sm"
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.6, delay: 1.0 }}
-                                >
-                                    Contact Me
-                                </motion.a>
-                                <motion.a
-                                    href=""
-                                    className="flex items-center justify-between h-8 px-3 py-1 bg-card border rounded-full text-xs md:text-sm"
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.6, delay: 1.1 }}
-                                >
-                                    Download CV
-                                </motion.a>
-                            </div>
-                            <div className="flex gap-2">
-                                {socials.map((social, index) => (
-                                    <motion.a
-                                        key={index}
-                                        href={social.link}
-                                        className="flex items-center justify-center h-8 w-8 py-1 bg-card border rounded-full text-xs md:text-sm"
-                                        whileHover={{ scale: 1.1, rotate: 5 }}
-                                        whileTap={{ scale: 0.9 }}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{
-                                            duration: 0.6,
-                                            delay: 1.2 + index * 0.1,
-                                            type: "spring",
-                                            stiffness: 300,
-                                            damping: 20,
-                                        }}
-                                    >
-                                        <social.icon className="h-4 w-4" />
-                                    </motion.a>
-                                ))}
-                            </div>
-                        </motion.div>
                         <motion.div
                             className="flex flex-wrap gap-4"
                             initial={{ opacity: 0, y: 30 }}
@@ -132,8 +78,8 @@ export default function Hero() {
                             <motion.a
                                 href="#contact"
                                 className={cn(
-                                    "group flex items-center gap-2 px-4 py-2 rounded-full",
-                                    "bg-primary text-primary-foreground font-medium text-sm",
+                                    "group flex items-center gap-2 px-4 py-2 rounded",
+                                    "bg-foreground text-primary-foreground font-medium text-sm",
                                     "hover:bg-primary/90 transition-all duration-300",
                                     "hover:shadow-xl"
                                 )}
@@ -146,7 +92,7 @@ export default function Hero() {
                             <motion.a
                                 href="#"
                                 className={cn(
-                                    "group flex items-center gap-2 px-4 py-2    rounded-full",
+                                    "group flex items-center gap-2 px-4 py-2    rounded",
                                     "bg-card border text-foreground font-medium text-sm",
                                     "hover:border-primary/50 transition-all duration-300"
                                 )}
@@ -165,7 +111,7 @@ export default function Hero() {
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.8, delay: 1.2 }}
                         >
-                            <div className="aspect-square hidden md:block rounded-3xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 overflow-hidden relative">
+                            <div className="aspect-square hidden lg:block rounded-md bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 overflow-hidden relative">
                                 {/* Placeholder content */}
                                 <div className="absolute inset-0 bg-card/50 backdrop-blur-sm"></div>
                                 <div className="absolute inset-0 flex items-center justify-center">
@@ -227,7 +173,7 @@ export default function Hero() {
                                             damping: 20,
                                         }}
                                     >
-                                        <social.icon className="h-5 w-5 group-hover:text-primary transition-colors" />
+                                        <social.icon className="h-4 w-4 group-hover:text-primary transition-colors" />
                                     </motion.a>
                                 ))}
                             </div>

@@ -66,10 +66,10 @@ export default function Projects() {
                                 index % 2 === 0
                                     ? "md:flex-row"
                                     : "md:flex-row-reverse"
-                            } pt-8 overflow-hidden justify-between gap-4 bg-transparent rounded-xl`}
+                            } pt-8 justify-between gap-4 bg-transparent`}
                         >
                             <div
-                                className="group cursor-pointer image-content relative flex items-center justify-center flex-1 p-4 h-80 aspect-video max-w-lg rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 border"
+                                className="group cursor-pointer image-content relative flex items-center justify-center flex-1 p-4 h-80 aspect-video max-w-lg rounded-md overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 border"
                                 onClick={() => handleImageClick(project)}
                             >
                                 <div className="absolute hidden -z-10 top-0 left-0 text-8xl md:text-9xl font-bold text-primary/5 select-none">
@@ -121,7 +121,7 @@ export default function Projects() {
                                         {project.tech.map((tech, techIndex) => (
                                             <span
                                                 key={techIndex}
-                                                className="px-3 bg-card py-1 border rounded-full text-xs font-medium text-foreground hover:border-primary/50 transition-colors"
+                                                className="px-3 bg-card py-1 border rounded text-xs font-medium text-foreground hover:border-primary/50 transition-colors"
                                             >
                                                 {tech}
                                             </span>
@@ -136,8 +136,8 @@ export default function Projects() {
                                             target="blank"
                                             href={project.live}
                                             className={cn(
-                                                "group/link flex items-center gap-2 px-4 py-2 rounded-full",
-                                                "bg-primary text-primary-foreground font-medium text-sm",
+                                                "group/link flex items-center gap-2 px-4 py-2 rounded",
+                                                "bg-foreground text-primary-foreground font-medium text-sm",
                                                 "hover:bg-primary/90 transition-all duration-300",
                                                 "border border-primary"
                                             )}
@@ -151,7 +151,7 @@ export default function Projects() {
                                             target="blank"
                                             href={project.github}
                                             className={cn(
-                                                "group/link flex items-center gap-2 px-4 py-2 rounded-full",
+                                                "group/link flex items-center gap-2 px-4 py-2 rounded",
                                                 "bg-card border text-foreground font-medium text-sm",
                                                 "hover:border-primary/50 transition-all duration-300"
                                             )}
@@ -183,7 +183,7 @@ export default function Projects() {
                         <div className="flex items-center justify-start md:justify-end gap-4">
                             <div className="w-12 h-0.5 bg-primary"></div>
                             <a
-                                href="#"
+                                href="projects"
                                 className="flex items-center gap-2 text-primary font-medium hover:underline"
                             >
                                 <span>View All Projects</span>

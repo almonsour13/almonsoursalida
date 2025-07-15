@@ -78,7 +78,7 @@ export default function ThemeToggle({ isExpanded }: { isExpanded: boolean }) {
                 onClick={handleThemeToggle}
                 className={`fixed ${
                     isExpanded ? "z-20" : "z-50"
-                } top-14 md:top-12 right-4 md:right-36 cursor-pointer flex items-center justify-center w-8 h-8 p-2 rounded-full border border-foregroundd bg-card backdrop-blur-sm`}
+                } top-14 lg:top-12 right-4 lg:right-36 cursor-pointer flex items-center justify-center w-8 h-8 p-2 rounded-full border border-foregroundd bg-card backdrop-blur-sm`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 disabled={isThemeTransitioning}

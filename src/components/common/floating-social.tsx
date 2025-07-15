@@ -11,7 +11,7 @@ export default function FloatingSocials() {
     const { activeSection } = useSection();
 
     return (
-        <div className="fixed z-50 bottom-4 md:bottom-12 left-4 flex flex-col gap-2">
+        <div className="fixed z-50 bottom-4 lg:bottom-12 left-4 lg:left-46 flex flex-col gap-2">
             <AnimatePresence>
                 {isShowSocialMedia && (
                     <motion.div

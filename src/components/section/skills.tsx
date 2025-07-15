@@ -143,7 +143,7 @@ export default function Skills() {
                 </div>
 
                 {/* Desktop: Grid layout */}
-                <div className="hidden md:grid grid-cols-10 gap-4 w-full">
+                <div className="hidden md:grid md:grid-cols-7 lg:grid-cols-10 gap-4 w-full">
                     {skills.map((skill, index) => {
                         const safeIcon = skill.icon.replace(
                             /<path(?![^>]*fill=)/g,
@@ -152,7 +152,7 @@ export default function Skills() {
                         return (
                             <div
                                 key={index}
-                                className="p-4 rounded-lg hover:bg-card flex flex-col items-center justify-center gap-2 borderr backdrop-blur-sm transition-all duration-300"
+                                className="p-4 rounded hover:bg-card flex flex-col items-center justify-center gap-2 borderr backdrop-blur-sm transition-all duration-300"
                             >
                                 <div
                                     className="w-12 h-12 text-foreground"
@@ -170,7 +170,7 @@ export default function Skills() {
                 <div className="w-full flex justify-start mt-2">
                     <div className="flex items-center gap-4">
                         <div className="w-8 h-0.5 hidden md:block bg-border"></div>
-                        <span className="text-xs text-muted-foreground">
+                        <span className="text-sm text-muted-foreground">
                             Always learning more
                         </span>
                     </div>

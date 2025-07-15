@@ -54,7 +54,7 @@ const ProjectModal = ({
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.8, y: 50 }}
                     transition={{ duration: 0.4, type: "spring", damping: 25 }}
-                    className="relative max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto bg-background border border-border rounded-2xl"
+                    className="relative max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto bg-background border border-border rounded-md"
                 >
                     {/* Close button */}
                     <button
@@ -144,7 +144,7 @@ const ProjectModal = ({
                                         {project.tech.map((tech, techIndex) => (
                                             <span
                                                 key={techIndex}
-                                                className="px-3 py-2 bg-card border rounded-full text-xs font-medium text-foreground hover:border-primary/50 transition-colors"
+                                                className="px-3 py-2 bg-card border rounded text-xs font-medium text-foreground hover:border-primary/50 transition-colors"
                                             >
                                                 {tech}
                                             </span>
@@ -158,8 +158,8 @@ const ProjectModal = ({
                                             target="_blank"
                                             href={project.live}
                                             className={cn(
-                                                "flex items-center gap-2 px-4 py-2 rounded-full",
-                                                "bg-primary text-primary-foreground font-medium text-sm",
+                                                "flex items-center gap-2 px-4 py-2 rounded",
+                                                "bg-foreground text-primary-foreground font-medium text-sm",
                                                 "hover:bg-primary/90 transition-all duration-300",
                                                 "border border-primary"
                                             )}
@@ -173,7 +173,7 @@ const ProjectModal = ({
                                             target="_blank"
                                             href={project.github}
                                             className={cn(
-                                                "flex items-center gap-2 px-4 py-2 rounded-full",
+                                                "flex items-center gap-2 px-4 py-2 rounded",
                                                 "bg-card border text-foreground font-medium text-sm",
                                                 "hover:border-primary/50 transition-all duration-300"
                                             )}

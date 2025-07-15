@@ -21,6 +21,7 @@ export default function NavigationMenu({
         { id: "projects", label: "Projects" },
         { id: "skills", label: "Skills" },
         { id: "services", label: "Services" },
+        // { id: "education", label: "Education" },
         { id: "contact", label: "Contact" },
     ];
 
@@ -76,7 +77,7 @@ export default function NavigationMenu({
             {/* Main Navigation */}
             <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className={`md:hidden fixed ${
+                className={`lg:hidden fixed ${
                     isExpanded ? "z-40" : "z-30"
                 } top-4 right-4 cursor-pointer flex items-center justify-center w-8 h-8 p-2 rounded-full border border-foregrounsd bg-card backdrop-blur-sm
 
@@ -89,7 +90,7 @@ export default function NavigationMenu({
                 )}
             </button>
             <div
-                className={`fixed p-4 md:py-12 z-30 top-0 bottom-0 w-48 md:w-36 right-0 md:border-l-0  transform transition duration-500 ease-in-out  md:translate-x-0 ${
+                className={`fixed p-4 lg:py-12 z-30 top-0 bottom-0 w-48 lg:w-36 right-0 lg:border-l-0  transform transition duration-500 ease-in-out  lg:translate-x-0 ${
                     isExpanded
                         ? "translate-x-0 border-l backdrop-blur-sm"
                         : "translate-x-48"
@@ -111,7 +112,7 @@ export default function NavigationMenu({
                                         onClick={() =>
                                             handleSectionClick(section.id)
                                         }
-                                        className={`group cursor-pointer relative flex items-center gap-4 w-full text-left transition-all duration-300 hover:scale-105 ${
+                                        className={`group cursor-pointer relative flex items-center gap-2 w-full text-left transition-all duration-300 hover:scale-105 ${
                                             isActive ? "" : ""
                                         }`}
                                     >

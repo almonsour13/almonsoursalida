@@ -29,7 +29,7 @@ export default function Footer() {
                                         href={social.link}
                                         className="group flex items-center justify-center h-10 w-10 bg-card border border-border rounded-full hover:border-primary/50 hover:bg-primary/10 transition-all duration-300"
                                     >
-                                        <social.icon className="h-5 w-5" />
+                                        <social.icon className="h-4 w-4" />
                                     </a>
                                 ))}
                             </div>

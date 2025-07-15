@@ -18,6 +18,14 @@ export default function Home() {
     const [isExpanded, setIsExpanded] = useState(false);
     return (
         <div className="flex flex-col gap-20 w-full relative font-sans ">
+            {/* sections */}
+            <Hero />
+            <Projects />
+            <Skills />
+            <Services />
+            <Contact />
+            <Footer />
+            {/* components */}
             <ScrollProgressBar />
             <NavigationMenu
                 isExpanded={isExpanded}
@@ -28,12 +36,6 @@ export default function Home() {
             <ScrollDownButton />
             <ThemeToggle isExpanded={isExpanded} />
             <FloatingSocials />
-            <Hero />
-            <Projects />
-            <Skills />
-            <Services />
-            <Contact />
-            <Footer />
         </div>
     );
 }
