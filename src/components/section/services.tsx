@@ -11,7 +11,7 @@ export default function Services() {
                 <div className="w-full">
                     <div className="flex items-center gap-4 md:gap-8 mb-8">
                         <div className="w-8 md:w-16 h-0.5 bg-primary"></div>
-                        <span className="text-sm font-medium tracking-widest uppercase text-primary">
+                        <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary">
                             Services
                         </span>
                         <div className="flex-1 h-0.5 bg-border"></div>
@@ -85,7 +85,7 @@ export default function Services() {
                         Looking to elevate your project?
                     </p>
                     <div className="flex items-center gap-4">
-                        <div className="w-8 h-0.5 bg-primary" />
+                        <div className="w-8 h-0.5 bg-primary hidden md:block" />
                         <span className="text-sm font-semibold text-primary tracking-wide">
                             Let’s build something great together
                         </span>

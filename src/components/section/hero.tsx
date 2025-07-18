@@ -4,9 +4,9 @@ import { socials } from "@/constant/social";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Download, PhoneCall } from "lucide-react";
+import Image from "next/image";
 import GridLines from "../grid-lines";
 import SectionWrapper from "../section-wrapper";
-import Image from "next/image";
 
 export default function Hero() {
     return (
@@ -15,7 +15,7 @@ export default function Hero() {
                 <div className="w-full flex items-center justify-between ">
                     <div className="flex items-center gap-4">
                         <div className="w-12 h-0.5 bg-primary"></div>
-                        <span className="text-xs font-medium tracking-widest uppercase text-primary">
+                        <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary">
                             Web Developer
                         </span>
                     </div>
@@ -41,7 +41,7 @@ export default function Hero() {
                                 transition={{ duration: 0.8, delay: 0.4 }}
                             >
                                 {/* {"I'm"}{" "} */}
-                               Al-Monsour
+                                Al-Monsour
                             </motion.span>
                             <motion.span
                                 className="block"
@@ -61,12 +61,14 @@ export default function Hero() {
                         >
                             <div className="flex items-center gap-4">
                                 <div className="w-12 h-0.5 bg-primary"></div>
-                                <span className="text-sm font-medium tracking-widest uppercase text-primary">
+                                <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary">
                                     About Me
                                 </span>
                             </div>
                             <p className="text-base text-muted-foreground max-w-2xl">
-                                {"I'm"} a Web Developer with a strong background in creating dynamic, responsive web applications from front to back.
+                                {"I'm"} a Web Developer with a strong background
+                                in creating dynamic, responsive web applications
+                                from front to back.
                             </p>
                         </motion.div>
                         <motion.div
@@ -115,14 +117,6 @@ export default function Hero() {
                                 {/* Placeholder content */}
                                 <div className="absolute inset-0 bg-card/50 backdrop-blur-sm"></div>
                                 <div className="absolute inset-0 flex items-center justify-center">
-                                    {/* <div className="text-center">
-                                        <div className="text-6xl text-primary/30 mb-4">
-                                            👨‍💻
-                                        </div>
-                                        <div className="text-sm text-muted-foreground">
-                                            Al-Monsour Salida
-                                        </div>
-                                    </div> */}
                                     <Image
                                         alt="profile-image"
                                         src="/image/profile.JPG"
@@ -156,6 +150,7 @@ export default function Hero() {
                                     <motion.a
                                         key={index}
                                         href={social.link}
+                                        target="blank"
                                         className={cn(
                                             "group flex items-center justify-center w-10 h-10 rounded-full",
                                             "bg-card border text-foreground",

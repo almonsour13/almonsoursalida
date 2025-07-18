@@ -26,7 +26,7 @@ export default function Projects() {
                 <div className="w-full">
                     <div className="flex items-center gap-4 md:gap-8 mb-8">
                         <div className="w-8 md:w-16 h-0.5 bg-primary"></div>
-                        <span className="text-sm font-medium tracking-widest uppercase text-primary">
+                        <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary">
                             Projects
                         </span>
                         <div className="flex-1 h-0.5 bg-border"></div>
@@ -72,9 +72,7 @@ export default function Projects() {
                                 className="group cursor-pointer image-content relative flex items-center justify-center flex-1 p-4 h-80 aspect-video max-w-lg rounded-md overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 border"
                                 onClick={() => handleImageClick(project)}
                             >
-                                <div className="absolute hidden -z-10 top-0 left-0 text-8xl md:text-9xl font-bold text-primary/5 select-none">
-                                    {(index + 1).toString().padStart(2, "0")}
-                                </div>
+                                
                                 <Image
                                     src={project.image}
                                     alt={project.title}
@@ -82,21 +80,18 @@ export default function Projects() {
                                     width={1000}
                                     height={1000}
                                 />
+                                <Image
+                                    src={project.image}
+                                    alt={project.title}
+                                    className="rounded absolute transition-transform duration-300 blur-[5px] -z-10 opacity-50"
+                                    fill
+                                />
                                 <div className="absolute z-50 w-full h-full bg-card/20 opacity-0 group-hover:opacity-100"></div>
                             </div>
                             <div
                                 className={`
                                     flex flex-col gap-4 items-start justify-center max-w-lg`}
                             >
-                                {/* <div className="flex items-center gap-2 md:gap-4">
-                                    <div className="w-4 *:md:w-8 h-0.5 bg-primary"></div>
-                                    <span className="text-sm font-medium text-primary tracking-wide">
-                                        PROJECT{" "}
-                                        {(index + 1)
-                                            .toString()
-                                            .padStart(2, "0")}
-                                    </span>
-                                </div> */}
                                 <div className="flex flex-col gap-2">
                                     <h2 className="text-2xl md:text-4xl font-bold text-foreground">
                                         {project.title}

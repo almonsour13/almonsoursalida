@@ -27,6 +27,7 @@ export default function Footer() {
                                     <a
                                         key={index}
                                         href={social.link}
+                                        target="blank"
                                         className="group flex items-center justify-center h-10 w-10 bg-card border border-border rounded-full hover:border-primary/50 hover:bg-primary/10 transition-all duration-300"
                                     >
                                         <social.icon className="h-4 w-4" />
@@ -41,7 +42,7 @@ export default function Footer() {
                 <div className="w-full h-px bg-border mb-6"></div>
 
                 {/* Bottom Section */}
-                <div className="flex flex-col md:flex-row items-start justify-between gap-4 text-sm text-muted-foreground">
+                <div className="flex flex-col-reverse md:flex-row items-start justify-between gap-4 text-sm text-muted-foreground">
                     <div className="flex items-center gap-2">
                         <span>© 2025 Al-Monsour Salida.</span>
                         <span>All rights reserved.</span>

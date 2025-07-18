@@ -57,7 +57,7 @@ export default function Contact() {
                 <div className="w-full">
                     <div className="flex items-center gap-4 md:gap-8 mb-8">
                         <div className="w-8 md:w-16 h-0.5 bg-primary"></div>
-                        <span className="text-sm font-medium tracking-widest uppercase text-primary">
+                        <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary">
                             Contact
                         </span>
                         <div className="flex-1 h-0.5 bg-border"></div>
@@ -95,7 +95,7 @@ export default function Contact() {
                         >
                             <div className="flex items-center gap-4 mb-6">
                                 <div className="w-8 h-0.5 bg-primary"></div>
-                                <span className="text-sm font-medium text-primary uppercase tracking-wide">
+                                <span className="text-xs font-medium text-primary uppercase tracking-[0.2em]">
                                     Contact Info
                                 </span>
                             </div>

@@ -28,6 +28,7 @@ export default function FloatingSocials() {
                             <motion.a
                                 key={index}
                                 href={social.link}
+                                target="blank"
                                 className="flex items-center justify-center h-8 w-8 py-1 bg-card border rounded-full text-xs md:text-sm"
                                 initial={{ opacity: 0, scale: 0, y: 32 }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
