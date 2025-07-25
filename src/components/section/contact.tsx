@@ -1,4 +1,5 @@
 "use client";
+import { socials } from "@/constant/social";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Mail, MapPin, MessageSquare, Phone, Send } from "lucide-react";
@@ -24,7 +25,7 @@ export default function Contact() {
         const email = formData.get("email") as string;
         const subject = formData.get("subject") as string;
         const message = formData.get("message") as string;
-        console.log(fullName)
+        console.log(fullName);
         // Simple validation
         if (!fullName || !email || !subject || !message) {
             setStatus("error");
@@ -55,7 +56,7 @@ export default function Contact() {
         <SectionWrapper id="contact" className="relative py-16">
             <div className="md:max-w-6xl w-full min-h-screen">
                 <div className="w-full">
-                    <div className="flex items-center gap-4 md:gap-8 mb-8">
+                    <div className="flex items-center gap-4 md:gap-8 mb-4 md:mb-8">
                         <div className="w-8 md:w-16 h-0.5 bg-primary"></div>
                         <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary">
                             Contact
@@ -343,11 +344,18 @@ export default function Contact() {
                             media or send a direct email.
                         </p>
                         <div className="flex items-center justify-center gap-4">
-                            <div className="w-12 h-0.5 bg-primary"></div>
-                            <span className="text-sm font-medium text-primary">
-                                {"Let's"} build something great together
-                            </span>
-                            <div className="w-12 h-0.5 bg-primary"></div>
+                            <div className="flex gap-3">
+                                {socials.map((social, index) => (
+                                    <a
+                                        key={index}
+                                        href={social.link}
+                                        target="blank"
+                                        className="group flex items-center justify-center h-10 w-10 bg-card border border-border rounded-full hover:border-primary/50 hover:bg-primary/10 transition-all duration-300"
+                                    >
+                                        <social.icon className="h-4 w-4" />
+                                    </a>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -31,7 +31,7 @@ export default function Home() {
                 isExpanded={isExpanded}
                 setIsExpanded={setIsExpanded}
             />
-            <ProfileBadge />
+            {/* <ProfileBadge /> */}
             <CursorCircle />
             <ScrollDownButton />
             <ThemeToggle isExpanded={isExpanded} />

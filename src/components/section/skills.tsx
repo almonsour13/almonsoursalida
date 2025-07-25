@@ -40,7 +40,7 @@ export default function Skills() {
             id="skills"
             className="flex items-center justify-center py-12"
         >
-            <div className="md:max-w-6xl w-full flex flex-col gap-4 md:gap-   items-center justify-center md:min-h-screen">
+            <div className="md:max-w-6xl w-full flex flex-col items-center justify-center md:min-h-screen">
                 <div className="w-full">
                     <div className="flex items-center gap-4 md:gap-8 mb-4 md:mb-8">
                         <div className="w-8 md:w-16 h-0.5 bg-primary"></div>

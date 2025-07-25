@@ -24,7 +24,7 @@ export default function Projects() {
         <SectionWrapper id="projects" className="">
             <div className="md:max-w-6xl w-full flex flex-col items-center min-h-screen">
                 <div className="w-full">
-                    <div className="flex items-center gap-4 md:gap-8 mb-8">
+                    <div className="flex items-center gap-4 md:gap-8 mb-4 md:mb-8">
                         <div className="w-8 md:w-16 h-0.5 bg-primary"></div>
                         <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary">
                             Projects

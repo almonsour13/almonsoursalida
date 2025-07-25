@@ -3,7 +3,7 @@
 import { socials } from "@/constant/social";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { Download, PhoneCall } from "lucide-react";
+import { Download, Eye, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import GridLines from "../grid-lines";
 import SectionWrapper from "../section-wrapper";
@@ -92,7 +92,8 @@ export default function Hero() {
                                 <span>{"Let's"} Talk</span>
                             </motion.a>
                             <motion.a
-                                href="#"
+                                    target="_blank"
+                                href="/resume/Al-Monsour_Salida_Resume.pdf"
                                 className={cn(
                                     "group flex items-center gap-2 px-4 py-2    rounded",
                                     "bg-card border text-foreground font-medium text-sm",
@@ -101,8 +102,8 @@ export default function Hero() {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                <Download className="w-4 h-4" />
-                                <span>Download CV</span>
+                                <Eye className="w-4 h-4" />
+                                <span>Resume</span>
                             </motion.a>
                         </motion.div>
                     </div>
