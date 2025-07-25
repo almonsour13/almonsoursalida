@@ -1,6 +1,5 @@
 "use client";
 import FloatingSocials from "@/components/common/floating-social";
-import ProfileBadge from "@/components/common/profile-badge";
 import ScrollDownButton from "@/components/common/scroll-down-button";
 import ScrollProgressBar from "@/components/common/scroll-progress-bar";
 import ThemeToggle from "@/components/common/theme-toggle";
