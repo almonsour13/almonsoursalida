@@ -3,7 +3,7 @@
 import { socials } from "@/constant/social";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { Download, Eye, PhoneCall } from "lucide-react";
+import { Eye, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import GridLines from "../grid-lines";
 import SectionWrapper from "../section-wrapper";
