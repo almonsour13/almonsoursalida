@@ -28,10 +28,6 @@ export default function ProjectCard({
             } pt-8 justify-between gap-4 bg-transparent`}
         >
             <ProjectModal project={project}>
-                <div
-                    className="group cursor-pointer image-content relative flex items-center justify-center flex-1 p-4 h-80 aspect-video max-w-lg rounded-md overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 border"
-                    // onClick={() => handleImageClick(project)}
-                >
                     <Image
                         src={project.image}
                         alt={project.title}
@@ -46,7 +42,6 @@ export default function ProjectCard({
                         fill
                     />
                     <div className="absolute z-50 w-full h-full bg-card/20 opacity-0 group-hover:opacity-100"></div>
-                </div>
             </ProjectModal>
             <div
                 className={`

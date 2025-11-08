@@ -15,20 +15,22 @@ export default function NavigationMenu({
 }) {
     const { activeSection, setActiveSection } = useSection();
     const [lastScrollY, setLastScrollY] = useState(0);
+    const [isScrolling, setIsScrolling] = useState(false);
 
+    useEffect(() => {}, []);
     const sections = [
         { id: "hero", label: "Home" },
         { id: "projects", label: "Projects" },
         { id: "skills", label: "Skills" },
         { id: "services", label: "Services" },
-        // { id: "education", label: "Education" },
         { id: "contact", label: "Contact" },
     ];
 
     useEffect(() => {
         const handleScroll = () => {
-            const currentScrollY = window.scrollY;
+            if (isScrolling) return;
 
+            const currentScrollY = window.scrollY;
 
             setLastScrollY(currentScrollY);
 
@@ -42,6 +44,7 @@ export default function NavigationMenu({
                         scrollPosition < offsetTop + offsetHeight
                     ) {
                         setActiveSection(section.id);
+                        window.history.replaceState(null, "", `#${section.id}`);
                         break;
                     }
                 }
@@ -50,31 +53,39 @@ export default function NavigationMenu({
 
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [lastScrollY,setActiveSection]);
+    }, [lastScrollY, setActiveSection, isScrolling]);
 
-    const handleSectionClick = (sectionId: string) => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-        }
-        setIsExpanded(false);
-    };
     useEffect(() => {
         if (isExpanded) {
-            document.body.style.overflow = "hidden"; // lock scroll
-            window.scrollTo({ top: 0, behavior: "smooth" }); // optional: scroll to top
+            document.body.style.overflow = "hidden";
+            window.scrollTo({ top: 0, behavior: "smooth" });
         } else {
-            document.body.style.overflow = ""; // restore scroll
+            document.body.style.overflow = "";
         }
 
         return () => {
-            document.body.style.overflow = ""; // clean up
+            document.body.style.overflow = "";
         };
     }, [isExpanded]);
 
+    useEffect(() => {
+        const hash = window.location.hash.slice(1);
+        if (hash) {
+            setTimeout(() => {
+                const element = document.getElementById(hash);
+                if (element) {
+                    setActiveSection(hash);
+                    element.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                    });
+                }
+            }, 100);
+        }
+    }, []);
+
     return (
         <>
-            {/* Main Navigation */}
             <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 className={`lg:hidden fixed ${
@@ -108,15 +119,40 @@ export default function NavigationMenu({
                                         "h-full "
                                     }`}
                                 >
-                                    <button
-                                        onClick={() =>
-                                            handleSectionClick(section.id)
-                                        }
+                                    <a
+                                        href={`#${section.id}`}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            const element =
+                                                document.getElementById(
+                                                    section.id
+                                                );
+                                            if (element) {
+                                                setIsScrolling(true);
+
+                                                setActiveSection(section.id);
+                                                window.history.pushState(
+                                                    null,
+                                                    "",
+                                                    `#${section.id}`
+                                                );
+
+                                                element.scrollIntoView({
+                                                    behavior: "smooth",
+                                                    block: "start",
+                                                });
+
+                                                setTimeout(() => {
+                                                    setIsScrolling(false);
+                                                }, 1000);
+
+                                                setIsExpanded(false);
+                                            }
+                                        }}
                                         className={`group cursor-pointer relative flex items-center gap-2 w-full text-left transition-all duration-300 hover:scale-105 ${
                                             isActive ? "" : ""
                                         }`}
                                     >
-                                        {/* Section Number */}
                                         <div
                                             className={`flex items-center justify-center w-8 h-8 rounded-full border transition-all duration-300 ${
                                                 isActive
@@ -129,14 +165,12 @@ export default function NavigationMenu({
                                             </span>
                                         </div>
 
-                                        {/* Section Label */}
                                         <span
                                             className={`block text-sm tracking-wider transition-all duration-300 `}
                                         >
                                             {section.label}
                                         </span>
 
-                                        {/* Active Indicator */}
                                         <AnimatePresence>
                                             {isActive && (
                                                 <motion.span
@@ -162,9 +196,8 @@ export default function NavigationMenu({
                                                 />
                                             )}
                                         </AnimatePresence>
-                                    </button>
+                                    </a>
 
-                                    {/* Connection Line to Next Item */}
                                     {index < sections.length - 1 && (
                                         <div className="ml-4 w-px flex-1 bg-border " />
                                     )}

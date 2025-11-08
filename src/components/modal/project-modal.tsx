@@ -46,7 +46,7 @@ export default function ProjectModal({
     return (
         <>
             {/* Trigger button */}
-            <div onClick={() => setOpen(true)} className="cursor-pointer">
+            <div onClick={() => setOpen(true)} className="group cursor-pointer image-content relative flex items-center justify-center flex-1 p-4 h-80 aspect-video max-w-lg rounded-md overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 border">
                 {children}
             </div>
 
