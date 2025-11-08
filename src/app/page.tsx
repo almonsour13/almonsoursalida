@@ -5,7 +5,6 @@ import ScrollProgressBar from "@/components/common/scroll-progress-bar";
 import ThemeToggle from "@/components/common/theme-toggle";
 import Services from "@/components/section/services";
 import { useState } from "react";
-import CursorCircle from "../components/cursor-circle";
 import Footer from "../components/layout/footer";
 import NavigationMenu from "../components/layout/navigation";
 import Contact from "../components/section/contact";
@@ -16,7 +15,7 @@ import Skills from "../components/section/skills";
 export default function Home() {
     const [isExpanded, setIsExpanded] = useState(false);
     return (
-        <div className="flex flex-col gap-20 w-full relative font-sans ">
+        <div className="flex flex-col gap-20 w-full relative ">
             {/* sections */}
             <Hero />
             <Projects />
@@ -31,7 +30,6 @@ export default function Home() {
                 setIsExpanded={setIsExpanded}
             />
             {/* <ProfileBadge /> */}
-            <CursorCircle />
             <ScrollDownButton />
             <ThemeToggle isExpanded={isExpanded} />
             <FloatingSocials />

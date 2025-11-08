@@ -16,7 +16,7 @@ export default function Hero() {
                     <div className="flex items-center gap-4">
                         <div className="w-12 h-0.5 bg-primary"></div>
                         <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary">
-                            Web Developer
+                            Full Stack Developer
                         </span>
                     </div>
                     <div className="hidden md:flex items-center gap-4">
@@ -66,7 +66,7 @@ export default function Hero() {
                                 </span>
                             </div>
                             <p className="text-base text-muted-foreground max-w-2xl">
-                                {"I'm"} a Web Developer with a strong background
+                                {"I'm"} a Full Stack Developer with a strong background
                                 in creating dynamic, responsive web applications
                                 from front to back.
                             </p>
@@ -93,7 +93,7 @@ export default function Hero() {
                             </motion.a>
                             <motion.a
                                     target="_blank"
-                                href="/resume/Al-Monsour_Salida_Resume.pdf"
+                                href="/resume/Al-Monsour M. Slida - Resume.3.pdf"
                                 className={cn(
                                     "group flex items-center gap-2 px-4 py-2    rounded",
                                     "bg-card border text-foreground font-medium text-sm",

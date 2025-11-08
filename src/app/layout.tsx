@@ -3,6 +3,7 @@ import { SectionProvider } from "@/context/section-context";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import CursorCircle from "@/components/cursor-circle";
 
 const geistSans = Geist({
     variable: "--font-poppins",
@@ -36,7 +37,7 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased `}
+                className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}
             >
                 <ThemeProvider
                     attribute="class"
@@ -45,6 +46,7 @@ export default function RootLayout({
                     disableTransitionOnChange
                 >
                     <SectionProvider>{children}</SectionProvider>
+                    <CursorCircle />
                 </ThemeProvider>
             </body>
         </html>

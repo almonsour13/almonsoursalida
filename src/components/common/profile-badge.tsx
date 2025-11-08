@@ -16,7 +16,7 @@ export default function ProfileBadge() {
         ${
             (activeSection === "hero" || activeSection === "contact") || scrollYProgress.get() === 0
                 ? "-translate-y-16 md:-translate-y-24"
-                : "translate-y-0"
+                : "translate-y-16"
         }`}
         >
             <div className="relative">

@@ -50,7 +50,7 @@ export default function NavigationMenu({
 
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [lastScrollY,setActiveSection,sections]);
+    }, [lastScrollY,setActiveSection]);
 
     const handleSectionClick = (sectionId: string) => {
         const element = document.getElementById(sectionId);
