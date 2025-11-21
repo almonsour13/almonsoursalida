@@ -40,10 +40,10 @@ export default function Skills() {
             id="skills"
             className="flex items-center justify-center py-12"
         >
-            <div className="md:max-w-6xl w-full flex flex-col items-center justify-center md:min-h-screen">
-                <div className="w-full">
-                    <div className="flex items-center gap-4 md:gap-8 mb-4 md:mb-8">
-                        <div className="w-8 md:w-16 h-0.5 bg-primary"></div>
+            <div className="flex flex-col items-center justify-center md:min-h-screen">
+                <div className="w-full space-y-4 md:space-y-8">
+                    <div className="flex items-center gap-4 md:gap-8">
+                        <div className="w-8 md:w-16 h-0.5 bg-border"></div>
                         <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary">
                             Skills & {""}
                             <span className="hidden md:block">
@@ -53,22 +53,21 @@ export default function Skills() {
                         </span>
                         <div className="flex-1 h-0.5 bg-border"></div>
                     </div>
-                    {/* <h1 className="text-5xl md:text-8xl font-bold uppercase tracking-tight text-foreground mb-6 leading-none">
-                        Skills & {""}
-                        <span className="hidden md:block">Technologies</span>
-                        <span className="md:hidden">Techs</span>
-                    </h1> */}
-                    <h1 className="text-5xl md:text-8xl font-bold uppercase tracking-tight text-foreground mb-6 leading-none">
-                        My Dev{" "}
-                        <span className="hidden md:inline">Environment</span>
-                        <span className="md:hidden">Stack</span>
-                    </h1>
 
-                    <p className="text-sm md:text-base mb-6 text-muted-foreground">
-                        A selection of full stack applications showcasing my
-                        ability to build responsive frontends, robust backends,
-                        and seamless user experiences.
-                    </p>
+                    <div className="flex-1 space-y-4">
+                        <h1 className="text-5xl md:text-6xl font-bold uppercase tracking-tight text-foreground leading-none">
+                            My Dev{" "}
+                            <span className="hidden md:inline">
+                                Environment
+                            </span>
+                            <span className="md:hidden">Stack</span>
+                        </h1>
+                        <p className="md:max-w-3xl text-sm md:text-base mb-6 text-muted-foreground">
+                            A selection of full stack applications showcasing my
+                            ability to build responsive frontends, robust
+                            backends, and seamless user experiences.
+                        </p>
+                    </div>
                 </div>
 
                 {/* Mobile: Horizontal scroll */}

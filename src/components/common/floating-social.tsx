@@ -1,21 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { User, X } from "lucide-react";
 import { useSection } from "@/context/section-context";
 import { socials } from "@/constant/social";
+import { Button } from "../ui/button";
 
 export default function FloatingSocials() {
     const [isShowSocialMedia, setIsShowSocialMedia] = useState(false);
     const { activeSection } = useSection();
 
+    useEffect(() => {
+        if (activeSection === "hero" || activeSection === "contact") {
+            setIsShowSocialMedia(false);
+        }
+    },[activeSection])
     return (
-        <div className="fixed z-50 bottom-4 lg:bottom-12 left-4 lg:left-46 flex flex-col gap-2">
+        <div
+            className={`fixed z-30 bottom-4 lg:bottom-12 left-4 lg:left-20 flex flex-col gap-2`}
+        >
             <AnimatePresence>
                 {isShowSocialMedia && (
                     <motion.div
-                        className="flex flex-col gap-2"
+                        className={`flex flex-col gap-2`}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -29,7 +37,6 @@ export default function FloatingSocials() {
                                 key={index}
                                 href={social.link}
                                 target="blank"
-                                className="flex items-center justify-center h-8 w-8 py-1 bg-card border rounded-full text-xs md:text-sm"
                                 initial={{ opacity: 0, scale: 0, y: 32 }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0, y: 32 }}
@@ -48,27 +55,27 @@ export default function FloatingSocials() {
                                 }}
                                 whileTap={{ scale: 0.9 }}
                             >
-                                <social.icon className="h-4 w-4" />
+                                <Button
+                                    size="icon"
+                                    variant="outline"
+                                    className="rounded-full"
+                                >
+                                    <social.icon className="h-4 w-4" />
+                                </Button>
                             </motion.a>
                         ))}
                     </motion.div>
                 )}
             </AnimatePresence>
-
-            <motion.button
+            <Button
+                size="icon"
+                variant="outline"
+                className={`rounded-full transform transition-all duration-500 ease-in-out ${
+                    activeSection === "hero" || activeSection === "contact"
+                        ? "translate-y-12 md:translate-y-24"
+                        : "translate-y-0"
+                }`}
                 onClick={() => setIsShowSocialMedia(!isShowSocialMedia)}
-                className={`cursor-pointer flex items-center justify-center w-8 h-8 p-2 rounded-full border bg-card backdrop-blur-sm
-          transform transition duration-500 ease-in-out  
-          ${
-              activeSection === "hero" || activeSection === "contact"
-                  ? "translate-y-12 md:translate-y-24"
-                  : "translate-y-0"
-          }
-        `}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                animate={{ rotate: isShowSocialMedia ? 180 : 0 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
             >
                 <AnimatePresence mode="wait">
                     <motion.div
@@ -85,7 +92,7 @@ export default function FloatingSocials() {
                         )}
                     </motion.div>
                 </AnimatePresence>
-            </motion.button>
+            </Button>
         </div>
     );
 }

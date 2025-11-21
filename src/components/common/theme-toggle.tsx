@@ -3,8 +3,9 @@ import { useTheme } from "next-themes";
 import { useCallback, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "../ui/button";
 
-export default function ThemeToggle({ isExpanded }: { isExpanded: boolean }) {
+export default function ThemeToggle() {
     const { theme, setTheme } = useTheme();
     const [isThemeTransitioning, setIsThemeTransitioning] = useState(false);
 
@@ -21,7 +22,6 @@ export default function ThemeToggle({ isExpanded }: { isExpanded: boolean }) {
             setIsThemeTransitioning(false);
         }, 1000);
     }, [theme, setTheme, isThemeTransitioning]);
-    
 
     return (
         <>
@@ -29,7 +29,7 @@ export default function ThemeToggle({ isExpanded }: { isExpanded: boolean }) {
                 {isThemeTransitioning && (
                     <>
                         <motion.div
-                            className={`fixed z-50 top-14 md:top-12 right-4 md:right-36 w-8 h-8 border-2 rounded-full ${
+                            className={`fixed z-50 h-8 w-8 md:h-12 md:w-12 mt-10 md:mt-16 border-2 rounded-full ${
                                 theme === "dark"
                                     ? "border-white/20"
                                     : "border-gray-900/20"
@@ -52,7 +52,7 @@ export default function ThemeToggle({ isExpanded }: { isExpanded: boolean }) {
                             }}
                         />
                         <motion.div
-                            className="fixed z-40 top-14 md:top-12 right-4 md:right-36 w-8 h-8 border-2 rounded-full bg-foreground"
+                            className="fixed z-50 h-8 w-8 md:h-12 md:w-12 mt-10 md:mt-16 border-2 rounded-full bg-foreground"
                             initial={{
                                 scale: 1,
                                 opacity: 0,
@@ -74,14 +74,12 @@ export default function ThemeToggle({ isExpanded }: { isExpanded: boolean }) {
                     </>
                 )}
             </AnimatePresence>
-            <motion.button
+            <Button
                 onClick={handleThemeToggle}
-                className={`fixed ${
-                    isExpanded ? "z-20" : "z-50"
-                } top-14 lg:top-12 right-4 lg:right-36 cursor-pointer flex items-center justify-center w-8 h-8 p-2 rounded-full border border-foregroundd bg-card backdrop-blur-sm`}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
                 disabled={isThemeTransitioning}
+                variant="outline"
+                size="icon"
+                className="rounded-full z-40"
             >
                 <motion.div
                     animate={{ rotate: isThemeTransitioning ? 360 : 0 }}
@@ -90,7 +88,7 @@ export default function ThemeToggle({ isExpanded }: { isExpanded: boolean }) {
                     <Sun className="w-4 h-4 dark:hidden" />
                     <Moon className="w-4 h-4 hidden dark:block" />
                 </motion.div>
-            </motion.button>
+            </Button>
         </>
     );
 }

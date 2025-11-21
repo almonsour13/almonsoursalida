@@ -1,20 +1,20 @@
 "use client";
 
 import { socials } from "@/constant/social";
-import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Eye, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import GridLines from "../grid-lines";
 import SectionWrapper from "../section-wrapper";
+import { Button } from "../ui/button";
 
 export default function Hero() {
     return (
         <SectionWrapper id="hero" className="relative">
-            <div className=" md:max-w-6xl w-full flex flex-col items-center  justify-center min-h-screen">
+            <div className="flex flex-col items-center  justify-center min-h-screen">
                 <div className="w-full flex items-center justify-between ">
                     <div className="flex items-center gap-4">
-                        <div className="w-12 h-0.5 bg-primary"></div>
+                        <div className="w-12 h-0.5 bg-border"></div>
                         <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary">
                             Full Stack Developer
                         </span>
@@ -60,15 +60,15 @@ export default function Hero() {
                             transition={{ duration: 0.8, delay: 0.8 }}
                         >
                             <div className="flex items-center gap-4">
-                                <div className="w-12 h-0.5 bg-primary"></div>
+                                <div className="w-12 h-0.5 bg-border"></div>
                                 <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary">
                                     About Me
                                 </span>
                             </div>
                             <p className="text-base text-muted-foreground max-w-2xl">
-                                {"I'm"} a Full Stack Developer with a strong background
-                                in creating dynamic, responsive web applications
-                                from front to back.
+                                {"I'm"} a Full Stack Developer with a strong
+                                background in creating dynamic, responsive web
+                                applications from front to back.
                             </p>
                         </motion.div>
                         <motion.div
@@ -79,31 +79,25 @@ export default function Hero() {
                         >
                             <motion.a
                                 href="#contact"
-                                className={cn(
-                                    "group flex items-center gap-2 px-4 py-2 rounded",
-                                    "bg-foreground text-primary-foreground font-medium text-sm",
-                                    "hover:bg-primary/90 transition-all duration-300",
-                                    "hover:shadow-xl"
-                                )}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
+                                <Button variant="default">
+                                    
                                 <PhoneCall className="w-4 h-4" />
                                 <span>{"Let's"} Talk</span>
+                                </Button>
                             </motion.a>
                             <motion.a
-                                    target="_blank"
+                                target="_blank"
                                 href="/resume/Al-Monsour M. Slida - Resume.3.pdf"
-                                className={cn(
-                                    "group flex items-center gap-2 px-4 py-2    rounded",
-                                    "bg-card border text-foreground font-medium text-sm",
-                                    "hover:border-primary/50 transition-all duration-300"
-                                )}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                <Eye className="w-4 h-4" />
-                                <span>Resume</span>
+                                <Button variant="outline">
+                                    <Eye className="w-4 h-4" />
+                                    <span>Resume</span>
+                                </Button>
                             </motion.a>
                         </motion.div>
                     </div>
@@ -114,15 +108,20 @@ export default function Hero() {
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.8, delay: 1.2 }}
                         >
-                            <div className="aspect-square hidden lg:block rounded-md bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 overflow-hidden relative">
+                            <div className="aspect-square hidden group  mask-profilea lg:block transition-all duration-200 rounded-md bg-gradient-to-br from-primary/20 to-primary/5 bordaer border-primary/20 overflow-hidden relative">
                                 {/* Placeholder content */}
-                                <div className="absolute inset-0 bg-card/50 backdrop-blur-sm"></div>
                                 <div className="absolute inset-0 flex items-center justify-center">
                                     <Image
                                         alt="profile-image"
                                         src="/image/profile.JPG"
-                                        // src="/image/anime-profile.png"
                                         className="w-full h-full"
+                                        width={1000}
+                                        height={1000}
+                                    />{" "}
+                                    <Image
+                                        alt="profile-image"
+                                        src="/image/anime-profile.png"
+                                        className="w-full h-full absolute opacity-0 group-hover:opacity-100"
                                         width={1000}
                                         height={1000}
                                     />
@@ -139,9 +138,8 @@ export default function Hero() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 1.4 }}
                         >
-                            {" "}
                             <div className="flex items-center gap-4">
-                                <div className="w-12 h-0.5 bg-primary"></div>
+                                <div className="w-12 h-0.5 bg-border"></div>
                                 <span className="text-xs font-medium tracking-widest uppercase text-primary">
                                     Connect
                                 </span>
@@ -152,13 +150,6 @@ export default function Hero() {
                                         key={index}
                                         href={social.link}
                                         target="blank"
-                                        className={cn(
-                                            "group flex items-center justify-center w-10 h-10 rounded-full",
-                                            "bg-card border text-foreground",
-                                            "hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
-                                        )}
-                                        whileHover={{ scale: 1.1, rotate: 5 }}
-                                        whileTap={{ scale: 0.9 }}
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{
@@ -169,31 +160,19 @@ export default function Hero() {
                                             damping: 20,
                                         }}
                                     >
-                                        <social.icon className="h-4 w-4 group-hover:text-primary transition-colors" />
+                                        <Button
+                                            size="icon"
+                                            variant="outline"
+                                            className="rounded-full"
+                                        >
+                                            <social.icon className="h-4 w-4 group-hover:text-primary transition-colors" />
+                                        </Button>
                                     </motion.a>
                                 ))}
                             </div>
                         </motion.div>
                     </div>
                 </div>
-
-                {/* <motion.div
-                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 2.0 }}
-                >
-                    <div className="flex flex-col items-center gap-2">
-                        <div className="text-xs text-muted-foreground uppercase tracking-wide">
-                            Scroll
-                        </div>
-                        <motion.div
-                            className="w-0.5 h-8 bg-primary/30"
-                            animate={{ height: [32, 16, 32] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                        ></motion.div>
-                    </div>
-                </motion.div> */}
             </div>
             <GridLines />
         </SectionWrapper>

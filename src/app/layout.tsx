@@ -2,8 +2,12 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { SectionProvider } from "@/context/section-context";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+
 import CursorCircle from "@/components/cursor-circle";
+import { ProjectProvider } from "@/context/project-context";
+import ProjectDrawer from "@/components/modal/project-drawer";
+import './_style/globals.css';
+import './_style/style.css';
 
 const geistSans = Geist({
     variable: "--font-poppins",
@@ -45,8 +49,11 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <SectionProvider>{children}</SectionProvider>
-                    <CursorCircle />
+                    <ProjectProvider>
+                        <SectionProvider>{children}</SectionProvider>
+                        <CursorCircle />
+                        <ProjectDrawer />
+                    </ProjectProvider>
                 </ThemeProvider>
             </body>
         </html>

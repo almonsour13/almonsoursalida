@@ -1,10 +1,15 @@
 "use client";
 
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useState } from "react";
-
 import { useSection } from "@/context/section-context";
-import { AnimatePresence, motion } from "framer-motion";
+import {
+    AnimatePresence,
+    motion
+} from "framer-motion";
+import { ArrowRight, Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import SectionWrapper from "../section-wrapper";
+import { Button } from "../ui/button";
+import { ScrollArea } from "../ui/scroll-area";
 
 export default function NavigationMenu({
     isExpanded,
@@ -17,7 +22,6 @@ export default function NavigationMenu({
     const [lastScrollY, setLastScrollY] = useState(0);
     const [isScrolling, setIsScrolling] = useState(false);
 
-    useEffect(() => {}, []);
     const sections = [
         { id: "hero", label: "Home" },
         { id: "projects", label: "Projects" },
@@ -31,7 +35,6 @@ export default function NavigationMenu({
             if (isScrolling) return;
 
             const currentScrollY = window.scrollY;
-
             setLastScrollY(currentScrollY);
 
             const scrollPosition = currentScrollY + 200;
@@ -58,7 +61,6 @@ export default function NavigationMenu({
     useEffect(() => {
         if (isExpanded) {
             document.body.style.overflow = "hidden";
-            window.scrollTo({ top: 0, behavior: "smooth" });
         } else {
             document.body.style.overflow = "";
         }
@@ -83,130 +85,221 @@ export default function NavigationMenu({
             }, 100);
         }
     }, []);
-
     return (
         <>
-            <button
+            <Button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className={`lg:hidden fixed ${
-                    isExpanded ? "z-40" : "z-30"
-                } top-4 right-4 cursor-pointer flex items-center justify-center w-8 h-8 p-2 rounded-full border border-foregrounsd bg-card backdrop-blur-sm
-
-                    `}
+                variant="outline"
+                size="icon"
+                className="rounded-full z-40 h-10 md:h-12 w-10 md:w-12"
             >
-                {isExpanded ? (
-                    <ChevronRight className="w-4 h-4" />
-                ) : (
-                    <ChevronLeft className="w-4 h-4" />
+                <AnimatePresence mode="wait">
+                    {isExpanded ? (
+                        <motion.div
+                            key="close"
+                            initial={{ rotate: -90, opacity: 0 }}
+                            animate={{ rotate: 0, opacity: 1 }}
+                            exit={{ rotate: 90, opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                        >
+                            <X className="h-4 w-4" />
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            key="menu"
+                            initial={{ rotate: 90, opacity: 0 }}
+                            animate={{ rotate: 0, opacity: 1 }}
+                            exit={{ rotate: -90, opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                        >
+                            <Menu className="h-4 w-4" />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </Button>
+
+            {/* Fullscreen Menu Overlay */}
+            <AnimatePresence>
+                {isExpanded && (
+                    <>
+                        {/* Backdrop */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="fixed inset-0 bg-background/95 backdrop-blur-md z-30"
+                            onClick={() => setIsExpanded(false)}
+                        />
+
+                        {/* Menu Content */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.4, delay: 0.1 }}
+                            className="fixed inset-0 z-30 flex items-center justify-center"
+                        >
+                            <ScrollArea className="flex-1">
+                                <SectionWrapper>
+                                    <div className="h-screen flex flex-col justify-center gap-12">
+                                        {/* Navigation Items */}
+                                        <nav className="space-y-2 mt-20 md:mt-0 flex flex-col">
+                                            {sections.map((section, index) => {
+                                                const isActive =
+                                                    activeSection ===
+                                                    section.id;
+                                                return (
+                                                    <motion.div
+                                                        key={section.id}
+                                                        initial={{
+                                                            opacity: 0,
+                                                            x: -50,
+                                                        }}
+                                                        animate={{
+                                                            opacity: 1,
+                                                            x: 0,
+                                                        }}
+                                                        exit={{
+                                                            opacity: 0,
+                                                            x: -50,
+                                                        }}
+                                                        transition={{
+                                                            duration: 0.4,
+                                                            delay: index * 0.1,
+                                                            ease: "easeOut",
+                                                        }}
+                                                        className="h-full flex-1"
+                                                    >
+                                                        <button
+                                                            onClick={(e) => {
+                                                                e.preventDefault();
+                                                                const element =
+                                                                    document.getElementById(
+                                                                        section.id
+                                                                    );
+                                                                if (element) {
+                                                                    setIsScrolling(
+                                                                        true
+                                                                    );
+                                                                    setActiveSection(
+                                                                        section.id
+                                                                    );
+                                                                    window.history.pushState(
+                                                                        null,
+                                                                        "",
+                                                                        `#${section.id}`
+                                                                    );
+                                                                    element.scrollIntoView(
+                                                                        {
+                                                                            behavior:
+                                                                                "smooth",
+                                                                            block: "start",
+                                                                        }
+                                                                    );
+                                                                    setTimeout(
+                                                                        () => {
+                                                                            setIsScrolling(
+                                                                                false
+                                                                            );
+                                                                        },
+                                                                        1000
+                                                                    );
+                                                                    setIsExpanded(
+                                                                        false
+                                                                    );
+                                                                }
+                                                            }}
+                                                            className="w-full h-full group relative"
+                                                        >
+                                                            {/* Hover Line */}
+                                                            <motion.div
+                                                                className={`absolute left-0 top-0 bottom-0 w-1 origin-top ${
+                                                                    isActive
+                                                                        ? "bg-foreground"
+                                                                        : "bg-foreground"
+                                                                }`}
+                                                                initial={{
+                                                                    scaleY: isActive
+                                                                        ? 1
+                                                                        : 0,
+                                                                }}
+                                                                whileHover={{
+                                                                    scaleY: 1,
+                                                                }}
+                                                                transition={{
+                                                                    duration: 0.3,
+                                                                }}
+                                                            />
+
+                                                            <div
+                                                                className={`flex items-center h-full justify-between py-6 px-6 border-b transition-all ${
+                                                                    isActive
+                                                                        ? "border-foreground/50 pl-8"
+                                                                        : "border-border/50 group-hover:border-foreground/30 group-hover:pl-8"
+                                                                }`}
+                                                            >
+                                                                <div className="flex items-baseline gap-6">
+                                                                    {/* Number */}
+                                                                    <span
+                                                                        className={`text-sm font-light transition-colors ${
+                                                                            isActive
+                                                                                ? "text-foreground"
+                                                                                : "text-muted-foreground group-hover:text-foreground"
+                                                                        }`}
+                                                                    >
+                                                                        {index +
+                                                                            1}
+                                                                    </span>
+
+                                                                    {/* Label */}
+                                                                    <h2
+                                                                        className={`text-4xl md:text-6xl font-light tracking-tight transition-all ${
+                                                                            isActive
+                                                                                ? "tracking-wide"
+                                                                                : "group-hover:tracking-wide"
+                                                                        }`}
+                                                                    >
+                                                                        {
+                                                                            section.label
+                                                                        }
+                                                                    </h2>
+                                                                </div>
+
+                                                                {/* Arrow */}
+                                                                <motion.div
+                                                                    initial={{
+                                                                        x: isActive
+                                                                            ? 0
+                                                                            : -10,
+                                                                        opacity:
+                                                                            isActive
+                                                                                ? 1
+                                                                                : 0,
+                                                                    }}
+                                                                    whileHover={{
+                                                                        x: 0,
+                                                                        opacity: 1,
+                                                                    }}
+                                                                    transition={{
+                                                                        duration: 0.2,
+                                                                    }}
+                                                                >
+                                                                    <ArrowRight className="h-6 w-6 md:h-8 md:w-8" />
+                                                                </motion.div>
+                                                            </div>
+                                                        </button>
+                                                    </motion.div>
+                                                );
+                                            })}
+                                        </nav>
+                                    </div>
+                                </SectionWrapper>
+                            </ScrollArea>
+                        </motion.div>
+                    </>
                 )}
-            </button>
-            <div
-                className={`fixed p-4 lg:py-12 z-30 top-0 bottom-0 w-48 lg:w-36 right-0 lg:border-l-0  transform transition duration-500 ease-in-out  lg:translate-x-0 ${
-                    isExpanded
-                        ? "translate-x-0 border-l backdrop-blur-sm"
-                        : "translate-x-48"
-                }`}
-            >
-                <nav className={`relative h-full`}>
-                    <ul className="flex  justify-between  flex-col h-full">
-                        {sections.map((section, index) => {
-                            const isActive = activeSection === section.id;
-                            return (
-                                <li
-                                    key={section.id}
-                                    className={`relative cursor-pointer flex flex-col ${
-                                        index !== sections.length - 1 &&
-                                        "h-full "
-                                    }`}
-                                >
-                                    <a
-                                        href={`#${section.id}`}
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            const element =
-                                                document.getElementById(
-                                                    section.id
-                                                );
-                                            if (element) {
-                                                setIsScrolling(true);
-
-                                                setActiveSection(section.id);
-                                                window.history.pushState(
-                                                    null,
-                                                    "",
-                                                    `#${section.id}`
-                                                );
-
-                                                element.scrollIntoView({
-                                                    behavior: "smooth",
-                                                    block: "start",
-                                                });
-
-                                                setTimeout(() => {
-                                                    setIsScrolling(false);
-                                                }, 1000);
-
-                                                setIsExpanded(false);
-                                            }
-                                        }}
-                                        className={`group cursor-pointer relative flex items-center gap-2 w-full text-left transition-all duration-300 hover:scale-105 ${
-                                            isActive ? "" : ""
-                                        }`}
-                                    >
-                                        <div
-                                            className={`flex items-center justify-center w-8 h-8 rounded-full border transition-all duration-300 ${
-                                                isActive
-                                                    ? "border-foregrounds text-primary-foreground text"
-                                                    : "border-foregrounds bg-card"
-                                            }`}
-                                        >
-                                            <span className="text-xs font-mono">
-                                                {index + 1}
-                                            </span>
-                                        </div>
-
-                                        <span
-                                            className={`block text-sm tracking-wider transition-all duration-300 `}
-                                        >
-                                            {section.label}
-                                        </span>
-
-                                        <AnimatePresence>
-                                            {isActive && (
-                                                <motion.span
-                                                    className="absolute -z-10 left-0 h-8 w-8 border rounded-full bg-foreground"
-                                                    layoutId="bottomNav"
-                                                    initial={{
-                                                        opacity: 0,
-                                                        scale: 0.3,
-                                                    }}
-                                                    animate={{
-                                                        opacity: 1,
-                                                        scale: 1,
-                                                    }}
-                                                    exit={{
-                                                        opacity: 0,
-                                                        scale: 0.3,
-                                                    }}
-                                                    transition={{
-                                                        stiffness: 300,
-                                                        damping: 25,
-                                                        duration: 0.4,
-                                                    }}
-                                                />
-                                            )}
-                                        </AnimatePresence>
-                                    </a>
-
-                                    {index < sections.length - 1 && (
-                                        <div className="ml-4 w-px flex-1 bg-border " />
-                                    )}
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </nav>
-            </div>
+            </AnimatePresence>
         </>
     );
 }

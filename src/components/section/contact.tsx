@@ -6,6 +6,7 @@ import { Mail, MapPin, MessageSquare, Phone, Send } from "lucide-react";
 import Image from "next/image";
 import { FormEvent, useRef, useState } from "react";
 import SectionWrapper from "../section-wrapper";
+import { Button } from "../ui/button";
 
 export default function Contact() {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,8 +26,7 @@ export default function Contact() {
         const email = formData.get("email") as string;
         const subject = formData.get("subject") as string;
         const message = formData.get("message") as string;
-        console.log(fullName);
-        // Simple validation
+
         if (!fullName || !email || !subject || !message) {
             setStatus("error");
             setIsSubmitting(false);
@@ -34,7 +34,6 @@ export default function Contact() {
         }
 
         try {
-            // Example POST request — replace with your backend/API endpoint
             const res = await fetch("/api/contact", {
                 method: "POST",
                 body: JSON.stringify({ fullName, email, subject, message }),
@@ -52,21 +51,47 @@ export default function Contact() {
             setIsSubmitting(false);
         }
     };
+
+    const contactInfo = [
+        {
+            type: "Email",
+            value: "almonsoursalida@gmail.com",
+            icon: Mail,
+        },
+        {
+            type: "Phone",
+            value: "+639569932496",
+            icon: Phone,
+        },
+        {
+            type: "Location",
+            value: "Lupon, Davao Oriental, Philippines",
+            icon: MapPin,
+        },
+    ];
+
     return (
         <SectionWrapper id="contact" className="relative py-16">
             <div className="md:max-w-6xl w-full min-h-screen">
-                <div className="w-full">
-                    <div className="flex items-center gap-4 md:gap-8 mb-4 md:mb-8">
-                        <div className="w-8 md:w-16 h-0.5 bg-primary"></div>
+                <div className="w-full space-y-4 md:space-y-8">
+                    <div className="flex items-center gap-4 md:gap-8 ">
+                        <div className="w-8 md:w-16 h-0.5 bg-border"></div>
                         <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary">
                             Contact
                         </span>
                         <div className="flex-1 h-0.5 bg-border"></div>
                     </div>
                     <div className="flex justify-between w-full">
-                        <h1 className="text-5xl md:text-8xl font-bold uppercase tracking-tight text-foreground mb-6 leading-none">
-                            Get in touch
-                        </h1>
+                        <div className="flex-1 space-y-4">
+                            <h1 className="text-5xl md:text-6xl font-bold uppercase tracking-tight text-primary leading-none">
+                                Get in touch
+                            </h1>
+                            <p className="md:max-w-3xl text-sm md:text-base mb-6 text-muted-foreground">
+                                Ready to bring your ideas to life? {"I'm"}{" "}
+                                always excited to work on new projects and
+                                collaborate with amazing people.
+                            </p>
+                        </div>
                         <div className="hidden md:block">
                             <div className="text-right">
                                 <div className="text-6xl font-light text-primary/20">
@@ -78,101 +103,54 @@ export default function Contact() {
                             </div>
                         </div>
                     </div>
-                    <p className="text-sm md:text-base mb-6 text-muted-foreground">
-                        Ready to bring your ideas to life? {"I'm"} always
-                        excited to work on new projects and collaborate with
-                        amazing people.
-                    </p>
                 </div>
 
                 {/* Main Content Grid */}
                 <div className="grid lg:grid-cols-5 gap-12">
                     {/* Contact Information - Left Column */}
                     <div className="lg:col-span-2 space-y-4">
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            <div className="flex items-center gap-4 mb-6">
-                                <div className="w-8 h-0.5 bg-primary"></div>
-                                <span className="text-xs font-medium text-primary uppercase tracking-[0.2em]">
-                                    Contact Info
-                                </span>
-                            </div>
+                        <div className="flex items-center gap-4 mb-6">
+                            <div className="w-8 h-0.5 bg-vorder"></div>
+                            <span className="text-xs font-medium text-primary uppercase tracking-[0.2em]">
+                                Contact Info
+                            </span>
+                        </div>
 
-                            <div className="space-y-4">
-                                {/* Email */}
+                        <div className="space-y-4">
+                            {contactInfo.map((info, index) => (
                                 <motion.div
+                                    key={info.type} // <- KEY ADDED
                                     className="group bg-card flex items-start gap-4 p-4 rounded-md border hover:border-primary/20 transition-all duration-300"
-                                    whileHover={{ scale: 1.02 }}
                                     initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.2 }}
+                                    whileInView={{ opacity: 1, x: 0 }} // keep only whileInView for scroll animation
+                                    transition={{
+                                        duration: 0.6,
+                                        delay: index * 0.15,
+                                    }}
+                                    viewport={{ once: true, amount: 0.3 }}
                                 >
                                     <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                                        <Mail className="w-5 h-5 text-primary" />
+                                        <info.icon className="w-5 h-5 text-primary" />
                                     </div>
                                     <div>
                                         <p className="text-sm text-muted-foreground uppercase tracking-wide mb-1">
-                                            Email
+                                            {info.type}
                                         </p>
                                         <p className="text-foreground font-medium">
-                                            almonsoursalida@gmail.com
+                                            {info.value}
                                         </p>
                                     </div>
                                 </motion.div>
-
-                                {/* Phone */}
-                                <motion.div
-                                    className="group  bg-card flex items-start gap-4 p-4 rounded-md border hover:border-primary/20 transition-all duration-300"
-                                    whileHover={{ scale: 1.02 }}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.3 }}
-                                >
-                                    <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                                        <Phone className="w-5 h-5 text-primary" />
-                                    </div>
-                                    <div>
-                                        <p className="text-sm text-muted-foreground uppercase tracking-wide mb-1">
-                                            Phone
-                                        </p>
-                                        <p className="text-foreground font-medium">
-                                            +639569932496
-                                        </p>
-                                    </div>
-                                </motion.div>
-
-                                {/* Location */}
-                                <motion.div
-                                    className="group  bg-card flex items-start gap-4 p-4 rounded-md border hover:border-primary/20 transition-all duration-300"
-                                    whileHover={{ scale: 1.02 }}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.4 }}
-                                >
-                                    <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                                        <MapPin className="w-5 h-5 text-primary" />
-                                    </div>
-                                    <div>
-                                        <p className="text-sm text-muted-foreground uppercase tracking-wide mb-1">
-                                            Location
-                                        </p>
-                                        <p className="text-foreground font-medium">
-                                            Lupon, Davao Oriental, Philippines
-                                        </p>
-                                    </div>
-                                </motion.div>
-                            </div>
-                        </motion.div>
+                            ))}
+                        </div>
 
                         {/* Quote Section */}
                         <motion.div
                             className="bg-card rounded-md p-8 border border-primary/20 relative overflow-hidden"
                             initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5 }}
+                            viewport={{ once: true, amount: 0.3 }}
                         >
                             <div className="absolute top-4 right-4 text-4xl text-primary/20">
                                 {`"`}
@@ -207,8 +185,9 @@ export default function Contact() {
                         <motion.div
                             className="border  bg-card rounded-md overflow-hidden"
                             initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.6 }}
+                            viewport={{ once: true, amount: 0.3 }}
                         >
                             {/* Form Header */}
                             <div className="bg-card p-6 border-b">
@@ -229,7 +208,7 @@ export default function Contact() {
                                 <form
                                     ref={formRef}
                                     onSubmit={handleSubmit}
-                                    className="space-y-6"
+                                    className="space-y-4"
                                 >
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div className="space-y-2">
@@ -298,19 +277,11 @@ export default function Contact() {
                                             required
                                         />
                                     </div>
-
-                                    <motion.button
-                                        type="submit"
+                                    <Button
                                         disabled={isSubmitting}
-                                        className={cn(
-                                            "group cursor-pointer w-full flex items-center justify-center gap-3 px-8 py-4 rounded",
-                                            "bg-foreground text-primary-foreground font-medium",
-                                            "hover:bg-primary/90 transition-all duration-300",
-                                            isSubmitting &&
-                                                "opacity-50 cursor-not-allowed"
-                                        )}
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
+                                        type="submit"
+                                        className="w-full flex items-center justify-center gap-3 px-8 py-4"
+                                        size="lg"
                                     >
                                         <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                         <span>
@@ -318,7 +289,7 @@ export default function Contact() {
                                                 ? "Sending..."
                                                 : "Send Message"}
                                         </span>
-                                    </motion.button>
+                                    </Button>
                                     {status === "success" && (
                                         <p className="text-green-600 text-sm mt-2">
                                             Message sent successfully!
@@ -336,8 +307,13 @@ export default function Contact() {
                     </div>
                 </div>
 
-                {/* Magazine Footer */}
-                <div className="mt-16 pt-8">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    className="mt-16 pt-8"
+                >
                     <div className="text-center">
                         <p className="text-muted-foreground mb-4">
                             Prefer a different way to connect? Find me on social
@@ -350,15 +326,20 @@ export default function Contact() {
                                         key={index}
                                         href={social.link}
                                         target="blank"
-                                        className="group flex items-center justify-center h-10 w-10 bg-card border border-border rounded-full hover:border-primary/50 hover:bg-primary/10 transition-all duration-300"
                                     >
-                                        <social.icon className="h-4 w-4" />
+                                        <Button
+                                            size="icon"
+                                            variant="outline"
+                                            className="rounded-full"
+                                        >
+                                            <social.icon className="h-4 w-4" />
+                                        </Button>
                                     </a>
                                 ))}
                             </div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </SectionWrapper>
     );

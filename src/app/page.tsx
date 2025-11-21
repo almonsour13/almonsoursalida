@@ -1,7 +1,5 @@
 "use client";
 import FloatingSocials from "@/components/common/floating-social";
-import ScrollDownButton from "@/components/common/scroll-down-button";
-import ScrollProgressBar from "@/components/common/scroll-progress-bar";
 import ThemeToggle from "@/components/common/theme-toggle";
 import Services from "@/components/section/services";
 import { useState } from "react";
@@ -23,15 +21,14 @@ export default function Home() {
             <Services />
             <Contact />
             <Footer />
-            {/* components */}
-            <ScrollProgressBar />
-            <NavigationMenu
-                isExpanded={isExpanded}
-                setIsExpanded={setIsExpanded}
-            />
-            {/* <ProfileBadge /> */}
-            <ScrollDownButton />
-            <ThemeToggle isExpanded={isExpanded} />
+            <div className="fixed flex flex-col items-center top-12 right-4 md:right-16 z-50 gap-2 md:gap-4">
+                <NavigationMenu
+                    isExpanded={isExpanded}
+                    setIsExpanded={setIsExpanded}
+                />
+                <ThemeToggle/>
+            </div>
+            {/* <ScrollDownButton /> */}
             <FloatingSocials />
         </div>
     );

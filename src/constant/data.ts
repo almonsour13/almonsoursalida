@@ -1,32 +1,3 @@
-export const projects = [
-    {
-        title: "MangoLens",
-        description:
-            "Built a progressive web application (PWA) that enables real-time mango leaf disease detection offline by implementing a single-label, multi-class classification model using MobileVNet2 and TensorFlow.js. Leveraged React, Next.js, and Legend State for dynamic front-end rendering, while Supabase and PostgreSQL powered cloud-based user data management. The app supports offline capabilities and installability through Serwist-PWA integration, allowing seamless field use by farmers and agricultural technicians in remote areas without internet access.",
-        tech: ["React", "Next.js", "Node.js", "PostgreSQL", "Supabase", "Python", "Tensorflowjs", "Legend State", "Shadcn", "Serwist-pwa"],
-        image: "/image/project/mango-lens.png",
-        github: "https://github.com/almonsour13/mango-lens.git",
-        live: "https://mango-lens.vercel.app/",
-    },
-    {
-        title: "DOPI",
-        description:
-            "Developed and deployed the official website for Davao Oriental Polytechnic Institute to enhance its digital presence and streamline access to academic resources. Used WordPress for content management and MySQL for dynamic data handling. The site includes features such as announcements, course information, faculty directories, and admission guidelines. This project aimed to modernize the school’s communication system and increase accessibility for stakeholders.",
-        tech: ["Wordpress", "MySQL"],
-        image: "/image/project/dopi.png",
-        github: "",
-        live: "https://www.davaoorientalpolytechnicinstitute.com/",
-    },
-    {
-        title: "Water Billing System",
-        description:
-            "Engineered a desktop-based water billing system using JavaFX and MySQL to digitize and automate the billing operations for local water districts. The system allows staff to manage customer records, compute bills based on meter readings, generate receipts, and track payments. Designed with an intuitive GUI and secure database integration, it reduces manual workload and billing errors. This system is particularly effective for small to medium-scale utilities transitioning from paper-based systems to digital solutions.",
-        tech: ["Java", "Javafx", "MySQL"],
-        image: "/image/project/wbs.png",
-        github: "https://github.com/almonsour13/water_billing_system_final.git",
-        live: "",
-    },
-];
 
 
 export const skills = [
