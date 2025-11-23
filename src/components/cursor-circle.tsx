@@ -1,51 +1,21 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useCursorPosition } from "@/app/hooks/use-cursor-position";
+import { useEffect } from "react";
 
 export default function CursorCircle() {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const [isClicking, setIsClicking] = useState(false);
-    const [isHoveringImageContent, setIsHoveringImageContent] = useState(false);
+    const { mousePosition, isClicking, isHovering } = useCursorPosition({
+        avoidElementId: ["project-image-wrapper","profile-image-wrapper"],
+    });
 
     useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            setMousePosition({ x: e.clientX, y: e.clientY });
+        console.log("isHovering:", isHovering);
+    }, [isHovering]);
 
-            const element = document.elementFromPoint(e.clientX, e.clientY);
-            if (element && element.closest(".image-content")) {
-                setIsHoveringImageContent(true);
-            } else {
-                setIsHoveringImageContent(false);
-            }
-        };
-
-        const handleMouseDown = () => setIsClicking(true);
-        const handleMouseUp = () => setIsClicking(false);
-
-        window.addEventListener("mousemove", handleMouseMove);
-        window.addEventListener("mousedown", handleMouseDown);
-        window.addEventListener("mouseup", handleMouseUp);
-
-        return () => {
-            window.removeEventListener("mousemove", handleMouseMove);
-            window.removeEventListener("mousedown", handleMouseDown);
-            window.removeEventListener("mouseup", handleMouseUp);
-        };
-    }, []);
-
-    // ⛔ If hovering over an image-content element, render nothing
-    if (isHoveringImageContent)
-        return (
-            <div
-                className="fixed hidden md:flex pointer-events-none z-50 h-20 w-20 rounded-full items-center justify-center transition-all duration-300 ease-out text-background text-xs backdrop-invert  bg-foreground/80  border border-foreground"
-                style={{
-                    left: mousePosition.x - 40,
-                    top: mousePosition.y - 40,
-                }}
-            >
-                View
-            </div>
-        );
+    // Hide cursor when hovering over avoided elements
+    if (isHovering) {
+        return null;
+    }
 
     return (
         <>

@@ -1,10 +1,7 @@
 "use client";
 
 import { useSection } from "@/context/section-context";
-import {
-    AnimatePresence,
-    motion
-} from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import SectionWrapper from "../section-wrapper";
@@ -56,7 +53,7 @@ export default function NavigationMenu({
 
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [lastScrollY, setActiveSection, isScrolling]);
+    }, [lastScrollY, setActiveSection, isScrolling, sections]);
 
     useEffect(() => {
         if (isExpanded) {
@@ -84,7 +81,8 @@ export default function NavigationMenu({
                 }
             }, 100);
         }
-    }, []);
+    }, [setActiveSection]);
+    
     return (
         <>
             <Button

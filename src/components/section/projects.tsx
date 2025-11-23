@@ -33,7 +33,7 @@ export default function Projects() {
                         </div>
                         <div className="hidden md:block">
                             <div className="text-right">
-                                <div className="text-6xl font-light text-primary/20">
+                                <div className="text-6xl font-light text-muted">
                                     {featuredProjects.length
                                         .toString()
                                         .padStart(2, "0")}
@@ -47,11 +47,7 @@ export default function Projects() {
                 </div>
                 <div className="flex flex-col w-full gap-16 md:gap-32">
                     {featuredProjects.map((project, index) => (
-                        <ProjectCard
-                            key={index}
-                            project={project}
-                            index={index}
-                        />
+                        <ProjectCard key={index} project={project} index={index} />
                     ))}
                 </div>
 

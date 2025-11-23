@@ -1,12 +1,12 @@
 "use client";
 
+import { projects } from "@/constant/projects";
 import { useProject } from "@/context/project-context";
 import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Github, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import { projects } from "@/constant/projects";
+import ImageLoader from "../image-loader";
 
 export default function ProjectDrawer() {
     const [open, setOpen] = useState(false);
@@ -29,7 +29,7 @@ export default function ProjectDrawer() {
             setCurrentImageIndex(
                 (prev) => (prev + 1) % selectedProject.images.length
             );
-        }, 5000); 
+        }, 5000);
 
         return () => clearInterval(interval);
     }, [selectedProject]);
@@ -106,8 +106,8 @@ export default function ProjectDrawer() {
                                 <div className="flex flex-col md:flex-row gap-8 md:gap-12 pb-12">
                                     {/* Images Section */}
                                     <div className="space-y-4 flex-2">
-                                        <div className="relative bg-card rounded-md overflow-hidden">
-                                            <Image
+                                        <div className="relative aspect-video bg-card rounded-md overflow-hidden">
+                                            <ImageLoader
                                                 src={
                                                     selectedProject.images[
                                                         currentImageIndex
@@ -126,7 +126,7 @@ export default function ProjectDrawer() {
                                                     (img, imgIndex) => (
                                                         <div
                                                             key={imgIndex}
-                                                            className={`rounded overflow-hidden bg-card hover:opacity-80 transition-colors cursor-pointer ${
+                                                            className={`rounded aspect-video overflow-hidden bg-card hover:opacity-80 transition-colors cursor-pointer ${
                                                                 imgIndex ===
                                                                     currentImageIndex &&
                                                                 "ring-4   ring-primary"
@@ -137,7 +137,7 @@ export default function ProjectDrawer() {
                                                                 )
                                                             }
                                                         >
-                                                            <Image
+                                                            <ImageLoader
                                                                 src={img}
                                                                 alt={
                                                                     selectedProject.title

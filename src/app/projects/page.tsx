@@ -12,7 +12,7 @@ export default function Page() {
     return (
         <div className="min-h-screen flex flex-col items-center justify-center">
             <SectionWrapper className="py-20">
-                <div className="md:max-w-6xl w-full flex flex-col items-center min-h-screen">
+                <div className="flex flex-col items-center gap-6 md:gap-12">
                     <div className="w-full space-y-4 md:space-y-8">
                         <div className="flex items-center gap-4 md:gap-8">
                             <button
@@ -41,11 +41,7 @@ export default function Page() {
                     </div>
                     <div className="flex flex-col w-full gap-16 md:gap-32">
                         {projects.map((project, index) => (
-                            <ProjectCard
-                                key={index}
-                                project={project}
-                                index={index}
-                            />
+                            <ProjectCard key={index} project={project} index={index} />
                         ))}
                     </div>
                 </div>

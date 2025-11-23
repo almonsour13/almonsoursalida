@@ -3,8 +3,8 @@ import { socials } from "@/constant/social";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Mail, MapPin, MessageSquare, Phone, Send } from "lucide-react";
-import Image from "next/image";
 import { FormEvent, useRef, useState } from "react";
+import ImageLoader from "../image-loader";
 import SectionWrapper from "../section-wrapper";
 import { Button } from "../ui/button";
 
@@ -160,7 +160,7 @@ export default function Contact() {
                             </p>
                             <div className="flex items-center gap-3">
                                 <div className="w-10 h-10 rounded-full overflow-hidden">
-                                    <Image
+                                    <ImageLoader
                                         src="/image/profile.JPG"
                                         alt="Al-Monsour M. Salida"
                                         className="h-full w-full object-cover"

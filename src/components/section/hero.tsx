@@ -1,14 +1,37 @@
 "use client";
 
+import { useCursorPosition } from "@/app/hooks/use-cursor-position";
 import { socials } from "@/constant/social";
 import { motion } from "framer-motion";
 import { Eye, PhoneCall } from "lucide-react";
-import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import GridLines from "../grid-lines";
+import ImageLoader from "../image-loader";
 import SectionWrapper from "../section-wrapper";
 import { Button } from "../ui/button";
 
 export default function Hero() {
+    const { mousePosition, isHovering } = useCursorPosition({
+        targetElementId: ["profile-image-wrapper"],
+    });
+    const imageRef = useRef<HTMLDivElement>(null);
+    const [relativePosition, setRelativePosition] = useState({ x: 0, y: 0 });
+
+    useEffect(() => {
+        if (isHovering && imageRef.current) {
+            const rect = imageRef.current.getBoundingClientRect();
+            setRelativePosition({
+                x: mousePosition.x - rect.left,
+                y: mousePosition.y - rect.top,
+            });
+        }
+    }, [mousePosition, isHovering]);
+
+    useEffect(() => {
+        console.log(isHovering);
+        console.log(mousePosition);
+    }, [isHovering, mousePosition]);
+
     return (
         <SectionWrapper id="hero" className="relative">
             <div className="flex flex-col items-center  justify-center min-h-screen">
@@ -83,9 +106,8 @@ export default function Hero() {
                                 whileTap={{ scale: 0.95 }}
                             >
                                 <Button variant="default">
-                                    
-                                <PhoneCall className="w-4 h-4" />
-                                <span>{"Let's"} Talk</span>
+                                    <PhoneCall className="w-4 h-4" />
+                                    <span>{"Let's"} Talk</span>
                                 </Button>
                             </motion.a>
                             <motion.a
@@ -108,25 +130,54 @@ export default function Hero() {
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.8, delay: 1.2 }}
                         >
-                            <div className="aspect-square hidden group  mask-profilea lg:block transition-all duration-200 rounded-md bg-gradient-to-br from-primary/20 to-primary/5 bordaer border-primary/20 overflow-hidden relative">
-                                {/* Placeholder content */}
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <Image
+                            <div
+                                ref={imageRef}
+                                id="profile-image-wrapper"
+                                className="aspect-square hidden group  mask-profile lg:block transition-all duration-200 rounded-md bg-gradient-to-br from-primary/20 to-primary/5 bordaer border-primary/20 overflow-hidden relative"
+                            >
+                                <div className="absolute inset-0">
+                                    <ImageLoader
                                         alt="profile-image"
                                         src="/image/profile.JPG"
-                                        className="w-full h-full"
+                                        className="w-full h-full object-cover "
                                         width={1000}
                                         height={1000}
-                                    />{" "}
-                                    <Image
-                                        alt="profile-image"
-                                        src="/image/anime-profile.png"
-                                        className="w-full h-full absolute opacity-0 group-hover:opacity-100"
-                                        width={1000}
-                                        height={1000}
+                                        priority={true}
                                     />
                                 </div>
 
+                                {/* Anime Profile with Spotlight Mask */}
+                                {isHovering && (
+                                    <div
+                                        className="absolute inset-0 transition-opacity opacity-0 group-hover:opacity-100 duration-300"
+                                        style={{
+                                            maskImage: `radial-gradient(circle 180px at ${relativePosition.x}px ${relativePosition.y}px, black 40%, transparent 100%)`,
+                                            WebkitMaskImage: `radial-gradient(circle 180px at ${relativePosition.x}px ${relativePosition.y}px, black 40%, transparent 100%)`,
+                                            maskSize: "100% 100%",
+                                            WebkitMaskSize: "100% 100%",
+                                        }}
+                                    >
+                                        <ImageLoader
+                                            alt="anime-profile-image"
+                                            src="/image/anime-profile.png"
+                                            className="w-full h-full object-cover"
+                                            width={1000}
+                                            height={1000}
+                                            priority={true}
+                                        />
+                                    </div>
+                                )}
+                                {/* {isHovering && (
+                                    <div
+                                        className="absolute w-[300px] h-[300px] rounded-full pointer-events-none border border-white"
+                                        style={{
+                                            left: relativePosition.x - 150,
+                                            top: relativePosition.y - 150,
+                                            transition:
+                                                "left 0.1s ease-out, top 0.1s ease-out",
+                                        }}
+                                    />
+                                )} */}
                                 {/* Decorative elements */}
                                 <div className="absolute top-4 right-4 w-12 h-12 bg-primary/10 rounded-full"></div>
                                 <div className="absolute bottom-4 left-4 w-8 h-8 bg-primary/20 rounded-full"></div>
