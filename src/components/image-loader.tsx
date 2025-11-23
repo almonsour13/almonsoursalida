@@ -51,7 +51,8 @@ export default function ImageLoader({
         }
     };
 
-    const handleManualRetry = () => {
+    const handleManualRetry = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         setRetryCount(0);
         setImageKey((prev) => prev + 1);
         setIsImageLoading(true);
