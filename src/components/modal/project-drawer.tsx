@@ -106,7 +106,7 @@ export default function ProjectDrawer() {
                                 <div className="flex flex-col md:flex-row gap-8 md:gap-12 pb-12">
                                     {/* Images Section */}
                                     <div className="space-y-4 flex-2">
-                                        <div className="relative aspect-video bg-card rounded-md overflow-hidden">
+                                        <div className="relative min-h-40 md:min-h-80 aspect-auto bg-card rounded-md overflow-hidden">
                                             <ImageLoader
                                                 src={
                                                     selectedProject.images[
@@ -126,7 +126,7 @@ export default function ProjectDrawer() {
                                                     (img, imgIndex) => (
                                                         <div
                                                             key={imgIndex}
-                                                            className={`rounded aspect-video overflow-hidden bg-card hover:opacity-80 transition-colors cursor-pointer ${
+                                                            className={`rounded min-h-20 aspect-auto overflow-hidden bg-card hover:opacity-80 transition-colors cursor-pointer ${
                                                                 imgIndex ===
                                                                     currentImageIndex &&
                                                                 "ring-4   ring-primary"

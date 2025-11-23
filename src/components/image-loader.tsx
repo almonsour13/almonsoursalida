@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { RotateCw } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -10,7 +11,7 @@ interface ImageLoaderProps {
     className?: string;
     width?: number;
     height?: number;
-    priority?: boolean; // Add priority prop
+    priority?: boolean;
 }
 
 export default function ImageLoader({
@@ -23,6 +24,10 @@ export default function ImageLoader({
 }: ImageLoaderProps) {
     const [isImageLoading, setIsImageLoading] = useState(true);
     const [isImageError, setIsImageError] = useState(false);
+    const [retryCount, setRetryCount] = useState(0);
+    const [imageKey, setImageKey] = useState(0);
+
+    const MAX_RETRIES = 2;
 
     const handleOnLoad = () => {
         setIsImageLoading(false);
@@ -31,7 +36,26 @@ export default function ImageLoader({
 
     const handleOnError = () => {
         setIsImageLoading(false);
-        setIsImageError(true);
+
+        if (retryCount < MAX_RETRIES) {
+            // Retry loading the image
+            setTimeout(() => {
+                setRetryCount((prev) => prev + 1);
+                setImageKey((prev) => prev + 1);
+                setIsImageLoading(true);
+                setIsImageError(false);
+            }, 1000); // Wait 1 second before retrying
+        } else {
+            // Max retries reached
+            setIsImageError(true);
+        }
+    };
+
+    const handleManualRetry = () => {
+        setRetryCount(0);
+        setImageKey((prev) => prev + 1);
+        setIsImageLoading(true);
+        setIsImageError(false);
     };
 
     return (
@@ -44,19 +68,34 @@ export default function ImageLoader({
                     )}
                 >
                     <div className="absolute inset-0 shimmer" />
+                    {retryCount > 0 && (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-xs text-muted-foreground">
+                                Retrying... ({retryCount}/{MAX_RETRIES})
+                            </span>
+                        </div>
+                    )}
                 </div>
             )}
             {isImageError && !isImageLoading && (
                 <div
                     className={cn(
-                        "w-full h-full flex items-center justify-center bg-muted text-muted-foreground",
+                        "w-full h-full flex flex-col items-center justify-center gap-3 bg-muted text-muted-foreground",
                         className
                     )}
                 >
-                    Failed to load image
+                    <span className="text-sm">Failed to load image</span>
+                    <button
+                        onClick={handleManualRetry}
+                        className="flex items-center gap-2 px-3 py-1.5 text-xs bg-background border rounded hover:bg-accent transition-colors"
+                    >
+                        <RotateCw className="w-3 h-3" />
+                        Try Again
+                    </button>
                 </div>
             )}
             <Image
+                key={imageKey} // Force remount on retry
                 src={src}
                 alt={alt}
                 width={width}
@@ -64,7 +103,6 @@ export default function ImageLoader({
                 onLoad={handleOnLoad}
                 onError={handleOnError}
                 priority={priority}
-                // loading="lazy"
                 className={cn(
                     "w-full h-full transition-opacity duration-300",
                     isImageLoading || isImageError
