@@ -63,8 +63,26 @@ export const projects = [
             "/image/project/testora/testora-2.png",
             // Add actual screenshot URLs when you have them
         ],
-        github: "", // If there’s a public repo
+        github: "https://github.com/almonsour13/Testora.git", // If there’s a public repo
         live: "https://testora-two.vercel.app",
+        isFeatured: false,
+    },{
+        title: "FLUX",
+        description:
+            "FLUX is a modern, creative digital agency website designed to showcase services, projects, and brand identity with a polished, high-performance frontend. Built using Vue 3, Vite, Tailwind CSS, and Shadcn-Vue, it features reusable UI components, smooth animations powered by Motion.vue, and a fully responsive layout. FLUX highlights your team's capabilities with elegant sections such as hero banners, service showcases, featured projects, testimonials, and dynamic dark mode support. Designed for speed, aesthetics, and scalability.",
+        tech: [
+            "Vue 3",
+            "Vite",
+            "Tailwind CSS",
+            "Shadcn-Vue",
+            "Motion.vue",
+            "Lucide-Vue",
+        ],
+        images: [
+            "/image/project/flux/flux-1.png",
+        ],
+        github: "https://github.com/almonsour13/flux.git",
+        live: "https://flux-beta-three.vercel.app/",
         isFeatured: false,
     },
 

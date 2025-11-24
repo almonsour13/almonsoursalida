@@ -128,7 +128,7 @@ export default function ProjectDrawer() {
                                 <div className="flex flex-col md:flex-row gap-8 md:gap-12 pb-12">
                                     {/* Images Section */}
                                     <div className="flex-2 flex flex-col gap-4">
-                                        <div className="relative min-h-40 md:min-h-80 max-h-44 md:max-h-84 aspect-auto bg-card rounded-md overflow-hidden">
+                                        <div className="relative min-h-40 md:min-h-80 max-h-44 md:max-h-96 aspect-auto bg-card rounded-md overflow-hidden">
                                             <ImageLoader
                                                 src={
                                                     selectedProject.images[

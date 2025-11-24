@@ -37,18 +37,8 @@ export default function ImageLoader({
     const handleOnError = () => {
         setIsImageLoading(false);
 
-        if (retryCount < MAX_RETRIES) {
-            // Retry loading the image
-            setTimeout(() => {
-                setRetryCount((prev) => prev + 1);
-                setImageKey((prev) => prev + 1);
-                setIsImageLoading(true);
-                setIsImageError(false);
-            }, 1000); // Wait 1 second before retrying
-        } else {
-            // Max retries reached
-            setIsImageError(true);
-        }
+        // Max retries reached
+        setIsImageError(true);
     };
 
     const handleManualRetry = (e: React.MouseEvent<HTMLButtonElement>) => {
