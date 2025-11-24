@@ -45,9 +45,7 @@ export default function ProjectCard({
             transition={{ duration: 0.6, delay: index * 0.15 }}
             viewport={{ once: true, amount: 0.3 }}
         >
-            <div
-                className="relative flex gap-4 md:gap-8 items-start"
-            >
+            <div className="relative flex gap-4 md:gap-8 items-start">
                 <div className="sticky top-20 -ml-20 hidden amd:block text-4xl md:text-6xl font-light text-muted">
                     {String(index + 1).padStart(2, "0")}
                 </div>

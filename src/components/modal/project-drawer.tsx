@@ -16,6 +16,10 @@ export default function ProjectDrawer() {
         (project) => project.title === selectedProjectTitle
     );
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [progress, setProgress] = useState(0);
+
+    const SLIDE_DURATION = 5000; // 5 seconds
+    const PROGRESS_INTERVAL = 50; // Update every 50ms
 
     useEffect(() => {
         if (
@@ -25,13 +29,25 @@ export default function ProjectDrawer() {
         )
             return;
 
-        const interval = setInterval(() => {
+        const slideInterval = setInterval(() => {
             setCurrentImageIndex(
                 (prev) => (prev + 1) % selectedProject.images.length
             );
-        }, 5000);
+        }, SLIDE_DURATION);
 
-        return () => clearInterval(interval);
+        const progressInterval = setInterval(() => {
+            setProgress((prev) => {
+                if (prev >= 100) {
+                    return 0;
+                }
+                return prev + (PROGRESS_INTERVAL / SLIDE_DURATION) * 100;
+            });
+        }, PROGRESS_INTERVAL);
+
+        return () => {
+            clearInterval(progressInterval);
+            clearInterval(slideInterval);
+        };
     }, [selectedProject]);
 
     useEffect(() => {
@@ -54,8 +70,14 @@ export default function ProjectDrawer() {
     useEffect(() => {
         if (selectedProjectTitle === "") {
             setCurrentImageIndex(0);
+            setProgress(0);
         }
     }, [selectedProjectTitle]);
+
+    const handleSelectImage = (index: number) => {
+        setCurrentImageIndex(index);
+        setProgress(0);
+    };
 
     return (
         <AnimatePresence>
@@ -105,8 +127,8 @@ export default function ProjectDrawer() {
                                 {/* Content */}
                                 <div className="flex flex-col md:flex-row gap-8 md:gap-12 pb-12">
                                     {/* Images Section */}
-                                    <div className="space-y-4 flex-2">
-                                        <div className="relative min-h-40 md:min-h-80 aspect-auto bg-card rounded-md overflow-hidden">
+                                    <div className="flex-2 flex flex-col gap-4">
+                                        <div className="relative min-h-40 md:min-h-80 max-h-44 md:max-h-84 aspect-auto bg-card rounded-md overflow-hidden">
                                             <ImageLoader
                                                 src={
                                                     selectedProject.images[
@@ -118,6 +140,50 @@ export default function ProjectDrawer() {
                                                 width={1000}
                                                 height={1000}
                                             />
+                                            {selectedProject.images.length >
+                                                1 && (
+                                                <div className="absolute top-4 right-4 flex items-center gap-2 transition-opacity">
+                                                    {/* Circular Progress */}
+                                                    <div className="relative w-6 h-64">
+                                                        <svg className="w-6 h-6 transform -rotate-90">
+                                                            {/* Background circle */}
+                                                            <circle
+                                                                cx="12"
+                                                                cy="12"
+                                                                r="8"
+                                                                stroke="currentColor"
+                                                                strokeWidth="3"
+                                                                fill="none"
+                                                                className="text-muted/30"
+                                                            />
+                                                            {/* Progress circle */}
+                                                            <circle
+                                                                cx="12"
+                                                                cy="12"
+                                                                r="8"
+                                                                stroke="currentColor"
+                                                                strokeWidth="3"
+                                                                fill="none"
+                                                                strokeDasharray={`${
+                                                                    2 *
+                                                                    Math.PI *
+                                                                    16
+                                                                }`}
+                                                                strokeDashoffset={`${
+                                                                    2 *
+                                                                    Math.PI *
+                                                                    16 *
+                                                                    (1 -
+                                                                        progress /
+                                                                            100)
+                                                                }`}
+                                                                className="text-primary transition-all duration-100"
+                                                                strokeLinecap="round"
+                                                            />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            )}
                                         </div>
                                         <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
                                             {selectedProject.images.length >
@@ -126,13 +192,13 @@ export default function ProjectDrawer() {
                                                     (img, imgIndex) => (
                                                         <div
                                                             key={imgIndex}
-                                                            className={`rounded min-h-20 aspect-auto overflow-hidden bg-card hover:opacity-80 transition-colors cursor-pointer ${
+                                                            className={`rounded min-h-20 max-h-24 aspect-auto overflow-hidden bg-card hover:opacity-80 transition-colors cursor-pointer ${
                                                                 imgIndex ===
                                                                     currentImageIndex &&
                                                                 "ring-4   ring-primary"
                                                             }`}
                                                             onClick={() =>
-                                                                setCurrentImageIndex(
+                                                                handleSelectImage(
                                                                     imgIndex
                                                                 )
                                                             }

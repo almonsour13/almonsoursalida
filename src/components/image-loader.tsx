@@ -85,7 +85,6 @@ export default function ImageLoader({
                         className
                     )}
                 >
-                    <span className="text-sm">Failed to load image</span>
                     <button
                         onClick={handleManualRetry}
                         className="flex items-center gap-2 px-3 py-1.5 text-xs bg-background border rounded hover:bg-accent transition-colors"
