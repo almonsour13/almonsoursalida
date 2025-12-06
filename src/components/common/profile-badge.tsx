@@ -2,46 +2,60 @@
 
 import { useSection } from "@/context/section-context";
 import { useScroll } from "framer-motion";
-import { Phone } from "lucide-react";
 import Image from "next/image";
-
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function ProfileBadge() {
     const { activeSection } = useSection();
     const { scrollYProgress } = useScroll();
+    const [scrollProgress, setScrollProgress] = useState(0);
+
+    const pathname = usePathname();
+    const [clientPathname, setClientPathname] = useState("");
+
+    useEffect(() => {
+        setClientPathname(pathname);
+        console.log(pathname);
+    }, [pathname]);
+
+    useEffect(() => {
+        return scrollYProgress.onChange((latest) => {
+            setScrollProgress(latest * 100); // 0 - 100
+        });
+    }, [scrollYProgress]);
 
     return (
-        <div
-            className={`backdrop-blur-sm border rounded-3xl pr-4 bg-background/50 fixed z-30 top-4 md:top-12 left-4 md:left-46 flex items-center gap-2 transform transition duration-300 ease-in-out
-        ${
-            (activeSection === "hero" || activeSection === "contact") || scrollYProgress.get() === 0
-                ? "-translate-y-16 md:-translate-y-24"
-                : "translate-y-16"
-        }`}
+        <Link
+            href="/#contact"
+            className={`fixed z-30  left-4 lg:left-44 transform-all transition duration-300 ease-in-out
+                ${
+                    ((activeSection !== "hero" &&
+                        activeSection !== "contact") ||
+                        clientPathname.includes("/projects")) &&
+                    scrollProgress !== 0
+                        ? "translate-y-12"
+                        : "-translate-y-24"
+                }`}
         >
-            <div className="relative">
-                <div className="w-12 h-12 rounded-full overflow-hidden">
-                    <Image
-                        src="/image/profile.JPG"
-                        alt="Al-Monsour M. Salida"
-                        className="h-full w-full object-cover"
-                        width={800}
-                        height={800}
-                    />
+            <div className=" relative  flex items-center gap-2 overflow-hidden backdrop-blur-sm border rounded-3xl bg-card ">
+                <div className="relative w-12 group-hover:w-0 overflow-hidden transform-all transition duration-300 ease-in-out">
+                    <div className="h-10 md:h-12 w-10 md:w-12 rounded-full overflow-hidden">
+                        <Image
+                            src="/image/profile.JPG"
+                            alt="Al-Monsour M. Salida"
+                            className="h-full w-full object-cover"
+                            width={800}
+                            height={800}
+                        />
+                    </div>
                 </div>
-
-                <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-background flex items-center justify-center">
-                    <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                <div className="flex flex-col mr-4">
+                    <h1 className="font-medium">Hire Me !</h1>
                 </div>
+                <div className="absolute inset-0 shimmer" />
             </div>
-            <div className="flex flex-col">
-                <h1>Al-Monsour M. Salida</h1>
-                <p className="text-xs text-muted-foreground">Web Developer</p>
-            </div>
-            <div className="h-8 w-px bg-border mx-1"/>
-            <a href="#contact" className="flex items-center justify-center">
-                <Phone className="w-4 h-4 text-primary" />
-            </a>
-        </div>
+        </Link>
     );
 }

@@ -54,7 +54,7 @@ export default function ImageLoader({
             {isImageLoading && (
                 <div
                     className={cn(
-                        "w-full h-full relative animate-pulse bg-muted",
+                        "w-full h-full relative bg-muted overflow-hidden",
                         className
                     )}
                 >

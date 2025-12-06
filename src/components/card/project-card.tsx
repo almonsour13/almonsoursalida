@@ -51,7 +51,7 @@ export default function ProjectCard({
                 </div>
                 <div
                     className={`flex-1 flex flex-col ${
-                        index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                        index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                     } justify-between items-start gap-8`}
                 >
                     <div
@@ -64,7 +64,7 @@ export default function ProjectCard({
                             alt={project.title}
                             width={1000}
                             height={1000}
-                            className="rounded-md w-md"
+                            className="rounded-md lg:w-md"
                         />
                         <ImageLoader
                             src={project.images[currentImageIndex]}
@@ -86,7 +86,7 @@ export default function ProjectCard({
                         )}
                     </div>
                     <div
-                        className={`flex flex-col gap-4 items-start justify-center max-w-lg`}
+                        className={`flex flex-col gap-4 items-start justify-center lg:max-w-lg`}
                     >
                         <div className="flex flex-col gap-2">
                             <h2 className="text-2xl md:text-4xl font-bold text-foreground">

@@ -27,14 +27,9 @@ export default function Hero() {
         }
     }, [mousePosition, isHovering]);
 
-    useEffect(() => {
-        console.log(isHovering);
-        console.log(mousePosition);
-    }, [isHovering, mousePosition]);
-
     return (
         <SectionWrapper id="hero" className="relative">
-            <div className="flex flex-col items-center  justify-center min-h-screen">
+            <div className="flex flex-col items-center gap-2 md:gap-0 justify-center min-h-screen">
                 <div className="w-full flex items-center justify-between ">
                     <div className="flex items-center gap-4">
                         <div className="w-12 h-0.5 bg-border"></div>
@@ -52,7 +47,7 @@ export default function Hero() {
                 <div className="w-full flex flex-col lg:flex-row gap-4">
                     <div className="flex-2 flex flex-col gap-4">
                         <motion.h1
-                            className="text-6xl sm:text-8xl md:text-9xl font-bold leading-tights uppercase"
+                            className="text-7xl sm:text-8xl md:text-9xl font-bold leading-tights uppercase"
                             initial={{ opacity: 0, y: 50 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1, ease: "easeOut" }}

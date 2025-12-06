@@ -92,16 +92,6 @@ export default function Contact() {
                                 collaborate with amazing people.
                             </p>
                         </div>
-                        <div className="hidden md:block">
-                            <div className="text-right">
-                                <div className="text-6xl font-light text-primary/20">
-                                    24
-                                </div>
-                                <div className="text-sm uppercase tracking-wide text-muted-foreground">
-                                    Hours Response
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -173,7 +163,7 @@ export default function Contact() {
                                         Al-Monsour Salida
                                     </p>
                                     <p className="text-sm text-muted-foreground">
-                                        Web Developer
+                                        Full Stack Developer
                                     </p>
                                 </div>
                             </div>
@@ -199,7 +189,7 @@ export default function Contact() {
                                 </div>
                                 <p className="text-sm text-muted-foreground mt-2">
                                     Fill out the form below and {"I'll"} get
-                                    back to you within 24 hours.
+                                    back to you as soon as possible.
                                 </p>
                             </div>
 

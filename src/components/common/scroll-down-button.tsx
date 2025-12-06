@@ -1,23 +1,45 @@
-import { useSection } from "@/context/section-context";
-import { ChevronUp } from "lucide-react";
+"use client";
 
-export default function ScrollDownButton() {
-    const { activeSection} = useSection();
+import { useSection } from "@/context/section-context";
+import { useScroll } from "framer-motion";
+import { ArrowUp } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Button } from "../ui/button";
+
+export default function ScrollToTopButton() {
+    const { scrollYProgress } = useScroll();
+    const { activeSection } = useSection();
+
+    const [scrollProgress, setScrollProgress] = useState(0);
+
+    useEffect(() => {
+        return scrollYProgress.onChange((latest) => {
+            setScrollProgress(latest * 100); // 0 - 100
+        });
+    }, [scrollYProgress]);
+
+    // Convert to degrees for conic-gradient (100% → 360deg)
+    const progressDegree = (scrollProgress / 100) * 360;
+
     return (
-        <button
-            onClick={() => {
-                window.scrollTo({ top: 0, behavior: "smooth" });
+        <div
+            className={`fixed p-px bg-card z-30 bottom-4 md:bottom-12 right-4 md:right-16 rounded-full transform transition duration-300 ease-in-out ${
+                activeSection === "hero" ? "translate-y-24" : "-translate-y-0"
+            }`}
+            style={{
+                background: `radial-gradient(closest-side, white 0%, transparent 80% 100%), 
+                       conic-gradient(var(--primary) ${progressDegree}deg, var(--border) 0deg)`,
             }}
-            className={`lg:hidden fixed z-30 bottom-4 right-4 cursor-pointer flex items-center justify-center w-8 h-8 p-2 rounded-full border border-foregrounds bg-card backdrop-blur-sm transform transition duration-300 ease-in-out 
-                    ${
-                        activeSection === "hero"
-                            ? "translate-y-12"
-                            : "translate-y-0"
-                    }
-                    
-                    `}
         >
-            <ChevronUp className="w-4 h-4" />
-        </button>
+            <Button
+                
+                variant="outline"
+                size="icon"
+                className="rounded-full border-0"
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            >
+                <ArrowUp className="w-4 h-4 relative z-10 text-primary" />
+            </Button>
+        </div>
     );
 }

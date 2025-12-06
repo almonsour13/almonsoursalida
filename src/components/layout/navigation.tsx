@@ -3,7 +3,7 @@
 import { useSection } from "@/context/section-context";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import SectionWrapper from "../section-wrapper";
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
@@ -19,13 +19,16 @@ export default function NavigationMenu({
     const [lastScrollY, setLastScrollY] = useState(0);
     const [isScrolling, setIsScrolling] = useState(false);
 
-    const sections = [
-        { id: "hero", label: "Home" },
-        { id: "projects", label: "Projects" },
-        { id: "skills", label: "Skills" },
-        { id: "services", label: "Services" },
-        { id: "contact", label: "Contact" },
-    ];
+    const sections = useMemo(
+        () => [
+            { id: "hero", label: "Home" },
+            { id: "projects", label: "Projects" },
+            { id: "skills", label: "Skills" },
+            { id: "services", label: "Services" },
+            { id: "contact", label: "Contact" },
+        ],
+        []
+    );
 
     useEffect(() => {
         const handleScroll = () => {
@@ -82,7 +85,7 @@ export default function NavigationMenu({
             }, 100);
         }
     }, [setActiveSection]);
-    
+
     return (
         <>
             <Button

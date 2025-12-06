@@ -1,18 +1,12 @@
 "use client";
 
 import { useCursorPosition } from "@/app/hooks/use-cursor-position";
-import { useEffect } from "react";
 
 export default function CursorCircle() {
     const { mousePosition, isClicking, isHovering } = useCursorPosition({
         avoidElementId: ["project-image-wrapper","profile-image-wrapper"],
     });
-
-    useEffect(() => {
-        console.log("isHovering:", isHovering);
-    }, [isHovering]);
-
-    // Hide cursor when hovering over avoided elements
+    
     if (isHovering) {
         return null;
     }
