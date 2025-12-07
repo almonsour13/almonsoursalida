@@ -19,7 +19,7 @@ export default function Services() {
                 </div>
 
                 <div className="grid items-start md:grid-cols-2 gap-4 w-full relative">
-                    <div className="flex flex-col stat">
+                    <div className="flex flex-col stat md:sticky md:top-16">
                         <h1 className="text-5xl md:text-9xl font-bold uppercase tracking-tight text-foreground mb-6 leading-none">
                             What I Offer
                         </h1>
@@ -43,7 +43,7 @@ export default function Services() {
                             >
                                 <div className="group relative">
                                     <div
-                                        className={`border border-border bg-gradient-to-r from-card rounded-md p-6 transition-all duration-300 cursor-pointer"
+                                        className={`border border-border bg-card rounded-md p-6 transition-all duration-300 cursor-pointer"
                                     `}
                                     >
                                         <div className="flex items-center gap-4">

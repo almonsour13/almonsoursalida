@@ -30,7 +30,7 @@ export default function Hero() {
     return (
         <SectionWrapper id="hero" className="relative">
             <div className="flex flex-col items-center gap-2 md:gap-0 justify-center min-h-screen">
-                <div className="w-full flex items-center justify-between ">
+                <div className="hidden w-full flex items-center justify-between ">
                     <div className="flex items-center gap-4">
                         <div className="w-12 h-0.5 bg-border"></div>
                         <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary">

@@ -56,7 +56,7 @@ export default function ProjectCard({
                 >
                     <div
                         id="project-image-wrapper"
-                        className="aspect-video group relative p-4 md:p-8 cursor-pointer rounded-md border overflow-hidden"
+                        className="aspect-video group lg:w-1/2 relative p-4 md:p-8 cursor-pointer rounded-md border overflow-hidden hover:opacity-80"
                         onClick={handclickOpen}
                     >
                         <ImageLoader
@@ -64,7 +64,7 @@ export default function ProjectCard({
                             alt={project.title}
                             width={1000}
                             height={1000}
-                            className="rounded-md lg:w-md"
+                            className="rounded-md"
                         />
                         <ImageLoader
                             src={project.images[currentImageIndex]}
@@ -86,7 +86,7 @@ export default function ProjectCard({
                         )}
                     </div>
                     <div
-                        className={`flex flex-col gap-4 items-start justify-center lg:max-w-lg`}
+                        className={`flex flex-col lg:w-1/2 gap-4 items-start `}
                     >
                         <div className="flex flex-col gap-2">
                             <h2 className="text-2xl md:text-4xl font-bold text-foreground">
@@ -116,8 +116,6 @@ export default function ProjectCard({
                                 ))}
                             </div>
                         </div>
-
-                        {/* Project Links */}
                         <div className="flex gap-2">
                             {project.live && (
                                 <a target="blank" href={project.live}>

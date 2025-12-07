@@ -11,7 +11,7 @@ export default function Page() {
     const router = useRouter();
     return (
         <AppLayout>
-            <div className="min-h-screen flex flex-col items-center justify-center">
+            <div className="min-h-screen flex flex-col items-center justify-center relative">
                 <SectionWrapper className="py-12">
                     <div className="flex flex-col items-center gap-6 md:gap-12">
                         <div className="w-full space-y-4 md:space-y-8">
@@ -40,7 +40,7 @@ export default function Page() {
                                 </p>
                             </div>
                         </div>
-                        <div className="flex flex-col w-full gap-16 md:gap-32">
+                        <div className="flex flex-col w-full gap-16">
                             {projects.map((project, index) => (
                                 <ProjectCard
                                     key={index}

@@ -2,7 +2,7 @@
 export default function Footer() {
     return (
         <div className="w-full px-6 py-12">
-            <div className="md:max-w-6xl mx-auto w-full">
+            <div className="md:max-w-7xl mx-auto w-full">
                 {/* Divider */}
                 <div className="w-full h-px bg-border mb-6"></div>
 

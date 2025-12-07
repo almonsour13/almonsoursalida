@@ -1,15 +1,15 @@
 "use client";
 
 import { projects } from "@/constant/projects";
+import { motion } from "framer-motion";
 import ProjectCard from "../card/project-card";
 import SectionWrapper from "../section-wrapper";
-import { motion } from "framer-motion";
 
 export default function Projects() {
     const featuredProjects =
         projects.filter((project) => project.isFeatured) || [];
     return (
-        <SectionWrapper id="projects" className="">
+        <SectionWrapper id="projects" className="py-12">
             <div className="flex flex-col items-center gap-6 md:gap-12">
                 <div className="w-full space-y-4 md:space-y-8">
                     <div className="flex items-center gap-4">
@@ -45,9 +45,11 @@ export default function Projects() {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col w-full gap-16 md:gap-32">
+                <div className="flex flex-col w-full gap-16">
+                {/* <div className="flex flex-col w-full"> */}
                     {featuredProjects.map((project, index) => (
                         <ProjectCard key={index} project={project} index={index} />
+                        // <Card key={index} project={project} index={index} />
                     ))}
                 </div>
 

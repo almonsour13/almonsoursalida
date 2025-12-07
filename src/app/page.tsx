@@ -20,7 +20,7 @@ export default function Home() {
             <Projects />
             <Skills />
             <Contact />
-            <div className="fixed flex flex-col items-center top-12 right-4 lg:right-16 z-50 gap-2 md:gap-4">
+            <div className="fixed flex flex-col items-center top-12 right-4 lg:right-8 z-50 gap-2 md:gap-4">
                 <NavigationMenu
                     isExpanded={isExpanded}
                     setIsExpanded={setIsExpanded}

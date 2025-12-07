@@ -12,7 +12,7 @@ export default function SectionWrapper({
             className={`px-4 w-full flex items-center justify-center   ${className}`}
             id={id}
         >
-            <div className="md:max-w-6xl w-full">{children}</div>
+            <div className="md:max-w-7xl w-full">{children}</div>
         </section>
     );
 }

@@ -18,7 +18,7 @@ export default function FloatingSocials() {
     },[activeSection])
     return (
         <div
-            className={`fixed z-30 bottom-4 lg:bottom-12 left-4 lg:left-20 flex flex-col gap-2`}
+            className={`fixed z-30 bottom-4 lg:bottom-12 left-4 lg:left-8 flex flex-col gap-2`}
         >
             <AnimatePresence>
                 {isShowSocialMedia && (

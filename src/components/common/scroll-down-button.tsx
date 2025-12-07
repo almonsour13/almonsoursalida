@@ -23,7 +23,7 @@ export default function ScrollToTopButton() {
 
     return (
         <div
-            className={`fixed p-px bg-card z-30 bottom-4 md:bottom-12 right-4 md:right-16 rounded-full transform transition duration-300 ease-in-out ${
+            className={`fixed p-px bg-card z-30 bottom-4 md:bottom-12 right-4 md:right-8 rounded-full transform transition duration-300 ease-in-out ${
                 activeSection === "hero" ? "translate-y-24" : "-translate-y-0"
             }`}
             style={{

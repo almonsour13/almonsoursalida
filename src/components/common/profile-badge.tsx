@@ -29,7 +29,7 @@ export default function ProfileBadge() {
     return (
         <Link
             href="/#contact"
-            className={`fixed z-30  left-4 lg:left-44 transform-all transition duration-300 ease-in-out
+            className={`fixed z-30  left-4 lg:left-8 transform-all transition duration-300 ease-in-out
                 ${
                     ((activeSection !== "hero" &&
                         activeSection !== "contact") ||
