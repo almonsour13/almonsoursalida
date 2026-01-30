@@ -84,7 +84,7 @@ export default function Hero() {
                                 </span>
                             </div>
                             <p className="text-base text-muted-foreground max-w-2xl">
-                                {"I'm"} a Full Stack Developer with a strong
+                                {"I'm"} a Full Stack Web Developer with a strong
                                 background in creating dynamic, responsive web
                                 applications from front to back.
                             </p>
@@ -107,7 +107,7 @@ export default function Hero() {
                             </motion.a>
                             <motion.a
                                 target="_blank"
-                                href="/resume/Al-Monsour M. Slida - Resume.3.pdf"
+                                href="https://docs.google.com/document/d/1_MNkRS92RUt3PGpjbCJz4QWbnwz1yvQZ9mf8dAhS9wI/edit?usp=sharing"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >

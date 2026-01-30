@@ -16,19 +16,15 @@ export const useCursorPosition = ({ targetElementId, avoidElementId }: CursorPos
         const handleMouseMove = (e: MouseEvent) => {
             setMousePosition({ x: e.clientX, y: e.clientY });
             const element = document.elementFromPoint(e.clientX, e.clientY);
-            
-            // Check if hovering over any avoided elements
             const isOverAvoided = avoidElementId?.some(id => 
                 element?.closest(`#${id}`) !== null
             ) ?? false;
             
-            // If only avoidElementId is provided, isHovering means we're over an avoided element
-            if (!targetElementId || targetElementId.length === 0) {
+             if (!targetElementId || targetElementId.length === 0) {
                 setIsHovering(isOverAvoided);
                 return;
             }
             
-            // If targetElementId is provided, check target elements
             if (isOverAvoided) {
                 setIsHovering(false);
                 return;
