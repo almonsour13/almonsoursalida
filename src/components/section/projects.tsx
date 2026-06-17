@@ -22,7 +22,7 @@ export default function Projects() {
             <SectionWrapper id="projects">
                 <div className="flex flex-col items-center gap-4">
                     <div className="w-full flex flex-col gap-2">
-                        <h1 className="text-2xl uppercase font-bold">
+                        <h1 className="text-2xl font-bold uppercase leading-none tracking-tight text-foreground">
                             Recent Projects
                         </h1>
                         <p className="text-sm md:text-base text-muted-foreground">
@@ -37,7 +37,7 @@ export default function Projects() {
                             return (
                                 <div
                                     key={project.title}
-                                    className="flex flex-col gap-4"
+                                    className="flex flex-col gap-2"
                                     onClick={() => {
                                         projectDrawerRef.current?.openWithTitle(
                                             project.title,

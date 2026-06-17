@@ -71,7 +71,7 @@ export default function Contact() {
         <SectionWrapper id="contact">
             <div className="flex flex-col items-center gap-4">
                 <div className="w-full flex flex-col gap-2">
-                    <h1 className="text-2xl uppercase font-bold">
+                    <h1 className="text-2xl font-bold uppercase leading-none tracking-tight text-foreground">
                         Get in touch
                     </h1>
                     <p className="md:max-w-3xl text-sm md:text-base text-muted-foreground">

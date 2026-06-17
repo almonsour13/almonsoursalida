@@ -2,8 +2,7 @@ import {
     Code,
     MonitorSmartphone,
     PenTool,
-    Server,
-    Smartphone,
+    Smartphone
 } from "lucide-react";
 
 export const services = [
@@ -19,13 +18,13 @@ export const services = [
             "Accessibility",
         ],
     },
-    {
-        title: "Backend Development",
-        description:
-            "Designing robust APIs and server-side applications using Node.js, Express, and relational databases like MySQL or PostgreSQL.",
-        icon: Server,
-        features: ["Node.js", "Express", "MySQL", "PostgreSQL"],
-    },
+    // {
+    //     title: "Backend Development",
+    //     description:
+    //         "Designing robust APIs and server-side applications using Node.js, Express, and relational databases like MySQL or PostgreSQL.",
+    //     icon: Server,
+    //     features: ["Node.js", "Express", "MySQL", "PostgreSQL"],
+    // },
     {
         title: "Full Stack Integration",
         description:
