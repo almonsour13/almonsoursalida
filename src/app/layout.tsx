@@ -5,7 +5,6 @@ import { DM_Sans } from "next/font/google";
 import ScrollToTopButton from "@/components/common/scroll-down-button";
 import ThemeToggle from "@/components/common/theme-toggle";
 import CursorCircle from "@/components/cursor-circle";
-import Footer from "@/components/layout/footer";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -40,7 +39,6 @@ export default function RootLayout({
                 >
                     <div className="flex flex-col gap-8 relative">
                         {children}
-                        <Footer />
                         <CursorCircle />
                         <ScrollToTopButton />
                         <ThemeToggle />

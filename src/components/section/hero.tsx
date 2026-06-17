@@ -27,7 +27,7 @@ export default function Hero() {
     }, [mousePosition, isHovering]);
 
     return (
-        <SectionWrapper className="pt-8" id="hero">
+        <SectionWrapper className="pt-16" id="hero">
             <div className="flex flex-col md:flex-row  gap-4">
                 <div className="smflex-1  mask-profile bg-red-200">
                     <Image
