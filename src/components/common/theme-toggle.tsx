@@ -1,8 +1,9 @@
 "use client";
+import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useCallback, useState } from "react";
-import { Moon, Sun } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../ui/button";
 
 export default function ThemeToggle() {
@@ -29,11 +30,12 @@ export default function ThemeToggle() {
                 {isThemeTransitioning && (
                     <>
                         <motion.div
-                            className={`fixed z-50 h-8 w-8 md:h-12 md:w-12 mt-10 md:mt-16 border-2 rounded-full ${
+                            className={cn(
+                                "fixed top-8 right-4 md:right-8 z-50 h-8 w-8 md:h-12 md:w-12 border-2 rounded-ful",
                                 theme === "dark"
                                     ? "border-white/20"
-                                    : "border-gray-900/20"
-                            }`}
+                                    : "border-gray-900/20",
+                            )}
                             initial={{
                                 scale: 1,
                                 opacity: 0.6,
@@ -52,7 +54,7 @@ export default function ThemeToggle() {
                             }}
                         />
                         <motion.div
-                            className="fixed z-50 h-8 w-8 md:h-12 md:w-12 mt-10 md:mt-16 border-2 rounded-full bg-foreground"
+                            className="fixed top-8 right-4 md:right-8 z-50 h-8 w-8 md:h-12 md:w-12 border-2 rounded-full bg-foreground"
                             initial={{
                                 scale: 1,
                                 opacity: 0,
@@ -79,7 +81,7 @@ export default function ThemeToggle() {
                 disabled={isThemeTransitioning}
                 variant="outline"
                 size="icon"
-                className="rounded-full z-40"
+                className="fixed top-8 right-4 md:right-8  rounded-full z-40"
             >
                 <motion.div
                     animate={{ rotate: isThemeTransitioning ? 360 : 0 }}

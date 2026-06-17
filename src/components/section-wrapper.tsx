@@ -1,18 +1,19 @@
+import { cn } from "@/lib/utils";
+
 export default function SectionWrapper({
     children,
-    className = "",
-    id = "",
-}: Readonly<{
-    children: React.ReactNode;
-    className?: string;
-    id?: string;
-}>) {
+    className,
+    ...props
+}: React.ComponentProps<"section">) {
     return (
         <section
-            className={`px-4 w-full flex items-center justify-center   ${className}`}
-            id={id}
+            className={cn(
+                "px-4 w-full flex items-center justify-center",
+                className,
+            )}
+            {...props}
         >
-            <div className="md:max-w-7xl w-full">{children}</div>
+            <div className="md:max-w-6xl w-full">{children}</div>
         </section>
     );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCursorPosition } from "@/app/hooks/use-cursor-position";
+import { useCursorPosition } from "@/hooks/use-cursor-position";
 
 export default function CursorCircle() {
     const { mousePosition, isClicking, isHovering } = useCursorPosition({

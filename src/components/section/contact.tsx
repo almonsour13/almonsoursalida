@@ -1,12 +1,14 @@
 "use client";
 import { socials } from "@/constant/social";
-import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
-import { Mail, MapPin, MessageSquare, Phone, Send } from "lucide-react";
+import { Mail, MessageSquare, Phone, Send } from "lucide-react";
+import Link from "next/link";
 import { FormEvent, useRef, useState } from "react";
-import ImageLoader from "../image-loader";
 import SectionWrapper from "../section-wrapper";
 import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Textarea } from "../ui/textarea";
 
 export default function Contact() {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -63,205 +65,116 @@ export default function Contact() {
             value: "+639569932496",
             icon: Phone,
         },
-        {
-            type: "Location",
-            value: "Lupon, Davao Oriental, Philippines",
-            icon: MapPin,
-        },
     ];
 
     return (
-        <SectionWrapper id="contact" className="relative py-12">
-            <div className="w-full space-y-4 md:space-y-8">
-                <div className="flex items-center gap-4 md:gap-8 ">
-                    <div className="w-8 md:w-16 h-0.5 bg-border"></div>
-                    <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary">
-                        Contact
-                    </span>
-                    <div className="flex-1 h-0.5 bg-border"></div>
+        <SectionWrapper id="contact">
+            <div className="flex flex-col items-center gap-4">
+                <div className="w-full flex flex-col gap-2">
+                    <h1 className="text-2xl uppercase font-bold">
+                        Get in touch
+                    </h1>
+                    <p className="md:max-w-3xl text-sm md:text-base text-muted-foreground">
+                        Ready to bring your ideas to life? {"I'm"} always
+                        excited to work on new projects and collaborate with
+                        amazing people.
+                    </p>
                 </div>
-                <div className="flex justify-between w-full">
-                    <div className="flex-1 space-y-4">
-                        <h1 className="text-5xl md:text-6xl font-bold uppercase tracking-tight text-primary leading-none">
-                            Get in touch
-                        </h1>
-                        <p className="md:max-w-3xl text-sm md:text-base mb-6 text-muted-foreground">
-                            Ready to bring your ideas to life? {"I'm"} always
-                            excited to work on new projects and collaborate with
-                            amazing people.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            {/* Main Content Grid */}
-            <div className="grid lg:grid-cols-5 gap-8">
-                {/* Contact Information - Left Column */}
-                <div className="lg:col-span-2 space-y-4">
-                    <div className="flex items-center gap-4 mb-6">
-                        <div className="w-8 h-0.5 bg-vorder"></div>
-                        <span className="text-xs font-medium text-primary uppercase tracking-[0.2em]">
-                            Contact Info
-                        </span>
-                    </div>
-
-                    <div className="space-y-4">
-                        {contactInfo.map((info, index) => (
-                            <motion.div
-                                key={info.type} // <- KEY ADDED
-                                className="group bg-card flex items-start gap-4 p-4 rounded-md border hover:border-primary/20 transition-all duration-300"
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }} // keep only whileInView for scroll animation
-                                transition={{
-                                    duration: 0.6,
-                                    delay: index * 0.15,
-                                }}
-                                viewport={{ once: true, amount: 0.3 }}
-                            >
-                                <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                                    <info.icon className="w-5 h-5 text-primary" />
-                                </div>
-                                <div>
-                                    <p className="text-sm text-muted-foreground uppercase tracking-wide mb-1">
-                                        {info.type}
-                                    </p>
-                                    <p className="text-foreground font-medium">
-                                        {info.value}
-                                    </p>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-
-                    {/* Quote Section */}
-                    <motion.div
-                        className="bg-card rounded-md p-8 border border-primary/20 relative overflow-hidden"
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                    >
-                        <div className="absolute top-4 right-4 text-4xl text-primary/20">
-                            {`"`}
+                <div className="flex flex-col-reverse md:flex-row gap-2">
+                    <div className="flex-2 space-y-2">
+                        <div className="space-y-2">
+                            {contactInfo.map((info, index) => (
+                                <Card key={index}>
+                                    <div className="flex flexr-row gap-4">
+                                        <Card className="flex-shrink-0 w-12 h-12 p-0 flex items-center justify-center">
+                                            <info.icon className="w-5 h-5 text-primary" />
+                                        </Card>
+                                        <div>
+                                            <p className="text-sm text-muted-foreground">
+                                                {info.type}
+                                            </p>
+                                            <p className="text-foreground font-medium">
+                                                {info.value}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </Card>
+                            ))}
                         </div>
-                        <p className="text-lg text-foreground mb-4 italic">
-                            {`"Let's create something amazing together. Every great project starts with a conversation."`}
-                        </p>
-                        <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full overflow-hidden">
-                                <ImageLoader
-                                    src="/image/profile.JPG"
-                                    alt="Al-Monsour M. Salida"
-                                    className="h-full w-full object-cover"
-                                    width={800}
-                                    height={800}
-                                />
-                            </div>
-                            <div>
-                                <p className="font-medium text-foreground">
-                                    Al-Monsour Salida
-                                </p>
-                                <p className="text-sm text-muted-foreground">
-                                    Full Stack Developer
-                                </p>
-                            </div>
-                        </div>
-                    </motion.div>
-                </div>
 
-                {/* Contact Form - Right Column */}
-                <div className="lg:col-span-3">
-                    <motion.div
-                        className="border  bg-card rounded-md overflow-hidden"
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.6 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                    >
-                        {/* Form Header */}
-                        <div className="bg-card p-6 border-b">
-                            <div className="flex items-center gap-3">
+                        <Card>
+                            <p className="text-base text-foreground italic">
+                                {`"Let's create something amazing together. Every great project starts with a conversation."`}
+                            </p>
+                        </Card>
+                        <div className="flex gap-2">
+                            {socials.map((social, index) => (
+                                <Link
+                                    key={index}
+                                    href={social.link}
+                                    target="blank"
+                                >
+                                    <Button size="icon" variant="outline">
+                                        <social.icon className="h-4 w-4 group-hover:text-primary transition-colors" />
+                                    </Button>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                    <Card className="flex-3">
+                        <div className="border-b flex flex-col gap-2 pb-4">
+                            <div className="flex items-center gap-2">
                                 <MessageSquare className="w-6 h-6 text-primary" />
                                 <h3 className="text-xl font-semibold text-foreground">
                                     Send a Message
                                 </h3>
                             </div>
-                            <p className="text-sm text-muted-foreground mt-2">
+                            <p className="text-sm text-muted-foreground">
                                 Fill out the form below and {"I'll"} get back to
                                 you as soon as possible.
                             </p>
                         </div>
-
-                        {/* Form Content */}
-                        <div className="p-6 md:p-8">
+                        <div className="flex flex-col">
                             <form
                                 ref={formRef}
                                 onSubmit={handleSubmit}
                                 className="space-y-4"
                             >
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="flex flex-row gap-2">
                                     <div className="space-y-2">
-                                        <label className="block text-sm font-medium text-foreground">
-                                            Full Name
-                                        </label>
-                                        <input
+                                        <Label>Full Name</Label>
+                                        <Input
                                             type="text"
                                             name="fullName"
-                                            className={cn(
-                                                "w-full px-4 py-3 rounded border bg-background",
-                                                "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50",
-                                                "transition-all duration-300 placeholder:text-muted-foreground/50"
-                                            )}
                                             placeholder="Your full name"
                                             required
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="block text-sm font-medium text-foreground">
-                                            Email Address
-                                        </label>
-                                        <input
+                                        <Label>Email Address</Label>{" "}
+                                        <Input
                                             type="email"
                                             name="email"
-                                            className={cn(
-                                                "w-full px-4 py-3 rounded border bg-background",
-                                                "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50",
-                                                "transition-all duration-300 placeholder:text-muted-foreground/50"
-                                            )}
                                             placeholder="your@email.com"
                                             required
                                         />
                                     </div>
                                 </div>
-
                                 <div className="space-y-2">
-                                    <label className="block text-sm font-medium text-foreground">
-                                        Subject
-                                    </label>
-                                    <input
+                                    <Label>Subject</Label>
+                                    <Input
                                         type="text"
                                         name="subject"
-                                        className={cn(
-                                            "w-full px-4 py-3 rounded border bg-background",
-                                            "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50",
-                                            "transition-all duration-300 placeholder:text-muted-foreground/50"
-                                        )}
                                         placeholder="Project inquiry, collaboration, or general question"
                                         required
                                     />
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label className="block text-sm font-medium text-foreground">
-                                        Message
-                                    </label>
-                                    <textarea
+                                    <Label>Message</Label>
+                                    <Textarea
                                         name="message"
-                                        className={cn(
-                                            "w-full px-4 py-3 rounded border bg-background   min-h-[140px] resize-none",
-                                            "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50",
-                                            "transition-all duration-300 placeholder:text-muted-foreground/50"
-                                        )}
+                                        className="min-h-[140px]"
                                         placeholder="Tell me about your project, timeline, and any specific requirements..."
                                         required
                                     />
@@ -292,43 +205,9 @@ export default function Contact() {
                                 )}
                             </form>
                         </div>
-                    </motion.div>
+                    </Card>
                 </div>
             </div>
-
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                viewport={{ once: true, amount: 0.3 }}
-                className="mt-16 pt-8"
-            >
-                <div className="text-center">
-                    <p className="text-muted-foreground mb-4">
-                        Prefer a different way to connect? Find me on social
-                        media or send a direct email.
-                    </p>
-                    <div className="flex items-center justify-center gap-4">
-                        <div className="flex gap-3">
-                            {socials.map((social, index) => (
-                                <a
-                                    key={index}
-                                    href={social.link}
-                                    target="blank"
-                                >
-                                    <Button
-                                        size="icon"
-                                        variant="outline"
-                                        className="rounded-full"
-                                    >
-                                        <social.icon className="h-4 w-4" />
-                                    </Button>
-                                </a>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </motion.div>
         </SectionWrapper>
     );
 }

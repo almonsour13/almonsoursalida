@@ -1,4 +1,10 @@
-import { Code, MonitorSmartphone, Server, PenTool } from "lucide-react";
+import {
+    Code,
+    MonitorSmartphone,
+    PenTool,
+    Server,
+    Smartphone,
+} from "lucide-react";
 
 export const services = [
     {
@@ -30,6 +36,18 @@ export const services = [
             "Database Design",
             "Authentication",
             "Deployment",
+        ],
+    },
+    {
+        title: "Mobile App Development",
+        description:
+            "Creating mobile applications using React Native or Flutter.",
+        icon: Smartphone,
+        features: [
+            "React Native / Flutter",
+            "Cross-Platform Deployment",
+            "App Store Publishing",
+            "Offline Support",
         ],
     },
     {

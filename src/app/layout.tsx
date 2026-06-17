@@ -1,28 +1,17 @@
 import { ThemeProvider } from "@/components/theme-provider";
-import { SectionProvider } from "@/context/section-context";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 
+import ScrollToTopButton from "@/components/common/scroll-down-button";
+import ThemeToggle from "@/components/common/theme-toggle";
 import CursorCircle from "@/components/cursor-circle";
-import { ProjectProvider } from "@/context/project-context";
-import ProjectDrawer from "@/components/modal/project-drawer";
-import './_style/globals.css';
-import './_style/style.css';
+import Footer from "@/components/layout/footer";
+import "./globals.css";
 
-const geistSans = Geist({
-    variable: "--font-poppins",
+const dmSans = DM_Sans({
     subsets: ["latin"],
-});
-// const poppins = Poppins({
-//   subsets: ['latin'],
-//   weight: ['400', '500', '600', '700'], // Add the weights you need
-//   variable: '--font-poppins',          // Optional: define a CSS variable
-//   display: 'swap',
-// });
-
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
-    subsets: ["latin"],
+    weight: ["400", "500", "600", "700"],
+    variable: "--font-dm-sans",
 });
 
 export const metadata: Metadata = {
@@ -41,7 +30,7 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}
+                className={`${dmSans.variable} ${dmSans.className} h-full antialiased bg-background`}
             >
                 <ThemeProvider
                     attribute="class"
@@ -49,11 +38,13 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <ProjectProvider>
-                        <SectionProvider>{children}</SectionProvider>
+                    <div className="flex flex-col gap-8 relative">
+                        {children}
+                        <Footer />
                         <CursorCircle />
-                        <ProjectDrawer />
-                    </ProjectProvider>
+                        <ScrollToTopButton />
+                        <ThemeToggle />
+                    </div>
                 </ThemeProvider>
             </body>
         </html>

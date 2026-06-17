@@ -1,97 +1,93 @@
 "use client";
 
 import { projects } from "@/constant/projects";
-import { motion } from "framer-motion";
-import ProjectCard from "../card/project-card";
+import { useCursorPosition } from "@/hooks/use-cursor-position";
+import { Expand } from "lucide-react";
+import Image from "next/image";
+import { useRef } from "react";
+import ProjectDrawer, { DrawerHandle } from "../drawer/ProjectDrawer";
 import SectionWrapper from "../section-wrapper";
+import { Card } from "../ui/card";
 
 export default function Projects() {
+    const projectDrawerRef = useRef<DrawerHandle>(null);
+    const { mousePosition, isHovering } = useCursorPosition({
+        targetElementId: ["project-card-trigger"],
+    });
     const featuredProjects =
         projects.filter((project) => project.isFeatured) || [];
-    return (
-        <SectionWrapper id="projects" className="py-12">
-            <div className="flex flex-col items-center gap-6 md:gap-12">
-                <div className="w-full space-y-4 md:space-y-8">
-                    <div className="flex items-center gap-4">
-                        <div className="w-8 md:w-16 h-0.5 bg-border"></div>
-                        <span className="text-xs font-medium tracking-[0.2em] uppercase text-primary">
-                            Projects
-                        </span>
-                        <div className="flex-1 h-0.5 bg-border"></div>
-                    </div>
-                    <div className="flex justify-between w-full">
-                        <div className="flex-1 space-y-4">
-                            <h1 className="text-5xl md:text-6xl font-bold uppercase tracking-tight text-foreground leading-none">
-                                Built With Passion
-                            </h1>
-                            <p className="md:max-w-3xl text-sm md:text-base mb-6 text-muted-foreground">
-                                A selection of full stack applications
-                                showcasing my ability to build responsive
-                                frontends, robust backends, and seamless user
-                                experiences.
-                            </p>
-                        </div>
-                        <div className="hidden md:block">
-                            <div className="text-right">
-                                <div className="text-6xl font-light text-muted">
-                                    {featuredProjects.length
-                                        .toString()
-                                        .padStart(2, "0")}
-                                </div>
-                                <div className="text-sm uppercase tracking-wide text-muted-foreground">
-                                    Featured Projects
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="flex flex-col w-full gap-16">
-                {/* <div className="flex flex-col w-full"> */}
-                    {featuredProjects.map((project, index) => (
-                        <ProjectCard key={index} project={project} index={index} />
-                        // <Card key={index} project={project} index={index} />
-                    ))}
-                </div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.15 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    className="w-full flex flex-col md:flex-row justify-between pt-8 gap-6"
-                >
-                    <div>
-                        <h3 className="text-2xl font-bold text-foreground mb-2">
-                            Want to see more?
-                        </h3>
-                        <p className="text-muted-foreground">
-                            These are just highlights from my portfolio. Check
-                            out my complete collection of projects.
+    return (
+        <>
+            <SectionWrapper id="projects">
+                <div className="flex flex-col items-center gap-4">
+                    <div className="w-full flex flex-col gap-2">
+                        <h1 className="text-2xl uppercase font-bold">
+                            Recent Projects
+                        </h1>
+                        <p className="text-sm md:text-base text-muted-foreground">
+                            A selection of full stack applications showcasing my
+                            ability to build responsive frontends, robust
+                            backends, and seamless user experiences.
                         </p>
                     </div>
-                    <div className="flex items-center justify-start md:justify-end gap-4">
-                        <a
-                            href="projects"
-                            className="flex items-center gap-2 text-primary font-medium hover:underline"
-                        >
-                            <span>View All Projects</span>
-                            <svg
-                                className="w-4 h-4"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                                />
-                            </svg>
-                        </a>
+                    <div className="w-full grid md:grid-cols-2 lg:grid-cols-4 gap-2">
+                        {featuredProjects.map((project) => {
+                            const image = project.image;
+                            return (
+                                <div
+                                    key={project.title}
+                                    className="flex flex-col gap-4"
+                                    onClick={() => {
+                                        projectDrawerRef.current?.openWithTitle(
+                                            project.title,
+                                        );
+                                    }}
+                                >
+                                    <Card
+                                        className="p-0 cursor-pointer overflow-hidden min-h-32"
+                                        id="project-image-wrapper"
+                                    >
+                                        <Image
+                                            src={image}
+                                            width={200}
+                                            height={180}
+                                            alt={project.title}
+                                            loading="lazy"
+                                            className="w-full aspect-video object-cover rounded"
+                                        />
+                                        {isHovering && (
+                                            <div
+                                                className="fixed hidden md:flex pointer-events-none z-[99] h-16 w-16 bg-primary rounded-full items-center justify-center transition-all duration-300 ease-out"
+                                                style={{
+                                                    left: mousePosition.x - 40,
+                                                    top: mousePosition.y - 40,
+                                                }}
+                                            >
+                                                <Expand className="h-6 w-6 text-primary-foreground" />
+                                            </div>
+                                        )}
+                                    </Card>
+                                    <div className="flex-1 flex flex-col gap-1">
+                                        <h1 className="text-lg font-medium text-foreground">
+                                            {project.title}
+                                        </h1>
+                                        <p className="line-clamp-2 text-wrap text-sm text-muted-foreground">
+                                            {project.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
-                </motion.div>
-            </div>
-        </SectionWrapper>
+                    <div className="w-full flex flex-col gap-2">
+                        <h1 className="text-base">
+                            Visit my Github profile for more projects
+                        </h1>
+                    </div>
+                </div>
+            </SectionWrapper>
+            <ProjectDrawer ref={projectDrawerRef} />
+        </>
     );
 }

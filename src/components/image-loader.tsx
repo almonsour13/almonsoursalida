@@ -5,7 +5,7 @@ import { RotateCw } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
-interface ImageLoaderProps {
+interface ImageLoaderProps extends React.ImgHTMLAttributes<HTMLImageElement> {
     src: string;
     alt: string;
     className?: string;
@@ -36,8 +36,6 @@ export default function ImageLoader({
 
     const handleOnError = () => {
         setIsImageLoading(false);
-
-        // Max retries reached
         setIsImageError(true);
     };
 
@@ -55,7 +53,7 @@ export default function ImageLoader({
                 <div
                     className={cn(
                         "w-full h-full relative bg-muted overflow-hidden",
-                        className
+                        className,
                     )}
                 >
                     <div className="absolute inset-0 shimmer" />
@@ -72,7 +70,7 @@ export default function ImageLoader({
                 <div
                     className={cn(
                         "w-full h-full flex flex-col items-center justify-center gap-3 bg-muted text-muted-foreground",
-                        className
+                        className,
                     )}
                 >
                     <button
@@ -98,7 +96,7 @@ export default function ImageLoader({
                     isImageLoading || isImageError
                         ? "opacity-0"
                         : "opacity-100",
-                    className
+                    className,
                 )}
             />
         </>
