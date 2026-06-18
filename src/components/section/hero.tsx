@@ -68,13 +68,17 @@ export default function Hero() {
                             AL-Monsour M. Salida
                         </h1>
                         <p className="text-base text-muted-foreground leading-relaxed">
-                            I'm a Full-Stack Developer specializing in building
-                            high-performance web, mobile, and desktop
-                            applications. From architecting scalable backends
-                            with Node.js and Laravel to crafting seamless
-                            frontends using React, Next.js, and React Native, I
-                            focus on writing clean, maintainable code and
-                            designing structured, user-centered interfaces.
+                            I'm a{" "}
+                            <span className="text-primary">
+                                Full-Stack Developer
+                            </span>{" "}
+                            specializing in building high-performance web,
+                            mobile, and desktop applications. From architecting
+                            scalable backends with Node.js and Laravel to
+                            crafting seamless frontends using React, Next.js,
+                            and React Native, I focus on writing clean,
+                            maintainable code and designing structured,
+                            user-centered interfaces.
                         </p>
                     </div>
                     <div className="flex flex-wrap gap-2">

@@ -1,40 +1,9 @@
 "use client";
 import { skills } from "@/constant/data";
-import { useEffect, useRef, useState } from "react";
 import SectionWrapper from "../section-wrapper";
 import { Card } from "../ui/card";
 
 export default function Skills() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [progress, setProgress] = useState(0);
-    const [maxScroll, setMaxScroll] = useState(0);
-
-    // Calculate scroll progress for mobile horizontal scroll
-    const handleScroll = () => {
-        if (!containerRef.current) return;
-
-        const container = containerRef.current;
-        const scrollLeft = container.scrollLeft;
-        const scrollWidth = container.scrollWidth - container.clientWidth;
-        const currentProgress = scrollWidth > 0 ? scrollLeft / scrollWidth : 0;
-
-        setProgress(currentProgress);
-    };
-
-    // Calculate max scroll width on mount and resize
-    useEffect(() => {
-        const updateMaxScroll = () => {
-            if (!containerRef.current) return;
-            const container = containerRef.current;
-            const scrollWidth = container.scrollWidth - container.clientWidth;
-            setMaxScroll(scrollWidth);
-        };
-
-        updateMaxScroll();
-        window.addEventListener("resize", updateMaxScroll);
-        return () => window.removeEventListener("resize", updateMaxScroll);
-    }, []);
-
     return (
         <SectionWrapper id="skills">
             <div className="flex-1 flex flex-col gap-2">

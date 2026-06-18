@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 
-const sectionIds = ["hero", "services", "projects", "skills", "contact"];
+const sectionIds = [
+    "hero",
+    "services",
+    "projects",
+    "skills",
+    "contributions",
+    "contact",
+];
 
 export const useObserveSection = () => {
     const [active, setActive] = useState("/");
