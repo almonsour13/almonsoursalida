@@ -16,9 +16,7 @@ export default function GithubContributions() {
                         iterations.
                     </p>
                 </div>
-                <div className="w-full [&_svg]:w-full">
-                    <GitHubCalendar username="almonsour13" />
-                </div>
+                <GitHubCalendar username="almonsour13" />
             </div>
         </SectionWrapper>
     );
