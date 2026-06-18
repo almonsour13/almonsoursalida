@@ -6,7 +6,7 @@ import { Expand, Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-import ProjectDrawer, { DrawerHandle } from "../drawer/ProjectDrawer";
+import ProjectDrawer, { DrawerHandle } from "../drawer/project-drawer";
 import SectionWrapper from "../section-wrapper";
 import { Card } from "../ui/card";
 export default function Projects() {
