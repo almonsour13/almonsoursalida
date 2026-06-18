@@ -2,17 +2,17 @@
 
 import { projects } from "@/constant/projects";
 import { useCursorPosition } from "@/hooks/use-cursor-position";
-import { Expand } from "lucide-react";
+import { Expand, Github } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
 import ProjectDrawer, { DrawerHandle } from "../drawer/ProjectDrawer";
 import SectionWrapper from "../section-wrapper";
 import { Card } from "../ui/card";
-
 export default function Projects() {
     const projectDrawerRef = useRef<DrawerHandle>(null);
     const { mousePosition, isHovering } = useCursorPosition({
-        targetElementId: ["project-card-trigger"],
+        targetElementId: ["project-image-wrapper"],
     });
     const featuredProjects =
         projects.filter((project) => project.isFeatured) || [];
@@ -22,7 +22,7 @@ export default function Projects() {
             <SectionWrapper id="projects">
                 <div className="flex flex-col items-center gap-4">
                     <div className="w-full flex flex-col gap-2">
-                        <h1 className="text-2xl font-bold uppercase leading-none tracking-tight text-foreground">
+                        <h1 className="text-2xl font-medium leading-none tracking-wide text-foreground">
                             Recent Projects
                         </h1>
                         <p className="text-sm md:text-base text-muted-foreground">
@@ -31,13 +31,13 @@ export default function Projects() {
                             backends, and seamless user experiences.
                         </p>
                     </div>
-                    <div className="w-full grid md:grid-cols-2 lg:grid-cols-4 gap-2">
+                    <div className="w-full grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-2">
                         {featuredProjects.map((project) => {
                             const image = project.image;
                             return (
                                 <div
                                     key={project.title}
-                                    className="flex flex-col gap-2"
+                                    className="flex flex-col gap-2 cursor-pointer"
                                     onClick={() => {
                                         projectDrawerRef.current?.openWithTitle(
                                             project.title,
@@ -80,10 +80,17 @@ export default function Projects() {
                             );
                         })}
                     </div>
-                    <div className="w-full flex flex-col gap-2">
-                        <h1 className="text-base">
-                            Visit my Github profile for more projects
-                        </h1>
+                    <div className="w-full flex flex-row items-center gap-2">
+                        <Link
+                            href="https://github.com/AlMonsourSalida"
+                            target="_blank"
+                            className="flex gap-2 items-center"
+                        >
+                            <h1 className="text-sm text-muted-foreground hover:underline capitalize">
+                                See more in my GitHub profile
+                            </h1>
+                            <Github size={16} />
+                        </Link>
                     </div>
                 </div>
             </SectionWrapper>

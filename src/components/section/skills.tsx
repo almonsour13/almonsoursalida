@@ -39,7 +39,7 @@ export default function Skills() {
         <SectionWrapper>
             <div className="flex-1 flex flex-col gap-2">
                 <div className="flex flex-col gap-2">
-                    <h1 className="text-2xl font-bold uppercase leading-none tracking-tight text-foreground">
+                    <h1 className="text-2xl font-medium leading-none tracking-wide text-foreground">
                         Tech Stacks
                     </h1>
                     <p className="text-sm md:text-base text-muted-foreground">

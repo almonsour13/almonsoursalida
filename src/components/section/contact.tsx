@@ -71,7 +71,7 @@ export default function Contact() {
         <SectionWrapper id="contact">
             <div className="flex flex-col items-center gap-4">
                 <div className="w-full flex flex-col gap-2">
-                    <h1 className="text-2xl font-bold uppercase leading-none tracking-tight text-foreground">
+                    <h1 className="text-2xl font-medium leading-none tracking-wide text-foreground">
                         Get in touch
                     </h1>
                     <p className="md:max-w-3xl text-sm md:text-base text-muted-foreground">
@@ -107,18 +107,23 @@ export default function Contact() {
                                 {`"Let's create something amazing together. Every great project starts with a conversation."`}
                             </p>
                         </Card>
-                        <div className="flex gap-2">
-                            {socials.map((social, index) => (
-                                <Link
-                                    key={index}
-                                    href={social.link}
-                                    target="blank"
-                                >
-                                    <Button size="icon" variant="outline">
-                                        <social.icon className="h-4 w-4 group-hover:text-primary transition-colors" />
-                                    </Button>
-                                </Link>
-                            ))}
+                        <div className="flex flex-col gap-2">
+                            <h1 className="text-sm text-muted-foreground">
+                                Social Links
+                            </h1>
+                            <div className="flex gap-2">
+                                {socials.map((social, index) => (
+                                    <Link
+                                        key={index}
+                                        href={social.link}
+                                        target="blank"
+                                    >
+                                        <Button size="icon" variant="outline">
+                                            <social.icon className="h-4 w-4 group-hover:text-primary transition-colors" />
+                                        </Button>
+                                    </Link>
+                                ))}
+                            </div>
                         </div>
                     </div>
                     <Card className="flex-3">
@@ -140,8 +145,8 @@ export default function Contact() {
                                 onSubmit={handleSubmit}
                                 className="space-y-4"
                             >
-                                <div className="flex flex-row gap-2">
-                                    <div className="space-y-2">
+                                <div className="flex flex-col md:flex-row gap-2">
+                                    <div className="flex-1 space-y-2">
                                         <Label>Full Name</Label>
                                         <Input
                                             type="text"
@@ -150,7 +155,7 @@ export default function Contact() {
                                             required
                                         />
                                     </div>
-                                    <div className="space-y-2">
+                                    <div className="flex-1 space-y-2">
                                         <Label>Email Address</Label>{" "}
                                         <Input
                                             type="email"

@@ -29,21 +29,21 @@ export default function Hero() {
     return (
         <SectionWrapper className="pt-16" id="hero">
             <div className="flex flex-col md:flex-row  gap-4">
-                <div className="smflex-1  mask-profile bg-red-200">
+                <div className="flex  mask-profile">
                     <Image
                         alt="anime-profile-image"
                         src="/image/anime-profile.png"
-                        width={200}
-                        height={200}
-                        className="w-full h-full"
+                        width={800}
+                        height={800}
+                        className="w-full md:w-68  h-full"
                     />
                 </div>
-                <div className="flex flex-col gap-4">
+                <div className="flex-1 flex flex-col gap-4">
                     <div className="flex flex-col gap-2">
-                        <h1 className="text-4xl font-bold leading-none">
-                            AL Monsour Salida
+                        <h1 className="text-4xl font-medium leading-none tracking-wide">
+                            AL-Monsour Salida
                         </h1>
-                        <p className="text-base text-muted-foreground max-w-2xl leading-relaxed">
+                        <p className="text-base text-muted-foreground leading-relaxed">
                             I'm a Full-Stack Developer specializing in building
                             high-performance web, mobile, and desktop
                             applications. From architecting scalable backends
@@ -70,14 +70,23 @@ export default function Hero() {
                             </Button>
                         </Link>
                     </div>
-                    <div className="flex gap-2">
-                        {socials.map((social, index) => (
-                            <Link key={index} href={social.link} target="blank">
-                                <Button size="icon" variant="outline">
-                                    <social.icon className="h-4 w-4 group-hover:text-primary transition-colors" />
-                                </Button>
-                            </Link>
-                        ))}
+                    <div className="flex flex-col gap-2">
+                        <h1 className="text-sm text-muted-foreground">
+                            Social Links
+                        </h1>
+                        <div className="flex gap-2">
+                            {socials.map((social, index) => (
+                                <Link
+                                    key={index}
+                                    href={social.link}
+                                    target="blank"
+                                >
+                                    <Button size="icon" variant="outline">
+                                        <social.icon className="h-4 w-4 group-hover:text-primary transition-colors" />
+                                    </Button>
+                                </Link>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
