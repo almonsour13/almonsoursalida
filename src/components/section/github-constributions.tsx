@@ -5,7 +5,7 @@ import SectionWrapper from "../section-wrapper";
 export default function GithubContributions() {
     return (
         <SectionWrapper id="contributions">
-            <div className="flex-1 flex flex-col gap-2 w-full">
+            <div className="flex-1 flex flex-col gap-4 w-full">
                 <div className="flex flex-col gap-2">
                     <h1 className="text-2xl font-medium leading-none tracking-wide text-foreground">
                         Open Source Contributions
