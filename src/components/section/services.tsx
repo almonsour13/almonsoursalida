@@ -27,7 +27,7 @@ export default function Services() {
                                         <service.icon className="w-8 h-8  md:w-12 md:h-12 text-muted-foreground" />
                                     </Card>
                                     <div className="flex-1 flex flex-col gap-1">
-                                        <h1 className="text-wrap text-lg text-foreground">
+                                        <h1 className="text-wrap text-lg  tracking-wide  text-foreground">
                                             {service.title}
                                         </h1>
                                         <p className="text-wrap text-sm text-muted-foreground leading-relaxed">

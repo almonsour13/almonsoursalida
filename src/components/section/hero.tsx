@@ -65,7 +65,7 @@ export default function Hero() {
                 <div className="flex-1 flex flex-col gap-4">
                     <div className="flex flex-col gap-2">
                         <h1 className="text-4xl font-medium leading-none tracking-wide">
-                            AL-Monsour Salida
+                            AL-Monsour M. Salida
                         </h1>
                         <p className="text-base text-muted-foreground leading-relaxed">
                             I'm a Full-Stack Developer specializing in building

@@ -36,7 +36,7 @@ export default function Skills() {
     }, []);
 
     return (
-        <SectionWrapper>
+        <SectionWrapper id="skills">
             <div className="flex-1 flex flex-col gap-2">
                 <div className="flex flex-col gap-2">
                     <h1 className="text-2xl font-medium leading-none tracking-wide text-foreground">
@@ -48,7 +48,7 @@ export default function Skills() {
                         and seamless user experiences.
                     </p>
                 </div>
-                <div className="grid grid-cols-4 md:rgid-cols-4 lg:grid-cols-8 gap-2">
+                <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-16 gap-2">
                     {skills.map((skill) => {
                         const safeIcon = skill.icon.replace(
                             /<path(?![^>]*fill=)/g,
@@ -62,12 +62,12 @@ export default function Skills() {
                             >
                                 <div className="flex justify-center items-center flex-col gap-2">
                                     <div
-                                        className="w-8 h-8 md:w-12 md:h-12 text-foreground"
+                                        className="w-8 h-8 text-foreground"
                                         dangerouslySetInnerHTML={{
                                             __html: safeIcon,
                                         }}
                                     />
-                                    <h1 className="text-xs text-foreground text-center whitespace-nowrap">
+                                    <h1 className="hidden text-xs text-foreground text-center whitespace-nowrap">
                                         {skill.name}
                                     </h1>
                                 </div>

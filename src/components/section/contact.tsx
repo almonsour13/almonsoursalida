@@ -130,7 +130,7 @@ export default function Contact() {
                         <div className="border-b flex flex-col gap-2 pb-4">
                             <div className="flex items-center gap-2">
                                 <MessageSquare className="w-6 h-6 text-primary" />
-                                <h3 className="text-xl font-semibold text-foreground">
+                                <h3 className="text-lg font-medium  tracking-wide  text-foreground">
                                     Send a Message
                                 </h3>
                             </div>

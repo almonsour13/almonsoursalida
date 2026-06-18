@@ -2,7 +2,7 @@
 
 import { projects } from "@/constant/projects";
 import { useCursorPosition } from "@/hooks/use-cursor-position";
-import { Expand, Github } from "lucide-react";
+import { ArrowUpRight, Expand, Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
@@ -69,9 +69,12 @@ export default function Projects() {
                                         )}
                                     </Card>
                                     <div className="flex-1 flex flex-col gap-1">
-                                        <h1 className="text-lg font-medium text-foreground">
-                                            {project.title}
-                                        </h1>
+                                        <div className="flex flex-row justify-between">
+                                            <h1 className="text-lg font-medium tracking-wide text-foreground">
+                                                {project.title}
+                                            </h1>
+                                            <ArrowUpRight size={24} />
+                                        </div>
                                         <p className="line-clamp-2 text-wrap text-sm text-muted-foreground">
                                             {project.description}
                                         </p>
