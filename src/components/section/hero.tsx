@@ -29,7 +29,11 @@ export default function Hero() {
     return (
         <SectionWrapper className="pt-16" id="hero">
             <div className="flex flex-col md:flex-row  gap-4">
-                <div className="flex  mask-profile">
+                <div
+                    ref={imageRef}
+                    id="profile-image-wrapper"
+                    className=" mask-profile relative flex group transition-all duration-200 rounded-md bg-gradient-to-br from-primary/20 to-primary/5 "
+                >
                     <Image
                         alt="anime-profile-image"
                         src="/image/anime-profile.png"
@@ -37,6 +41,26 @@ export default function Hero() {
                         height={800}
                         className="w-full md:w-68  h-full"
                     />
+                    {isHovering && (
+                        <div
+                            className="absolute inset-0 transition-opacity opacity-0 group-hover:opacity-100 duration-300"
+                            style={{
+                                maskImage: `radial-gradient(circle 180px at ${relativePosition.x}px ${relativePosition.y}px, black 40%, transparent 100%)`,
+                                WebkitMaskImage: `radial-gradient(circle 180px at ${relativePosition.x}px ${relativePosition.y}px, black 40%, transparent 100%)`,
+                                maskSize: "100% 100%",
+                                WebkitMaskSize: "100% 100%",
+                            }}
+                        >
+                            <Image
+                                alt="profile-image"
+                                src="/image/profile.png"
+                                className="w-full h-full object-cover"
+                                width={1000}
+                                height={1000}
+                                priority={true}
+                            />
+                        </div>
+                    )}
                 </div>
                 <div className="flex-1 flex flex-col gap-4">
                     <div className="flex flex-col gap-2">

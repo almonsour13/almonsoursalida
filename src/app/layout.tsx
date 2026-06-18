@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: "Al-Monsour M. Salida",
     description: "A static website portfolio of Al-Monsour M. Salida",
     icons: {
-        icon: "/image/profile.JPG",
+        icon: "/image/profile.png",
     },
 };
 
