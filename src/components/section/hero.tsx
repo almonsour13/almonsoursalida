@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import SectionWrapper from "../section-wrapper";
 import { Button } from "../ui/button";
+import { Card } from "../ui/card";
 
 export default function Hero() {
     const { mousePosition, isHovering } = useCursorPosition({
@@ -29,10 +30,10 @@ export default function Hero() {
     return (
         <SectionWrapper className="pt-16" id="hero">
             <div className="flex flex-col md:flex-row  gap-4">
-                <div
+                <Card
                     ref={imageRef}
                     id="profile-image-wrapper"
-                    className=" mask-profile relative flex group transition-all duration-200 rounded-md bg-gradient-to-br from-primary/20 to-primary/5 "
+                    className="relative p-0 flex group transition-all duration-200 rounded-md overflow-hidden "
                 >
                     <Image
                         alt="anime-profile-image"
@@ -61,7 +62,7 @@ export default function Hero() {
                             />
                         </div>
                     )}
-                </div>
+                </Card>
                 <div className="flex-1 flex flex-col gap-4">
                     <div className="flex flex-col gap-2">
                         <h1 className="text-4xl font-medium leading-none tracking-wide">
