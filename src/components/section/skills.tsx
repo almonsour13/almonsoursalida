@@ -1,14 +1,15 @@
 "use client";
 import { skills } from "@/constant/data";
+import { cn } from "@/lib/utils";
 import SectionWrapper from "../section-wrapper";
 import { Card } from "../ui/card";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 
 export default function Skills() {
     return (
-        <SectionWrapper id="skills">
+        <SectionWrapper id="skills" className="px-0">
             <div className="flex-1 flex flex-col gap-4 w-full min-w-0">
-                <div className="flex flex-col gap-2">
+                <div className="px-4 md:px-0  flex flex-col gap-2">
                     <h1 className="text-2xl font-medium leading-none tracking-wide text-foreground">
                         Tech Stacks
                     </h1>
@@ -22,7 +23,7 @@ export default function Skills() {
 
                 <ScrollArea className="w-full whitespace-nowrap pb-4">
                     <div className="flex gap-2 w-max">
-                        {skills.map((skill) => {
+                        {skills.map((skill, i) => {
                             const safeIcon = skill.icon.replace(
                                 /<path(?![^>]*fill=)/g,
                                 '<path fill="currentColor"',
@@ -31,7 +32,11 @@ export default function Skills() {
                             return (
                                 <Card
                                     key={skill.name}
-                                    className="size-16 flex justify-center items-center flex-shrink-0"
+                                    className={cn(
+                                        "size-16 flex justify-center items-center md:mx-0 flex-shrink-0",
+                                        i === 0 && "ml-4",
+                                        skills.length - 1 === i && "mr-4",
+                                    )}
                                 >
                                     <div className="flex justify-center items-center flex-col gap-2">
                                         <div
