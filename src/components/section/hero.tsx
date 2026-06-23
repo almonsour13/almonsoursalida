@@ -2,7 +2,7 @@
 
 import { socials } from "@/constant/social";
 import { useCursorPosition } from "@/hooks/use-cursor-position";
-import { Eye, PhoneCall } from "lucide-react";
+import { FileUser, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -13,6 +13,7 @@ import { Card } from "../ui/card";
 export default function Hero() {
     const { mousePosition, isHovering } = useCursorPosition({
         targetElementId: ["profile-image-wrapper"],
+        enableTouch: true,
     });
     const imageRef = useRef<HTMLDivElement>(null);
     const [relativePosition, setRelativePosition] = useState({ x: 0, y: 0 });
@@ -75,11 +76,18 @@ export default function Hero() {
                             </span>{" "}
                             specializing in building high-performance web,
                             mobile, and desktop applications. From architecting
-                            scalable backends with Node.js and Laravel to
-                            crafting seamless frontends using React, Next.js,
-                            and React Native, I focus on writing clean,
-                            maintainable code and designing structured,
-                            user-centered interfaces.
+                            scalable backends with{" "}
+                            <span className="text-primary">Node.js</span> and{" "}
+                            <span className="text-primary">Laravel</span> to
+                            crafting seamless frontends using{" "}
+                            <span className="text-primary">React</span>,{" "}
+                            <span className="text-primary">Next.js</span>,{" "}
+                            <span className="text-primary">Vue.js</span> and{" "}
+                            <span className="text-primary">React Native</span>,
+                            with additional experience across CMS platforms like{" "}
+                            <span className="text-primary">WordPress</span>, I
+                            focus on writing clean, maintainable code and
+                            designing structured, user-centered interfaces.
                         </p>
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -94,7 +102,7 @@ export default function Hero() {
                             href="https://docs.google.com/document/d/1_MNkRS92RUt3PGpjbCJz4QWbnwz1yvQZ9mf8dAhS9wI/edit?usp=sharing"
                         >
                             <Button variant="outline">
-                                <Eye className="w-4 h-4" />
+                                <FileUser className="w-4 h-4" />
                                 <span>Resume</span>
                             </Button>
                         </Link>
@@ -109,7 +117,7 @@ export default function Hero() {
                                     target="blank"
                                 >
                                     <Button size="icon" variant="outline">
-                                        <social.icon className="h-4 w-4 group-hover:text-primary transition-colors" />
+                                        <social.icon className="h-4 w-4" />
                                     </Button>
                                 </Link>
                             ))}
