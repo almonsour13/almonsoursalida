@@ -28,7 +28,7 @@ export default function Hero() {
     }, [mousePosition, isHovering]);
 
     return (
-        <SectionWrapper className="pt-16" id="hero">
+        <SectionWrapper className="pt-8 md:pt-16" id="hero">
             <div className="flex flex-col md:flex-row  gap-4">
                 <Card
                     ref={imageRef}
@@ -100,9 +100,7 @@ export default function Hero() {
                         </Link>
                     </div>
                     <div className="flex flex-col gap-2">
-                        <h1 className="text-sm text-muted-foreground">
-                            Social Links
-                        </h1>
+                        <h1 className="text-sm">Social Links</h1>
                         <div className="flex gap-2">
                             {socials.map((social, index) => (
                                 <Link

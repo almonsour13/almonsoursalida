@@ -2,29 +2,33 @@ import {
     Code,
     MonitorSmartphone,
     PenTool,
-    Smartphone
+    Server,
+    Smartphone,
 } from "lucide-react";
 
 export const services = [
     {
         title: "Frontend Development",
         description:
-            "Building responsive and accessible user interfaces using modern frameworks like React, Next.js, and Tailwind CSS.",
+            "Building responsive and accessible user interfaces using modern frameworks like React, Next.js, Vue.js and Tailwind CSS.",
         icon: MonitorSmartphone,
         features: [
             "React/Next.js",
+            "Vue.js",
             "Tailwind CSS",
             "Responsive Design",
             "Accessibility",
         ],
+        visible: true,
     },
-    // {
-    //     title: "Backend Development",
-    //     description:
-    //         "Designing robust APIs and server-side applications using Node.js, Express, and relational databases like MySQL or PostgreSQL.",
-    //     icon: Server,
-    //     features: ["Node.js", "Express", "MySQL", "PostgreSQL"],
-    // },
+    {
+        title: "Backend Development",
+        description:
+            "Designing robust APIs and server-side applications using Node.js, Express, and relational databases like MySQL or PostgreSQL.",
+        icon: Server,
+        features: ["Node.js", "Express", "MySQL", "PostgreSQL"],
+        visible: false,
+    },
     {
         title: "Full Stack Integration",
         description:
@@ -36,6 +40,7 @@ export const services = [
             "Authentication",
             "Deployment",
         ],
+        visible: true,
     },
     {
         title: "Mobile App Development",
@@ -48,6 +53,7 @@ export const services = [
             "App Store Publishing",
             "Offline Support",
         ],
+        visible: true,
     },
     {
         title: "UI/UX Design",
@@ -60,5 +66,6 @@ export const services = [
             "Design Systems",
             "Usability Testing",
         ],
+        visible: true,
     },
 ];

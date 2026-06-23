@@ -19,25 +19,30 @@ export default function Services() {
                     </p>
                 </div>
                 <div className="grid  md:grid-cols-2 gap-2">
-                    {services.map((service) => {
-                        return (
-                            <Card key={service.title} className="">
-                                <div className="flex flex-row items-start gap-4">
-                                    <Card className="w-16 md:w-20 aspect-square">
-                                        <service.icon className="w-8 h-8  md:w-12 md:h-12 text-muted-foreground" />
-                                    </Card>
-                                    <div className="flex-1 flex flex-col gap-1">
-                                        <h1 className="text-wrap text-lg  tracking-wide  text-foreground">
-                                            {service.title}
-                                        </h1>
-                                        <p className="text-wrap text-sm text-muted-foreground leading-relaxed">
-                                            {service.description}
-                                        </p>
+                    {services
+                        .filter((s) => s.visible)
+                        .map((service) => {
+                            return (
+                                <Card key={service.title} className="">
+                                    <div className="flex flex-row items-start gap-4">
+                                        <Card className="w-16 md:w-20 aspect-square rounded">
+                                            <service.icon
+                                                className="w-8 h-8  md:w-12 md:h-12"
+                                                strokeWidth={1.5}
+                                            />
+                                        </Card>
+                                        <div className="flex-1 flex flex-col gap-1">
+                                            <h1 className="text-wrap text-lg  tracking-wide  text-foreground">
+                                                {service.title}
+                                            </h1>
+                                            <p className="text-wrap text-sm text-muted-foreground leading-relaxed">
+                                                {service.description}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </Card>
-                        );
-                    })}
+                                </Card>
+                            );
+                        })}
                 </div>
             </div>
         </SectionWrapper>

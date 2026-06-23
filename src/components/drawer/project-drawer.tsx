@@ -75,9 +75,9 @@ const ProjectDrawer = forwardRef<
                             >
                                 <div className="max-w-6xl mx-auto h-full flex flex-col gap-4">
                                     <div className="w-full flex justify-between items-center gap-4">
-                                        <span className="text-sm font-medium tracking-widest uppercase text-primary">
+                                        <h1 className="text-2xl font-medium tracking-wide">
                                             Project Details
-                                        </span>
+                                        </h1>
                                         <Button
                                             size="icon"
                                             variant="outline"
@@ -87,9 +87,6 @@ const ProjectDrawer = forwardRef<
                                         </Button>
                                     </div>
                                     <div className="flex flex-col gap-4">
-                                        <h1 className="text-2xl md:text-4xl font-bold uppercase tracking-tight text-foreground leading-none">
-                                            {selectedProject.title}
-                                        </h1>
                                         <div className="flex flex-col md:flex-row gap-4 pb-12">
                                             <div className="flex-1 flex flex-col gap-4">
                                                 <Card className="relative p-0  aspect-video bg-card rounded-md overflow-hidden">
@@ -109,10 +106,10 @@ const ProjectDrawer = forwardRef<
                                             </div>
                                             <div className="space-y-4 flex-1">
                                                 <div className="flex flex-col gap-2">
-                                                    <h3 className="text-lg font-semibold text-foreground">
-                                                        About This Project
-                                                    </h3>
-                                                    <p className="text-sm leading-relaxed text-muted-foreground">
+                                                    <h1 className="text-2xl leading-none font-medium tracking-wide text-foreground">
+                                                        {selectedProject.title}
+                                                    </h1>
+                                                    <p className="text-sm leading-normal text-muted-foreground">
                                                         {
                                                             selectedProject.description
                                                         }
@@ -120,9 +117,9 @@ const ProjectDrawer = forwardRef<
                                                 </div>
 
                                                 <div className="flex flex-col gap-2">
-                                                    <h3 className="text-lg font-semibold text-foreground">
+                                                    <h1 className="text-sm tracking-wide leading-none   text-foreground">
                                                         Technologies Used
-                                                    </h3>
+                                                    </h1>
                                                     <div className="flex flex-wrap gap-2">
                                                         {selectedProject.tech.map(
                                                             (
@@ -142,39 +139,46 @@ const ProjectDrawer = forwardRef<
                                                     </div>
                                                 </div>
 
-                                                <div className="flex flex-wrap gap-3 pt-2">
-                                                    {selectedProject.live && (
-                                                        <Link
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            href={
-                                                                selectedProject.live
-                                                            }
-                                                        >
-                                                            <Button variant="default">
-                                                                <ArrowUpRight className="h-4 w-4" />
-                                                                <span>
-                                                                    View Live
-                                                                </span>
-                                                            </Button>
-                                                        </Link>
-                                                    )}
-                                                    {selectedProject.github && (
-                                                        <Link
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            href={
-                                                                selectedProject.github
-                                                            }
-                                                        >
-                                                            <Button variant="outline">
-                                                                <Github className="h-4 w-4" />
-                                                                <span>
-                                                                    Source Code
-                                                                </span>
-                                                            </Button>
-                                                        </Link>
-                                                    )}
+                                                <div className="flex flex-col gap-2">
+                                                    <h1 className="text-sm tracking-wide leading-none text-foreground">
+                                                        Project Links
+                                                    </h1>
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {selectedProject.live && (
+                                                            <Link
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                href={
+                                                                    selectedProject.live
+                                                                }
+                                                            >
+                                                                <Button variant="default">
+                                                                    <ArrowUpRight className="h-4 w-4" />
+                                                                    <span>
+                                                                        View
+                                                                        Live
+                                                                    </span>
+                                                                </Button>
+                                                            </Link>
+                                                        )}
+                                                        {selectedProject.github && (
+                                                            <Link
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                href={
+                                                                    selectedProject.github
+                                                                }
+                                                            >
+                                                                <Button variant="outline">
+                                                                    <Github className="h-4 w-4" />
+                                                                    <span>
+                                                                        Source
+                                                                        Code
+                                                                    </span>
+                                                                </Button>
+                                                            </Link>
+                                                        )}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

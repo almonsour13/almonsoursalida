@@ -31,7 +31,7 @@ export default function ThemeToggle() {
                     <>
                         <motion.div
                             className={cn(
-                                "fixed top-8 right-4 md:right-8 z-50 h-8 w-8 md:h-12 md:w-12 border-2 rounded-ful",
+                                "fixed top-8 right-4 md:right-8 z-50 h-8 w-8 md:h-12 md:w-12 border-2 rounded-full",
                                 theme === "dark"
                                     ? "border-white/20"
                                     : "border-gray-900/20",

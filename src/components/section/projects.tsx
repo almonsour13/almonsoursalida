@@ -31,7 +31,7 @@ export default function Projects() {
                             backends, and seamless user experiences.
                         </p>
                     </div>
-                    <div className="w-full grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-2">
+                    <div className="w-full grid md:grid-cols-2 lg:grid-cols-4 gap-2">
                         {featuredProjects.map((project) => {
                             const image = project.image;
                             return (
@@ -45,7 +45,7 @@ export default function Projects() {
                                     }}
                                 >
                                     <Card
-                                        className="p-0 cursor-pointer overflow-hidden min-h-32"
+                                        className="hidden p-0 cursor-pointer overflow-hidden min-h-32"
                                         id="project-image-wrapper"
                                     >
                                         <Image
@@ -68,17 +68,19 @@ export default function Projects() {
                                             </div>
                                         )}
                                     </Card>
-                                    <div className="flex-1 flex flex-col gap-1">
-                                        <div className="flex flex-row justify-between">
-                                            <h1 className="text-lg font-medium tracking-wide text-foreground">
-                                                {project.title}
-                                            </h1>
-                                            <ArrowUpRight size={24} />
+                                    <Card>
+                                        <div className="flex-1 flex flex-col gap-1">
+                                            <div className="flex flex-row justify-between">
+                                                <h1 className="text-lg font-medium tracking-wide text-foreground">
+                                                    {project.title}
+                                                </h1>
+                                                <ArrowUpRight size={24} />
+                                            </div>
+                                            <p className="line-clamp-2 text-wrap text-sm text-muted-foreground">
+                                                {project.description}
+                                            </p>
                                         </div>
-                                        <p className="line-clamp-2 text-wrap text-sm text-muted-foreground">
-                                            {project.description}
-                                        </p>
-                                    </div>
+                                    </Card>
                                 </div>
                             );
                         })}

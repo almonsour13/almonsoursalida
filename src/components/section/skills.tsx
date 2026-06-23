@@ -1,5 +1,5 @@
 "use client";
-import { skills } from "@/constant/data";
+import { skills } from "@/constant/skills";
 import { cn } from "@/lib/utils";
 import SectionWrapper from "../section-wrapper";
 import { Card } from "../ui/card";
@@ -21,7 +21,7 @@ export default function Skills() {
                     </p>
                 </div>
 
-                <ScrollArea className="w-full whitespace-nowrap pb-4">
+                <ScrollArea className="w-full whitespace-nowrap pb-4 md:pb-0">
                     <div className="flex gap-2 w-max">
                         {skills.map((skill, i) => {
                             const safeIcon = skill.icon.replace(
