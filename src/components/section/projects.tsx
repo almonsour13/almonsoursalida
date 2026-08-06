@@ -87,7 +87,7 @@ export default function Projects() {
                     </div>
                     <div className="w-full flex flex-row items-center gap-2">
                         <Link
-                            href="https://github.com/AlMonsourSalida"
+                            href="https://github.com/almonsour13"
                             target="_blank"
                             className="flex gap-2 items-center"
                         >
