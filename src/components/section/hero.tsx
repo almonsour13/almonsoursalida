@@ -85,7 +85,7 @@ export default function Hero() {
                             <span className="text-primary">Vue.js</span> and{" "}
                             <span className="text-primary">React Native</span>,
                             with additional experience across CMS platforms like{" "}
-                            <span className="text-primary">WordPress</span>, I
+                            <span className="text-primary">WordPress</span> and etc, I
                             focus on writing clean, maintainable code and
                             designing structured, user-centered interfaces.
                         </p>
