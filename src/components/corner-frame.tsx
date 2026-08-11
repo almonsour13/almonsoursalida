@@ -14,10 +14,10 @@ export default function CornerFrame({
         <div className={cn("relative", className)}>
             {!hideCorners && (
                 <>
-                    <span className="pointer-events-none absolute -top-px -left-px h-2.5 w-2.5 border-l border-t border-primary/60" />
-                    <span className="pointer-events-none absolute -top-px -right-px h-2.5 w-2.5 border-r border-t border-primary/60" />
-                    <span className="pointer-events-none absolute -bottom-px -left-px h-2.5 w-2.5 border-l border-b border-primary/60" />
-                    <span className="pointer-events-none absolute -bottom-px -right-px h-2.5 w-2.5 border-r border-b border-primary/60" />
+                    <span className="pointer-events-none absolute -top-1 -left-1 h-2 w-2 border border-border bg-background" />
+                    <span className="pointer-events-none absolute -top-1 -right-1 h-2 w-2 border border-border bg-background" />
+                    <span className="pointer-events-none absolute -bottom-1 -left-1 h-2 w-2 border border-border bg-background" />
+                    <span className="pointer-events-none absolute -bottom-1 -right-1 h-2 w-2 border border-border bg-background" />
                 </>
             )}
             {children}

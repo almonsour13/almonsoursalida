@@ -1,32 +1,14 @@
 "use client";
 import { socials } from "@/constant/social";
-import { cn } from "@/lib/utils";
 import { Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
-import { FormEvent, ReactNode, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
+import CornerFrame from "../corner-frame";
 import SectionWrapper from "../section-wrapper";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
-
-function CornerFrame({
-    className,
-    children,
-}: {
-    className?: string;
-    children: ReactNode;
-}) {
-    return (
-        <div className={cn("relative", className)}>
-            <span className="pointer-events-none absolute -top-px -left-px h-2.5 w-2.5 border-l border-t border-primary/60" />
-            <span className="pointer-events-none absolute -top-px -right-px h-2.5 w-2.5 border-r border-t border-primary/60" />
-            <span className="pointer-events-none absolute -bottom-px -left-px h-2.5 w-2.5 border-l border-b border-primary/60" />
-            <span className="pointer-events-none absolute -bottom-px -right-px h-2.5 w-2.5 border-r border-b border-primary/60" />
-            {children}
-        </div>
-    );
-}
 
 export default function Contact() {
     const [isSubmitting, setIsSubmitting] = useState(false);

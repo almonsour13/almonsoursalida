@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { GitHubCalendar } from "react-github-calendar";
 import SectionWrapper from "../section-wrapper";
 
@@ -16,7 +17,37 @@ export default function GithubContributions() {
                         iterations.
                     </p>
                 </div>
-                <GitHubCalendar username="almonsour13" />
+                <Link href="https://github.com/almonsour13">
+                    <GitHubCalendar
+                        username="almonsour13"
+                        colorScheme="light"
+                        blockSize={16}
+                        blockMargin={5.8}
+                        blockRadius={0}
+                        fontSize={12}
+                        style={{ width: "100%" }}
+                        theme={{
+                            light: [
+                                "var(--card)",
+                                "oklch(0.85 0 0)",
+                                "oklch(0.70 0 0)",
+                                "oklch(0.55 0 0)",
+                                "var(--primary)",
+                            ],
+                            dark: [
+                                "var(--card)",
+                                "oklch(0.32 0 0)",
+                                "oklch(0.42 0 0)",
+                                "oklch(0.55 0 0)",
+                                "var(--primary)",
+                            ],
+                        }}
+                        labels={{
+                            totalCount:
+                                "{{count}} contributions in the last year",
+                        }}
+                    />
+                </Link>
             </div>
         </SectionWrapper>
     );

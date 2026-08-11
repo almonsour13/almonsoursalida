@@ -57,8 +57,8 @@ function DotGrid({ className }: { className?: string }) {
             )}
             style={{
                 backgroundImage:
-                    "radial-gradient(rgba(128,128,128,0.35) 1px, transparent 1px)",
-                backgroundSize: "22px 22px",
+                    "radial-gradient(rgba(128,128,128,0.16) 1px, transparent 1px)",
+                backgroundSize: "8px 8px",
             }}
         />
     );

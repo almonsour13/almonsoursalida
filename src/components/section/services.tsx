@@ -1,6 +1,7 @@
 "use client";
 
 import { services } from "@/constant/services";
+import { cn } from "@/lib/utils";
 import CornerFrame from "../corner-frame";
 import SectionWrapper from "../section-wrapper";
 
@@ -18,35 +19,49 @@ export default function Services() {
                         mastery.
                     </p>
                 </div>
-                <div className="grid  md:grid-cols-2 gap-2">
+                <CornerFrame className="grid grid-cols-1 md:grid-cols-2 border">
                     {services
                         .filter((s) => s.visible)
-                        .map((service) => {
-                            return (
-                                <CornerFrame
-                                    key={service.title}
-                                    className="border p-4"
-                                >
-                                    <div className="flex flex-row items-start gap-4">
-                                        <CornerFrame className="w-16 md:w-20 aspect-square border flex items-center justify-center ">
-                                            <service.icon
-                                                className="w-8 h-8  md:w-12 md:h-12"
-                                                strokeWidth={1.5}
-                                            />
-                                        </CornerFrame>
-                                        <div className="flex-1 flex flex-col gap-1">
-                                            <h1 className="text-wrap text-lg  tracking-wide  text-foreground">
-                                                {service.title}
-                                            </h1>
-                                            <p className="text-wrap text-sm text-muted-foreground leading-relaxed">
-                                                {service.description}
-                                            </p>
-                                        </div>
+                        .map((service, i) => (
+                            <div
+                                key={service.title}
+                                className={cn(
+                                    "border-border p-4",
+
+                                    // Mobile: horizontal divider between items
+                                    i > 0 && "border-t",
+
+                                    // Desktop: vertical divider between columns
+                                    "md:border-t-0 md:border-r",
+
+                                    // Remove right border from the second column
+                                    i % 2 === 1 && "md:border-r-0",
+
+                                    // Desktop: horizontal divider starting from row 2
+                                    i >= 2 && "md:border-t",
+                                )}
+                            >
+                                <div className="flex flex-row items-start gap-4">
+                                    <div className="flex aspect-square w-16 items-center justify-center border md:w-20">
+                                        <service.icon
+                                            className="h-8 w-8 md:h-12 md:w-12"
+                                            strokeWidth={1.5}
+                                        />
                                     </div>
-                                </CornerFrame>
-                            );
-                        })}
-                </div>
+
+                                    <div className="flex flex-1 flex-col gap-1">
+                                        <h1 className="text-lg tracking-wide text-foreground">
+                                            {service.title}
+                                        </h1>
+
+                                        <p className="text-sm leading-relaxed text-muted-foreground">
+                                            {service.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                </CornerFrame>
             </div>
         </SectionWrapper>
     );

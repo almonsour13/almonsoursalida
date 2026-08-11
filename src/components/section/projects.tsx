@@ -2,6 +2,7 @@
 
 import { projects } from "@/constant/projects";
 import { useCursorPosition } from "@/hooks/use-cursor-position";
+import { cn } from "@/lib/utils";
 import { ArrowUpRight, Expand, Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,7 +36,7 @@ export default function Projects() {
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-2">
-                        <CornerFrame className="border border-border p-5 flex flex-col gap-2">
+                        <CornerFrame className="border border-border p-4 flex flex-col gap-2">
                             <p className="text-xs text-muted-foreground mb-1">
                                 Build log
                             </p>
@@ -56,8 +57,7 @@ export default function Projects() {
                                 </div>
                             ))}
                         </CornerFrame>
-
-                        <div className="bg-primary text-primary-foreground p-6 flex flex-col justify-center gap-2">
+                        <CornerFrame className="border border-border bg-primary text-primary-foreground p-4 flex flex-col items-start justify-center gap-2">
                             <h3 className="text-lg font-medium">
                                 Always building something new
                             </h3>
@@ -74,16 +74,31 @@ export default function Projects() {
                                 <Github size={14} />
                                 <span>View GitHub</span>
                             </Link>
-                        </div>
+                        </CornerFrame>
                     </div>
-
-                    <div className="w-full grid md:grid-cols-2 lg:grid-cols-4 gap-2">
-                        {featuredProjects.map((project) => {
+                    <CornerFrame className="border grid w-full grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
+                        {featuredProjects.map((project, i) => {
                             const image = project.image;
+
                             return (
-                                <CornerFrame
+                                <div
                                     key={project.title}
-                                    className="group border border-border cursor-pointer transition-colors duration-200 hover:border-primary/60"
+                                    className={cn(
+                                        "group cursor-pointer border-border transition-colors duration-200",
+
+                                        // Mobile: horizontal borders between items
+                                        i > 0 && "border-t",
+
+                                        // md: 2-column layout
+                                        "md:border-t-0 md:border-r",
+                                        i % 2 === 1 && "md:border-r-0",
+                                        i >= 2 && "md:border-t",
+
+                                        // lg: 4-column layout
+                                        "lg:border-t-0 lg:border-r",
+                                        i % 4 === 3 && "lg:border-r-0",
+                                        i >= 4 && "lg:border-t",
+                                    )}
                                 >
                                     <div
                                         onClick={() => {
@@ -93,7 +108,7 @@ export default function Projects() {
                                         }}
                                     >
                                         <div
-                                            className="hidden relative overflow-hidden min-h-32 border-b border-border"
+                                            className="relative hidden min-h-32 overflow-hidden border-b border-border"
                                             id="project-image-wrapper"
                                         >
                                             <Image
@@ -102,11 +117,12 @@ export default function Projects() {
                                                 height={180}
                                                 alt={project.title}
                                                 loading="lazy"
-                                                className="w-full aspect-video object-cover"
+                                                className="aspect-video w-full object-cover"
                                             />
+
                                             {isHovering && (
                                                 <div
-                                                    className="fixed hidden md:flex pointer-events-none z-[99] h-16 w-16 bg-primary rounded-full items-center justify-center transition-all duration-300 ease-out"
+                                                    className="pointer-events-none fixed z-[99] hidden h-16 w-16 items-center justify-center rounded-full bg-primary transition-all duration-300 ease-out md:flex"
                                                     style={{
                                                         left:
                                                             mousePosition.x -
@@ -120,25 +136,28 @@ export default function Projects() {
                                                 </div>
                                             )}
                                         </div>
-                                        <div className="flex-1 flex flex-col gap-1 p-4">
-                                            <div className="flex flex-row justify-between items-start gap-2">
+
+                                        <div className="flex flex-1 flex-col gap-1 p-4">
+                                            <div className="flex flex-row items-start justify-between gap-2">
                                                 <h1 className="text-lg font-medium tracking-wide text-foreground">
                                                     {project.title}
                                                 </h1>
+
                                                 <ArrowUpRight
                                                     size={20}
-                                                    className="shrink-0 text-muted-foreground transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary"
+                                                    className="shrink-0 text-muted-foreground transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
                                                 />
                                             </div>
+
                                             <p className="line-clamp-2 text-wrap text-sm text-muted-foreground">
                                                 {project.description}
                                             </p>
                                         </div>
                                     </div>
-                                </CornerFrame>
+                                </div>
                             );
                         })}
-                    </div>
+                    </CornerFrame>
 
                     <div className="w-full flex flex-row items-center gap-2">
                         <Link
