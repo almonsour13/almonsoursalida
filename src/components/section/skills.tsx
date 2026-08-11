@@ -1,8 +1,8 @@
 "use client";
 import { skills } from "@/constant/skills";
 import { cn } from "@/lib/utils";
+import CornerFrame from "../corner-frame";
 import SectionWrapper from "../section-wrapper";
-import { Card } from "../ui/card";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 
 export default function Skills() {
@@ -22,7 +22,7 @@ export default function Skills() {
                 </div>
 
                 <ScrollArea className="w-full whitespace-nowrap pb-4 md:pb-0">
-                    <div className="flex gap-2 w-max">
+                    <div className="flex gap-2 w-max p-px">
                         {skills.map((skill, i) => {
                             const safeIcon = skill.icon.replace(
                                 /<path(?![^>]*fill=)/g,
@@ -30,10 +30,10 @@ export default function Skills() {
                             );
 
                             return (
-                                <Card
+                                <CornerFrame
                                     key={skill.name}
                                     className={cn(
-                                        "size-16 flex justify-center items-center md:mx-0 flex-shrink-0",
+                                        "size-16 border flex justify-center items-center md:mx-0 flex-shrink-0",
                                         i === 0 && "ml-4",
                                         skills.length - 1 === i && "mr-4",
                                     )}
@@ -49,7 +49,7 @@ export default function Skills() {
                                             {skill.name}
                                         </h1>
                                     </div>
-                                </Card>
+                                </CornerFrame>
                             );
                         })}
                     </div>

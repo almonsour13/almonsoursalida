@@ -1,14 +1,32 @@
 "use client";
 import { socials } from "@/constant/social";
-import { Mail, MapPin, MessageSquare, Phone } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, ReactNode, useRef, useState } from "react";
 import SectionWrapper from "../section-wrapper";
 import { Button } from "../ui/button";
-import { Card } from "../ui/card";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
+
+function CornerFrame({
+    className,
+    children,
+}: {
+    className?: string;
+    children: ReactNode;
+}) {
+    return (
+        <div className={cn("relative", className)}>
+            <span className="pointer-events-none absolute -top-px -left-px h-2.5 w-2.5 border-l border-t border-primary/60" />
+            <span className="pointer-events-none absolute -top-px -right-px h-2.5 w-2.5 border-r border-t border-primary/60" />
+            <span className="pointer-events-none absolute -bottom-px -left-px h-2.5 w-2.5 border-l border-b border-primary/60" />
+            <span className="pointer-events-none absolute -bottom-px -right-px h-2.5 w-2.5 border-r border-b border-primary/60" />
+            {children}
+        </div>
+    );
+}
 
 export default function Contact() {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -77,154 +95,157 @@ export default function Contact() {
 
     return (
         <SectionWrapper id="contact">
-            <div className="flex flex-col items-center gap-4">
-                <div className="w-full flex flex-col gap-2">
-                    <h1 className="text-2xl font-medium leading-none tracking-wide text-foreground">
+            <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-3 max-w-2xl">
+                    <h1 className="text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-foreground">
                         Get in touch
                     </h1>
-                    <p className="md:max-w-3xl text-sm md:text-base text-muted-foreground">
+                    <p className="text-base md:text-lg text-muted-foreground">
                         Ready to bring your ideas to life? {"I'm"} always
                         excited to work on new projects and collaborate with
                         amazing people.
                     </p>
                 </div>
-                <div className="w-full flex flex-col-reverse md:flex-row gap-2">
-                    <div className="flex-2 flex flex-col gap-2">
-                        <div className="flex flex-col gap-2">
-                            <h1 className="text-sm">Contact Info.</h1>
+
+                <div className="w-full grid md:grid-cols-5 gap-3">
+                    <CornerFrame className="md:col-span-2 border border-border p-6 flex flex-col gap-6">
+                        <div className="flex flex-col gap-4">
                             {contactInfo
                                 .filter((c) => c.visible)
                                 .map((info, index) => (
-                                    <Card key={index}>
-                                        <div className="flex flexr-row gap-4">
-                                            <Card className="flex-shrink-0 w-12 h-12 p-0 rounded flex items-center justify-center">
-                                                <info.icon className="w-5 h-5 text-primary" />
-                                            </Card>
-                                            <div>
-                                                <p className="text-sm text-muted-foreground">
-                                                    {info.type}
-                                                </p>
-                                                <p className="text-foreground leading-relaxed">
-                                                    {info.value}
-                                                </p>
-                                            </div>
+                                    <div
+                                        key={index}
+                                        className="flex flex-row items-center gap-3"
+                                    >
+                                        <div className="flex items-center justify-center h-9 w-9 rounded-md border border-border shrink-0">
+                                            <info.icon className="w-4 h-4 text-primary" />
                                         </div>
-                                    </Card>
+                                        <div className="flex flex-col min-w-0">
+                                            <p className="text-xs text-muted-foreground">
+                                                {info.type}
+                                            </p>
+                                            <p className="text-sm text-foreground leading-relaxed truncate">
+                                                {info.value}
+                                            </p>
+                                        </div>
+                                    </div>
                                 ))}
                         </div>
-                        <div className="flex flex-col gap-2">
-                            <h1 className="text-sm">Social Links</h1>
+
+                        <div className="flex flex-col gap-3 border-t border-border pt-4">
+                            <p className="text-xs text-muted-foreground">
+                                Elsewhere
+                            </p>
                             <div className="flex gap-2">
                                 {socials.map((social, index) => (
                                     <Link
                                         key={index}
                                         href={social.link}
-                                        target="blank"
+                                        target="_blank"
                                     >
-                                        <Button size="icon" variant="outline">
+                                        <Button
+                                            size="icon"
+                                            variant="outline"
+                                            className="rounded-full group"
+                                        >
                                             <social.icon className="h-4 w-4 group-hover:text-primary transition-colors" />
                                         </Button>
                                     </Link>
                                 ))}
                             </div>
                         </div>
-                    </div>
-                    <div className="flex-3 flex flex-col gap-2">
-                        <h1 className="hidden text-sm capitalize">
-                            Send me an email
-                        </h1>
-                        <Card>
-                            <div className="border-b flex flex-col gap-2 pb-4">
-                                <div className="flex items-center gap-2">
-                                    <MessageSquare className="w-6 h-6 text-primary" />
-                                    <h3 className="text-lg font-medium  tracking-wide  text-foreground">
-                                        Send a Message
-                                    </h3>
-                                </div>
-                                <p className="text-sm text-muted-foreground">
-                                    Fill out the form below and {"I'll"} get
-                                    back to you as soon as possible.
-                                </p>
-                            </div>
-                            <div className="flex flex-col">
-                                <form
-                                    ref={formRef}
-                                    onSubmit={handleSubmit}
-                                    className="space-y-4"
-                                >
-                                    <div className="flex flex-col md:flex-row gap-2">
-                                        <div className="flex-1 space-y-2">
-                                            <Label>Full Name</Label>
-                                            <Input
-                                                type="text"
-                                                name="fullName"
-                                                placeholder="Your full name"
-                                                required
-                                            />
-                                        </div>
-                                        <div className="flex-1 space-y-2">
-                                            <Label>Email Address</Label>{" "}
-                                            <Input
-                                                type="email"
-                                                name="email"
-                                                placeholder="your@email.com"
-                                                required
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label>Subject</Label>
-                                        <Input
-                                            type="text"
-                                            name="subject"
-                                            placeholder="Project inquiry, collaboration, or general question"
-                                            required
-                                        />
-                                    </div>
+                    </CornerFrame>
 
-                                    <div className="space-y-2">
-                                        <Label>Message</Label>
-                                        <Textarea
-                                            name="message"
-                                            className="min-h-[140px]"
-                                            placeholder="Tell me about your project, timeline, and any specific requirements..."
-                                            required
-                                        />
-                                    </div>
-                                    <Button
-                                        disabled={isSubmitting}
-                                        type="submit"
-                                        className="w-full flex items-center justify-center gap-3 px-8 py-4"
-                                        size="lg"
-                                    >
-                                        <span>
-                                            {isSubmitting
-                                                ? "Sending..."
-                                                : "Send Message"}
-                                        </span>
-                                    </Button>
-                                    {status === "success" && (
-                                        <p className="text-green-600 text-sm mt-2">
-                                            Message sent successfully!
-                                        </p>
-                                    )}
-                                    {status === "error" && (
-                                        <p className="text-red-600 text-sm mt-2">
-                                            Please fill out all fields correctly
-                                            or try again.
-                                        </p>
-                                    )}
-                                </form>
+                    <CornerFrame className="md:col-span-3 border border-border p-6">
+                        <form
+                            ref={formRef}
+                            onSubmit={handleSubmit}
+                            className="space-y-5"
+                        >
+                            <div className="flex flex-col md:flex-row gap-4">
+                                <div className="flex-1 space-y-2">
+                                    <Label>Full Name</Label>
+                                    <Input
+                                        type="text"
+                                        name="fullName"
+                                        placeholder="Your full name"
+                                        required
+                                    />
+                                </div>
+                                <div className="flex-1 space-y-2">
+                                    <Label>Email Address</Label>{" "}
+                                    <Input
+                                        type="email"
+                                        name="email"
+                                        placeholder="your@email.com"
+                                        required
+                                    />
+                                </div>
                             </div>
-                        </Card>
-                    </div>
+                            <div className="space-y-2">
+                                <Label>Subject</Label>
+                                <Input
+                                    type="text"
+                                    name="subject"
+                                    placeholder="Project inquiry, collaboration, or general question"
+                                    required
+                                />
+                            </div>
+
+                            <div className="space-y-2">
+                                <Label>Message</Label>
+                                <Textarea
+                                    name="message"
+                                    className="min-h-[140px]"
+                                    placeholder="Tell me about your project, timeline, and any specific requirements..."
+                                    required
+                                />
+                            </div>
+                            <Button
+                                disabled={isSubmitting}
+                                type="submit"
+                                className="w-full rounded-full flex items-center justify-center gap-3 px-8 py-4"
+                                size="lg"
+                            >
+                                <span>
+                                    {isSubmitting
+                                        ? "Sending..."
+                                        : "Send Message"}
+                                </span>
+                            </Button>
+                            {status === "success" && (
+                                <p className="text-sm text-emerald-600">
+                                    Message sent — {"I'll"} get back to you
+                                    soon.
+                                </p>
+                            )}
+                            {status === "error" && (
+                                <p className="text-sm text-red-600">
+                                    Please fill out all fields correctly or try
+                                    again.
+                                </p>
+                            )}
+                        </form>
+                    </CornerFrame>
                 </div>
 
-                <Card className="w-full flex justify-center items-center">
-                    <p className="text-base text-foreground italic">
-                        {`"Let's create something amazing together. Every great project starts with a conversation."`}
+                <div className="w-full bg-primary text-primary-foreground p-10 md:p-16 flex flex-col items-center gap-4 text-center">
+                    <h2 className="text-3xl md:text-5xl font-semibold leading-tight tracking-tight max-w-2xl">
+                        {"Let's"} build something without boundaries
+                    </h2>
+                    <p className="opacity-90 max-w-xl">
+                        Every great project starts with a conversation — reach
+                        out and {"let's"} talk through what {"you're"} building.
                     </p>
-                </Card>
+                    <Link href="#contact">
+                        <Button
+                            size="lg"
+                            className="rounded-full bg-primary-foreground text-primary hover:opacity-90"
+                        >
+                            <span>Start a conversation</span>
+                        </Button>
+                    </Link>
+                </div>
             </div>
         </SectionWrapper>
     );

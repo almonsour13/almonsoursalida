@@ -1,8 +1,8 @@
 "use client";
 
 import { services } from "@/constant/services";
+import CornerFrame from "../corner-frame";
 import SectionWrapper from "../section-wrapper";
-import { Card } from "../ui/card";
 
 export default function Services() {
     return (
@@ -23,14 +23,17 @@ export default function Services() {
                         .filter((s) => s.visible)
                         .map((service) => {
                             return (
-                                <Card key={service.title} className="">
+                                <CornerFrame
+                                    key={service.title}
+                                    className="border p-4"
+                                >
                                     <div className="flex flex-row items-start gap-4">
-                                        <Card className="w-16 md:w-20 aspect-square rounded">
+                                        <CornerFrame className="w-16 md:w-20 aspect-square border flex items-center justify-center ">
                                             <service.icon
                                                 className="w-8 h-8  md:w-12 md:h-12"
                                                 strokeWidth={1.5}
                                             />
-                                        </Card>
+                                        </CornerFrame>
                                         <div className="flex-1 flex flex-col gap-1">
                                             <h1 className="text-wrap text-lg  tracking-wide  text-foreground">
                                                 {service.title}
@@ -40,7 +43,7 @@ export default function Services() {
                                             </p>
                                         </div>
                                     </div>
-                                </Card>
+                                </CornerFrame>
                             );
                         })}
                 </div>
