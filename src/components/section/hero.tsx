@@ -1,17 +1,15 @@
 "use client";
 
 import { socials } from "@/constant/social";
-import { useCursorPosition } from "@/hooks/use-cursor-position";
-import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { FileUser, PhoneCall } from "lucide-react";
+import { Eye, FileUser, Layers, PhoneCall, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import CornerFrame from "../corner-frame";
+import DotGrid from "../dot-grid";
 import SectionWrapper from "../section-wrapper";
 import { Button } from "../ui/button";
-import { Card } from "../ui/card";
 
 const ROLES = [
     "Full-Stack Developer",
@@ -32,37 +30,23 @@ const STACK = [
 
 const PRINCIPLES = [
     {
+        icon: Zap,
         title: "Ship fast",
         description:
-            "Lean iterations from idea to production, without cutting corners on quality.",
+            "Lean iterations from idea to production, without cutting corners.",
     },
     {
+        icon: Layers,
         title: "Built to scale",
         description:
-            "Architecture decisions made for the app you'll have in a year, not just today.",
+            "Architecture decisions made for the app you'll have in a year.",
     },
     {
+        icon: Eye,
         title: "Detail-obsessed",
-        description:
-            "Pixel-level UI polish and edge-case handling, on every screen, every time.",
+        description: "Pixel-level UI polish on every screen, every time.",
     },
 ];
-
-function DotGrid({ className }: { className?: string }) {
-    return (
-        <div
-            className={cn(
-                "pointer-events-none absolute inset-0 -z-10",
-                className,
-            )}
-            style={{
-                backgroundImage:
-                    "radial-gradient(rgba(128,128,128,0.16) 1px, transparent 1px)",
-                backgroundSize: "8px 8px",
-            }}
-        />
-    );
-}
 
 function RoleCycler() {
     const [index, setIndex] = useState(0);
@@ -93,169 +77,109 @@ function RoleCycler() {
 }
 
 export default function Hero() {
-    const { mousePosition, isHovering } = useCursorPosition({
-        targetElementId: ["profile-image-wrapper"],
-        enableTouch: true,
-    });
-    const imageRef = useRef<HTMLDivElement>(null);
-    const [relativePosition, setRelativePosition] = useState({ x: 0, y: 0 });
-
-    useEffect(() => {
-        if (isHovering && imageRef.current) {
-            const rect = imageRef.current.getBoundingClientRect();
-            setRelativePosition({
-                x: mousePosition.x - rect.left,
-                y: mousePosition.y - rect.top,
-            });
-        }
-    }, [mousePosition, isHovering]);
-
     return (
-        <SectionWrapper className="pt-8 md:pt-16" id="hero">
-            <CornerFrame className="border border-border px-4 py-12 md:py-20 overflow-hidden">
-                <DotGrid />
-
-                <div className="flex flex-col items-center gap-4 text-center">
-                    <Link
-                        href="#contact"
-                        className="rounded-full bg-primary text-primary-foreground text-xs font-medium px-4 py-1.5 hover:opacity-90 transition-opacity"
-                    >
-                        Open to new projects — {"let's"} talk
-                    </Link>
-
-                    <h1 className="text-4xl md:text-6xl font-semibold leading-[1.05] tracking-tight text-foreground max-w-3xl">
-                        AL-Monsour M. Salida
-                    </h1>
-                    <p className="text-xl md:text-2xl text-muted-foreground">
-                        <RoleCycler />
-                    </p>
-                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
-                        I build high-performance web, mobile, and desktop
-                        applications end to end — architecting scalable
-                        backends, crafting seamless frontends, and designing
-                        structured, user-centered interfaces along the way.
-                    </p>
-
-                    <div className="flex flex-wrap justify-center gap-2 pt-1">
-                        {STACK.map((tech) => (
-                            <span
-                                key={tech}
-                                className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground"
-                            >
-                                {tech}
-                            </span>
-                        ))}
-                    </div>
-
-                    <div className="relative mt-8 w-full flex justify-center">
-                        <Card
-                            ref={imageRef}
-                            id="profile-image-wrapper"
-                            className="relative p-0 flex group transition-all duration-200 rounded-md overflow-hidden w-56 md:w-64 aspect-[4/5]"
-                        >
+        <SectionWrapper className="mt-8 md:mt-16" id="hero">
+            <CornerFrame className="relative border border-border rounded-md">
+                <DotGrid className="opacity-60" />
+                <div className="flex flex-col lg:flex-row">
+                    <div className="w-full lg:w-xs shrink-0 flex flex-col gap-3">
+                        <div className="relative overflow-hidden aspect-square h-full">
                             <Image
-                                alt="anime-profile-image"
-                                src="/image/anime-profile.png"
+                                alt="profile-image"
+                                src="/image/profile.png"
                                 fill
                                 className="object-cover"
+                                priority
                             />
-                            {isHovering && (
-                                <div
-                                    className="absolute inset-0 transition-opacity opacity-0 group-hover:opacity-100 duration-300"
-                                    style={{
-                                        maskImage: `radial-gradient(circle 180px at ${relativePosition.x}px ${relativePosition.y}px, black 40%, transparent 100%)`,
-                                        WebkitMaskImage: `radial-gradient(circle 180px at ${relativePosition.x}px ${relativePosition.y}px, black 40%, transparent 100%)`,
-                                        maskSize: "100% 100%",
-                                        WebkitMaskSize: "100% 100%",
-                                    }}
-                                >
-                                    <Image
-                                        alt="profile-image"
-                                        src="/image/profile.png"
-                                        fill
-                                        className="object-cover"
-                                        priority
-                                    />
-                                </div>
-                            )}
-                        </Card>
-
-                        <CornerFrame className="hidden lg:block absolute left-[8%] top-6 w-48 border border-primary/60 bg-background/90 backdrop-blur-sm px-3 py-2.5">
-                            <p className="text-primary text-sm font-semibold">
-                                5+ years
-                            </p>
-                            <p className="text-xs text-muted-foreground leading-snug">
-                                Shipping production apps across web, mobile, and
-                                desktop.
-                            </p>
-                        </CornerFrame>
-
-                        <CornerFrame className="hidden lg:block absolute right-[8%] bottom-6 w-52 border border-primary/60 bg-background/90 backdrop-blur-sm px-3 py-2.5">
-                            <p className="text-primary text-sm font-semibold">
-                                20+ products
-                            </p>
-                            <p className="text-xs text-muted-foreground leading-snug">
-                                Launched end to end, from schema to shipped UI.
-                            </p>
-                        </CornerFrame>
+                        </div>
                     </div>
+                    <div className="flex-1 flex flex-col gap-4 justify-center p-4">
+                        <span className="text-primary text-xs font-medium">
+                            [ INTRODUCTION ]
+                        </span>
 
-                    <div className="flex flex-wrap items-center justify-center gap-3 pt-8">
-                        <Link href="#contact">
-                            <Button variant="default" className="rounded-full">
-                                <PhoneCall className="w-4 h-4" />
-                                <span>{"Let's"} Talk</span>
-                            </Button>
-                        </Link>
-                        <Link
-                            target="_blank"
-                            href="https://docs.google.com/document/d/1_MNkRS92RUt3PGpjbCJz4QWbnwz1yvQZ9mf8dAhS9wI/edit?usp=sharing"
-                        >
-                            <Button variant="outline" className="rounded-full">
-                                <FileUser className="w-4 h-4" />
-                                <span>Resume</span>
-                            </Button>
-                        </Link>
-                        <div className="hidden sm:block h-6 w-px bg-border mx-1" />
-                        <div className="flex items-center gap-2">
-                            {socials.map((social, index) => (
-                                <Link
-                                    key={index}
-                                    href={social.link}
-                                    target="_blank"
+                        <div className="flex flex-col gap-2">
+                            <h1 className="text-4xl md:text-5xl font-semibold leading-[1.05] tracking-tight text-foreground">
+                                AL-Monsour M. Salida
+                            </h1>
+                            <p className="text-xl md:text-2xl text-muted-foreground">
+                                <RoleCycler />
+                            </p>
+                        </div>
+
+                        <p className="text-base text-muted-foreground leading-relaxed">
+                            I build high-performance web, mobile, and desktop
+                            applications end to end — architecting scalable
+                            backends, crafting seamless frontends, and designing
+                            structured, user-centered interfaces along the way.
+                        </p>
+
+                        <div className="flex hidden flex-wrap gap-2">
+                            {STACK.map((tech) => (
+                                <span
+                                    key={tech}
+                                    className="rounded bg-background border border-border px-3 py-1 text-xs text-muted-foreground"
                                 >
-                                    <Button
-                                        size="icon"
-                                        variant="outline"
-                                        className="rounded-full"
-                                    >
-                                        <social.icon className="h-4 w-4" />
-                                    </Button>
-                                </Link>
+                                    {tech}
+                                </span>
                             ))}
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-2">
+                            <Link href="#contact">
+                                <Button variant="default">
+                                    <PhoneCall className="w-4 h-4" />
+                                    <span>{"Let's"} Talk</span>
+                                </Button>
+                            </Link>
+                            <Link
+                                target="_blank"
+                                href="https://docs.google.com/document/d/1_MNkRS92RUt3PGpjbCJz4QWbnwz1yvQZ9mf8dAhS9wI/edit?usp=sharing"
+                            >
+                                <Button variant="outline">
+                                    <FileUser className="w-4 h-4" />
+                                    <span>Resume</span>
+                                </Button>
+                            </Link>
+                            <div className="hidden sm:block h-6 w-px bg-border mx-1" />
+                            <div className="flex items-center gap-2">
+                                {socials.map((social, index) => (
+                                    <Link
+                                        key={index}
+                                        href={social.link}
+                                        target="_blank"
+                                    >
+                                        <Button size="icon" variant="outline">
+                                            <social.icon className="h-4 w-4" />
+                                        </Button>
+                                    </Link>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </CornerFrame>
 
-            <div className="grid md:grid-cols-3 border border-t-0 border-border overflow-hidden">
-                {PRINCIPLES.map((principle, i) => (
-                    <div
-                        key={principle.title}
-                        className={cn(
-                            "flex flex-col gap-1.5 p-6",
-                            i !== 0 && "md:border-l border-border",
-                        )}
-                    >
-                        <h3 className="text-sm font-medium text-foreground">
-                            {principle.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                            {principle.description}
-                        </p>
-                    </div>
-                ))}
-            </div>
+                <div className="grid border-t border-border md:grid-cols-3">
+                    {PRINCIPLES.map((principle, index) => (
+                        <div
+                            key={principle.title}
+                            className={`p-4 ${
+                                index > 0
+                                    ? "border-t border-border md:border-t-0 md:border-l"
+                                    : ""
+                            }`}
+                        >
+                            <principle.icon className="mb-2 h-5 w-5 text-muted-foreground" />
+                            <h3 className="mb-1 text-sm font-medium text-foreground">
+                                {principle.title}
+                            </h3>
+                            <p className="text-sm leading-relaxed text-muted-foreground">
+                                {principle.description}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+            </CornerFrame>
         </SectionWrapper>
     );
 }
