@@ -12,6 +12,7 @@ export default function Home() {
     const active = useObserveSection();
     return (
         <div className="flex flex-col gap-8 md:gap-16 w-full relative ">
+            {/* <Header /> */}
             <Hero />
             <Services />
             <Projects />
