@@ -1,19 +1,21 @@
 import {
     Code,
     MonitorSmartphone,
+    PanelsTopLeft,
     PenTool,
     Server,
     Smartphone,
+    Workflow,
 } from "lucide-react";
 
 export const services = [
     {
         title: "Frontend Development",
         description:
-            "Building responsive and accessible user interfaces using modern frameworks like React, Next.js, Vue.js and Tailwind CSS.",
+            "Building responsive and accessible user interfaces using modern frameworks like React, Next.js, Vue.js, and Tailwind CSS.",
         icon: MonitorSmartphone,
         features: [
-            "React/Next.js",
+            "React / Next.js",
             "Vue.js",
             "Tailwind CSS",
             "Responsive Design",
@@ -45,7 +47,7 @@ export const services = [
     {
         title: "Mobile App Development",
         description:
-            "Creating mobile applications using React Native or Flutter.",
+            "Creating cross-platform mobile applications using React Native and Flutter.",
         icon: Smartphone,
         features: [
             "React Native / Flutter",
@@ -65,6 +67,34 @@ export const services = [
             "Prototyping",
             "Design Systems",
             "Usability Testing",
+        ],
+        visible: true,
+    },
+    {
+        title: "CMS Development",
+        description:
+            "Building and customizing content management systems that make it easy to manage, publish, and maintain website content.",
+        icon: PanelsTopLeft,
+        features: [
+            "WordPress",
+            "Headless CMS",
+            "Custom Themes",
+            "Custom Plugins",
+            "Content Management",
+        ],
+        visible: true,
+    },
+    {
+        title: "Automation",
+        description:
+            "Automating repetitive workflows and connecting services to improve efficiency, reduce manual work, and streamline business processes.",
+        icon: Workflow,
+        features: [
+            "Workflow Automation",
+            "API Integrations",
+            "Webhooks",
+            "Data Synchronization",
+            "Scheduled Tasks",
         ],
         visible: true,
     },

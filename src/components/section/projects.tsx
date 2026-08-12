@@ -3,7 +3,13 @@
 import { projects } from "@/constant/projects";
 import { useCursorPosition } from "@/hooks/use-cursor-position";
 import { cn } from "@/lib/utils";
-import { ArrowUpRight, Expand, Github } from "lucide-react";
+import {
+    ArrowUpRight,
+    Github,
+    ShieldCheck,
+    Sparkles,
+    Wrench,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
@@ -11,167 +17,131 @@ import CornerFrame from "../corner-frame";
 import ProjectDrawer, { DrawerHandle } from "../drawer/project-drawer";
 import SectionWrapper from "../section-wrapper";
 
+const FEATURE_NOTES = [
+    {
+        icon: Wrench,
+        title: "Fits your workflow",
+        description: "Git, CI, and whatever framework your team already runs.",
+    },
+    {
+        icon: ShieldCheck,
+        title: "Secure by default",
+        description:
+            "Auth, validation, and data handling done right from commit one.",
+    },
+    {
+        icon: Sparkles,
+        title: "Deployed, not just demoed",
+        description: "Shipped to production with docs and monitoring included.",
+    },
+];
+
 export default function Projects() {
     const projectDrawerRef = useRef<DrawerHandle>(null);
     const { mousePosition, isHovering } = useCursorPosition({
         targetElementId: ["project-image-wrapper"],
     });
-    const featuredProjects =
-        projects.filter((project) => project.isFeatured) || [];
-    const recentActivity = featuredProjects.slice(0, 4);
 
     return (
         <>
             <SectionWrapper id="projects">
-                <div className="flex flex-col gap-2">
-                    <div className="flex flex-col gap-3 max-w-2xl">
-                        <h1 className="text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-foreground">
-                            Recent projects
+                <CornerFrame className="relative border border-border rounded-md">
+                    <div className="p-4">
+                        <span className="text-primary text-xs font-medium">
+                            [ RECENT WORK ]
+                        </span>
+                        <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground mt-2">
+                            Projects
                         </h1>
-                        <p className="text-sm md:text-base text-muted-foreground">
+                        <p className="text-sm md:text-base text-muted-foreground mt-1 max-w-xl">
                             A selection of full stack applications showcasing my
                             ability to build responsive frontends, robust
                             backends, and seamless user experiences.
                         </p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-2">
-                        <CornerFrame className="border border-border p-4 flex flex-col gap-2">
-                            <p className="text-xs text-muted-foreground mb-1">
-                                Build log
-                            </p>
-                            {recentActivity.map((project) => (
-                                <div
-                                    key={project.title}
-                                    className="flex items-center justify-between gap-3 py-2 not-last:border-b border-border/60"
-                                >
-                                    <div className="flex items-center gap-2 min-w-0">
-                                        <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
-                                        <span className="text-sm text-foreground truncate">
-                                            {project.title}
-                                        </span>
-                                    </div>
-                                    <span className="text-xs text-muted-foreground shrink-0">
-                                        Shipped
-                                    </span>
-                                </div>
-                            ))}
-                        </CornerFrame>
-                        <CornerFrame className="border border-border bg-primary text-primary-foreground p-4 flex flex-col items-start justify-center gap-2">
-                            <h3 className="text-lg font-medium">
-                                Always building something new
-                            </h3>
-                            <p className="text-sm opacity-90 leading-relaxed">
-                                Beyond what's featured here, there's usually a
-                                side project mid-flight. GitHub has the full
-                                history, commits and all.
-                            </p>
-                            <Link
-                                href="https://github.com/almonsour13"
-                                target="_blank"
-                                className="mt-2 w-fit flex items-center gap-2 rounded-full bg-primary-foreground text-primary px-4 py-1.5 text-xs font-medium hover:opacity-90 transition-opacity"
-                            >
-                                <Github size={14} />
-                                <span>View GitHub</span>
-                            </Link>
-                        </CornerFrame>
-                    </div>
-                    <CornerFrame className="border grid w-full grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
-                        {featuredProjects.map((project, i) => {
-                            const image = project.image;
-
-                            return (
-                                <div
-                                    key={project.title}
-                                    className={cn(
-                                        "group cursor-pointer border-border transition-colors duration-200",
-
-                                        // Mobile: horizontal borders between items
-                                        i > 0 && "border-t",
-
-                                        // md: 2-column layout
-                                        "md:border-t-0 md:border-r",
-                                        i % 2 === 1 && "md:border-r-0",
-                                        i >= 2 && "md:border-t",
-
-                                        // lg: 4-column layout
-                                        "lg:border-t-0 lg:border-r",
-                                        i % 4 === 3 && "lg:border-r-0",
-                                        i >= 4 && "lg:border-t",
-                                    )}
-                                >
+                    <div className="grid grid-cols-2 md:grid-cols-2 border-t border-border">
+                        {projects
+                            .filter((p) => p.isFeatured === true)
+                            .map((project, i) => {
+                                return (
                                     <div
-                                        onClick={() => {
+                                        key={project.title}
+                                        id="project-image-wrapper"
+                                        onClick={() =>
                                             projectDrawerRef.current?.openWithTitle(
                                                 project.title,
-                                            );
-                                        }}
+                                            )
+                                        }
+                                        className={cn(
+                                            "group relative cursor-pointer overflow-hidden border-border",
+                                            "border-r border-b",
+                                            (i + 1) % 2 === 0 && "md:border-r",
+                                        )}
                                     >
-                                        <div
-                                            className="relative hidden min-h-32 overflow-hidden border-b border-border"
-                                            id="project-image-wrapper"
-                                        >
-                                            <Image
-                                                src={image}
-                                                width={200}
-                                                height={180}
-                                                alt={project.title}
-                                                loading="lazy"
-                                                className="aspect-video w-full object-cover"
-                                            />
-
-                                            {isHovering && (
-                                                <div
-                                                    className="pointer-events-none fixed z-[99] hidden h-16 w-16 items-center justify-center rounded-full bg-primary transition-all duration-300 ease-out md:flex"
-                                                    style={{
-                                                        left:
-                                                            mousePosition.x -
-                                                            40,
-                                                        top:
-                                                            mousePosition.y -
-                                                            40,
-                                                    }}
-                                                >
-                                                    <Expand className="h-6 w-6 text-primary-foreground" />
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        <div className="flex flex-1 flex-col gap-1 p-4">
-                                            <div className="flex flex-row items-start justify-between gap-2">
-                                                <h1 className="text-lg font-medium tracking-wide text-foreground">
-                                                    {project.title}
-                                                </h1>
-
-                                                <ArrowUpRight
-                                                    size={20}
-                                                    className="shrink-0 text-muted-foreground transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
-                                                />
-                                            </div>
-
-                                            <p className="line-clamp-2 text-wrap text-sm text-muted-foreground">
+                                        <Image
+                                            src={project.image}
+                                            alt={project.title}
+                                            fill
+                                            loading="lazy"
+                                            className="hidden object-cover transition-transform duration-300 group-hover:scale-105"
+                                        />
+                                        <ArrowUpRight
+                                            size={20}
+                                            className="absolute top-3 right-3 text-white/80 group-hover:text-primary transition-colors"
+                                        />
+                                        <div className="p-4 flex flex-col gap-2">
+                                            <h3 className="font-semibold text-lg tracking-normal">
+                                                {i + 1 < 10
+                                                    ? `0${i + 1}`
+                                                    : i + 1}
+                                            </h3>
+                                            <h3 className="font-semibold text-lg md:text-xl tracking-normal">
+                                                {project.title}
+                                            </h3>
+                                            <p className="text-muted-foreground text-sm line-clamp-3 max-w-md">
                                                 {project.description}
                                             </p>
                                         </div>
                                     </div>
-                                </div>
-                            );
-                        })}
-                    </CornerFrame>
+                                );
+                            })}
+                    </div>
 
-                    <div className="w-full flex flex-row items-center gap-2">
+                    <div className="grid md:grid-cols-3">
+                        {FEATURE_NOTES.map((note, index) => (
+                            <div
+                                key={note.title}
+                                className={`p-4 ${
+                                    index > 0
+                                        ? "border-t border-border md:border-t-0 md:border-l"
+                                        : ""
+                                }`}
+                            >
+                                <note.icon className="mb-2 h-5 w-5 text-muted-foreground" />
+
+                                <h3 className="mb-1 text-sm font-medium text-foreground">
+                                    {note.title}
+                                </h3>
+
+                                <p className="text-sm leading-relaxed text-muted-foreground">
+                                    {note.description}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="flex items-center justify-center gap-2 p-4 border-t border-border">
                         <Link
-                            href="https://github.com/almonsour13"
+                            href="https://github.com/almonsour013"
                             target="_blank"
-                            className="flex gap-2 items-center"
+                            className="flex gap-2 items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
                         >
-                            <h1 className="text-sm text-muted-foreground hover:underline capitalize">
-                                See more in my GitHub profile
-                            </h1>
+                            <span>See more on my GitHub profile</span>
                             <Github size={16} />
                         </Link>
                     </div>
-                </div>
+                </CornerFrame>
             </SectionWrapper>
             <ProjectDrawer ref={projectDrawerRef} />
         </>

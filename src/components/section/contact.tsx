@@ -1,20 +1,107 @@
 "use client";
+import { contact_info } from "@/constant/contact-info";
 import { socials } from "@/constant/social";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { cn } from "@/lib/utils";
+import {
+    Clock,
+    Code,
+    Database,
+    MessageCircle,
+    PanelsTopLeft,
+    PenTool,
+    Server,
+    ShieldCheck,
+    Workflow,
+} from "lucide-react";
 import Link from "next/link";
-import { FormEvent, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import CornerFrame from "../corner-frame";
+import DotGrid from "../dot-grid";
 import SectionWrapper from "../section-wrapper";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 
+import { motion } from "framer-motion";
+const CONTACT_NOTES = [
+    {
+        icon: Clock,
+        title: "Usually quick",
+        description: "Most messages get a reply within a day, often sooner.",
+    },
+    {
+        icon: MessageCircle,
+        title: "No auto-replies",
+        description: "I read every message myself, no filters or bots.",
+    },
+    {
+        icon: ShieldCheck,
+        title: "No spam, ever",
+        description: "Your details are only ever used to get back to you.",
+    },
+];
+const FLOATING_ICONS = [
+    {
+        icon: Database,
+        className: "top-[10%] left-[4%] hidden md:flex",
+        rotate: -12,
+        duration: 4.5,
+        delay: 0,
+    },
+    {
+        icon: Code,
+        className: "top-[40%] left-[12%] hidden lg:flex",
+        rotate: 10,
+        duration: 5,
+        delay: 0.6,
+    },
+    {
+        icon: Server,
+        className: "bottom-[10%] left-[8%] hidden md:flex",
+        rotate: 8,
+        duration: 4,
+        delay: 1.1,
+    },
+    {
+        icon: PenTool,
+        className: "top-10 right-[8%] hidden md:flex",
+        rotate: 14,
+        duration: 4.2,
+        delay: 0.3,
+    },
+    {
+        icon: Workflow,
+        className: "bottom-[40%] right-[16%] hidden lg:flex",
+        rotate: -10,
+        duration: 5.2,
+        delay: 0.9,
+    },
+    {
+        icon: PanelsTopLeft,
+        className: "bottom-[10%] right-[4%] hidden lg:flex",
+        rotate: -10,
+        duration: 5.2,
+        delay: 0.9,
+    },
+];
 export default function Contact() {
+    const searchParams = useSearchParams();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+    const [subject, setSubject] = useState("");
 
     const formRef = useRef<HTMLFormElement>(null);
+
+    useEffect(() => {
+        const service = searchParams.get("service");
+
+        if (service) {
+            setSubject(service);
+        }
+    }, [searchParams]);
+
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsSubmitting(true);
@@ -54,97 +141,31 @@ export default function Contact() {
         }
     };
 
-    const contactInfo = [
-        {
-            type: "Email",
-            value: "almonsoursalida@gmail.com",
-            icon: Mail,
-            visible: true,
-        },
-        {
-            type: "Phone",
-            value: "+639569932496",
-            icon: Phone,
-            visible: true,
-        },
-        {
-            type: "Location",
-            value: "Lupo, Davao Oriental, Philippines.",
-            icon: MapPin,
-            visible: true,
-        },
-    ];
-
     return (
         <SectionWrapper id="contact">
-            <div className="flex flex-col gap-8">
-                <div className="flex flex-col gap-3 max-w-2xl">
-                    <h1 className="text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-foreground">
-                        Get in touch
+            <CornerFrame className="relative border border-border rounded-md">
+                <div className="p-4">
+                    <span className="text-primary text-xs font-medium">
+                        [ GET IN TOUCH ]
+                    </span>
+                    <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground mt-2">
+                        {"Let's"} work together
                     </h1>
-                    <p className="text-base md:text-lg text-muted-foreground">
+                    <p className="text-sm md:text-base text-muted-foreground mt-1 max-w-xl">
                         Ready to bring your ideas to life? {"I'm"} always
                         excited to work on new projects and collaborate with
                         amazing people.
                     </p>
                 </div>
 
-                <div className="w-full grid md:grid-cols-5 gap-3">
-                    <CornerFrame className="md:col-span-2 border border-border p-6 flex flex-col gap-6">
-                        <div className="flex flex-col gap-4">
-                            {contactInfo
-                                .filter((c) => c.visible)
-                                .map((info, index) => (
-                                    <div
-                                        key={index}
-                                        className="flex flex-row items-center gap-3"
-                                    >
-                                        <div className="flex items-center justify-center h-9 w-9 rounded-md border border-border shrink-0">
-                                            <info.icon className="w-4 h-4 text-primary" />
-                                        </div>
-                                        <div className="flex flex-col min-w-0">
-                                            <p className="text-xs text-muted-foreground">
-                                                {info.type}
-                                            </p>
-                                            <p className="text-sm text-foreground leading-relaxed truncate">
-                                                {info.value}
-                                            </p>
-                                        </div>
-                                    </div>
-                                ))}
-                        </div>
-
-                        <div className="flex flex-col gap-3 border-t border-border pt-4">
-                            <p className="text-xs text-muted-foreground">
-                                Elsewhere
-                            </p>
-                            <div className="flex gap-2">
-                                {socials.map((social, index) => (
-                                    <Link
-                                        key={index}
-                                        href={social.link}
-                                        target="_blank"
-                                    >
-                                        <Button
-                                            size="icon"
-                                            variant="outline"
-                                            className="rounded-full group"
-                                        >
-                                            <social.icon className="h-4 w-4 group-hover:text-primary transition-colors" />
-                                        </Button>
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
-                    </CornerFrame>
-
-                    <CornerFrame className="md:col-span-3 border border-border p-6">
+                <div className="grid md:grid-cols-3 border-t border-border">
+                    <div className="md:col-span-2 md:border-r border-border p-4">
                         <form
                             ref={formRef}
                             onSubmit={handleSubmit}
-                            className="space-y-5"
+                            className="space-y-4"
                         >
-                            <div className="flex flex-col md:flex-row gap-4">
+                            <div className="flex flex-col md:flex-row gap-3">
                                 <div className="flex-1 space-y-2">
                                     <Label>Full Name</Label>
                                     <Input
@@ -155,7 +176,7 @@ export default function Contact() {
                                     />
                                 </div>
                                 <div className="flex-1 space-y-2">
-                                    <Label>Email Address</Label>{" "}
+                                    <Label>Email Address</Label>
                                     <Input
                                         type="email"
                                         name="email"
@@ -170,15 +191,16 @@ export default function Contact() {
                                     type="text"
                                     name="subject"
                                     placeholder="Project inquiry, collaboration, or general question"
+                                    value={subject}
+                                    onChange={(e) => setSubject(e.target.value)}
                                     required
                                 />
                             </div>
-
                             <div className="space-y-2">
                                 <Label>Message</Label>
                                 <Textarea
                                     name="message"
-                                    className="min-h-[140px]"
+                                    className="min-h-[120px]"
                                     placeholder="Tell me about your project, timeline, and any specific requirements..."
                                     required
                                 />
@@ -186,7 +208,7 @@ export default function Contact() {
                             <Button
                                 disabled={isSubmitting}
                                 type="submit"
-                                className="w-full rounded-full flex items-center justify-center gap-3 px-8 py-4"
+                                className="w-full flex items-center justify-center gap-3"
                                 size="lg"
                             >
                                 <span>
@@ -208,10 +230,103 @@ export default function Contact() {
                                 </p>
                             )}
                         </form>
-                    </CornerFrame>
+                    </div>
+
+                    <div className="flex flex-col border-t md:border-t-0">
+                        {contact_info.map((info, i) => (
+                            <Link
+                                key={info.type}
+                                href={info.href}
+                                target={
+                                    info.type === "Location"
+                                        ? "_blank"
+                                        : undefined
+                                }
+                                className={cn(
+                                    "group flex items-center gap-3 p-4 transition-colors hover:bg-muted/40",
+                                    i !== contact_info.length - 1 &&
+                                        "border-b border-border",
+                                )}
+                            >
+                                <info.icon className="w-5 h-5 text-muted-foreground shrink-0 group-hover:text-primary transition-colors" />
+                                <div className="flex flex-col min-w-0">
+                                    <p className="text-xs text-muted-foreground">
+                                        {info.type}
+                                    </p>
+                                    <p className="text-sm font-medium text-foreground truncate">
+                                        {info.value}
+                                    </p>
+                                </div>
+                            </Link>
+                        ))}
+
+                        <div className="flex h-full border-t">
+                            {socials.map((social, index) => (
+                                <Link
+                                    key={index}
+                                    href={social.link}
+                                    target="_blank"
+                                    className={cn(
+                                        "flex flex-1 h-fu justify-center items-center hover:bg-muted/40",
+                                        index !== socials.length - 1 &&
+                                            "border-r border-border",
+                                    )}
+                                >
+                                    <social.icon className="h-4 w-4" />
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
-                <div className="w-full bg-primary text-primary-foreground p-10 md:p-16 flex flex-col items-center gap-4 text-center">
+                <div className="grid border-t border-border md:grid-cols-3">
+                    {CONTACT_NOTES.map((note, index) => (
+                        <div
+                            key={note.title}
+                            className={cn(
+                                "p-4",
+                                index > 0 &&
+                                    "border-t border-border md:border-t-0 md:border-l",
+                            )}
+                        >
+                            <note.icon className="mb-2 h-5 w-5 text-muted-foreground" />
+
+                            <h3 className="mb-1 text-sm font-medium text-foreground">
+                                {note.title}
+                            </h3>
+
+                            <p className="text-sm leading-relaxed text-muted-foreground">
+                                {note.description}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="w-full relative bg-primary text-primary-foreground p-4 py-16 md:py-20 flex flex-col items-center gap-4 text-center">
+                    <DotGrid className="opacity-100 z-10" />
+                    {FLOATING_ICONS.map((item, index) => (
+                        <motion.div
+                            key={index}
+                            className={`absolute h-16 w-16 items-center justify-center rounded-lg border border-border border-dashed bg-primary-foreground/10 ${item.className}`}
+                            initial={{ rotate: item.rotate }}
+                            animate={{
+                                y: [0, -14, 0],
+                                rotate: [
+                                    item.rotate,
+                                    item.rotate + 4,
+                                    item.rotate,
+                                ],
+                            }}
+                            transition={{
+                                duration: item.duration,
+                                delay: item.delay,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                            }}
+                        >
+                            <item.icon className="h-6 w-6 text-primary-foreground/80" />
+                        </motion.div>
+                    ))}
                     <h2 className="text-3xl md:text-5xl font-semibold leading-tight tracking-tight max-w-2xl">
                         {"Let's"} build something without boundaries
                     </h2>
@@ -219,16 +334,8 @@ export default function Contact() {
                         Every great project starts with a conversation — reach
                         out and {"let's"} talk through what {"you're"} building.
                     </p>
-                    <Link href="#contact">
-                        <Button
-                            size="lg"
-                            className="rounded-full bg-primary-foreground text-primary hover:opacity-90"
-                        >
-                            <span>Start a conversation</span>
-                        </Button>
-                    </Link>
                 </div>
-            </div>
+            </CornerFrame>
         </SectionWrapper>
     );
 }
