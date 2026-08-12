@@ -8,12 +8,16 @@ export default function SectionWrapper({
     return (
         <section
             className={cn(
-                "px-4 w-full flex items-center justify-center",
+                "relative w-full px-4 flex items-center justify-center",
                 className,
             )}
             {...props}
         >
-            <div className="md:max-w-6xl w-full">{children}</div>
+            {/* <div className="hidden md:block absolute inset-x-0 top-0 h-px bg-[repeating-linear-gradient(to_right,var(--border)_0,var(--border)_6px,transparent_6px,transparent_12px)]" /> */}
+
+            <div className="w-full md:max-w-6xl">{children}</div>
+
+            {/* <div className="hidden md:block absolute inset-x-0 bottom-0 h-px bg-[repeating-linear-gradient(to_right,var(--border)_0,var(--border)_6px,transparent_6px,transparent_12px)]" /> */}
         </section>
     );
 }
