@@ -78,8 +78,8 @@ const ProjectDrawer = forwardRef<
                                 className="w-full h-[90vh] bg-background border-t border-border rounded-t-md px-4 py-8 md:py-12 overflow-y-auto pointer-events-auto"
                             >
                                 <SectionWrapper>
-                                    <CornerFrame className="h-full flex flex-col border">
-                                        <div className="w-full flex justify-between items-center gap-4 p-4 border-b">
+                                    <div className="h-full flex flex-col gap-4  ">
+                                        <div className="w-full flex justify-between items-center gap-4">
                                             <span className="text-primary text-xs font-medium">
                                                 [ PROJECT DETAILS ]
                                             </span>
@@ -92,8 +92,8 @@ const ProjectDrawer = forwardRef<
                                             </Button>
                                         </div>
                                         <div className="flex flex-col">
-                                            <div className="flex flex-col md:flex-row">
-                                                <div className="flex-1 flex flex-col gap-4 p-4">
+                                            <div className="flex flex-col md:flex-row gap-4">
+                                                <div className="flex-1 flex flex-col gap-4">
                                                     <CornerFrame className="border aspect-video">
                                                         <Card className="relative p-0 h-full bg-card rounded-none border-0">
                                                             <Image
@@ -111,7 +111,7 @@ const ProjectDrawer = forwardRef<
                                                         </Card>
                                                     </CornerFrame>
                                                 </div>
-                                                <div className="md:border-l flex-1">
+                                                <CornerFrame className="border flex-1">
                                                     <div className="flex flex-col gap-2 p-4 border-b">
                                                         <h1 className="text-2xl leading-none font-semibold tracking-tight text-foreground">
                                                             {
@@ -189,10 +189,10 @@ const ProjectDrawer = forwardRef<
                                                             )}
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </CornerFrame>
                                             </div>
                                         </div>
-                                    </CornerFrame>
+                                    </div>
                                 </SectionWrapper>
                             </motion.div>
                         </div>

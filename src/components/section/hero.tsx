@@ -90,14 +90,14 @@ export default function Hero() {
                                 alt="profile-image"
                                 src="/image/profile.png"
                                 fill
-                                className="object-cover"
+                                className="object-cover grayscale transition-all duration-700 hover:grayscale-0"
                                 priority
                             />
                         </div>
                     </CornerFrame>
-                    <div className=" flex-1 flex flex-col gap-4 justify-start relative">
-                        <DotGrid className="hidden opacity-40 -z-10" />
-                        <div className="hidden absolute inset-0 bg-card -z-20"></div>
+                    <CornerFrame className="p-4 md:p-6 border flex-1 flex flex-col gap-4 justify-start relative">
+                        <DotGrid className="opacity-40 -z-10" />
+                        <div className=" absolute inset-0 bg-card -z-20"></div>
                         <span className="text-primary text-xs font-medium">
                             [ INTRODUCTION ]
                         </span>
@@ -163,7 +163,7 @@ export default function Hero() {
                                 ))}
                             </div>
                         </div>
-                    </div>
+                    </CornerFrame>
                 </div>
 
                 <CornerFrame className="grid md:grid-cols-3 border">
@@ -171,7 +171,7 @@ export default function Hero() {
                         <div
                             key={principle.title}
                             className={cn(
-                                "p-4  bg-card",
+                                "p-4 bg-card",
                                 index > 0 &&
                                     "border-t border-border md:border-t-0 md:border-l",
                             )}

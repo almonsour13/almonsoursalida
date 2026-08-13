@@ -1,6 +1,7 @@
 "use client";
 
 import { services } from "@/constant/services";
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import {
     ArrowUpRight,
@@ -18,14 +19,14 @@ import { Button } from "../ui/button";
 export const FLOATING_ICONS = [
     {
         icon: Server,
-        className: "bottom-[8%] left-[12%] hidden md:flex",
+        className: "bottom-[12%] left-[12%] hidden md:flex",
         rotate: 8,
         duration: 4,
         delay: 1.1,
     },
     {
         icon: Workflow,
-        className: "bottom-[24%] right-[40%] hidden lg:flex",
+        className: "bottom-[30%] right-[40%] hidden lg:flex",
         rotate: -10,
         duration: 5.2,
         delay: 0.9,
@@ -71,9 +72,10 @@ export default function Services() {
                                     href={`?service=${encodeURIComponent(
                                         service.title,
                                     )}#contact`}
-                                    className={`group flex items-center gap-4 p-4 transition-colors hover:bg-muted/40 ${
-                                        isLast ? "" : "border-b border-border"
-                                    }`}
+                                    className={cn(
+                                        "group flex items-center gap-4 p-4  transition-colors hover:bg-muted/40",
+                                        isLast ? "" : "border-b border-border",
+                                    )}
                                 >
                                     <div className="relative size-16 border border-border border-dashed rounded flex justify-center items-center flex-shrink-0 transition-colors hover:bg-muted/40">
                                         <service.icon
@@ -102,32 +104,37 @@ export default function Services() {
                     </CornerFrame>
 
                     {/* CTA Section */}
+                    {/* <div className=""> */}
                     <CornerFrame className="relative flex flex-col justify-between gap-4 bg-primary p-4">
-                        <DotGrid className="z-10 opacity-100" />
-
-                        {FLOATING_ICONS.map((item, index) => (
-                            <motion.div
-                                key={index}
-                                className={`absolute h-20 w-20 opacity-60 items-center justify-center rounded-lg border border-border border-dashed bg-primary-foreground/10 ${item.className}`}
-                                initial={{ rotate: item.rotate }}
-                                // animate={{
-                                //     y: [0, -14, 0],
-                                //     rotate: [
-                                //         item.rotate,
-                                //         item.rotate + 4,
-                                //         item.rotate,
-                                //     ],
-                                // }}
-                                // transition={{
-                                //     duration: item.duration,
-                                //     delay: item.delay,
-                                //     repeat: Infinity,
-                                //     ease: "easeInOut",
-                                // }}
-                            >
-                                <item.icon className="h-8 w-8 text-primary-foreground/80" />
-                            </motion.div>
-                        ))}
+                        <DotGrid className="z-10 hidden opacity-100" />
+                        <div className="absolute inset-0 overflow-hidden">
+                            {FLOATING_ICONS.map((item, index) => (
+                                <motion.div
+                                    key={index}
+                                    className={cn(
+                                        "absolute h-20 w-20 opacity-20 items-center justify-center rounded-lg border border-border border-dashed bg-primary-foreground/10",
+                                        item.className,
+                                    )}
+                                    initial={{ rotate: item.rotate }}
+                                    // animate={{
+                                    //     y: [0, -14, 0],
+                                    //     rotate: [
+                                    //         item.rotate,
+                                    //         item.rotate + 4,
+                                    //         item.rotate,
+                                    //     ],
+                                    // }}
+                                    // transition={{
+                                    //     duration: item.duration,
+                                    //     delay: item.delay,
+                                    //     repeat: Infinity,
+                                    //     ease: "easeInOut",
+                                    // }}
+                                >
+                                    <item.icon className="h-8 w-8 text-primary-foreground/80" />
+                                </motion.div>
+                            ))}
+                        </div>
 
                         <div className="relative z-20 flex flex-col gap-4">
                             <Sparkles className="h-6 w-6 text-primary-foreground/90" />
@@ -153,6 +160,7 @@ export default function Services() {
                             </Link>
                         </div>
                     </CornerFrame>
+                    {/* </div> */}
                 </div>
             </div>
         </SectionWrapper>

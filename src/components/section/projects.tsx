@@ -66,11 +66,11 @@ export default function Projects() {
             <SectionWrapper id="projects">
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-col gap-2">
-                        <span className="text-primary text-xs font-medium">
-                            [ RECENT WORK ]
+                        <span className="text-primary text-xs font-medium uppercase">
+                            [ PROJects ]
                         </span>
                         <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
-                            Projects
+                            Built With Passion
                         </h1>
                         <p className="text-sm md:text-base text-muted-foreground">
                             A selection of full stack applications showcasing my

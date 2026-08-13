@@ -102,14 +102,68 @@ export default function Contact() {
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-4">
-                    <div className="md:col-span-2 h-full bg-red-200">
+                <div className="grid md:grid-cols-5 gap-4">
+                    <div className="flex flex-col md:col-span-2 gap-4">
+                        <CornerFrame className=" border">
+                            {contact_info.map((info, i) => (
+                                <Link
+                                    key={info.type}
+                                    href={info.href}
+                                    target={
+                                        info.type === "Location"
+                                            ? "_blank"
+                                            : undefined
+                                    }
+                                    className={cn(
+                                        "group flex items-center gap-3 p-4 transition-colors hover:bg-muted/40",
+                                        i !== contact_info.length - 1 &&
+                                            "border-b border-border",
+                                    )}
+                                >
+                                    <info.icon className="w-5 h-5 text-muted-foreground shrink-0 group-hover:text-primary transition-colors" />
+                                    <div className="flex flex-col min-w-0">
+                                        <p className="text-xs text-muted-foreground">
+                                            {info.type}
+                                        </p>
+                                        <p className="text-sm font-medium text-foreground truncate">
+                                            {info.value}
+                                        </p>
+                                    </div>
+                                </Link>
+                            ))}
+                        </CornerFrame>
+
+                        <div className="flex flex-col gap-2">
+                            <p className="text-xs text-muted-foreground">
+                                Elsewhere
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                                {socials.map((social, index) => (
+                                    <Link
+                                        key={index}
+                                        href={social.link}
+                                        target="_blank"
+                                    >
+                                        <Button
+                                            size="icon"
+                                            variant="outline"
+                                            className="group rounded"
+                                        >
+                                            <social.icon className="h-4 w-4 group-hover:text-primary transition-colors" />
+                                        </Button>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="md:col-span-3 h-full">
                         <CornerFrame className="border border-border p-4 bg-card h-full">
                             <form
                                 ref={formRef}
                                 onSubmit={handleSubmit}
                                 className="space-y-4 h-full flex flex-col"
                             >
+                                <div className="space-y-2 border-b"></div>
                                 <div className="flex flex-col md:flex-row gap-3">
                                     <div className="flex-1 space-y-2">
                                         <Label>Full Name</Label>
@@ -179,63 +233,9 @@ export default function Contact() {
                             </form>
                         </CornerFrame>
                     </div>
-
-                    <CornerFrame className="flex flex-col border">
-                        <div className="flex flex-col">
-                            {contact_info.map((info, i) => (
-                                <Link
-                                    key={info.type}
-                                    href={info.href}
-                                    target={
-                                        info.type === "Location"
-                                            ? "_blank"
-                                            : undefined
-                                    }
-                                    className={cn(
-                                        "group flex items-center gap-3 p-4 transition-colors hover:bg-muted/40",
-                                        i !== contact_info.length - 1 &&
-                                            "border-b border-border",
-                                    )}
-                                >
-                                    <info.icon className="w-5 h-5 text-muted-foreground shrink-0 group-hover:text-primary transition-colors" />
-                                    <div className="flex flex-col min-w-0">
-                                        <p className="text-xs text-muted-foreground">
-                                            {info.type}
-                                        </p>
-                                        <p className="text-sm font-medium text-foreground truncate">
-                                            {info.value}
-                                        </p>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
-
-                        <div className="flex flex-col gap-3 p-4 border-t border-border mt-auto">
-                            <p className="text-xs text-muted-foreground">
-                                Elsewhere
-                            </p>
-                            <div className="flex flex-wrap gap-2">
-                                {socials.map((social, index) => (
-                                    <Link
-                                        key={index}
-                                        href={social.link}
-                                        target="_blank"
-                                    >
-                                        <Button
-                                            size="icon"
-                                            variant="outline"
-                                            className="group rounded"
-                                        >
-                                            <social.icon className="h-4 w-4 group-hover:text-primary transition-colors" />
-                                        </Button>
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
-                    </CornerFrame>
                 </div>
 
-                <CornerFrame className="grid border border-border md:grid-cols-3">
+                <CornerFrame className="grid hidden border border-border md:grid-cols-3">
                     {CONTACT_NOTES.map((note, index) => (
                         <div
                             key={note.title}
