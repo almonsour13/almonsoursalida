@@ -10,25 +10,24 @@ const GITHUB_USERNAME = "almonsour13";
 export default function GithubContributions() {
     return (
         <SectionWrapper id="contributions">
-            <CornerFrame className="relative border border-border">
-                {/* Header */}
-                <div className="p-4">
+            <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-2">
                     <span className="text-xs font-medium text-primary">
-                        [ OPEN SOURCE ]
+                        [ GITHUB CONTRIBUTIONS ]
                     </span>
 
-                    <h1 className="mt-2 text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+                    <h1 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
                         Open Source Contributions
                     </h1>
 
-                    <p className="mt-1 max-w-xl text-sm text-muted-foreground md:text-base">
+                    <p className="text-sm text-muted-foreground md:text-base">
                         A real-time look at my recent engineering activity,
                         version control workflows, and ongoing project
                         iterations.
                     </p>
                 </div>
 
-                <div className="border-t border-border p-4">
+                <CornerFrame className="border p-4 hover:bg-muted/40">
                     <Link
                         href={`https://github.com/${GITHUB_USERNAME}`}
                         target="_blank"
@@ -64,8 +63,8 @@ export default function GithubContributions() {
                             }}
                         />
                     </Link>
-                </div>
-            </CornerFrame>
+                </CornerFrame>
+            </div>
         </SectionWrapper>
     );
 }

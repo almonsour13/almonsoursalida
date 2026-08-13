@@ -1,80 +1,110 @@
 "use client";
 
 import { useCursorPosition } from "@/hooks/use-cursor-position";
+import {
+    AnimatePresence,
+    motion,
+    useMotionValue,
+    useSpring,
+} from "framer-motion";
+import { useEffect } from "react";
+
+const BOX_SIZE = 40;
+const RIPPLE_SIZE = 60;
 
 export default function CursorCircle() {
     const { mousePosition, isClicking, isHovering } = useCursorPosition({
-        avoidElementId: ["project-image-wrapper","profile-image-wrapper"],
+        avoidElementId: ["project-image-wrapper", "profile-image-wrapper"],
     });
-    
-    if (isHovering) {
-        return null;
-    }
+
+    const x = useMotionValue(mousePosition.x);
+    const y = useMotionValue(mousePosition.y);
+    const springConfig = { damping: 28, stiffness: 380, mass: 0.4 };
+    const springX = useSpring(x, springConfig);
+    const springY = useSpring(y, springConfig);
+
+    useEffect(() => {
+        x.set(mousePosition.x);
+        y.set(mousePosition.y);
+    }, [mousePosition.x, mousePosition.y, x, y]);
 
     return (
-        <>
-            {/* Center dot */}
-            <div
-                className="fixed hidden md:block -z-10 transition-all duration-200 ease-out"
-                style={{
-                    left: mousePosition.x - 25,
-                    top: mousePosition.y - 25,
-                }}
-            >
-                <div
-                    className={`absolute top-[24px] left-[24px] rounded-full w-1 h-1 transition-all duration-200 ease-out ${
-                        isClicking
-                            ? "bg-foreground scale-150 shadow-lg shadow-foreground/50"
-                            : "bg-foreground scale-100"
-                    }`}
-                />
-            </div>
-
-            {/* Animated circles */}
-            <div
-                className={`fixed hidden md:block pointer-events-none z-50 transition-all duration-300 ease-out ${
-                    isClicking ? "scale-75" : "scale-100"
-                }`}
-                style={{
-                    left: mousePosition.x - 25,
-                    top: mousePosition.y - 25,
-                }}
-            >
-                <svg
-                    width="50"
-                    height="50"
-                    className={`transition-all duration-200 ${
-                        isClicking
-                            ? "animate-spin stroke-foreground"
-                            : "animate-spin-slow stroke-foreground "
-                    }`}
+        <AnimatePresence>
+            {!isHovering && (
+                <motion.div
+                    className="fixed hidden md:block top-0 left-0 pointer-events-none z-50 mix-blend-difference"
+                    style={{ x: springX, y: springY }}
+                    initial={{ opacity: 0, scale: 0.6 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.6 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
                 >
-                    <circle
-                        cx="25"
-                        cy="25"
-                        r="20"
-                        fill="none"
-                        strokeWidth={isClicking ? "1.5" : "1"}
-                        strokeDasharray="10 5"
-                        className={`transition-all duration-200 ${
-                            isClicking ? "drop-shadow-lg" : ""
-                        }`}
+                    <motion.span
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white"
+                        animate={
+                            isClicking
+                                ? {
+                                      width: 6,
+                                      height: 6,
+                                      boxShadow:
+                                          "0 0 10px 2px rgba(255,255,255,0.8)",
+                                  }
+                                : {
+                                      width: [3, 4, 3],
+                                      height: [3, 4, 3],
+                                      boxShadow: "0 0 0px 0px transparent",
+                                  }
+                        }
+                        transition={
+                            isClicking
+                                ? { duration: 0.2, ease: "easeOut" }
+                                : {
+                                      duration: 1.6,
+                                      repeat: Infinity,
+                                      ease: "easeInOut",
+                                  }
+                        }
                     />
-                </svg>
-            </div>
 
-            {/* Click ripple effect */}
-            {isClicking && (
-                <div
-                    className="fixed hidden md:block pointer-events-none z-40"
-                    style={{
-                        left: mousePosition.x - 30,
-                        top: mousePosition.y - 30,
-                    }}
-                >
-                    <div className="w-[60px] h-[60px] rounded-full border border-foreground/30 animate-ping" />
-                </div>
+                    <motion.div
+                        className="absolute -translate-x-1/2 -translate-y-1/2"
+                        style={{
+                            top: 0,
+                            left: 0,
+                            width: BOX_SIZE,
+                            height: BOX_SIZE,
+                        }}
+                        animate={{
+                            scale: isClicking ? 0.65 : 1,
+                            rotate: isClicking ? 45 : 0,
+                        }}
+                        transition={{ duration: 0.25, ease: "easeOut" }}
+                    >
+                        <span className="absolute -top-px -left-px h-2.5 w-2.5 border-l border-t border-white" />
+                        <span className="absolute -top-px -right-px h-2.5 w-2.5 border-r border-t border-white" />
+                        <span className="absolute -bottom-px -left-px h-2.5 w-2.5 border-l border-b border-white" />
+                        <span className="absolute -bottom-px -right-px h-2.5 w-2.5 border-r border-b border-white" />
+                    </motion.div>
+
+                    <AnimatePresence>
+                        {isClicking && (
+                            <motion.span
+                                className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-white"
+                                style={{
+                                    top: 0,
+                                    left: 0,
+                                    width: RIPPLE_SIZE,
+                                    height: RIPPLE_SIZE,
+                                }}
+                                initial={{ opacity: 0.6, scale: 0.4 }}
+                                animate={{ opacity: 0, scale: 1.4 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.5, ease: "easeOut" }}
+                            />
+                        )}
+                    </AnimatePresence>
+                </motion.div>
             )}
-        </>
+        </AnimatePresence>
     );
 }

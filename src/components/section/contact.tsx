@@ -2,29 +2,17 @@
 import { contact_info } from "@/constant/contact-info";
 import { socials } from "@/constant/social";
 import { cn } from "@/lib/utils";
-import {
-    Clock,
-    Code,
-    Database,
-    MessageCircle,
-    PanelsTopLeft,
-    PenTool,
-    Server,
-    ShieldCheck,
-    Workflow,
-} from "lucide-react";
+import { Clock, MessageCircle, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import CornerFrame from "../corner-frame";
-import DotGrid from "../dot-grid";
 import SectionWrapper from "../section-wrapper";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 
-import { motion } from "framer-motion";
 const CONTACT_NOTES = [
     {
         icon: Clock,
@@ -40,50 +28,6 @@ const CONTACT_NOTES = [
         icon: ShieldCheck,
         title: "No spam, ever",
         description: "Your details are only ever used to get back to you.",
-    },
-];
-const FLOATING_ICONS = [
-    {
-        icon: Database,
-        className: "top-[10%] left-[4%] hidden md:flex",
-        rotate: -12,
-        duration: 4.5,
-        delay: 0,
-    },
-    {
-        icon: Code,
-        className: "top-[40%] left-[12%] hidden lg:flex",
-        rotate: 10,
-        duration: 5,
-        delay: 0.6,
-    },
-    {
-        icon: Server,
-        className: "bottom-[10%] left-[8%] hidden md:flex",
-        rotate: 8,
-        duration: 4,
-        delay: 1.1,
-    },
-    {
-        icon: PenTool,
-        className: "top-10 right-[8%] hidden md:flex",
-        rotate: 14,
-        duration: 4.2,
-        delay: 0.3,
-    },
-    {
-        icon: Workflow,
-        className: "bottom-[40%] right-[16%] hidden lg:flex",
-        rotate: -10,
-        duration: 5.2,
-        delay: 0.9,
-    },
-    {
-        icon: PanelsTopLeft,
-        className: "bottom-[10%] right-[4%] hidden lg:flex",
-        rotate: -10,
-        duration: 5.2,
-        delay: 0.9,
     },
 ];
 export default function Contact() {
@@ -143,148 +87,160 @@ export default function Contact() {
 
     return (
         <SectionWrapper id="contact">
-            <CornerFrame className="relative border border-border rounded-md">
-                <div className="p-4">
+            <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-2">
                     <span className="text-primary text-xs font-medium">
                         [ GET IN TOUCH ]
                     </span>
-                    <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground mt-2">
+                    <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
                         {"Let's"} work together
                     </h1>
-                    <p className="text-sm md:text-base text-muted-foreground mt-1 max-w-xl">
+                    <p className="text-sm md:text-base text-muted-foreground">
                         Ready to bring your ideas to life? {"I'm"} always
                         excited to work on new projects and collaborate with
                         amazing people.
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-3 border-t border-border">
-                    <div className="md:col-span-2 md:border-r border-border p-4">
-                        <form
-                            ref={formRef}
-                            onSubmit={handleSubmit}
-                            className="space-y-4"
-                        >
-                            <div className="flex flex-col md:flex-row gap-3">
-                                <div className="flex-1 space-y-2">
-                                    <Label>Full Name</Label>
+                <div className="grid md:grid-cols-3 gap-4">
+                    <div className="md:col-span-2 h-full bg-red-200">
+                        <CornerFrame className="border border-border p-4 bg-card h-full">
+                            <form
+                                ref={formRef}
+                                onSubmit={handleSubmit}
+                                className="space-y-4 h-full flex flex-col"
+                            >
+                                <div className="flex flex-col md:flex-row gap-3">
+                                    <div className="flex-1 space-y-2">
+                                        <Label>Full Name</Label>
+                                        <Input
+                                            type="text"
+                                            name="fullName"
+                                            placeholder="Your full name"
+                                            required
+                                        />
+                                    </div>
+                                    <div className="flex-1 space-y-2">
+                                        <Label>Email Address</Label>
+                                        <Input
+                                            type="email"
+                                            name="email"
+                                            placeholder="your@email.com"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>Subject</Label>
                                     <Input
                                         type="text"
-                                        name="fullName"
-                                        placeholder="Your full name"
+                                        name="subject"
+                                        placeholder="Project inquiry, collaboration, or general question"
+                                        value={subject}
+                                        onChange={(e) =>
+                                            setSubject(e.target.value)
+                                        }
                                         required
                                     />
                                 </div>
-                                <div className="flex-1 space-y-2">
-                                    <Label>Email Address</Label>
-                                    <Input
-                                        type="email"
-                                        name="email"
-                                        placeholder="your@email.com"
+                                <div className="space-y-2 flex-1 flex flex-col">
+                                    <Label>Message</Label>
+                                    <Textarea
+                                        name="message"
+                                        className="min-h-[120px] flex-1"
+                                        placeholder="Tell me about your project, timeline, and any specific requirements..."
                                         required
                                     />
                                 </div>
-                            </div>
-                            <div className="space-y-2">
-                                <Label>Subject</Label>
-                                <Input
-                                    type="text"
-                                    name="subject"
-                                    placeholder="Project inquiry, collaboration, or general question"
-                                    value={subject}
-                                    onChange={(e) => setSubject(e.target.value)}
-                                    required
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <Label>Message</Label>
-                                <Textarea
-                                    name="message"
-                                    className="min-h-[120px]"
-                                    placeholder="Tell me about your project, timeline, and any specific requirements..."
-                                    required
-                                />
-                            </div>
-                            <Button
-                                disabled={isSubmitting}
-                                type="submit"
-                                className="w-full flex items-center justify-center gap-3"
-                                size="lg"
-                            >
-                                <span>
-                                    {isSubmitting
-                                        ? "Sending..."
-                                        : "Send Message"}
-                                </span>
-                            </Button>
-                            {status === "success" && (
-                                <p className="text-sm text-emerald-600">
-                                    Message sent — {"I'll"} get back to you
-                                    soon.
-                                </p>
-                            )}
-                            {status === "error" && (
-                                <p className="text-sm text-red-600">
-                                    Please fill out all fields correctly or try
-                                    again.
-                                </p>
-                            )}
-                        </form>
+                                <Button
+                                    disabled={isSubmitting}
+                                    type="submit"
+                                    className="w-full flex items-center justify-center gap-3"
+                                    size="lg"
+                                >
+                                    <span>
+                                        {isSubmitting
+                                            ? "Sending..."
+                                            : "Send Message"}
+                                    </span>
+                                </Button>
+                                {status === "success" && (
+                                    <p className="text-sm text-emerald-600">
+                                        Message sent — {"I'll"} get back to you
+                                        soon.
+                                    </p>
+                                )}
+                                {status === "error" && (
+                                    <p className="text-sm text-red-600">
+                                        Please fill out all fields correctly or
+                                        try again.
+                                    </p>
+                                )}
+                            </form>
+                        </CornerFrame>
                     </div>
 
-                    <div className="flex flex-col border-t md:border-t-0">
-                        {contact_info.map((info, i) => (
-                            <Link
-                                key={info.type}
-                                href={info.href}
-                                target={
-                                    info.type === "Location"
-                                        ? "_blank"
-                                        : undefined
-                                }
-                                className={cn(
-                                    "group flex items-center gap-3 p-4 transition-colors hover:bg-muted/40",
-                                    i !== contact_info.length - 1 &&
-                                        "border-b border-border",
-                                )}
-                            >
-                                <info.icon className="w-5 h-5 text-muted-foreground shrink-0 group-hover:text-primary transition-colors" />
-                                <div className="flex flex-col min-w-0">
-                                    <p className="text-xs text-muted-foreground">
-                                        {info.type}
-                                    </p>
-                                    <p className="text-sm font-medium text-foreground truncate">
-                                        {info.value}
-                                    </p>
-                                </div>
-                            </Link>
-                        ))}
-
-                        <div className="flex h-full border-t">
-                            {socials.map((social, index) => (
+                    <CornerFrame className="flex flex-col border">
+                        <div className="flex flex-col">
+                            {contact_info.map((info, i) => (
                                 <Link
-                                    key={index}
-                                    href={social.link}
-                                    target="_blank"
+                                    key={info.type}
+                                    href={info.href}
+                                    target={
+                                        info.type === "Location"
+                                            ? "_blank"
+                                            : undefined
+                                    }
                                     className={cn(
-                                        "flex flex-1 h-fu justify-center items-center hover:bg-muted/40",
-                                        index !== socials.length - 1 &&
-                                            "border-r border-border",
+                                        "group flex items-center gap-3 p-4 transition-colors hover:bg-muted/40",
+                                        i !== contact_info.length - 1 &&
+                                            "border-b border-border",
                                     )}
                                 >
-                                    <social.icon className="h-4 w-4" />
+                                    <info.icon className="w-5 h-5 text-muted-foreground shrink-0 group-hover:text-primary transition-colors" />
+                                    <div className="flex flex-col min-w-0">
+                                        <p className="text-xs text-muted-foreground">
+                                            {info.type}
+                                        </p>
+                                        <p className="text-sm font-medium text-foreground truncate">
+                                            {info.value}
+                                        </p>
+                                    </div>
                                 </Link>
                             ))}
                         </div>
-                    </div>
+
+                        <div className="flex flex-col gap-3 p-4 border-t border-border mt-auto">
+                            <p className="text-xs text-muted-foreground">
+                                Elsewhere
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                                {socials.map((social, index) => (
+                                    <Link
+                                        key={index}
+                                        href={social.link}
+                                        target="_blank"
+                                    >
+                                        <Button
+                                            size="icon"
+                                            variant="outline"
+                                            className="group rounded"
+                                        >
+                                            <social.icon className="h-4 w-4 group-hover:text-primary transition-colors" />
+                                        </Button>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    </CornerFrame>
                 </div>
 
-                <div className="grid border-t border-border md:grid-cols-3">
+                <CornerFrame className="grid border border-border md:grid-cols-3">
                     {CONTACT_NOTES.map((note, index) => (
                         <div
                             key={note.title}
                             className={cn(
-                                "p-4",
+                                "p-4 bg-card",
                                 index > 0 &&
                                     "border-t border-border md:border-t-0 md:border-l",
                             )}
@@ -300,42 +256,8 @@ export default function Contact() {
                             </p>
                         </div>
                     ))}
-                </div>
-
-                <div className="w-full relative bg-primary text-primary-foreground p-4 py-16 md:py-20 flex flex-col items-center gap-4 text-center">
-                    <DotGrid className="opacity-100 z-10" />
-                    {FLOATING_ICONS.map((item, index) => (
-                        <motion.div
-                            key={index}
-                            className={`absolute h-16 w-16 items-center justify-center rounded-lg border border-border border-dashed bg-primary-foreground/10 ${item.className}`}
-                            initial={{ rotate: item.rotate }}
-                            animate={{
-                                y: [0, -14, 0],
-                                rotate: [
-                                    item.rotate,
-                                    item.rotate + 4,
-                                    item.rotate,
-                                ],
-                            }}
-                            transition={{
-                                duration: item.duration,
-                                delay: item.delay,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                            }}
-                        >
-                            <item.icon className="h-6 w-6 text-primary-foreground/80" />
-                        </motion.div>
-                    ))}
-                    <h2 className="text-3xl md:text-5xl font-semibold leading-tight tracking-tight max-w-2xl">
-                        {"Let's"} build something without boundaries
-                    </h2>
-                    <p className="opacity-90 max-w-xl">
-                        Every great project starts with a conversation — reach
-                        out and {"let's"} talk through what {"you're"} building.
-                    </p>
-                </div>
-            </CornerFrame>
+                </CornerFrame>
+            </div>
         </SectionWrapper>
     );
 }

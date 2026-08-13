@@ -1,6 +1,7 @@
 "use client";
 
 import { socials } from "@/constant/social";
+import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { Eye, FileUser, Layers, PhoneCall, Zap } from "lucide-react";
 import Image from "next/image";
@@ -13,9 +14,11 @@ import { Button } from "../ui/button";
 
 const ROLES = [
     "Full-Stack Developer",
-    "React Native Engineer",
-    "Systems Architect",
-    "Interface Craftsman",
+    "Front-End Developer",
+    "Backend-End Developer",
+    "Mobile App Developer",
+    "CMS Developer",
+    "Automation Developer",
 ];
 
 const STACK = [
@@ -79,10 +82,9 @@ function RoleCycler() {
 export default function Hero() {
     return (
         <SectionWrapper className="mt-8 md:mt-16" id="hero">
-            <CornerFrame className="relative border border-border rounded-md">
-                <DotGrid className="opacity-60" />
-                <div className="flex flex-col lg:flex-row">
-                    <div className="w-full lg:w-xs shrink-0 flex flex-col gap-3">
+            <div className="relative flex flex-col gap-4">
+                <div className="flex flex-col lg:flex-row gap-4">
+                    <CornerFrame className="w-full lg:w-xs shrink-0 flex flex-col gap-3 border">
                         <div className="relative overflow-hidden aspect-square h-full">
                             <Image
                                 alt="profile-image"
@@ -92,8 +94,10 @@ export default function Hero() {
                                 priority
                             />
                         </div>
-                    </div>
-                    <div className="flex-1 flex flex-col gap-4 justify-center p-4">
+                    </CornerFrame>
+                    <div className=" flex-1 flex flex-col gap-4 justify-start relative">
+                        <DotGrid className="hidden opacity-40 -z-10" />
+                        <div className="hidden absolute inset-0 bg-card -z-20"></div>
                         <span className="text-primary text-xs font-medium">
                             [ INTRODUCTION ]
                         </span>
@@ -108,22 +112,25 @@ export default function Hero() {
                         </div>
 
                         <p className="text-base text-muted-foreground leading-relaxed">
-                            I build high-performance web, mobile, and desktop
-                            applications end to end — architecting scalable
-                            backends, crafting seamless frontends, and designing
-                            structured, user-centered interfaces along the way.
+                            I'm a{" "}
+                            <span className="text-primary">
+                                Full-Stack Developer
+                            </span>{" "}
+                            specializing in building high-performance web,
+                            mobile, and desktop applications. From architecting
+                            scalable backends with{" "}
+                            <span className="text-primary">Node.js</span> and{" "}
+                            <span className="text-primary">Laravel</span> to
+                            crafting seamless frontends using{" "}
+                            <span className="text-primary">React</span>,{" "}
+                            <span className="text-primary">Next.js</span>,{" "}
+                            <span className="text-primary">Vue.js</span> and{" "}
+                            <span className="text-primary">React Native</span>,
+                            with additional experience across CMS platforms like{" "}
+                            <span className="text-primary">WordPress</span> and
+                            etc, I focus on writing clean, maintainable code and
+                            designing structured, user-centered interfaces.
                         </p>
-
-                        <div className="flex hidden flex-wrap gap-2">
-                            {STACK.map((tech) => (
-                                <span
-                                    key={tech}
-                                    className="rounded bg-background border border-border px-3 py-1 text-xs text-muted-foreground"
-                                >
-                                    {tech}
-                                </span>
-                            ))}
-                        </div>
 
                         <div className="flex flex-wrap items-center gap-2">
                             <Link href="#contact">
@@ -159,15 +166,15 @@ export default function Hero() {
                     </div>
                 </div>
 
-                <div className="grid border-t border-border md:grid-cols-3">
+                <CornerFrame className="grid md:grid-cols-3 border">
                     {PRINCIPLES.map((principle, index) => (
                         <div
                             key={principle.title}
-                            className={`p-4 ${
-                                index > 0
-                                    ? "border-t border-border md:border-t-0 md:border-l"
-                                    : ""
-                            }`}
+                            className={cn(
+                                "p-4  bg-card",
+                                index > 0 &&
+                                    "border-t border-border md:border-t-0 md:border-l",
+                            )}
                         >
                             <principle.icon className="mb-2 h-5 w-5 text-muted-foreground" />
                             <h3 className="mb-1 text-sm font-medium text-foreground">
@@ -178,8 +185,8 @@ export default function Hero() {
                             </p>
                         </div>
                     ))}
-                </div>
-            </CornerFrame>
+                </CornerFrame>
+            </div>
         </SectionWrapper>
     );
 }

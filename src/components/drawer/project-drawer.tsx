@@ -93,8 +93,8 @@ const ProjectDrawer = forwardRef<
                                         </div>
                                         <div className="flex flex-col">
                                             <div className="flex flex-col md:flex-row">
-                                                <div className="flex-1 flex flex-col gap-4">
-                                                    <div className="border border-border overflow-hidden aspect-video">
+                                                <div className="flex-1 flex flex-col gap-4 p-4">
+                                                    <CornerFrame className="border aspect-video">
                                                         <Card className="relative p-0 h-full bg-card rounded-none border-0">
                                                             <Image
                                                                 src={
@@ -109,7 +109,7 @@ const ProjectDrawer = forwardRef<
                                                                 height={1000}
                                                             />
                                                         </Card>
-                                                    </div>
+                                                    </CornerFrame>
                                                 </div>
                                                 <div className="md:border-l flex-1">
                                                     <div className="flex flex-col gap-2 p-4 border-b">

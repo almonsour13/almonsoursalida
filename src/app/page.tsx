@@ -1,5 +1,6 @@
 "use client";
 import Footer from "@/components/layout/footer";
+import CTA from "@/components/section/CTA";
 import GithubDistribution from "@/components/section/github-constributions";
 import Services from "@/components/section/services";
 import Skills from "@/components/section/skills";
@@ -19,6 +20,7 @@ export default function Home() {
             <Skills />
             <GithubDistribution />
             <Contact />
+            <CTA />
             <Footer />
         </div>
     );

@@ -1,88 +1,160 @@
 "use client";
 
 import { services } from "@/constant/services";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+    ArrowUpRight,
+    PanelsTopLeft,
+    Server,
+    Sparkles,
+    Workflow,
+} from "lucide-react";
 import Link from "next/link";
 import CornerFrame from "../corner-frame";
 import DotGrid from "../dot-grid";
 import SectionWrapper from "../section-wrapper";
 import { Button } from "../ui/button";
 
+export const FLOATING_ICONS = [
+    {
+        icon: Server,
+        className: "bottom-[8%] left-[12%] hidden md:flex",
+        rotate: 8,
+        duration: 4,
+        delay: 1.1,
+    },
+    {
+        icon: Workflow,
+        className: "bottom-[24%] right-[40%] hidden lg:flex",
+        rotate: -10,
+        duration: 5.2,
+        delay: 0.9,
+    },
+    {
+        icon: PanelsTopLeft,
+        className: "bottom-[6%] right-[12%] hidden lg:flex",
+        rotate: -10,
+        duration: 5.2,
+        delay: 0.9,
+    },
+];
 export default function Services() {
     const visibleServices = services.filter((s) => s.visible);
 
     return (
         <SectionWrapper id="services">
-            <CornerFrame className="relative border border-border rounded-md">
-                <div className="p-4">
-                    <span className="text-primary text-xs font-medium">
-                        [ WHAT I OFFER ]
+            <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-2">
+                    <span className="text-xs font-medium text-primary">
+                        [ SERVICES ]
                     </span>
-                    <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground mt-2">
+
+                    <h1 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
                         What I Offer
                     </h1>
-                    <p className="text-sm md:text-base text-muted-foreground mt-1 max-w-xl">
+
+                    <p className="text-sm text-muted-foreground md:text-base">
                         Discover expert-crafted solutions to elevate your
                         digital experience — from front-end finesse to back-end
                         mastery.
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-3 border-t border-border">
-                    <div className="md:col-span-2 flex flex-col md:border-r border-border">
+                <div className="grid md:grid-cols-3 gap-4">
+                    <CornerFrame className="flex flex-col md:col-span-2 border border-border">
                         {visibleServices.map((service, index) => {
                             const isLast = index === visibleServices.length - 1;
+
                             return (
                                 <Link
                                     key={service.title}
-                                    href={`?service=${encodeURIComponent(service.title)}#contact`}
-                                    className={`group flex items-center gap-4 p-4 hover:bg-muted/40 transition-colors ${
+                                    href={`?service=${encodeURIComponent(
+                                        service.title,
+                                    )}#contact`}
+                                    className={`group flex items-center gap-4 p-4 transition-colors hover:bg-muted/40 ${
                                         isLast ? "" : "border-b border-border"
                                     }`}
                                 >
-                                    <service.icon
-                                        className="w-6 h-6 text-primary shrink-0"
-                                        strokeWidth={1.5}
-                                    />
-                                    <div className="flex flex-col gap-0.5 min-w-0 flex-1">
-                                        <h2 className="text-sm md:text-base font-medium text-foreground">
+                                    <div className="relative size-16 border border-border border-dashed rounded flex justify-center items-center flex-shrink-0 transition-colors hover:bg-muted/40">
+                                        <service.icon
+                                            className="h-6 w-6 shrink-0 text-primary"
+                                            strokeWidth={1.5}
+                                        />
+                                    </div>
+
+                                    <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                                        <h2 className="text-sm font-medium text-foreground md:text-base">
                                             {service.title}
                                         </h2>
-                                        <p className="text-xs md:text-sm text-muted-foreground line-clamp-1">
+
+                                        <p className="text-xs text-muted-foreground md:text-sm">
                                             {service.description}
                                         </p>
                                     </div>
+
                                     <ArrowUpRight
                                         size={18}
-                                        className="text-muted-foreground shrink-0 group-hover:text-primary transition-colors"
+                                        className="shrink-0 text-muted-foreground transition-colors group-hover:text-primary"
                                     />
                                 </Link>
                             );
                         })}
-                    </div>
+                    </CornerFrame>
 
-                    <div className="relative bg-primary flex flex-col gap-4 p-4 justify-between">
-                        <DotGrid className="opacity-60 z-10" />
-                        <div>
-                            <Sparkles className="w-6 h-6 text-primary-foreground/90 mb-3" />
-                            <h3 className="text-primary-foreground font-semibold text-4xl mb-1">
+                    {/* CTA Section */}
+                    <CornerFrame className="relative flex flex-col justify-between gap-4 bg-primary p-4">
+                        <DotGrid className="z-10 opacity-100" />
+
+                        {FLOATING_ICONS.map((item, index) => (
+                            <motion.div
+                                key={index}
+                                className={`absolute h-20 w-20 opacity-60 items-center justify-center rounded-lg border border-border border-dashed bg-primary-foreground/10 ${item.className}`}
+                                initial={{ rotate: item.rotate }}
+                                // animate={{
+                                //     y: [0, -14, 0],
+                                //     rotate: [
+                                //         item.rotate,
+                                //         item.rotate + 4,
+                                //         item.rotate,
+                                //     ],
+                                // }}
+                                // transition={{
+                                //     duration: item.duration,
+                                //     delay: item.delay,
+                                //     repeat: Infinity,
+                                //     ease: "easeInOut",
+                                // }}
+                            >
+                                <item.icon className="h-8 w-8 text-primary-foreground/80" />
+                            </motion.div>
+                        ))}
+
+                        <div className="relative z-20 flex flex-col gap-4">
+                            <Sparkles className="h-6 w-6 text-primary-foreground/90" />
+
+                            <h3 className="text-3xl font-semibold leading-tight tracking-tight text-primary-foreground md:text-5xl">
                                 Not sure what you need?
                             </h3>
-                            <p className="text-primary-foreground/80 text-sm leading-relaxed">
-                                Tell me what {"you're"} building and {"I'll"}
+
+                            <p className="text-sm leading-relaxed text-primary-foreground/80">
+                                Tell me what {"you're"} building and {"I'll"}{" "}
                                 point you to the right approach — no obligation,
                                 just a conversation.
                             </p>
+
+                            <Link href="#contact" className="z-20">
+                                <Button
+                                    className="bg-primary-foreground text-primary hover:bg-primary-foreground/80"
+                                    size="lg"
+                                >
+                                    Start a conversation
+                                    <ArrowUpRight size={14} />
+                                </Button>
+                            </Link>
                         </div>
-                        <Link href="#contact" className="z-20">
-                            <Button className="bg-primary-foreground text-primary hover:bg-primary-foreground/80">
-                                Start a conversation
-                                <ArrowUpRight size={14} />
-                            </Button>
-                        </Link>
-                    </div>
+                    </CornerFrame>
                 </div>
-            </CornerFrame>
+            </div>
         </SectionWrapper>
     );
 }

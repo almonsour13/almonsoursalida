@@ -26,7 +26,7 @@ export default function Footer() {
                     </span>
 
                     <div className="flex items-center gap-3">
-                        <div className="flex items-center gap-2 rounded-full border border-border px-3 py-1">
+                        <div className="flex items-center gap-2 rounded border border-border px-3 py-1">
                             <span className="relative flex h-1.5 w-1.5">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
                                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />

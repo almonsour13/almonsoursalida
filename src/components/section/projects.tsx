@@ -4,15 +4,21 @@ import { projects } from "@/constant/projects";
 import { useCursorPosition } from "@/hooks/use-cursor-position";
 import { cn } from "@/lib/utils";
 import {
+    AnimatePresence,
+    motion,
+    useMotionValue,
+    useSpring,
+} from "framer-motion";
+import {
     ArrowUpRight,
+    Expand,
     Github,
     ShieldCheck,
     Sparkles,
     Wrench,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import CornerFrame from "../corner-frame";
 import ProjectDrawer, { DrawerHandle } from "../drawer/project-drawer";
 import SectionWrapper from "../section-wrapper";
@@ -42,28 +48,57 @@ export default function Projects() {
         targetElementId: ["project-image-wrapper"],
     });
 
+    const x = useMotionValue(mousePosition.x - 30);
+    const y = useMotionValue(mousePosition.y - 30);
+    const springConfig = { damping: 28, stiffness: 380, mass: 0.4 };
+    const springX = useSpring(x, springConfig);
+    const springY = useSpring(y, springConfig);
+
+    useEffect(() => {
+        x.set(mousePosition.x - 30);
+        y.set(mousePosition.y - 30);
+    }, [mousePosition.x, mousePosition.y, x, y]);
+
+    const featuredProjects = projects.filter((p) => p.isFeatured === true);
+
     return (
         <>
             <SectionWrapper id="projects">
-                <CornerFrame className="relative border border-border rounded-md">
-                    <div className="p-4">
+                <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-2">
                         <span className="text-primary text-xs font-medium">
                             [ RECENT WORK ]
                         </span>
-                        <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground mt-2">
+                        <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
                             Projects
                         </h1>
-                        <p className="text-sm md:text-base text-muted-foreground mt-1 max-w-xl">
+                        <p className="text-sm md:text-base text-muted-foreground">
                             A selection of full stack applications showcasing my
                             ability to build responsive frontends, robust
                             backends, and seamless user experiences.
                         </p>
                     </div>
+                    <CornerFrame className="relative border border-border">
+                        <div className="relative grid md:grid-cols-2">
+                            <AnimatePresence>
+                                {isHovering && (
+                                    <motion.div
+                                        className="fixed hidden md:flex pointer-events-none z-[99] h-16 w-16 bg-primary rounded-full items-center justify-center top-0 left-0"
+                                        style={{ x: springX, y: springY }}
+                                        initial={{ opacity: 0, scale: 0.6 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.6 }}
+                                        transition={{
+                                            duration: 0.2,
+                                            ease: "easeOut",
+                                        }}
+                                    >
+                                        <Expand className="h-6 w-6 text-primary-foreground" />
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
 
-                    <div className="grid grid-cols-2 md:grid-cols-2 border-t border-border">
-                        {projects
-                            .filter((p) => p.isFeatured === true)
-                            .map((project, i) => {
+                            {featuredProjects.map((project, i) => {
                                 return (
                                     <div
                                         key={project.title}
@@ -74,29 +109,22 @@ export default function Projects() {
                                             )
                                         }
                                         className={cn(
-                                            "group relative cursor-pointer overflow-hidden border-border",
-                                            "border-r border-b",
-                                            (i + 1) % 2 === 0 && "md:border-r",
+                                            "group hover:bg-muted/40 relative cursor-pointer overflow-hidden border-border transition-colors",
+                                            "border-b",
+                                            (i + 1) % 2 === 1 && "md:border-r",
                                         )}
                                     >
-                                        <Image
-                                            src={project.image}
-                                            alt={project.title}
-                                            fill
-                                            loading="lazy"
-                                            className="hidden object-cover transition-transform duration-300 group-hover:scale-105"
-                                        />
                                         <ArrowUpRight
                                             size={20}
-                                            className="absolute top-3 right-3 text-white/80 group-hover:text-primary transition-colors"
+                                            className="absolute top-3 right-3 text-muted-foreground transition-colors group-hover:text-primary"
                                         />
                                         <div className="p-4 flex flex-col gap-2">
-                                            <h3 className="font-semibold text-lg tracking-normal">
+                                            <h3 className="font-semibold text-lg tracking-normal text-muted-foreground">
                                                 {i + 1 < 10
                                                     ? `0${i + 1}`
                                                     : i + 1}
                                             </h3>
-                                            <h3 className="font-semibold text-lg md:text-xl tracking-normal">
+                                            <h3 className="font-semibold text-lg md:text-xl tracking-normal text-foreground">
                                                 {project.title}
                                             </h3>
                                             <p className="text-muted-foreground text-sm line-clamp-3 max-w-md">
@@ -106,17 +134,29 @@ export default function Projects() {
                                     </div>
                                 );
                             })}
+                        </div>
+                    </CornerFrame>
+
+                    <div className="flex">
+                        <Link
+                            href="https://github.com/almonsour013"
+                            target="_blank"
+                            className="flex flex-1 p-4 bg-primary items-center justify-center gap-2 text-base text-primary-foreground transition-opacity hover:opacity-90"
+                        >
+                            <span>See more on my GitHub profile</span>
+                            <Github size={16} />
+                        </Link>
                     </div>
 
-                    <div className="grid md:grid-cols-3">
+                    <div className="hidden grid md:grid-cols-3 border-t border-border">
                         {FEATURE_NOTES.map((note, index) => (
                             <div
                                 key={note.title}
-                                className={`p-4 ${
-                                    index > 0
-                                        ? "border-t border-border md:border-t-0 md:border-l"
-                                        : ""
-                                }`}
+                                className={cn(
+                                    "p-4 bg-card",
+                                    index > 0 &&
+                                        "border-t border-border md:border-t-0 md:border-l",
+                                )}
                             >
                                 <note.icon className="mb-2 h-5 w-5 text-muted-foreground" />
 
@@ -130,18 +170,7 @@ export default function Projects() {
                             </div>
                         ))}
                     </div>
-
-                    <div className="flex items-center justify-center gap-2 p-4 border-t border-border">
-                        <Link
-                            href="https://github.com/almonsour013"
-                            target="_blank"
-                            className="flex gap-2 items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                            <span>See more on my GitHub profile</span>
-                            <Github size={16} />
-                        </Link>
-                    </div>
-                </CornerFrame>
+                </div>
             </SectionWrapper>
             <ProjectDrawer ref={projectDrawerRef} />
         </>
