@@ -73,7 +73,7 @@ export default function Services() {
                                         service.title,
                                     )}#contact`}
                                     className={cn(
-                                        "group flex items-center gap-4 p-4  transition-colors hover:bg-muted/40",
+                                        "group flex items-start gap-4 p-4  transition-colors hover:bg-muted/40",
                                         isLast ? "" : "border-b border-border",
                                     )}
                                 >
