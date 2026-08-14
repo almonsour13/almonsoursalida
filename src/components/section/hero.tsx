@@ -100,7 +100,7 @@ export default function Hero() {
                         </span>
 
                         <div className="flex flex-col gap-2">
-                            <h1 className="text-4xl md:text-5xl font-dium leading-14 tracking-tight text-foreground">
+                            <h1 className="text-4xl md:text-5xl font-medium md:leading-14 tracking-tight text-foreground">
                                 <span className="hidden md:block">
                                     Hey, I'm
                                 </span>
