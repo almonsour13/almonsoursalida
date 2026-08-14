@@ -2,7 +2,7 @@
 import { contact_info } from "@/constant/contact-info";
 import { socials } from "@/constant/social";
 import { cn } from "@/lib/utils";
-import { Clock, MessageCircle, ShieldCheck } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useRef, useState } from "react";
@@ -13,23 +13,6 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 
-const CONTACT_NOTES = [
-    {
-        icon: Clock,
-        title: "Usually quick",
-        description: "Most messages get a reply within a day, often sooner.",
-    },
-    {
-        icon: MessageCircle,
-        title: "No auto-replies",
-        description: "I read every message myself, no filters or bots.",
-    },
-    {
-        icon: ShieldCheck,
-        title: "No spam, ever",
-        description: "Your details are only ever used to get back to you.",
-    },
-];
 export default function Contact() {
     const searchParams = useSearchParams();
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -92,7 +75,7 @@ export default function Contact() {
                     <span className="text-primary text-xs font-medium">
                         [ GET IN TOUCH ]
                     </span>
-                    <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
+                    <h1 className="text-2xl md:text-4xl font-medium tracking-tight text-foreground">
                         {"Let's"} work together
                     </h1>
                     <p className="text-sm md:text-base text-muted-foreground">
@@ -163,7 +146,18 @@ export default function Contact() {
                                 onSubmit={handleSubmit}
                                 className="space-y-4 h-full flex flex-col"
                             >
-                                <div className="space-y-2 border-b"></div>
+                                <div className="space-y-2 border-b pb-4">
+                                    <div className="flex items-center gap-2">
+                                        <MessageSquare className="w-6 h-6 text-primary" />
+                                        <h3 className="text-lg font-medium  tracking-wide  text-foreground">
+                                            Send a Message
+                                        </h3>
+                                    </div>
+                                    <p className="text-sm text-muted-foreground">
+                                        Fill out the form below and {"I'll"} get
+                                        back to you as soon as possible.
+                                    </p>
+                                </div>
                                 <div className="flex flex-col md:flex-row gap-3">
                                     <div className="flex-1 space-y-2">
                                         <Label>Full Name</Label>
@@ -234,29 +228,6 @@ export default function Contact() {
                         </CornerFrame>
                     </div>
                 </div>
-
-                <CornerFrame className="grid hidden border border-border md:grid-cols-3">
-                    {CONTACT_NOTES.map((note, index) => (
-                        <div
-                            key={note.title}
-                            className={cn(
-                                "p-4 bg-card",
-                                index > 0 &&
-                                    "border-t border-border md:border-t-0 md:border-l",
-                            )}
-                        >
-                            <note.icon className="mb-2 h-5 w-5 text-muted-foreground" />
-
-                            <h3 className="mb-1 text-sm font-medium text-foreground">
-                                {note.title}
-                            </h3>
-
-                            <p className="text-sm leading-relaxed text-muted-foreground">
-                                {note.description}
-                            </p>
-                        </div>
-                    ))}
-                </CornerFrame>
             </div>
         </SectionWrapper>
     );

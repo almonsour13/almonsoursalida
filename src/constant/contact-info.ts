@@ -21,9 +21,9 @@ export const contact_info = [
     },
     {
         type: "WhatsApp",
-        value: "+63 956 993 2496",
+        value: "@al_mnsr13",
         icon: MessageCircle,
-        href: "https://wa.me/639569932496",
+        href: "https://wa.me/al_mnsr13",
     },
     {
         type: "Location",

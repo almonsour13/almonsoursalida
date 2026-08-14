@@ -85,7 +85,7 @@ export default function CTA() {
                             <item.icon className="h-6 w-6 text-primary-foreground/80" />
                         </motion.div>
                     ))}
-                    <h2 className="text-3xl md:text-5xl font-semibold leading-tight tracking-tight max-w-2xl">
+                    <h2 className="text-3xl md:text-5xl font-medium leading-tight tracking-tight max-w-2xl">
                         {"Let's"} build something without boundaries
                     </h2>
                     <p className="opacity-90 max-w-xl">

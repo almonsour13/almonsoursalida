@@ -37,7 +37,7 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <div className="flex flex-col gap-8 relative">
+                    <div className="flex flex-col relative">
                         {children}
                         <CursorCircle />
                         <ScrollToTopButton />

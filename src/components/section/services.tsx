@@ -50,7 +50,7 @@ export default function Services() {
                         [ SERVICES ]
                     </span>
 
-                    <h1 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+                    <h1 className="text-2xl md:text-4xl font-medium tracking-tight text-foreground">
                         What I Offer
                     </h1>
 
@@ -112,7 +112,7 @@ export default function Services() {
                                 <motion.div
                                     key={index}
                                     className={cn(
-                                        "absolute h-20 w-20 opacity-20 items-center justify-center rounded-lg border border-border border-dashed bg-primary-foreground/10",
+                                        "absolute h-20 w-20 opacity-40 items-center justify-center rounded-lg border border-border border-dashed bg-primary-foreground/10",
                                         item.className,
                                     )}
                                     initial={{ rotate: item.rotate }}
@@ -139,7 +139,7 @@ export default function Services() {
                         <div className="relative z-20 flex flex-col gap-4">
                             <Sparkles className="h-6 w-6 text-primary-foreground/90" />
 
-                            <h3 className="text-3xl font-semibold leading-tight tracking-tight text-primary-foreground md:text-5xl">
+                            <h3 className="text-3xl font-medium leading-tight tracking-tight text-primary-foreground md:text-5xl">
                                 Not sure what you need?
                             </h3>
 

@@ -139,7 +139,7 @@ const ProjectDrawer = forwardRef<
                                                                         key={
                                                                             techIndex
                                                                         }
-                                                                        className="px-3 py-1.5 border border-border rounded text-xs font-medium text-foreground hover:border-primary/60 transition-colors"
+                                                                        className="px-3 py-1.5 border border-border rounded text-xs font-medium text-foreground transition-colors"
                                                                     >
                                                                         {tech}
                                                                     </span>

@@ -1,6 +1,6 @@
 "use client";
 import Footer from "@/components/layout/footer";
-import CTA from "@/components/section/CTA";
+import CTA from "@/components/section/cta";
 import GithubDistribution from "@/components/section/github-constributions";
 import Services from "@/components/section/services";
 import Skills from "@/components/section/skills";
@@ -12,7 +12,7 @@ import Projects from "../components/section/projects";
 export default function Home() {
     const active = useObserveSection();
     return (
-        <div className="flex flex-col gap-8 md:gap-16 w-full relative ">
+        <div className="flex flex-col gap-12 md:gap-24 w-full relative ">
             {/* <Header /> */}
             <Hero />
             <Services />

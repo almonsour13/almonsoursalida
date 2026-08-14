@@ -3,7 +3,13 @@
 import { socials } from "@/constant/social";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { Eye, FileUser, Layers, PhoneCall, Zap } from "lucide-react";
+import {
+    FileUser,
+    LayoutTemplate,
+    Lightbulb,
+    PhoneCall,
+    Wrench,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -15,39 +21,30 @@ import { Button } from "../ui/button";
 const ROLES = [
     "Full-Stack Developer",
     "Front-End Developer",
-    "Backend-End Developer",
+    "Back-End Developer",
     "Mobile App Developer",
     "CMS Developer",
     "Automation Developer",
 ];
 
-const STACK = [
-    "Node.js",
-    "Laravel",
-    "React",
-    "Next.js",
-    "Vue.js",
-    "React Native",
-    "WordPress",
-];
-
-const PRINCIPLES = [
+const SOLUTIONS = [
     {
-        icon: Zap,
-        title: "Ship fast",
+        icon: Lightbulb,
+        title: "Build your idea",
         description:
-            "Lean iterations from idea to production, without cutting corners.",
+            "Turn your idea into a working website, application, or digital product.",
     },
     {
-        icon: Layers,
-        title: "Built to scale",
+        icon: Wrench,
+        title: "Improve your existing app",
         description:
-            "Architecture decisions made for the app you'll have in a year.",
+            "Add features, fix issues, and improve existing projects and systems.",
     },
     {
-        icon: Eye,
-        title: "Detail-obsessed",
-        description: "Pixel-level UI polish on every screen, every time.",
+        icon: LayoutTemplate,
+        title: "Create a better experience",
+        description:
+            "Build clean, responsive interfaces that are simple and easy to use.",
     },
 ];
 
@@ -103,7 +100,10 @@ export default function Hero() {
                         </span>
 
                         <div className="flex flex-col gap-2">
-                            <h1 className="text-4xl md:text-5xl font-semibold leading-[1.05] tracking-tight text-foreground">
+                            <h1 className="text-4xl md:text-5xl font-dium leading-14 tracking-tight text-foreground">
+                                <span className="hidden md:block">
+                                    Hey, I'm
+                                </span>
                                 AL-Monsour M. Salida
                             </h1>
                             <p className="text-xl md:text-2xl text-muted-foreground">
@@ -165,26 +165,39 @@ export default function Hero() {
                         </div>
                     </CornerFrame>
                 </div>
+                <CornerFrame className="grid border md:grid-cols-3">
+                    {SOLUTIONS.map((solution, i) => {
+                        const Icon = solution.icon;
 
-                <CornerFrame className="grid md:grid-cols-3 border">
-                    {PRINCIPLES.map((principle, index) => (
-                        <div
-                            key={principle.title}
-                            className={cn(
-                                "p-4 bg-card",
-                                index > 0 &&
-                                    "border-t border-border md:border-t-0 md:border-l",
-                            )}
-                        >
-                            <principle.icon className="mb-2 h-5 w-5 text-muted-foreground" />
-                            <h3 className="mb-1 text-sm font-medium text-foreground">
-                                {principle.title}
-                            </h3>
-                            <p className="text-sm leading-relaxed text-muted-foreground">
-                                {principle.description}
-                            </p>
-                        </div>
-                    ))}
+                        return (
+                            <div
+                                key={solution.title}
+                                className={cn(
+                                    "group bg-card p-5 transition-colors hover:bg-muted/30",
+
+                                    i > 0 &&
+                                        "border-t border-border md:border-t-0 md:border-l",
+                                    // i % 2 === 1 && "bg-primary",
+                                )}
+                            >
+                                <div className="mb-4 flex items-center justify-between">
+                                    <Icon className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
+
+                                    <span className="font-mono text-[10px] text-muted-foreground">
+                                        0{i + 1}
+                                    </span>
+                                </div>
+
+                                <h3 className="mb-2 text-sm font-medium text-foreground">
+                                    {solution.title}
+                                </h3>
+
+                                <p className="text-sm leading-relaxed text-muted-foreground">
+                                    {solution.description}
+                                </p>
+                            </div>
+                        );
+                    })}
                 </CornerFrame>
             </div>
         </SectionWrapper>

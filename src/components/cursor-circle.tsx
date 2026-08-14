@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 
 const BOX_SIZE = 40;
 const RIPPLE_SIZE = 60;
-const CLICKABLE_RING_SIZE = 72;
+const CLICKABLE_RING_SIZE = 60;
 
 // Selector for anything that should trigger the "clickable" pop-up.
 // Add/remove selectors here if your buttons/links use different markup.
@@ -138,10 +138,7 @@ export default function CursorCircle() {
                             >
                                 <span className="absolute inset-0 rounded-full border border-white bg-white/10" />
                                 <div className="relative flex flex-col items-center gap-0.5">
-                                    <MousePointerClick className="h-4 w-4 text-white" />
-                                    <span className="text-[9px] font-medium tracking-wide text-white uppercase">
-                                        Click
-                                    </span>
+                                    <MousePointerClick className="h-6 w-6 text-white" />
                                 </div>
                             </motion.div>
                         )}
