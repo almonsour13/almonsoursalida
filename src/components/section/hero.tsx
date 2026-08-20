@@ -79,7 +79,7 @@ function RoleCycler() {
 export default function Hero() {
     return (
         <SectionWrapper className="relative " id="hero">
-            <div className="relative pt-4 md:pt-8">
+            <div className="relative pt-8">
                 <EdgeDash side="right" className="-z-20 hidden md:block" />
                 <EdgeDash side="left" className="-z-20 hidden md:block" />
             </div>

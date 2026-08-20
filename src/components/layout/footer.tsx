@@ -14,7 +14,7 @@ export default function Footer() {
         <SectionWrapper className="relative flex justify-center items-center">
             <EdgeDash side="top" />
             <div className="">
-                <div className="flex flex-col md:flex-row items-start justify-between gap-6 px-4 md:px-0 py-4">
+                <div className="flex flex-col md:flex-row items-start justify-between gap-2 px-4 md:px-0 py-4">
                     <div className="flex flex-col gap-1">
                         <span className="text-sm font-medium text-foreground">
                             AM. Salida
