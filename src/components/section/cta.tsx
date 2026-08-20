@@ -63,8 +63,8 @@ export default function CTA() {
     return (
         <SectionWrapper id="cta" className="relative">
             <div className="relative pt-8 md:pt-16">
-                <EdgeDash side="right" className="-z-20" />
-                <EdgeDash side="left" className="-z-20" />
+                <EdgeDash side="right" className="-z-20 hidden md:block" />
+                <EdgeDash side="left" className="-z-20 hidden md:block" />
             </div>
             <div className="relative rounded overflow-hidden">
                 <div className="w-full relative bg-primary text-primary-foreground p-4 py-16 md:py-20 flex flex-col items-center gap-4 text-center">
