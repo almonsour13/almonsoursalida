@@ -6,7 +6,7 @@ import { MessageSquare } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useRef, useState } from "react";
-import CornerFrame from "../corner-frame";
+import EdgeDash from "../edge-dash";
 import SectionWrapper from "../section-wrapper";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -70,24 +70,26 @@ export default function Contact() {
 
     return (
         <SectionWrapper id="contact">
-            <div className="flex flex-col gap-4">
-                <div className="flex flex-col gap-2">
-                    <span className="text-primary text-xs font-medium">
+            <div className="flex flex-col">
+                <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-16">
+                    <EdgeDash side="right" className="-z-20" />
+                    <EdgeDash side="left" className="-z-20" />
+                    <span className="text-primary text-xs font-medium uppercase">
                         [ GET IN TOUCH ]
                     </span>
-                    <h1 className="text-2xl md:text-4xl font-medium tracking-tight text-foreground">
+                    <h1 className="text-4xl md:text-6xl font-medium tracking-tight text-foreground">
                         {"Let's"} work together
                     </h1>
-                    <p className="text-sm md:text-base text-muted-foreground">
+                    <p className="text-sm md:text-base text-muted-foreground text-center">
                         Ready to bring your ideas to life? {"I'm"} always
                         excited to work on new projects and collaborate with
                         amazing people.
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-5 gap-4">
-                    <div className="flex flex-col md:col-span-2 gap-4">
-                        <CornerFrame className=" border">
+                <div className="grid md:grid-cols-5 gap-2">
+                    <div className="flex flex-col md:col-span-2 gap-2">
+                        <div className="bg-card border rounded overflow-hidden">
                             {contact_info.map((info, i) => (
                                 <Link
                                     key={info.type}
@@ -114,9 +116,9 @@ export default function Contact() {
                                     </div>
                                 </Link>
                             ))}
-                        </CornerFrame>
+                        </div>
 
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col items-center md:items-start gap-2 px-4 md:px-0">
                             <p className="text-xs text-muted-foreground">
                                 Elsewhere
                             </p>
@@ -130,7 +132,7 @@ export default function Contact() {
                                         <Button
                                             size="icon"
                                             variant="outline"
-                                            className="group rounded"
+                                            className="group"
                                         >
                                             <social.icon className="h-4 w-4 group-hover:text-primary transition-colors" />
                                         </Button>
@@ -140,13 +142,13 @@ export default function Contact() {
                         </div>
                     </div>
                     <div className="md:col-span-3 h-full">
-                        <CornerFrame className="border border-border p-4 bg-card h-full">
+                        <div className="p-4 bg-card border rounded overflow-hidden h-full">
                             <form
                                 ref={formRef}
                                 onSubmit={handleSubmit}
                                 className="space-y-4 h-full flex flex-col"
                             >
-                                <div className="space-y-2 border-b pb-4">
+                                <div className="space-y-2 border-b border-border pb-4">
                                     <div className="flex items-center gap-2">
                                         <MessageSquare className="w-6 h-6 text-primary" />
                                         <h3 className="text-lg font-medium  tracking-wide  text-foreground">
@@ -162,6 +164,7 @@ export default function Contact() {
                                     <div className="flex-1 space-y-2">
                                         <Label>Full Name</Label>
                                         <Input
+                                            className="h-10"
                                             type="text"
                                             name="fullName"
                                             placeholder="Your full name"
@@ -171,6 +174,7 @@ export default function Contact() {
                                     <div className="flex-1 space-y-2">
                                         <Label>Email Address</Label>
                                         <Input
+                                            className="h-10"
                                             type="email"
                                             name="email"
                                             placeholder="your@email.com"
@@ -181,6 +185,7 @@ export default function Contact() {
                                 <div className="space-y-2">
                                     <Label>Subject</Label>
                                     <Input
+                                        className="h-10"
                                         type="text"
                                         name="subject"
                                         placeholder="Project inquiry, collaboration, or general question"
@@ -213,19 +218,19 @@ export default function Contact() {
                                     </span>
                                 </Button>
                                 {status === "success" && (
-                                    <p className="text-sm text-emerald-600">
+                                    <p className="text-sm text-primary">
                                         Message sent — {"I'll"} get back to you
                                         soon.
                                     </p>
                                 )}
                                 {status === "error" && (
-                                    <p className="text-sm text-red-600">
+                                    <p className="text-sm text-destructive">
                                         Please fill out all fields correctly or
                                         try again.
                                     </p>
                                 )}
                             </form>
-                        </CornerFrame>
+                        </div>
                     </div>
                 </div>
             </div>

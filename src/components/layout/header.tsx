@@ -1,49 +1,60 @@
 "use client";
 
+import { useObserveSection } from "@/hooks/use-observe-section";
+import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import CornerFrame from "../corner-frame";
+import EdgeDash from "../edge-dash";
 import SectionWrapper from "../section-wrapper";
 import { Button } from "../ui/button";
 
 const NAV_LINKS = [
+    { label: "Home", href: "#hero" },
     { label: "Services", href: "#services" },
     { label: "Projects", href: "#projects" },
     { label: "Skills", href: "#skills" },
     { label: "Contact", href: "#contact" },
 ];
 
+// active from the hook is "/" or "/#id" — normalize both sides to compare
+const normalize = (href: string) => (href === "#hero" ? "/" : `/${href}`);
+
 export default function Header() {
     const [open, setOpen] = useState(false);
+    const active = useObserveSection();
+
+    const renderLinks = (onLinkClick?: () => void) =>
+        NAV_LINKS.map((link) => {
+            const isActive = normalize(link.href) === active;
+            return (
+                <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={onLinkClick}
+                    className={cn(
+                        "text-sm transition-colors hover:text-primary",
+                        isActive
+                            ? "text-primary font-medium"
+                            : "text-muted-foreground",
+                    )}
+                >
+                    {link.label}
+                </Link>
+            );
+        });
 
     return (
-        <SectionWrapper className="sticky top-0 z-20 bg-background" id="header">
-            <CornerFrame
-                className="relative border border-t-0 border-border"
-                showTopLeft={false}
-                showTopRight={false}
-            >
-                <div className="flex items-center justify-between gap-4 p-4">
+        <SectionWrapper
+            className="sticky top-0 z-50 bg-background flex justify-center items-center"
+            id="header"
+        >
+            <EdgeDash side="bottom" />
+            <div className="relative ">
+                <div className="flex items-center justify-between gap-4 px-4 md:px-0 py-4">
                     <nav className="hidden md:flex items-center gap-6">
-                        {NAV_LINKS.map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
+                        {renderLinks()}
                     </nav>
-
-                    <div className="hidden md:flex items-center gap-3">
-                        <Link href="#contact">
-                            <Button size="sm" className="rounded-full">
-                                {"Let's"} talk
-                            </Button>
-                        </Link>
-                    </div>
 
                     <button
                         className="md:hidden text-foreground"
@@ -56,30 +67,19 @@ export default function Header() {
                             <Menu className="h-5 w-5" />
                         )}
                     </button>
+                    <Link href="#contact" className="block">
+                        <Button>{"Let's"} talk</Button>
+                    </Link>
                 </div>
 
                 {open && (
                     <div className="md:hidden border-t border-border flex flex-col p-4 gap-4">
                         <nav className="flex flex-col gap-3">
-                            {NAV_LINKS.map((link) => (
-                                <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    onClick={() => setOpen(false)}
-                                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                                >
-                                    {link.label}
-                                </Link>
-                            ))}
+                            {renderLinks(() => setOpen(false))}
                         </nav>
-                        <Link href="#contact" onClick={() => setOpen(false)}>
-                            <Button size="sm" className="rounded-full w-full">
-                                {"Let's"} talk
-                            </Button>
-                        </Link>
                     </div>
                 )}
-            </CornerFrame>
+            </div>
         </SectionWrapper>
     );
 }

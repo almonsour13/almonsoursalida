@@ -10,10 +10,11 @@ import {
     useSpring,
 } from "framer-motion";
 import { ArrowUpRight, Expand, Github } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import CornerFrame from "../corner-frame";
 import ProjectDrawer, { DrawerHandle } from "../drawer/project-drawer";
+import EdgeDash from "../edge-dash";
 import SectionWrapper from "../section-wrapper";
 import { Button } from "../ui/button";
 
@@ -39,22 +40,25 @@ export default function Projects() {
     return (
         <>
             <SectionWrapper id="projects">
-                <div className="flex flex-col gap-4">
-                    <div className="flex flex-col gap-2">
+                <div className="flex flex-col">
+                    <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-16">
+                        <EdgeDash side="right" className="-z-20" />
+                        <EdgeDash side="left" className="-z-20" />
                         <span className="text-primary text-xs font-medium uppercase">
                             [ PROJects ]
                         </span>
-                        <h1 className="text-2xl md:text-4xl font-medium tracking-tight text-foreground">
+                        <h1 className="text-4xl md:text-6xl font-normal tracking-tight text-foreground">
                             Built With Passion
                         </h1>
-                        <p className="text-sm md:text-base text-muted-foreground">
+                        <p className="text-sm md:text-base text-muted-foreground text-center">
                             A selection of full stack applications showcasing my
                             ability to build responsive frontends, robust
                             backends, and seamless user experiences.
                         </p>
                     </div>
-                    <CornerFrame className="relative border border-border">
-                        <div className="relative grid md:grid-cols-2">
+
+                    <div className="flex flex-col gap-2">
+                        <div className="relative border rounded overflow-hidden grid md:grid-cols-2">
                             <AnimatePresence>
                                 {isHovering && (
                                     <motion.div
@@ -74,6 +78,8 @@ export default function Projects() {
                             </AnimatePresence>
 
                             {featuredProjects.map((project, i) => {
+                                const hasImage = Boolean(project.image);
+
                                 return (
                                     <div
                                         key={project.title}
@@ -84,15 +90,38 @@ export default function Projects() {
                                             )
                                         }
                                         className={cn(
-                                            "group hover:bg-muted/40 relative cursor-pointer overflow-hidden border-border transition-colors",
-                                            "border-b",
+                                            "group hover:bg-muted/40 relative cursor-pointer bg-card bordera roundeda overflow-hidden transition-colors",
+                                            i < 2 && "border-b",
+                                            i >= 2 &&
+                                                i <
+                                                    featuredProjects.length -
+                                                        1 &&
+                                                "border-b md:border-b-0",
                                             (i + 1) % 2 === 1 && "md:border-r",
                                         )}
                                     >
                                         <ArrowUpRight
                                             size={20}
-                                            className="absolute top-3 right-3 text-muted-foreground transition-colors group-hover:text-primary"
+                                            className="absolute top-3 right-3 z-10 text-muted-foreground transition-colors group-hover:text-primary"
                                         />
+                                        <div className="hidden relative h-40 md:h-48 w-full overflow-hidden border-b border-border bg-muted/30">
+                                            {hasImage ? (
+                                                <Image
+                                                    src={project.image}
+                                                    alt={project.title}
+                                                    fill
+                                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                                    className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                                                />
+                                            ) : (
+                                                <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-muted/60 to-muted/20">
+                                                    <span className="text-xs uppercase tracking-widest text-muted-foreground">
+                                                        No preview
+                                                    </span>
+                                                </div>
+                                            )}
+                                        </div>
+
                                         <div className="p-4 flex flex-col gap-2">
                                             <h3 className="font-medium text-lg tracking-normal text-muted-foreground">
                                                 {i + 1 < 10
@@ -110,19 +139,19 @@ export default function Projects() {
                                 );
                             })}
                         </div>
-                    </CornerFrame>
 
-                    <div className="flex">
-                        <Link
-                            href="https://github.com/almonsour013"
-                            target="_blank"
-                            className="flex flex-1"
-                        >
-                            <Button className="flex-1 p-4">
-                                <span>See more on my GitHub profile</span>
-                                <Github size={16} />
-                            </Button>
-                        </Link>
+                        <div className="flex">
+                            <Link
+                                href="https://github.com/almonsour013"
+                                target="_blank"
+                                className="flex flex-1"
+                            >
+                                <Button className="flex-1 p-4">
+                                    <span>See more on my GitHub profile</span>
+                                    <Github size={16} />
+                                </Button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </SectionWrapper>

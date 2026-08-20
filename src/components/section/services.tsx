@@ -11,8 +11,8 @@ import {
     Workflow,
 } from "lucide-react";
 import Link from "next/link";
-import CornerFrame from "../corner-frame";
-import DotGrid from "../dot-grid";
+import EdgeDash from "../edge-dash";
+import GradientDotGrid from "../gradient-dot-grid";
 import SectionWrapper from "../section-wrapper";
 import { Button } from "../ui/button";
 
@@ -44,25 +44,27 @@ export default function Services() {
 
     return (
         <SectionWrapper id="services">
-            <div className="flex flex-col gap-4">
-                <div className="flex flex-col gap-2">
-                    <span className="text-xs font-medium text-primary">
+            <div className="flex flex-col">
+                <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-16">
+                    <EdgeDash side="right" className="-z-20" />
+                    <EdgeDash side="left" className="-z-20" />
+                    <span className="text-xs font-medium text-primary uppercase">
                         [ SERVICES ]
                     </span>
 
-                    <h1 className="text-2xl md:text-4xl font-medium tracking-tight text-foreground">
+                    <h1 className="text-4xl md:text-6xl font-medium tracking-tight text-foreground">
                         What I Offer
                     </h1>
 
-                    <p className="text-sm text-muted-foreground md:text-base">
+                    <p className="text-sm text-muted-foreground md:text-base text-center">
                         Discover expert-crafted solutions to elevate your
                         digital experience — from front-end finesse to back-end
                         mastery.
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-4">
-                    <CornerFrame className="flex flex-col md:col-span-2 border border-border">
+                <div className="grid md:grid-cols-3 gap-2">
+                    <div className="flex flex-col md:col-span-2 bg-card border rounded overflow-hidden">
                         {visibleServices.map((service, index) => {
                             const isLast = index === visibleServices.length - 1;
 
@@ -73,11 +75,11 @@ export default function Services() {
                                         service.title,
                                     )}#contact`}
                                     className={cn(
-                                        "group flex items-start gap-4 p-4  transition-colors hover:bg-muted/40",
+                                        "group flex items-start gap-4 p-4 transition-colors hover:bg-muted/40",
                                         isLast ? "" : "border-b border-border",
                                     )}
                                 >
-                                    <div className="relative size-16 border border-border border-dashed rounded flex justify-center items-center flex-shrink-0 transition-colors hover:bg-muted/40">
+                                    <div className="relative size-16 flex flex-shrink-0 items-center justify-center rounded border border-dashed border-border transition-colors group-hover:border-primary/50">
                                         <service.icon
                                             className="h-6 w-6 shrink-0 text-primary"
                                             strokeWidth={1.5}
@@ -101,18 +103,17 @@ export default function Services() {
                                 </Link>
                             );
                         })}
-                    </CornerFrame>
+                    </div>
 
                     {/* CTA Section */}
-                    {/* <div className=""> */}
-                    <CornerFrame className="relative flex flex-col justify-between gap-4 bg-primary p-4">
-                        <DotGrid className="z-10 hidden opacity-100" />
+                    <div className="relative flex flex-col justify-between gap-4 bg-primary p-4 rounded overflow-hidden">
+                        <GradientDotGrid className="z-10 opacity-100" />
                         <div className="absolute inset-0 overflow-hidden">
                             {FLOATING_ICONS.map((item, index) => (
                                 <motion.div
                                     key={index}
                                     className={cn(
-                                        "absolute h-20 w-20 opacity-40 items-center justify-center rounded-lg border border-border border-dashed bg-primary-foreground/10",
+                                        "absolute h-20 w-20 opacity-40 items-center justify-center rounded border border-dashed border-border bg-primary-foreground/10",
                                         item.className,
                                     )}
                                     initial={{ rotate: item.rotate }}
@@ -124,12 +125,12 @@ export default function Services() {
                                     //         item.rotate,
                                     //     ],
                                     // }}
-                                    // transition={{
-                                    //     duration: item.duration,
-                                    //     delay: item.delay,
-                                    //     repeat: Infinity,
-                                    //     ease: "easeInOut",
-                                    // }}
+                                    transition={{
+                                        duration: item.duration,
+                                        delay: item.delay,
+                                        repeat: Infinity,
+                                        ease: "easeInOut",
+                                    }}
                                 >
                                     <item.icon className="h-8 w-8 text-primary-foreground/80" />
                                 </motion.div>
@@ -159,8 +160,7 @@ export default function Services() {
                                 </Button>
                             </Link>
                         </div>
-                    </CornerFrame>
-                    {/* </div> */}
+                    </div>
                 </div>
             </div>
         </SectionWrapper>

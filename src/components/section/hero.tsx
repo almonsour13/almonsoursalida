@@ -13,8 +13,8 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import CornerFrame from "../corner-frame";
-import DotGrid from "../dot-grid";
+import EdgeDash from "../edge-dash";
+import GradientDotGrid from "../gradient-dot-grid";
 import SectionWrapper from "../section-wrapper";
 import { Button } from "../ui/button";
 
@@ -78,22 +78,26 @@ function RoleCycler() {
 
 export default function Hero() {
     return (
-        <SectionWrapper className="mt-8 md:mt-16" id="hero">
-            <div className="relative flex flex-col gap-4">
-                <div className="flex flex-col lg:flex-row gap-4">
-                    <CornerFrame className="w-full lg:w-xs shrink-0 flex flex-col gap-3 border">
+        <SectionWrapper className="relative " id="hero">
+            <div className="relative pt-4 md:pt-8">
+                <EdgeDash side="right" className="-z-20" />
+                <EdgeDash side="left" className="-z-20" />
+            </div>
+            <div className="relative flex flex-col gap-2">
+                <div className="flex flex-col lg:flex-row gap-2">
+                    <div className="w-full lg:w-xs shrink-0 flex flex-col gap-3 rounded overflow-hidden">
                         <div className="relative overflow-hidden aspect-square h-full">
                             <Image
                                 alt="profile-image"
                                 src="/image/profile.png"
                                 fill
-                                className="object-cover grayscale transition-all duration-700 hover:grayscale-0"
+                                className="object-cover"
                                 priority
                             />
                         </div>
-                    </CornerFrame>
-                    <CornerFrame className="p-4 md:p-6 border flex-1 flex flex-col gap-4 justify-start relative">
-                        <DotGrid className="opacity-40 -z-10" />
+                    </div>
+                    <div className="p-4 md:p-6 flex-1 flex flex-col gap-4 justify-start relative border rounded overflow-hidden">
+                        <GradientDotGrid />
                         <div className=" absolute inset-0 bg-card -z-20"></div>
                         <span className="text-primary text-xs font-medium">
                             [ INTRODUCTION ]
@@ -163,9 +167,9 @@ export default function Hero() {
                                 ))}
                             </div>
                         </div>
-                    </CornerFrame>
+                    </div>
                 </div>
-                <CornerFrame className="grid border md:grid-cols-3">
+                <div className="grid border md:grid-cols-3 rounded overflow-hidden">
                     {SOLUTIONS.map((solution, i) => {
                         const Icon = solution.icon;
 
@@ -198,7 +202,7 @@ export default function Hero() {
                             </div>
                         );
                     })}
-                </CornerFrame>
+                </div>
             </div>
         </SectionWrapper>
     );

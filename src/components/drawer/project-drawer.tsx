@@ -77,7 +77,7 @@ const ProjectDrawer = forwardRef<
                                 }}
                                 className="w-full h-[90vh] bg-background border-t border-border rounded-t-md px-4 py-8 md:py-12 overflow-y-auto pointer-events-auto"
                             >
-                                <SectionWrapper>
+                                <SectionWrapper className="flex justify-center items-center">
                                     <div className="h-full flex flex-col gap-4  ">
                                         <div className="w-full flex justify-between items-center gap-4">
                                             <span className="text-primary text-xs font-medium">

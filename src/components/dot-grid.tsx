@@ -9,8 +9,8 @@ export default function DotGrid({ className }: { className?: string }) {
             )}
             style={{
                 backgroundImage:
-                    "radial-gradient(rgba(128,128,128,0.25) 1px, transparent 1px)",
-                backgroundSize: "8px 8px",
+                    "radial-gradient(rgba(128,128,128,1) 0.5px, transparent 0.5px)",
+                backgroundSize: "10px 10px",
             }}
         />
     );
