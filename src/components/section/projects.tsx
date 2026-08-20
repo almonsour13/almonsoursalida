@@ -42,12 +42,18 @@ export default function Projects() {
             <SectionWrapper id="projects">
                 <div className="flex flex-col">
                     <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-16">
-                        <EdgeDash side="right" className="-z-20" />
-                        <EdgeDash side="left" className="-z-20" />
+                        <EdgeDash
+                            side="right"
+                            className="-z-20 hidden md:block"
+                        />
+                        <EdgeDash
+                            side="left"
+                            className="-z-20 hidden md:block"
+                        />
                         <span className="text-primary text-xs font-medium uppercase">
                             [ PROJects ]
                         </span>
-                        <h1 className="text-4xl md:text-6xl font-normal tracking-tight text-foreground">
+                        <h1 className="text-4xl md:text-6xl font-normal tracking-tight text-foreground text-center">
                             Built With Passion
                         </h1>
                         <p className="text-sm md:text-base text-muted-foreground text-center">

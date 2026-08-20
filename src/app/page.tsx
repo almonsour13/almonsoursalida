@@ -22,7 +22,7 @@ export default function Home() {
     return (
         <div className="relative px-4 flex">
             <div className="absolute inset-0  flex px-4">
-                <div className="flex-1 relative">
+                <div className="hidden md:block flex-1 relative">
                     <EdgeDash side="left" className="-z-20" />
                     <EdgeDash side="right" className="-z-20" />
                 </div>

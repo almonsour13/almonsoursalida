@@ -61,12 +61,12 @@ export default function Skills() {
         <SectionWrapper id="skills">
             <div className="flex flex-col">
                 <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-16">
-                    <EdgeDash side="right" className="-z-20" />
-                    <EdgeDash side="left" className="-z-20" />
+                    <EdgeDash side="right" className="-z-20 hidden md:block" />
+                    <EdgeDash side="left" className="-z-20 hidden md:block" />
                     <span className="text-primary text-xs font-medium uppercase">
                         [ SKILLS ]
                     </span>
-                    <h1 className="text-4xl md:text-6xl font-medium tracking-tight text-foreground">
+                    <h1 className="text-4xl md:text-6xl font-medium tracking-tight text-foreground text-center">
                         Tech Stacks
                     </h1>
                     <p className="text-sm md:text-base text-muted-foreground text-center">

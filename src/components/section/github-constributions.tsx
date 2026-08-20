@@ -25,13 +25,13 @@ export default function GithubContributions() {
         <SectionWrapper id="contributions">
             <div className="flex flex-col">
                 <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-16">
-                    <EdgeDash side="right" className="-z-20" />
-                    <EdgeDash side="left" className="-z-20" />
+                    <EdgeDash side="right" className="-z-20 hidden md:block" />
+                    <EdgeDash side="left" className="-z-20 hidden md:block" />
                     <span className="text-xs font-medium text-primary uppercase">
                         [ GITHUB CONTRIBUTIONS ]
                     </span>
 
-                    <h1 className="text-4xl md:text-6xl font-normal tracking-tight text-foreground">
+                    <h1 className="text-4xl md:text-6xl font-normal tracking-tight text-foreground text-center">
                         Open Source Contributions
                     </h1>
 

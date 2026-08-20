@@ -80,8 +80,8 @@ export default function Hero() {
     return (
         <SectionWrapper className="relative " id="hero">
             <div className="relative pt-4 md:pt-8">
-                <EdgeDash side="right" className="-z-20" />
-                <EdgeDash side="left" className="-z-20" />
+                <EdgeDash side="right" className="-z-20 hidden md:block" />
+                <EdgeDash side="left" className="-z-20 hidden md:block" />
             </div>
             <div className="relative flex flex-col gap-2">
                 <div className="flex flex-col lg:flex-row gap-2">
