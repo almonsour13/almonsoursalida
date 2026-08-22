@@ -21,7 +21,7 @@ export default function SectionWrapper({
             className={cn("relative flex w-full px-4", className)}
             {...props}
         >
-            <div className="absolute inset-0 flex px-4">
+            <div className="absolute inset-0 flex px-4 -z-40 pointer-events-none ">
                 <div className="hidden md:block flex-1 relative">
                     <EdgeDash side="left" className="-z-20" />
                     <EdgeDash side="right" className="-z-20" />

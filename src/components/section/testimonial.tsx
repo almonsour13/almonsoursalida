@@ -78,7 +78,7 @@ export default function Testimonials() {
 
                 <div className="flex flex-col gap-4">
                     <div className="md:px-4">
-                        <div className="relative flex flex-col justify-center border border-dashed items-center gap-4 p-4 py-16 md:py-20 rounded overflow-hidden h-[320px] md:h-[280px]">
+                        <div className="relative flex flex-col justify-center border border-dashed items-center gap-4 p-4 py-16 md:py-20 rounded overflow-hidden h-auto min-h-[320px] md:min-h-[280px]">
                             <GridLines className="z-10" />
 
                             <AnimatePresence mode="wait">
@@ -93,7 +93,7 @@ export default function Testimonials() {
                                     }}
                                     className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-4 px-6 md:px-16"
                                 >
-                                    <h3 className="text-2xl font-medium leading-tight tracking-tight md:text-4xl text-center line-clamp-4">
+                                    <h3 className="text-2xl font-medium leading-tight tracking-tight md:text-4xl text-center">
                                         <WordReveal
                                             text={featured.quote}
                                             quotes

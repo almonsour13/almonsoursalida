@@ -45,12 +45,12 @@ export default function Header() {
 
     return (
         <header
-            className="sticky w-full px-4  top-0 z-50 bg-background flex justify-center items-center"
+            className="sticky w-full px-4 py-4  top-0 z-50 bg-background flex justify-center items-center"
             id="header"
         >
             <EdgeDash side="bottom" />
             <ContentContainer>
-                <div className="flex items-center justify-between gap-4 px-4 md:px-0 py-4">
+                <div className="flex items-center justify-between gap-4">
                     <nav className="hidden md:flex items-center gap-6">
                         {renderLinks()}
                     </nav>

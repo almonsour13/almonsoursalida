@@ -11,12 +11,12 @@ export default function Footer() {
         <footer className="relative px-4 flex justify-center items-center">
             <EdgeDash side="top" />
             <ContentContainer>
-                <div className="flex flex-col md:flex-row items-start justify-between gap-2 px-4 md:px-0 py-4">
-                    <div className="flex flex-col gap-1">
+                <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-2 px-4 md:px-0 py-4">
+                    <div className="flex flex-col  items-center md:items-start gap-2">
                         <span className="text-sm font-medium text-foreground">
                             AM. Salida
                         </span>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-xs text-muted-foreground text-center md:text-start">
                             Full-stack developer building web, mobile, and
                             desktop products end to end.
                         </p>
@@ -33,7 +33,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="relative flex flex-col-reverse md:flex-row items-center justify-between gap-3 px-4 md:px-0 py-4 border-t border-border">
+                <div className="relative flex flex-col-reverse md:flex-row items-center justify-between gap-2 px-4 md:px-0 py-4 border-t border-border">
                     <span className="text-xs text-muted-foreground">
                         © {date.getFullYear()} Al-Monsour Salida. All rights
                         reserved.
@@ -44,7 +44,7 @@ export default function Footer() {
                             href="https://www.cloudflare.com"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-primary underline underline-offset-4 decoration-primary/40 hover:decoration-primary transition-colors"
+                            className="text-orange-500 underline underline-offset-4 decoration-primary/40 hover:decoration-primary transition-colors"
                         >
                             Cloudflare
                         </Link>
