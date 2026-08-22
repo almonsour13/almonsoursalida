@@ -6,8 +6,8 @@ import { MessageSquare } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useRef, useState } from "react";
-import EdgeDash from "../edge-dash";
-import SectionWrapper from "../section-wrapper";
+import EdgeDash from "../decorative/edge-dash";
+import SectionWrapper from "../layout/section-wrapper";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -70,10 +70,10 @@ export default function Contact() {
 
     return (
         <SectionWrapper id="contact">
-            <div className="flex flex-col">
-                <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-16">
-                    <EdgeDash side="right" className="-z-20 hidden md:block" />
-                    <EdgeDash side="left" className="-z-20 hidden md:block" />
+            <div className="relative pb-8 md:pb-16 flex flex-col">
+                <EdgeDash side="right" className="-z-20 hidden md:block" />
+                <EdgeDash side="left" className="-z-20 hidden md:block" />
+                <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-20">
                     <span className="text-primary text-xs font-medium uppercase">
                         [ GET IN TOUCH ]
                     </span>
@@ -89,7 +89,7 @@ export default function Contact() {
 
                 <div className="grid md:grid-cols-5 gap-2">
                     <div className="flex flex-col md:col-span-2 gap-2">
-                        <div className="bg-card border rounded overflow-hidden">
+                        <div className="border rounded overflow-hidden">
                             {contact_info.map((info, i) => (
                                 <Link
                                     key={info.type}
@@ -118,7 +118,7 @@ export default function Contact() {
                             ))}
                         </div>
 
-                        <div className="flex flex-col items-center md:items-start gap-2 px-4 md:px-0">
+                        <div className="flex flex-col items-center md:items-start gap-2 px-4">
                             <p className="text-xs text-muted-foreground">
                                 Elsewhere
                             </p>
@@ -142,7 +142,7 @@ export default function Contact() {
                         </div>
                     </div>
                     <div className="md:col-span-3 h-full">
-                        <div className="p-4 bg-card border rounded overflow-hidden h-full">
+                        <div className="p-4 border rounded overflow-hidden h-full bg-background">
                             <form
                                 ref={formRef}
                                 onSubmit={handleSubmit}

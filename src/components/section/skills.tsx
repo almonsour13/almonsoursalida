@@ -9,8 +9,8 @@ import {
 } from "framer-motion";
 import { Layers, Sparkles, Target } from "lucide-react";
 import { useEffect, useRef } from "react";
-import EdgeDash from "../edge-dash";
-import SectionWrapper from "../section-wrapper";
+import EdgeDash from "../decorative/edge-dash";
+import SectionWrapper from "../layout/section-wrapper";
 
 const STACK_NOTES = [
     {
@@ -59,10 +59,10 @@ export default function Skills() {
 
     return (
         <SectionWrapper id="skills">
-            <div className="flex flex-col">
-                <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-16">
-                    <EdgeDash side="right" className="-z-20 hidden md:block" />
-                    <EdgeDash side="left" className="-z-20 hidden md:block" />
+            <div className="relative flex flex-col">
+                <EdgeDash side="right" className="z-20 hidden md:block" />
+                <EdgeDash side="left" className="z-20 hidden md:block" />
+                <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-20">
                     <span className="text-primary text-xs font-medium uppercase">
                         [ SKILLS ]
                     </span>
@@ -78,7 +78,7 @@ export default function Skills() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                    <div className="relative bg-card border rounded overflow-hidden">
+                    <div className="relative overflow-hidden">
                         <div className="pointer-events-none absolute inset-y-0 left-0 w-12 md:w-20 bg-gradient-to-r from-background to-transparent z-10" />
                         <div className="pointer-events-none absolute inset-y-0 right-0 w-12 md:w-20 bg-gradient-to-l from-background to-transparent z-10" />
                         <div
@@ -92,7 +92,7 @@ export default function Skills() {
                         >
                             <motion.div
                                 ref={trackRef}
-                                className="flex w-max cursor-grab active:cursor-grabbing"
+                                className="flex gap-2 w-max cursor-grab active:cursor-grabbing"
                                 style={{ x }}
                                 drag="x"
                                 dragConstraints={false}
@@ -122,12 +122,12 @@ export default function Skills() {
                                         <div
                                             key={`${skill.name}-${i}`}
                                             className={cn(
-                                                "group relative size-28 border-r flex justify-center items-center flex-shrink-0 transition-colors hover:bg-muted/40",
+                                                "group relative size-28 border rounded flex justify-center items-center flex-shrink-0 transition-colors hover:bg-muted/40",
                                                 i === 0 && "ml-4",
                                             )}
                                         >
                                             <div
-                                                className="w-10 h-10 text-foreground transition-colors group-hover:text-primary group-hover:scale-110 pointer-events-none transition-transform duration-200"
+                                                className="w-10 h-10 text-foreground group-hover:text-primary group-hover:scale-110 pointer-events-none transition-transform duration-200"
                                                 dangerouslySetInnerHTML={{
                                                     __html: safeIcon,
                                                 }}
@@ -147,7 +147,7 @@ export default function Skills() {
                             <div
                                 key={note.title}
                                 className={cn(
-                                    "group bg-card p-4 transition-colors hover:bg-muted/40",
+                                    "group p-4 transition-colors",
                                     index > 0 &&
                                         "border-t border-border md:border-t-0 md:border-l",
                                 )}

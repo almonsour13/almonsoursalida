@@ -5,9 +5,9 @@ import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import EdgeDash from "../edge-dash";
-import SectionWrapper from "../section-wrapper";
+import EdgeDash from "../decorative/edge-dash";
 import { Button } from "../ui/button";
+import ContentContainer from "./content-container";
 
 const NAV_LINKS = [
     { label: "Home", href: "#hero" },
@@ -17,7 +17,6 @@ const NAV_LINKS = [
     { label: "Contact", href: "#contact" },
 ];
 
-// active from the hook is "/" or "/#id" — normalize both sides to compare
 const normalize = (href: string) => (href === "#hero" ? "/" : `/${href}`);
 
 export default function Header() {
@@ -45,12 +44,12 @@ export default function Header() {
         });
 
     return (
-        <SectionWrapper
-            className="sticky top-0 z-50 bg-background flex justify-center items-center"
+        <header
+            className="sticky w-full px-4  top-0 z-50 bg-background flex justify-center items-center"
             id="header"
         >
             <EdgeDash side="bottom" />
-            <div className="relative ">
+            <ContentContainer>
                 <div className="flex items-center justify-between gap-4 px-4 md:px-0 py-4">
                     <nav className="hidden md:flex items-center gap-6">
                         {renderLinks()}
@@ -68,7 +67,7 @@ export default function Header() {
                         )}
                     </button>
                     <Link href="#contact" className="block">
-                        <Button>{"Let's"} talk</Button>
+                        <Button>Get in touch</Button>
                     </Link>
                 </div>
 
@@ -79,7 +78,7 @@ export default function Header() {
                         </nav>
                     </div>
                 )}
-            </div>
-        </SectionWrapper>
+            </ContentContainer>
+        </header>
     );
 }

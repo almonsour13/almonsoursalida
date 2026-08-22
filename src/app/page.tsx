@@ -1,11 +1,15 @@
 "use client";
-import DotGrid from "@/components/dot-grid";
-import EdgeDash from "@/components/edge-dash";
+import ScrollToTopButton from "@/components/common/scroll-down-button";
+import ThemeToggle from "@/components/common/theme-toggle";
+import DotGrid from "@/components/decorative/dot-grid";
+import CursorCircle from "@/components/effects/cursor-circle";
+import Footer from "@/components/layout/footer";
+import Header from "@/components/layout/header";
 import CTA from "@/components/section/cta";
-import GithubDistribution from "@/components/section/github-constributions";
+import HowIWork from "@/components/section/how-i-work";
 import Services from "@/components/section/services";
 import Skills from "@/components/section/skills";
-import { useObserveSection } from "@/hooks/use-observe-section";
+import Testimonials from "@/components/section/testimonial";
 import Contact from "../components/section/contact";
 import Hero from "../components/section/hero";
 import Projects from "../components/section/projects";
@@ -17,30 +21,26 @@ function Gutter() {
         </div>
     );
 }
-export default function Home() {
-    const active = useObserveSection();
-    return (
-        <div className="relative px-4 flex">
-            <div className="absolute inset-0  flex px-4">
-                <div className="hidden md:block flex-1 relative">
-                    <EdgeDash side="left" className="-z-20" />
-                    <EdgeDash side="right" className="-z-20" />
-                </div>
-            </div>
-            <Gutter />
 
-            <div className="pb-8 md:pb-16 flex flex-col items-start relative w-full max-w-6xl">
-                {/* <Header /> */}
+export default function Home() {
+    return (
+        <div className="relative flex flex-col">
+            <Header />
+            <div className="flex flex-col items-start relative w-full maax-w-6xl">
                 <Hero />
                 <Services />
                 <Projects />
                 <Skills />
-                <GithubDistribution />
+                <HowIWork />
+                {/* <GithubDistribution /> */}
+                <Testimonials />
                 <CTA />
                 <Contact />
             </div>
-
-            <Gutter />
+            <Footer />
+            <CursorCircle />
+            <ScrollToTopButton />
+            <ThemeToggle />
         </div>
     );
 }

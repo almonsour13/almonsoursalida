@@ -1,12 +1,7 @@
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 
-import ScrollToTopButton from "@/components/common/scroll-down-button";
-import ThemeToggle from "@/components/common/theme-toggle";
-import CursorCircle from "@/components/cursor-circle";
-import Footer from "@/components/layout/footer";
-import Header from "@/components/layout/header";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -39,14 +34,7 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <div className="flex flex-col relative">
-                        <Header />
-                        {children}
-                        <CursorCircle />
-                        <ScrollToTopButton />
-                        <ThemeToggle />
-                        <Footer />
-                    </div>
+                    {children}
                 </ThemeProvider>
             </body>
         </html>

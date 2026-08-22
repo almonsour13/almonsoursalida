@@ -1,21 +1,12 @@
 "use client";
 
 import { socials } from "@/constant/social";
-import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
-import {
-    FileUser,
-    LayoutTemplate,
-    Lightbulb,
-    PhoneCall,
-    Wrench,
-} from "lucide-react";
+import { FileUser, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import EdgeDash from "../edge-dash";
-import GradientDotGrid from "../gradient-dot-grid";
-import SectionWrapper from "../section-wrapper";
+import TextAnimate from "../animation/text-animate";
+import EdgeDash from "../decorative/edge-dash";
+import SectionWrapper from "../layout/section-wrapper";
 import { Button } from "../ui/button";
 
 const ROLES = [
@@ -27,91 +18,63 @@ const ROLES = [
     "Automation Developer",
 ];
 
-const SOLUTIONS = [
-    {
-        icon: Lightbulb,
-        title: "Build your idea",
-        description:
-            "Turn your idea into a working website, application, or digital product.",
-    },
-    {
-        icon: Wrench,
-        title: "Improve your existing app",
-        description:
-            "Add features, fix issues, and improve existing projects and systems.",
-    },
-    {
-        icon: LayoutTemplate,
-        title: "Create a better experience",
-        description:
-            "Build clean, responsive interfaces that are simple and easy to use.",
-    },
+const STATS = [
+    { value: "4+", label: "Years experience" },
+    { value: "40+", label: "Projects shipped" },
+    { value: "15+", label: "Happy clients" },
 ];
-
-function RoleCycler() {
-    const [index, setIndex] = useState(0);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setIndex((prev) => (prev + 1) % ROLES.length);
-        }, 2600);
-        return () => clearInterval(interval);
-    }, []);
-
-    return (
-        <span className="relative inline-flex h-[1.2em] overflow-hidden align-bottom">
-            <AnimatePresence mode="wait">
-                <motion.span
-                    key={ROLES[index]}
-                    initial={{ y: 14, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -14, opacity: 0 }}
-                    transition={{ duration: 0.35, ease: "easeInOut" }}
-                    className="text-primary whitespace-nowrap"
-                >
-                    {ROLES[index]}
-                </motion.span>
-            </AnimatePresence>
-        </span>
-    );
-}
 
 export default function Hero() {
     return (
-        <SectionWrapper className="relative " id="hero">
-            <div className="relative pt-8">
+        <SectionWrapper id="hero">
+            <div className="relative flex flex-col gap-2 py-8 md:py-20">
                 <EdgeDash side="right" className="-z-20 hidden md:block" />
                 <EdgeDash side="left" className="-z-20 hidden md:block" />
-            </div>
-            <div className="relative flex flex-col gap-2">
-                <div className="flex flex-col lg:flex-row gap-2">
-                    <div className="w-full lg:w-xs shrink-0 flex flex-col gap-3 rounded overflow-hidden">
-                        <div className="relative overflow-hidden aspect-square h-full">
+                <EdgeDash side="bottom" className="-z-20" />
+                <div className="flex flex-col lg:flex-row gap-4">
+                    <div className="w-full lg:w-xs shrink-0 flex flex-col gap-2">
+                        <div className="relative aspect-square h-full rounded overflow-hidden">
                             <Image
                                 alt="profile-image"
                                 src="/image/profile.png"
                                 fill
-                                className="object-cover"
+                                className="object-cover grayscale hover:grayscale-0 duration-500 transition-all"
                                 priority
                             />
                         </div>
+
+                        <div className="hidden lg:flex items-center gap-2 rounded border px-4 h-10 py-2">
+                            <span className="relative flex shrink-0">
+                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+                            </span>
+                            <span className="font-mono text-sm text-muted-foreground">
+                                Available for new projects
+                            </span>
+                        </div>
                     </div>
-                    <div className="p-4 md:p-6 flex-1 flex flex-col gap-4 justify-start relative border rounded overflow-hidden">
-                        <GradientDotGrid />
-                        <div className=" absolute inset-0 bg-card -z-20"></div>
+                    <div className="md:px-4 flex-1 flex flex-col gap-4 justify-start relative boarder rounded overflow-hidden">
+                        {/* <GradientDotGrid /> */}
+                        <div className=" absolute inset-0 -z-20"></div>
                         <span className="text-primary text-xs font-medium">
                             [ INTRODUCTION ]
                         </span>
 
                         <div className="flex flex-col gap-2">
-                            <h1 className="text-4xl md:text-5xl font-medium md:leading-14 tracking-tight text-foreground">
+                            <h1 className="text-4xl md:text-6xl lg:text-8xl font-medium md:laeading-14 tracking-tight text-foreground">
                                 <span className="hidden md:block">
                                     Hey, I'm
                                 </span>
                                 AL-Monsour M. Salida
                             </h1>
                             <p className="text-xl md:text-2xl text-muted-foreground">
-                                <RoleCycler />
+                                <p className="text-xl md:text-2xl text-muted-foreground">
+                                    <TextAnimate
+                                        words={ROLES}
+                                        className="text-primary"
+                                        type="slide"
+                                    />
+                                </p>
                             </p>
                         </div>
 
@@ -122,19 +85,29 @@ export default function Hero() {
                             </span>{" "}
                             specializing in building high-performance web,
                             mobile, and desktop applications. From architecting
-                            scalable backends with{" "}
-                            <span className="text-primary">Node.js</span> and{" "}
-                            <span className="text-primary">Laravel</span> to
-                            crafting seamless frontends using{" "}
-                            <span className="text-primary">React</span>,{" "}
-                            <span className="text-primary">Next.js</span>,{" "}
-                            <span className="text-primary">Vue.js</span> and{" "}
-                            <span className="text-primary">React Native</span>,
-                            with additional experience across CMS platforms like{" "}
-                            <span className="text-primary">WordPress</span> and
-                            etc, I focus on writing clean, maintainable code and
-                            designing structured, user-centered interfaces.
+                            scalable{" "}
+                            <span className="text-primary">Backends</span> to
+                            crafting seamless{" "}
+                            <span className="text-primary">Frontends</span>,
+                            with additional experience across{" "}
+                            <span className="text-primary">CMS platforms</span>.
                         </p>
+
+                        <div className="hidden grid grid-cols-3 divide-x rounded border bg-background">
+                            {STATS.map((stat) => (
+                                <div
+                                    key={stat.label}
+                                    className="flex flex-col items-center justify-center gap-0.5 px-2 py-3"
+                                >
+                                    <span className="font-mono text-lg md:text-xl font-medium text-foreground">
+                                        {stat.value}
+                                    </span>
+                                    <span className="text-[10px] md:text-xs text-muted-foreground text-center leading-tight">
+                                        {stat.label}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
 
                         <div className="flex flex-wrap items-center gap-2">
                             <Link href="#contact">
@@ -168,40 +141,6 @@ export default function Hero() {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="grid border md:grid-cols-3 rounded overflow-hidden">
-                    {SOLUTIONS.map((solution, i) => {
-                        const Icon = solution.icon;
-
-                        return (
-                            <div
-                                key={solution.title}
-                                className={cn(
-                                    "group bg-card p-5 transition-colors hover:bg-muted/30",
-
-                                    i > 0 &&
-                                        "border-t border-border md:border-t-0 md:border-l",
-                                    // i % 2 === 1 && "bg-primary",
-                                )}
-                            >
-                                <div className="mb-4 flex items-center justify-between">
-                                    <Icon className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
-
-                                    <span className="font-mono text-[10px] text-muted-foreground">
-                                        0{i + 1}
-                                    </span>
-                                </div>
-
-                                <h3 className="mb-2 text-sm font-medium text-foreground">
-                                    {solution.title}
-                                </h3>
-
-                                <p className="text-sm leading-relaxed text-muted-foreground">
-                                    {solution.description}
-                                </p>
-                            </div>
-                        );
-                    })}
                 </div>
             </div>
         </SectionWrapper>

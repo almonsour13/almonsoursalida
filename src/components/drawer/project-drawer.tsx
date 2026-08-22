@@ -6,8 +6,8 @@ import { ArrowUpRight, Github, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { forwardRef, useImperativeHandle, useState } from "react";
-import CornerFrame from "../corner-frame";
-import SectionWrapper from "../section-wrapper";
+import CornerFrame from "../decorative/corner-frame";
+import SectionWrapper from "../layout/section-wrapper";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 
@@ -92,7 +92,7 @@ const ProjectDrawer = forwardRef<
                                             </Button>
                                         </div>
                                         <div className="flex flex-col">
-                                            <div className="flex flex-col md:flex-row gap-4">
+                                            <div className="flex flex-col md:flex-row gap-2">
                                                 <div className="flex-1 flex flex-col gap-4">
                                                     <CornerFrame className="border aspect-video">
                                                         <Card className="relative p-0 h-full bg-card rounded-none border-0">

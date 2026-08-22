@@ -5,8 +5,8 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { GitHubCalendar } from "react-github-calendar";
-import EdgeDash from "../edge-dash";
-import SectionWrapper from "../section-wrapper";
+import EdgeDash from "../decorative/edge-dash";
+import SectionWrapper from "../layout/section-wrapper";
 import { Button } from "../ui/button";
 
 const GITHUB_USERNAME = "almonsour13";
@@ -24,7 +24,7 @@ export default function GithubContributions() {
     return (
         <SectionWrapper id="contributions">
             <div className="flex flex-col">
-                <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-16">
+                <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-20">
                     <EdgeDash side="right" className="-z-20 hidden md:block" />
                     <EdgeDash side="left" className="-z-20 hidden md:block" />
                     <span className="text-xs font-medium text-primary uppercase">
@@ -43,7 +43,7 @@ export default function GithubContributions() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                    <div className="p-4 bg-card border rounded overflow-hidden">
+                    <div className="p-4 border rounded overflow-hidden">
                         {!mounted ? (
                             <div className="h-[140px] w-full animate-pulse rounded bg-muted/40" />
                         ) : (

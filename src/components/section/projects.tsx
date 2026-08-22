@@ -13,10 +13,13 @@ import { ArrowUpRight, Expand, Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import TextAnimate from "../animation/text-animate";
+import EdgeDash from "../decorative/edge-dash";
 import ProjectDrawer, { DrawerHandle } from "../drawer/project-drawer";
-import EdgeDash from "../edge-dash";
-import SectionWrapper from "../section-wrapper";
+import SectionWrapper from "../layout/section-wrapper";
 import { Button } from "../ui/button";
+
+const BUILT_WITH_WORDS = ["Passion", "Precision", "Purpose", "Persistence"];
 
 export default function Projects() {
     const projectDrawerRef = useRef<DrawerHandle>(null);
@@ -41,7 +44,7 @@ export default function Projects() {
         <>
             <SectionWrapper id="projects">
                 <div className="flex flex-col">
-                    <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-16">
+                    <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-20">
                         <EdgeDash
                             side="right"
                             className="-z-20 hidden md:block"
@@ -51,10 +54,16 @@ export default function Projects() {
                             className="-z-20 hidden md:block"
                         />
                         <span className="text-primary text-xs font-medium uppercase">
-                            [ PROJects ]
+                            [ personal feature PROJects ]
                         </span>
                         <h1 className="text-4xl md:text-6xl font-normal tracking-tight text-foreground text-center">
-                            Built With Passion
+                            Built With{" "}
+                            <TextAnimate
+                                words={BUILT_WITH_WORDS}
+                                type="blur"
+                                className="text-primary"
+                                interval={5000}
+                            />
                         </h1>
                         <p className="text-sm md:text-base text-muted-foreground text-center">
                             A selection of full stack applications showcasing my
@@ -96,7 +105,7 @@ export default function Projects() {
                                             )
                                         }
                                         className={cn(
-                                            "group hover:bg-muted/40 relative cursor-pointer bg-card bordera roundeda overflow-hidden transition-colors",
+                                            "group hover:bg-muted/40 relative cursor-pointer bordera roundeda overflow-hidden transition-colors",
                                             i < 2 && "border-b",
                                             i >= 2 &&
                                                 i <
