@@ -14,6 +14,7 @@ import {
     Wrench,
 } from "lucide-react";
 import Link from "next/link";
+import TextAnimate from "../animation/text-animate";
 import EdgeDash from "../decorative/edge-dash";
 import GridLines from "../decorative/grid-lines";
 import SectionWrapper from "../layout/section-wrapper";
@@ -63,24 +64,32 @@ export const FLOATING_ICONS = [
         delay: 0.9,
     },
 ];
+
+const OFFER_WORDS = ["Offer", "Build", "Ship", "Deliver"];
 export default function Services() {
     const visibleServices = services.filter((s) => s.visible);
 
     return (
         <SectionWrapper id="services">
             <div className="flex flex-col">
-                <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-20">
+                <div className="relative flex flex-col items-start md:items-center gap-2 pt-16 md:pt-20 pb-8 md:pb-12">
                     <EdgeDash side="right" className="-z-20 hidden md:block" />
                     <EdgeDash side="left" className="-z-20 hidden md:block" />
                     <span className="text-xs font-medium text-primary uppercase">
                         [ SERVICES ]
                     </span>
 
-                    <h1 className="text-4xl md:text-6xl font-medium tracking-tight text-foreground text-center">
-                        What I Offer
+                    <h1 className="text-5xl md:text-6xl font-medium tracking-tight text-foreground items-start md:text-center">
+                        What I{" "}
+                        <TextAnimate
+                            words={OFFER_WORDS}
+                            type="scramble"
+                            className="text-primary"
+                            interval={5000}
+                        />
                     </h1>
 
-                    <p className="text-sm text-muted-foreground md:text-base text-center">
+                    <p className="text-sm text-muted-foreground md:text-base items-tart md:text-center">
                         Discover expert-crafted solutions to elevate your
                         digital experience — from front-end finesse to back-end
                         mastery.
@@ -113,7 +122,7 @@ export default function Services() {
                                             />
                                         </div>
 
-                                        <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                                        <div className="flex min-w-0 flex-1 flex-col gap-1">
                                             <h2 className="text-sm font-medium text-foreground md:text-base">
                                                 {service.title}
                                             </h2>
@@ -144,14 +153,6 @@ export default function Services() {
                                             item.className,
                                         )}
                                         initial={{ rotate: item.rotate }}
-                                        // animate={{
-                                        //     y: [0, -14, 0],
-                                        //     rotate: [
-                                        //         item.rotate,
-                                        //         item.rotate + 4,
-                                        //         item.rotate,
-                                        //     ],
-                                        // }}
                                         transition={{
                                             duration: item.duration,
                                             delay: item.delay,
@@ -198,28 +199,22 @@ export default function Services() {
                                 <div
                                     key={solution.title}
                                     className={cn(
-                                        "group p-5 transition-colors",
+                                        "p-4 flex flex-col gap-2",
 
                                         i > 0 &&
                                             "border-t border-border md:border-t-0 md:border-l",
-                                        // i % 2 === 1 && "bg-primary",
                                     )}
                                 >
-                                    <div className="mb-4 flex items-center justify-between">
-                                        <Icon className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
+                                    <Icon className="h-6 w-6 text-muted-foreground" />
 
-                                        <span className="font-mono text-[10px] text-muted-foreground">
-                                            0{i + 1}
-                                        </span>
+                                    <div className="flex flex-col gap-1">
+                                        <h3 className="text-base font-medium text-foreground">
+                                            {solution.title}
+                                        </h3>
+                                        <p className="text-sm leading-relaxed text-muted-foreground">
+                                            {solution.description}
+                                        </p>
                                     </div>
-
-                                    <h3 className="mb-2 text-sm font-medium text-foreground">
-                                        {solution.title}
-                                    </h3>
-
-                                    <p className="text-sm leading-relaxed text-muted-foreground">
-                                        {solution.description}
-                                    </p>
                                 </div>
                             );
                         })}

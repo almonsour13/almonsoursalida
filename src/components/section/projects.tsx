@@ -44,7 +44,7 @@ export default function Projects() {
         <>
             <SectionWrapper id="projects">
                 <div className="flex flex-col">
-                    <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-20">
+                    <div className="relative flex flex-col items-start md:items-center gap-2 pt-16 md:pt-20 pb-8 md:pb-12">
                         <EdgeDash
                             side="right"
                             className="-z-20 hidden md:block"
@@ -56,7 +56,7 @@ export default function Projects() {
                         <span className="text-primary text-xs font-medium uppercase">
                             [ personal feature PROJects ]
                         </span>
-                        <h1 className="text-4xl md:text-6xl font-normal tracking-tight text-foreground text-center">
+                        <h1 className="text-5xl md:text-6xl font-medium tracking-tight text-foreground items-start md:text-center">
                             Built With{" "}
                             <TextAnimate
                                 words={BUILT_WITH_WORDS}
@@ -65,7 +65,7 @@ export default function Projects() {
                                 interval={5000}
                             />
                         </h1>
-                        <p className="text-sm md:text-base text-muted-foreground text-center">
+                        <p className="text-sm text-muted-foreground md:text-base items-tart md:text-center">
                             A selection of full stack applications showcasing my
                             ability to build responsive frontends, robust
                             backends, and seamless user experiences.
@@ -73,7 +73,7 @@ export default function Projects() {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <div className="relative border rounded overflow-hidden grid md:grid-cols-2">
+                        <div className="relative grid md:grid-cols-2 gap-2">
                             <AnimatePresence>
                                 {isHovering && (
                                     <motion.div
@@ -105,14 +105,7 @@ export default function Projects() {
                                             )
                                         }
                                         className={cn(
-                                            "group hover:bg-muted/40 relative cursor-pointer bordera roundeda overflow-hidden transition-colors",
-                                            i < 2 && "border-b",
-                                            i >= 2 &&
-                                                i <
-                                                    featuredProjects.length -
-                                                        1 &&
-                                                "border-b md:border-b-0",
-                                            (i + 1) % 2 === 1 && "md:border-r",
+                                            "group hover:bg-muted/40 relative cursor-pointer border rounded overflow-hidden transition-colors",
                                         )}
                                     >
                                         <ArrowUpRight

@@ -6,6 +6,7 @@ import { MessageSquare } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useRef, useState } from "react";
+import TextAnimate from "../animation/text-animate";
 import EdgeDash from "../decorative/edge-dash";
 import SectionWrapper from "../layout/section-wrapper";
 import { Button } from "../ui/button";
@@ -13,6 +14,7 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 
+const HEADLINE_WORDS = [" work ", " build ", " create ", " start "];
 export default function Contact() {
     const searchParams = useSearchParams();
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -73,14 +75,21 @@ export default function Contact() {
             <div className="relative pb-8 md:pb-16 flex flex-col">
                 <EdgeDash side="right" className="-z-20 hidden md:block" />
                 <EdgeDash side="left" className="-z-20 hidden md:block" />
-                <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-20">
+                <div className="relative flex flex-col items-start md:items-center gap-2 pt-16 md:pt-20 pb-8 md:pb-12">
                     <span className="text-primary text-xs font-medium uppercase">
                         [ GET IN TOUCH ]
                     </span>
-                    <h1 className="text-4xl md:text-6xl font-medium tracking-tight text-foreground text-center">
-                        {"Let's"} work together
+                    <h1 className="text-5xl md:text-6xl font-medium tracking-tight text-foreground items-start md:text-center">
+                        {"Let's "}
+                        <TextAnimate
+                            words={HEADLINE_WORDS}
+                            type="blur"
+                            className="text-primary"
+                            interval={5000}
+                        />{" "}
+                        together
                     </h1>
-                    <p className="text-sm md:text-base text-muted-foreground text-center">
+                    <p className="text-sm text-muted-foreground md:text-base items-tart md:text-center">
                         Ready to bring your ideas to life? {"I'm"} always
                         excited to work on new projects and collaborate with
                         amazing people.
@@ -118,7 +127,7 @@ export default function Contact() {
                             ))}
                         </div>
 
-                        <div className="flex flex-col items-center md:items-start gap-2 px-4">
+                        <div className="flex flex-col items-start gap-2 md:px-4">
                             <p className="text-xs text-muted-foreground">
                                 Elsewhere
                             </p>

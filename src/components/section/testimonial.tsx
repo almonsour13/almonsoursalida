@@ -10,6 +10,7 @@ import {
     useTransform,
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import TextAnimate from "../animation/text-animate";
 import WordReveal from "../animation/word-reveal";
 import EdgeDash from "../decorative/edge-dash";
 import GridLines from "../decorative/grid-lines";
@@ -23,6 +24,7 @@ function wrap(min: number, max: number, value: number) {
     return ((((value - min) % range) + range) % range) + min;
 }
 
+const TRUST_WORDS = ["clients", "founders", "teams", "partners", "businesses"];
 export default function Testimonials() {
     const [featuredIndex, setFeaturedIndex] = useState(0);
     const marquee = [...TESTIMONIALS, ...TESTIMONIALS];
@@ -60,16 +62,20 @@ export default function Testimonials() {
             <div className="relative flex flex-col pb-8 md:pb-16">
                 <EdgeDash side="right" className="z-20 hidden md:block" />
                 <EdgeDash side="left" className="z-20 hidden md:block" />
-                <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-20">
+                <div className="relative flex flex-col items-start md:items-center gap-2 pt-16 md:pt-20 pb-8 md:pb-12">
                     <span className="text-xs font-medium text-primary uppercase">
                         [ TESTIMONIALS ]
                     </span>
-
-                    <h1 className="text-4xl md:text-6xl font-medium tracking-tight text-foreground text-center">
-                        Trusted by clients
+                    <h1 className="text-5xl md:text-6xl font-medium tracking-tight text-foreground items-start md:text-center">
+                        Trusted by{" "}
+                        <TextAnimate
+                            words={TRUST_WORDS}
+                            type="slide"
+                            className="text-primary"
+                            interval={5000}
+                        />
                     </h1>
-
-                    <p className="text-sm text-muted-foreground md:text-base text-center">
+                    <p className="text-sm text-muted-foreground md:text-base items-tart md:text-center">
                         Honest reviews from founders, teams, and partners I've
                         collaborated with to build high-performing digital
                         products.
@@ -91,9 +97,9 @@ export default function Testimonials() {
                                         duration: 0.4,
                                         ease: "easeOut",
                                     }}
-                                    className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-4 px-6 md:px-16"
+                                    className="absolute inset-0 z-20 flex flex-col items-start md:items-center justify-center gap-4 px-6 md:px-16"
                                 >
-                                    <h3 className="text-2xl font-medium leading-tight tracking-tight md:text-4xl text-center">
+                                    <h3 className="text-2xl font-medium leading-tight tracking-tight md:text-4xl text-start md:text-center">
                                         <WordReveal
                                             text={featured.quote}
                                             quotes
@@ -102,7 +108,7 @@ export default function Testimonials() {
                                     </h3>
 
                                     <p className="text-sm leading-relaxed text-muted-foreground">
-                                        {featured.name}
+                                        -{featured.name}
                                     </p>
                                 </motion.div>
                             </AnimatePresence>

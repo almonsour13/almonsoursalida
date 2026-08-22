@@ -60,10 +60,10 @@ const FLOATING_ICONS = [
 ];
 export default function CTA() {
     return (
-        <div className="w-full px-4 relative py-4">
-            <EdgeDash side="top" />
-            <EdgeDash side="bottom" />
-            <div className="w-full  rounded overflow-hidden relative bg-primary text-primary-foreground p-4 py-16 md:py-20 flex flex-col items-center gap-4 text-center">
+        <div className="w-full p-0 md:p-4 relative">
+            <EdgeDash side="top" className="hidden md:block" />
+            <EdgeDash side="bottom" className="hidden md:block" />
+            <div className="w-full  rounded overflow-hidden relative bg-primary text-primary-foreground p-4 md:py-20 flex flex-col items-start md:items-center gap-4 text-start md:text-center">
                 <GradientDotGrid className="opacity-100 z-10" />
                 {FLOATING_ICONS.map((item, index) => (
                     <motion.div
@@ -85,14 +85,10 @@ export default function CTA() {
                     </motion.div>
                 ))}
 
-                <span className="relative z-20 text-xs font-medium uppercase text-primary-foreground/70">
-                    [ LET'S TALK ]
-                </span>
-
-                <h2 className="relative z-20 text-4xl md:text-6xl font-medium leading-tight tracking-tight max-w-3xl">
+                <h2 className="relative z-20 text-4xl md:text-6xl font-medium leading-tight tracking-tight md:max-w-3xl">
                     {"Let's"} build something without boundaries
                 </h2>
-                <p className="relative z-20 opacity-90 max-w-xl">
+                <p className="relative z-20 opacity-90 md:max-w-xl ">
                     Every great project starts with a conversation — reach out
                     and {"let's"} talk through what {"you're"} building.
                 </p>

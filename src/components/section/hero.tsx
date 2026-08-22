@@ -28,7 +28,7 @@ export default function Hero() {
                 reduceMotion={reduceMotion}
                 className="absolute inset-0 -z-10 pointer-events-none"
             />
-            <EdgeDash side="bottom" className="-z-20" />
+            <EdgeDash side="bottom" className="-z-20 hidden md:block" />
             <ContentContainer>
                 <div className="relative flex flex-col gap-2 py-8 md:py-20">
                     {/* <EdgeDash side="right" className="-z-20 hidden md:block" />
@@ -55,14 +55,14 @@ export default function Hero() {
                                 </span>
                             </div>
                         </div>
-                        <div className="md:px-4 flex-1 flex flex-col gap-2 md:gap-4 items-center md:items-start relative borader rounded overflow-hidden bg-bacakground">
-                            <h1 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-foreground text-center md:text-start">
+                        <div className="md:px-4 flex-1 flex flex-col gap-2 md:gap-4 relative borader rounded overflow-hidden bg-bacakground">
+                            <h1 className="text-5xl md:text-7xl font-normal tracking-tight text-foreground">
                                 Hey, I'm
                             </h1>
-                            <h1 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-foreground text-center md:text-start">
+                            <h1 className="text-5xl md:text-7xl font-normal tracking-tight text-foreground">
                                 AL-Monsour M. Salida
                             </h1>
-                            <p className="text-xl md:text-2xl text-muted-foreground ">
+                            <p className="text-2xl md:text-4xl text-muted-foreground ">
                                 <TextAnimate
                                     words={ROLES}
                                     className="text-primary"
@@ -70,7 +70,7 @@ export default function Hero() {
                                 />
                             </p>
 
-                            <p className="text-base text-center md:text-start text-muted-foreground leading-relaxed">
+                            <p className="text-base text-muted-foreground leading-relaxed">
                                 I'm a{" "}
                                 <span className="text-primary">
                                     Full-Stack Developer
@@ -88,7 +88,7 @@ export default function Hero() {
                                 .
                             </p>
 
-                            <div className="flex flex-wrap items-center justify-center md:justify-start gap-2">
+                            <div className="flex flex-wrap items-center gap-2">
                                 <Link href="#contact">
                                     <Button variant="default">
                                         <PhoneCall className="w-4 h-4" />

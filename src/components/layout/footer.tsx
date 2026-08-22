@@ -11,12 +11,12 @@ export default function Footer() {
         <footer className="relative px-4 flex justify-center items-center">
             <EdgeDash side="top" />
             <ContentContainer>
-                <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-2 px-4 md:px-0 py-4">
-                    <div className="flex flex-col  items-center md:items-start gap-2">
-                        <span className="text-sm font-medium text-foreground">
+                <div className="flex flex-col md:flex-row items-start md:justify-between gap-4 py-4">
+                    <div className="flex flex-col gap-1">
+                        <span className="text-base font-medium text-foreground">
                             AM. Salida
                         </span>
-                        <p className="text-xs text-muted-foreground text-center md:text-start">
+                        <p className="text-sm text-muted-foreground">
                             Full-stack developer building web, mobile, and
                             desktop products end to end.
                         </p>
@@ -33,12 +33,12 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="relative flex flex-col-reverse md:flex-row items-center justify-between gap-2 px-4 md:px-0 py-4 border-t border-border">
-                    <span className="text-xs text-muted-foreground">
+                <div className="relative flex flex-col-reverse md:flex-row items-start md:items-center justify-between gap-2 py-4 border-t border-border">
+                    <span className="text-sm text-muted-foreground">
                         © {date.getFullYear()} Al-Monsour Salida. All rights
                         reserved.
                     </span>
-                    <span className="text-xs text-muted-foreground">
+                    <span className="text-sm text-muted-foreground">
                         Design inspired by{" "}
                         <Link
                             href="https://www.cloudflare.com"

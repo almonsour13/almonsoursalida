@@ -90,13 +90,13 @@ export default function HowIWork() {
     return (
         <SectionWrapper id="how-i-work">
             <div className="flex flex-col">
-                <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-20">
+                <div className="relative flex flex-col items-start md:items-center gap-2 pt-16 md:pt-20 pb-8 md:pb-12">
                     <EdgeDash side="right" className="-z-20 hidden md:block" />
                     <EdgeDash side="left" className="-z-20 hidden md:block" />
                     <span className="text-primary text-xs font-medium uppercase">
                         [ HOW I WORK ]
                     </span>
-                    <h1 className="text-4xl md:text-6xl font-normal tracking-tight text-foreground text-center">
+                    <h1 className="text-5xl md:text-6xl font-medium tracking-tight text-foreground items-start md:text-center">
                         A process built for{" "}
                         <TextAnimate
                             words={HEADLINE_WORDS}
@@ -104,7 +104,7 @@ export default function HowIWork() {
                             className="text-primary"
                         />
                     </h1>
-                    <p className="text-sm md:text-base text-muted-foreground text-center max-w-xl">
+                    <p className="text-sm text-muted-foreground md:text-base items-tart md:text-center">
                         Every engagement follows the same five-stage framework —
                         transparent, repeatable, and structured to deliver
                         consistent results.

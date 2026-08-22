@@ -4,12 +4,12 @@
 import { useEffect, useRef } from "react";
 
 const CELL = 10; // px per dot cell
-const MIN_DOT_RADIUS = 0.5; // resting dot size
+const MIN_DOT_RADIUS = 0.4; // resting dot size
 const MAX_DOT_RADIUS = 2.8; // dot size at full ripple intensity
-const RESTING_OPACITY = 0.8; // idle dot opacity — visible at rest
+const RESTING_OPACITY = 0.5; // idle dot opacity — visible at rest
 const MAX_OPACITY = 1; // opacity at full ripple intensity
 const MAX_RIPPLES = 14; // more concurrent ripples = a continuously busy field
-const DOT_COLOR = "60,60,60"; // darker gray
+const DOT_COLOR = "128,128,128"; // darker gray
 const INTENSITY_BUCKETS = 20; // active-dot opacity/radius levels, reduces fillStyle changes
 
 type Ripple = {

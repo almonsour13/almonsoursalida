@@ -6,10 +6,8 @@ import { ArrowUpRight, Github, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { forwardRef, useImperativeHandle, useState } from "react";
-import CornerFrame from "../decorative/corner-frame";
 import ContentContainer from "../layout/content-container";
 import { Button } from "../ui/button";
-import { Card } from "../ui/card";
 
 export type DrawerHandle = {
     open: () => void;
@@ -62,7 +60,7 @@ const ProjectDrawer = forwardRef<
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.3 }}
-                            className="fixed w-full h-full top-0 left-0 bg-black/60 z-[99]"
+                            className="fixed inset-0 z-[99]  bg-background/60 backdrop-blur-sm"
                             onClick={handleClose}
                         />
                         <div className="fixed w-full h-screen top-0 left-0 flex items-end z-[100] pointer-events-none">
@@ -92,110 +90,101 @@ const ProjectDrawer = forwardRef<
                                                     <X className="h-5 w-5" />
                                                 </Button>
                                             </div>
-                                            <div className="flex flex-col">
-                                                <div className="flex flex-col md:flex-row gap-2">
-                                                    <div className="flex-1 flex flex-col gap-4">
-                                                        <CornerFrame className="border aspect-video">
-                                                            <Card className="relative p-0 h-full bg-card rounded-none border-0">
-                                                                <Image
-                                                                    src={
-                                                                        selectedProject.image
-                                                                    }
-                                                                    alt={
-                                                                        selectedProject.title
-                                                                    }
-                                                                    loading="lazy"
-                                                                    className="w-full h-full object-cover"
-                                                                    width={1000}
-                                                                    height={
-                                                                        1000
-                                                                    }
-                                                                />
-                                                            </Card>
-                                                        </CornerFrame>
+                                            <div className="flex flex-col md:flex-row gap-4 md:gap-8">
+                                                <div className="flex-1 flex flex-col gap-4">
+                                                    <div className="border rounded overflow-hidden aspect-video">
+                                                        <Image
+                                                            src={
+                                                                selectedProject.image
+                                                            }
+                                                            alt={
+                                                                selectedProject.title
+                                                            }
+                                                            loading="lazy"
+                                                            className="w-full h-full object-cover"
+                                                            width={1000}
+                                                            height={600}
+                                                        />
                                                     </div>
-                                                    <CornerFrame className="border flex-1">
-                                                        <div className="flex flex-col gap-2 p-4 border-b">
-                                                            <h1 className="text-2xl leading-none font-semibold tracking-tight text-foreground">
-                                                                {
-                                                                    selectedProject.title
-                                                                }
-                                                            </h1>
-                                                            <p className="text-sm leading-normal text-muted-foreground">
-                                                                {
-                                                                    selectedProject.description
-                                                                }
-                                                            </p>
-                                                        </div>
+                                                </div>
+                                                <div className="flex-1 flex flex-col gap-4">
+                                                    <div className="flex flex-col gap-2">
+                                                        <h1 className="text-4xl leading-none font-semibold tracking-tight text-foreground">
+                                                            {
+                                                                selectedProject.title
+                                                            }
+                                                        </h1>
+                                                        <p className="text-sm leading-normal text-muted-foreground">
+                                                            {
+                                                                selectedProject.description
+                                                            }
+                                                        </p>
+                                                    </div>
 
-                                                        <div className="flex flex-col gap-2 border-b p-4">
-                                                            <h1 className="text-xs text-muted-foreground">
-                                                                Technologies
-                                                                used
-                                                            </h1>
-                                                            <div className="flex flex-wrap gap-2">
-                                                                {selectedProject.tech.map(
-                                                                    (
-                                                                        tech,
-                                                                        techIndex,
-                                                                    ) => (
-                                                                        <span
-                                                                            key={
-                                                                                techIndex
-                                                                            }
-                                                                            className="px-3 py-1.5 border border-border rounded text-xs font-medium text-foreground transition-colors"
-                                                                        >
-                                                                            {
-                                                                                tech
-                                                                            }
+                                                    <div className="flex flex-col gap-2">
+                                                        <h1 className="text-xs text-muted-foreground">
+                                                            Technologies used
+                                                        </h1>
+                                                        <div className="flex flex-wrap gap-2">
+                                                            {selectedProject.tech.map(
+                                                                (
+                                                                    tech,
+                                                                    techIndex,
+                                                                ) => (
+                                                                    <span
+                                                                        key={
+                                                                            techIndex
+                                                                        }
+                                                                        className="px-3 py-1.5 border border-border rounded text-xs font-medium text-foreground transition-colors"
+                                                                    >
+                                                                        {tech}
+                                                                    </span>
+                                                                ),
+                                                            )}
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="flex flex-col gap-2">
+                                                        <h1 className="text-xs text-muted-foreground">
+                                                            Project links
+                                                        </h1>
+                                                        <div className="flex flex-wrap gap-2">
+                                                            {selectedProject.live && (
+                                                                <Link
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    href={
+                                                                        selectedProject.live
+                                                                    }
+                                                                >
+                                                                    <Button variant="default">
+                                                                        <ArrowUpRight className="h-4 w-4" />
+                                                                        <span>
+                                                                            View
+                                                                            Live
                                                                         </span>
-                                                                    ),
-                                                                )}
-                                                            </div>
+                                                                    </Button>
+                                                                </Link>
+                                                            )}
+                                                            {selectedProject.github && (
+                                                                <Link
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    href={
+                                                                        selectedProject.github
+                                                                    }
+                                                                >
+                                                                    <Button variant="outline">
+                                                                        <Github className="h-4 w-4" />
+                                                                        <span>
+                                                                            Source
+                                                                            Code
+                                                                        </span>
+                                                                    </Button>
+                                                                </Link>
+                                                            )}
                                                         </div>
-
-                                                        <div className="flex flex-col gap-2 p-4    ">
-                                                            <h1 className="text-xs text-muted-foreground">
-                                                                Project links
-                                                            </h1>
-                                                            <div className="flex flex-wrap gap-2">
-                                                                {selectedProject.live && (
-                                                                    <Link
-                                                                        target="_blank"
-                                                                        rel="noopener noreferrer"
-                                                                        href={
-                                                                            selectedProject.live
-                                                                        }
-                                                                    >
-                                                                        <Button variant="default">
-                                                                            <ArrowUpRight className="h-4 w-4" />
-                                                                            <span>
-                                                                                View
-                                                                                Live
-                                                                            </span>
-                                                                        </Button>
-                                                                    </Link>
-                                                                )}
-                                                                {selectedProject.github && (
-                                                                    <Link
-                                                                        target="_blank"
-                                                                        rel="noopener noreferrer"
-                                                                        href={
-                                                                            selectedProject.github
-                                                                        }
-                                                                    >
-                                                                        <Button variant="outline">
-                                                                            <Github className="h-4 w-4" />
-                                                                            <span>
-                                                                                Source
-                                                                                Code
-                                                                            </span>
-                                                                        </Button>
-                                                                    </Link>
-                                                                )}
-                                                            </div>
-                                                        </div>
-                                                    </CornerFrame>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
