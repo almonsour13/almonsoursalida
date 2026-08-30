@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { GitHubCalendar } from "react-github-calendar";
 import EdgeLine from "../decorative/edge-line";
-import SectionWrapper from "../layout/section-wrapper";
+import ContentContainer from "../layout/content-container";
 import { Button } from "../ui/button";
 
 const GITHUB_USERNAME = "almonsour13";
@@ -22,7 +22,7 @@ export default function GithubContributions() {
     }, []);
 
     return (
-        <SectionWrapper id="contributions">
+        <ContentContainer id="contributions">
             <div className="flex flex-col">
                 <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-20">
                     <EdgeLine side="right" className="-z-20 hidden md:block" />
@@ -95,6 +95,6 @@ export default function GithubContributions() {
                     </div>
                 </div>
             </div>
-        </SectionWrapper>
+        </ContentContainer>
     );
 }
