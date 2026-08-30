@@ -6,7 +6,7 @@ import { FileUser, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import TextAnimate from "../animation/text-animate";
-import DotTexture from "../decorative/dot-texture";
+import DotSprayTexture from "../decorative/dot-spray-texture";
 import EdgeLine from "../decorative/edge-line";
 import ContentContainer from "../layout/content-container";
 import { Button } from "../ui/button";
@@ -25,10 +25,10 @@ export default function Hero() {
 
     return (
         <div className="w-full px-4 relative flex items-center justify-center">
-            <DotTexture
-                reduceMotion={reduceMotion}
+            <DotSprayTexture
+                // reduceMotion={reduceMotion}
                 className="absolute inset-0 -z-10 pointer-events-none"
-                autoAnimateInterval={6000}
+                // autoAnimateInterval={6000}
             />
             <EdgeLine side="bottom" className="-z-20 hidden md:block" />
             <ContentContainer>

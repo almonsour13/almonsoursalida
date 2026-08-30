@@ -95,27 +95,6 @@ export default function CursorCircle() {
                         }
                     />
 
-                    <motion.div
-                        className="absolute -translate-x-1/2 -translate-y-1/2"
-                        style={{
-                            top: 0,
-                            left: 0,
-                            width: BOX_SIZE,
-                            height: BOX_SIZE,
-                        }}
-                        animate={{
-                            scale: isClicking ? 0.65 : isOverClickable ? 0 : 1,
-                            rotate: isClicking ? 45 : 0,
-                            opacity: isOverClickable ? 0 : 1,
-                        }}
-                        transition={{ duration: 0.25, ease: "easeOut" }}
-                    >
-                        <span className="absolute -top-px -left-px h-2.5 w-2.5 border-l border-t border-white" />
-                        <span className="absolute -top-px -right-px h-2.5 w-2.5 border-r border-t border-white" />
-                        <span className="absolute -bottom-px -left-px h-2.5 w-2.5 border-l border-b border-white" />
-                        <span className="absolute -bottom-px -right-px h-2.5 w-2.5 border-r border-b border-white" />
-                    </motion.div>
-
                     {/* Pop-up ring + label shown while hovering a link/button */}
                     <AnimatePresence>
                         {isOverClickable && !isClicking && (

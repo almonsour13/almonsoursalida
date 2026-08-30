@@ -1,11 +1,11 @@
 import { cn } from "@/lib/utils";
-import DotTexture from "../decorative/dot-texture";
+import DotSprayTexture from "../decorative/dot-spray-texture";
 import EdgeLine from "../decorative/edge-line";
 
 function Gutter() {
     return (
         <div className="relative hidden md:block flex-1 self-stretch">
-            <DotTexture className="absolute inset-0" autoAnimate={false} />
+            <DotSprayTexture className="absolute inset-0" />
         </div>
     );
 }

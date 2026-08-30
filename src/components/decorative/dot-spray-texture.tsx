@@ -36,7 +36,7 @@ function readActiveColor(): string {
         .trim();
 }
 
-export default function DotSprayexture({
+export default function DotSprayTexture({
     className,
     hoverRadius = 60,
     falloff = "smooth",
@@ -85,6 +85,10 @@ export default function DotSprayexture({
         // per-dot memory: idx -> when it was last touched and how bright.
         // This is the actual "trail" mechanism — everything else is just
         // reading from this map and letting entries age out.
+        //
+        // Important invariant this relies on: Map iteration order tracks
+        // touch RECENCY, not just insertion order. That's what makes the
+        // eviction below cheap (see the comment at the touch site).
         const touched = new Map<number, TouchedDot>();
 
         let raf = 0;
@@ -199,28 +203,46 @@ export default function DotSprayexture({
 
                         const idx = row * cols + col;
                         const existing = touched.get(idx);
+                        const nextPeak = existing
+                            ? Math.max(existing.peak, intensity)
+                            : intensity;
 
-                        // refresh the timestamp and keep the brighter of the
-                        // two peaks, so hovering back over an already-fading
-                        // dot re-lights it rather than averaging it down
-                        touched.set(idx, {
-                            peak: existing
-                                ? Math.max(existing.peak, intensity)
-                                : intensity,
-                            touchedAt: now,
-                        });
+                        // Deleting before re-setting an existing key moves
+                        // it to the end of the Map's iteration order — that
+                        // is what makes the eviction below cheap and
+                        // correct. Without this, a dot re-touched 5 seconds
+                        // after its first touch would still sit wherever it
+                        // was FIRST inserted, so "evict the first N keys by
+                        // iteration order" would evict the wrong entries
+                        // (recently-touched, bright dots) instead of the
+                        // genuinely stale ones.
+                        if (existing) {
+                            touched.delete(idx);
+                        }
+                        touched.set(idx, { peak: nextPeak, touchedAt: now });
                     }
                 }
 
-                // safety cap: if somehow way too many dots are tracked at
-                // once, drop the oldest rather than let the map grow forever
+                // Safety cap so `touched` can't grow without bound during a
+                // long, wide sweep. This used to sort a freshly-allocated
+                // array of every tracked dot by timestamp every single
+                // frame — an O(n log n) allocation + sort that, given
+                // hoverRadius=60 touches ~113 cells per stamp, realistically
+                // fires on most frames during ordinary use, not just as a
+                // rare edge case. That was the actual source of stutter.
+                //
+                // Because Map iteration order now tracks touch recency (see
+                // above), the oldest-touched entries are simply the first
+                // ones the iterator yields — no sort needed, and the cost
+                // is proportional to how far over the cap we are, not to
+                // the total number of tracked dots.
                 if (touched.size > MAX_TRACKED_DOTS) {
-                    const overflow = touched.size - MAX_TRACKED_DOTS;
-                    const oldestFirst = [...touched.entries()].sort(
-                        (a, b) => a[1].touchedAt - b[1].touchedAt,
-                    );
-                    for (let i = 0; i < overflow; i++) {
-                        touched.delete(oldestFirst[i][0]);
+                    let overflow = touched.size - MAX_TRACKED_DOTS;
+                    const it = touched.keys();
+                    while (overflow-- > 0) {
+                        const next = it.next();
+                        if (next.done) break;
+                        touched.delete(next.value);
                     }
                 }
             }
