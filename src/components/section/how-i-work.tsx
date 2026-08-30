@@ -19,8 +19,7 @@ import {
 } from "lucide-react";
 import { useRef, useState } from "react";
 import TextAnimate from "../animation/text-animate";
-import EdgeDash from "../decorative/edge-dash";
-import SectionWrapper from "../layout/section-wrapper";
+import ContentContainer from "../layout/content-container";
 
 const STEPS = [
     {
@@ -56,7 +55,7 @@ const STEPS = [
 ];
 
 const HEADLINE_WORDS = ["clarity", "speed", "quality", "trust"];
-const STEP_DURATION_MS = 2000;
+const STEP_DURATION_MS = 1500;
 const ALL_DONE_PAUSE_MS = 600;
 const RESET_PAUSE_MS = 2000;
 export default function HowIWork() {
@@ -88,11 +87,9 @@ export default function HowIWork() {
     });
 
     return (
-        <SectionWrapper id="how-i-work">
+        <ContentContainer id="how-i-work" className="z-50">
             <div className="flex flex-col">
                 <div className="relative flex flex-col items-start md:items-center gap-2 pt-16 md:pt-20 pb-8 md:pb-12">
-                    <EdgeDash side="right" className="-z-20 hidden md:block" />
-                    <EdgeDash side="left" className="-z-20 hidden md:block" />
                     <span className="text-primary text-xs font-medium uppercase">
                         [ HOW I WORK ]
                     </span>
@@ -100,8 +97,9 @@ export default function HowIWork() {
                         A process built for{" "}
                         <TextAnimate
                             words={HEADLINE_WORDS}
-                            type="typewriter"
+                            type="flip"
                             className="text-primary"
+                            interval={5000}
                         />
                     </h1>
                     <p className="text-sm text-muted-foreground md:text-base items-tart md:text-center">
@@ -121,7 +119,7 @@ export default function HowIWork() {
                             return (
                                 <div
                                     key={step.title}
-                                    className="relative flex-1 flex border rounded"
+                                    className="relative flex-1 flex border rounded bg-background"
                                 >
                                     <AnimatePresence>
                                         {isDone && (
@@ -157,9 +155,9 @@ export default function HowIWork() {
                                             </span>
                                             <div
                                                 className={cn(
-                                                    "relative flex h-8 w-8 shrink-0 border items-center justify-center rounded-full",
+                                                    "relative border-primary-foreground flex h-8 w-8 shrink-0 border items-center justify-center rounded-full",
                                                     isActive &&
-                                                        "border-muted-foreground",
+                                                        "baorder-muted-foreground",
                                                     isDone &&
                                                         "bg-primary-foreground",
                                                 )}
@@ -200,6 +198,6 @@ export default function HowIWork() {
                     </div>
                 </LayoutGroup>
             </div>
-        </SectionWrapper>
+        </ContentContainer>
     );
 }

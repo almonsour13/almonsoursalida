@@ -5,7 +5,7 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { GitHubCalendar } from "react-github-calendar";
-import EdgeDash from "../decorative/edge-dash";
+import EdgeLine from "../decorative/edge-line";
 import SectionWrapper from "../layout/section-wrapper";
 import { Button } from "../ui/button";
 
@@ -25,8 +25,8 @@ export default function GithubContributions() {
         <SectionWrapper id="contributions">
             <div className="flex flex-col">
                 <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-20">
-                    <EdgeDash side="right" className="-z-20 hidden md:block" />
-                    <EdgeDash side="left" className="-z-20 hidden md:block" />
+                    <EdgeLine side="right" className="-z-20 hidden md:block" />
+                    <EdgeLine side="left" className="-z-20 hidden md:block" />
                     <span className="text-xs font-medium text-primary uppercase">
                         [ GITHUB CONTRIBUTIONS ]
                     </span>

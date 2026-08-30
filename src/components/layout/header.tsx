@@ -6,7 +6,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import EdgeDash from "../decorative/edge-dash";
+import EdgeLine from "../decorative/edge-line";
 import { Button } from "../ui/button";
 import ContentContainer from "./content-container";
 
@@ -50,10 +50,10 @@ export default function Header() {
 
     return (
         <header
-            className="sticky w-full px-4 py-4  top-0 z-50 bg-background flex justify-center items-center"
+            className="sticky w-full px-4 py-4  top-0 z-[60] bg-background flex justify-center items-center"
             id="header"
         >
-            <EdgeDash side="bottom" />
+            <EdgeLine side="bottom" />
             <ContentContainer className="relative">
                 <div className="flex items-center justify-between gap-4">
                     <nav className="hidden md:flex items-center gap-6">
@@ -138,7 +138,7 @@ export default function Header() {
                                     );
                                 })}
                             </nav>
-                            <EdgeDash side="bottom" />
+                            <EdgeLine side="bottom" />
                         </motion.div>
                     </>
                 )}

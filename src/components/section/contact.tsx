@@ -7,8 +7,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import TextAnimate from "../animation/text-animate";
-import EdgeDash from "../decorative/edge-dash";
-import SectionWrapper from "../layout/section-wrapper";
+import ContentContainer from "../layout/content-container";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -71,10 +70,8 @@ export default function Contact() {
     };
 
     return (
-        <SectionWrapper id="contact">
+        <ContentContainer id="contact" className="z-50">
             <div className="relative pb-8 md:pb-16 flex flex-col">
-                <EdgeDash side="right" className="-z-20 hidden md:block" />
-                <EdgeDash side="left" className="-z-20 hidden md:block" />
                 <div className="relative flex flex-col items-start md:items-center gap-2 pt-16 md:pt-20 pb-8 md:pb-12">
                     <span className="text-primary text-xs font-medium uppercase">
                         [ GET IN TOUCH ]
@@ -243,6 +240,6 @@ export default function Contact() {
                     </div>
                 </div>
             </div>
-        </SectionWrapper>
+        </ContentContainer>
     );
 }

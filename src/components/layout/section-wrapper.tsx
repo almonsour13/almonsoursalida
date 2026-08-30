@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import DotGrid from "../decorative/dot-grid";
-import EdgeDash from "../decorative/edge-dash";
+import EdgeDash from "../decorative/edge-line";
 import ContentContainer from "./content-container";
 
 function Gutter() {
@@ -17,19 +17,16 @@ export default function SectionWrapper({
     ...props
 }: React.ComponentProps<"section">) {
     return (
-        <section
-            className={cn("relative flex w-full px-4", className)}
-            {...props}
-        >
-            <div className="absolute inset-0 flex px-4 -z-40 pointer-events-none ">
+        <section className={cn("relative flex w-full", className)} {...props}>
+            <div className="hidden absolute inset-0 flex px-4 -z-40 pointer-events-none ">
                 <div className="hidden md:block flex-1 relative">
                     <EdgeDash side="left" className="-z-20" />
-                    <EdgeDash side="right" className="-z-20" />
+                    <EdgeLine side="right" className="-z-20" />
                 </div>
             </div>
-            <Gutter />
+            {/* <Gutter /> */}
             <ContentContainer>{children}</ContentContainer>
-            <Gutter />
+            {/* <Gutter /> */}
         </section>
     );
 }

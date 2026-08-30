@@ -1,0 +1,22 @@
+@layer utilities {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .scrollbar-hide {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.mask-profile {
+    -webkit-mask-image: url("/mask-1.svg");
+    mask-image: url("/mask-1.svg");
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}

@@ -14,9 +14,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import TextAnimate from "../animation/text-animate";
-import EdgeDash from "../decorative/edge-dash";
 import ProjectDrawer, { DrawerHandle } from "../drawer/project-drawer";
-import SectionWrapper from "../layout/section-wrapper";
+import ContentContainer from "../layout/content-container";
 import { Button } from "../ui/button";
 
 const BUILT_WITH_WORDS = ["Passion", "Precision", "Purpose", "Persistence"];
@@ -42,17 +41,9 @@ export default function Projects() {
 
     return (
         <>
-            <SectionWrapper id="projects">
+            <ContentContainer id="projects" className="z-50">
                 <div className="flex flex-col">
                     <div className="relative flex flex-col items-start md:items-center gap-2 pt-16 md:pt-20 pb-8 md:pb-12">
-                        <EdgeDash
-                            side="right"
-                            className="-z-20 hidden md:block"
-                        />
-                        <EdgeDash
-                            side="left"
-                            className="-z-20 hidden md:block"
-                        />
                         <span className="text-primary text-xs font-medium uppercase">
                             [ personal feature PROJects ]
                         </span>
@@ -61,9 +52,10 @@ export default function Projects() {
                             <TextAnimate
                                 words={BUILT_WITH_WORDS}
                                 type="blur"
-                                className="text-primary"
+                                className="text-primary hidden md:block"
                                 interval={5000}
                             />
+                            <span className="md:hidden">Passion</span>
                         </h1>
                         <p className="text-sm text-muted-foreground md:text-base items-tart md:text-center">
                             A selection of full stack applications showcasing my
@@ -105,7 +97,7 @@ export default function Projects() {
                                             )
                                         }
                                         className={cn(
-                                            "group hover:bg-muted/40 relative cursor-pointer border rounded overflow-hidden transition-colors",
+                                            "group hover:bg-muted/40 relative cursor-pointer border rounded overflow-hidden transition-colors bg-background",
                                         )}
                                     >
                                         <ArrowUpRight
@@ -162,7 +154,7 @@ export default function Projects() {
                         </div>
                     </div>
                 </div>
-            </SectionWrapper>
+            </ContentContainer>
             <ProjectDrawer ref={projectDrawerRef} />
         </>
     );

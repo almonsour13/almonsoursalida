@@ -6,7 +6,9 @@ import { ArrowUpRight, Github, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { forwardRef, useImperativeHandle, useState } from "react";
+import EdgeLine from "../decorative/edge-line";
 import ContentContainer from "../layout/content-container";
+import { GutterLayout } from "../layout/gutter-layout";
 import { Button } from "../ui/button";
 
 export type DrawerHandle = {
@@ -73,12 +75,13 @@ const ProjectDrawer = forwardRef<
                                     damping: 30,
                                     stiffness: 300,
                                 }}
-                                className="w-full h-[90vh] bg-background border-t border-border rounded-t-md px-4 py-8 md:py-12 overflow-y-auto pointer-events-auto"
+                                className="w-full relative h-[90vh] bg-background overflow-y-auto pointer-events-auto"
                             >
-                                <div className="flex justify-center items-center">
-                                    <ContentContainer>
+                                <EdgeLine side="top" />
+                                <GutterLayout className="h-full rounded-t-md px-4">
+                                    <ContentContainer className="z-50 py-4 md:py-8 pb-24">
                                         <div className="h-full flex flex-col gap-4  ">
-                                            <div className="w-full flex justify-between items-center gap-4">
+                                            <div className="w-full flex justify-between items-center gap-4 md:px-4">
                                                 <span className="text-primary text-xs font-medium">
                                                     [ PROJECT DETAILS ]
                                                 </span>
@@ -189,7 +192,7 @@ const ProjectDrawer = forwardRef<
                                             </div>
                                         </div>
                                     </ContentContainer>
-                                </div>
+                                </GutterLayout>
                             </motion.div>
                         </div>
                     </>

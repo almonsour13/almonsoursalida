@@ -1,5 +1,6 @@
 "use client";
-import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { motion, useReducedMotion } from "framer-motion";
 import {
     ArrowUpRight,
     Code,
@@ -10,80 +11,129 @@ import {
     Workflow,
 } from "lucide-react";
 import Link from "next/link";
-import EdgeDash from "../decorative/edge-dash";
-import GradientDotGrid from "../decorative/gradient-dot-grid";
+import DotPingTexture from "../decorative/dote-ping-texture";
+import EdgeLine from "../decorative/edge-line";
 import { Button } from "../ui/button";
 
 const FLOATING_ICONS = [
     {
         icon: Database,
-        className: "top-[10%] left-[4%] hidden md:flex",
+        className: "top-[8%] left-[4%] hidden md:flex",
         rotate: -12,
         duration: 4.5,
         delay: 0,
     },
     {
         icon: Code,
-        className: "top-[40%] left-[12%] hidden lg:flex",
+        className: "top-[32%] left-[16%] hidden lg:flex",
         rotate: 10,
         duration: 5,
         delay: 0.6,
     },
     {
         icon: Server,
-        className: "bottom-[10%] left-[8%] hidden md:flex",
+        className: "top-[52%] left-[4%] hidden md:flex",
         rotate: 8,
         duration: 4,
         delay: 1.1,
     },
     {
         icon: PenTool,
-        className: "top-10 right-[8%] hidden md:flex",
+        className: "top-[6%] right-[8%] hidden md:flex",
         rotate: 14,
         duration: 4.2,
         delay: 0.3,
     },
     {
         icon: Workflow,
-        className: "bottom-[40%] right-[16%] hidden lg:flex",
+        className: "top-[32%] right-[16%] hidden lg:flex",
         rotate: -10,
         duration: 5.2,
         delay: 0.9,
     },
     {
         icon: PanelsTopLeft,
-        className: "bottom-[10%] right-[4%] hidden lg:flex",
+        className: "top-[52%] right-[4%] hidden lg:flex",
         rotate: -10,
         duration: 5.2,
         delay: 0.9,
     },
 ];
+
+const ENTRANCE_DURATION = 0.6;
+// Icons stagger in one after another rather than all landing at once
+const ENTRANCE_STAGGER = 0.08;
+
 export default function CTA() {
+    const reduceMotion = useReducedMotion();
+
     return (
         <div className="w-full p-0 md:p-4 relative">
-            <EdgeDash side="top" className="hidden md:block" />
-            <EdgeDash side="bottom" className="hidden md:block" />
-            <div className="w-full  rounded overflow-hidden relative bg-primary text-primary-foreground p-4 md:py-20 flex flex-col items-start md:items-center gap-4 text-start md:text-center">
-                <GradientDotGrid className="opacity-100 z-10" />
-                {FLOATING_ICONS.map((item, index) => (
-                    <motion.div
-                        key={index}
-                        className={`z-30 absolute h-16 w-16 items-center justify-center rounded border border-dashed border-border bg-primary ${item.className}`}
-                        initial={{ rotate: item.rotate }}
-                        animate={{
-                            y: [0, -14, 0],
-                            rotate: [item.rotate, item.rotate + 4, item.rotate],
-                        }}
-                        transition={{
-                            duration: item.duration,
-                            delay: item.delay,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                        }}
-                    >
-                        <item.icon className="h-6 w-6 text-primary-foreground/80" />
-                    </motion.div>
-                ))}
+            <EdgeLine side="top" className="hidden md:block" />
+            <EdgeLine side="bottom" className="hidden md:block" />
+            <div className="w-full  md:rounded overflow-hidden relative bg-primary text-primary-foreground p-4 md:py-20 flex flex-col items-start md:items-center gap-4 text-start md:text-center">
+                <DotPingTexture
+                    reduceMotion={reduceMotion}
+                    className="absolute inset-0 pointer-events-none"
+                />
+                {FLOATING_ICONS.map((item, index) => {
+                    const entranceDelay = index * ENTRANCE_STAGGER;
+                    // float loop only starts once this icon has finished
+                    // dropping into place, so it doesn't bob mid-entrance
+                    const floatDelay =
+                        ENTRANCE_DURATION + entranceDelay + item.delay;
+
+                    return (
+                        <motion.div
+                            key={index}
+                            className={cn("z-30 absolute", item.className)}
+                            initial={
+                                reduceMotion
+                                    ? undefined
+                                    : {
+                                          opacity: 0,
+                                          y: -40,
+                                          rotate: item.rotate,
+                                      }
+                            }
+                            whileInView={
+                                reduceMotion
+                                    ? undefined
+                                    : { opacity: 1, y: 0, rotate: item.rotate }
+                            }
+                            viewport={{ once: true, amount: 0.4 }}
+                            transition={{
+                                duration: ENTRANCE_DURATION,
+                                delay: entranceDelay,
+                                ease: "easeOut",
+                            }}
+                        >
+                            <motion.div
+                                className="h-16 w-16 flex items-center justify-center rounded border border-dashed border-primary-foreground/50 bg-primary "
+                                animate={
+                                    reduceMotion
+                                        ? undefined
+                                        : {
+                                              y: [0, -14, 0],
+                                              rotate: [
+                                                  item.rotate,
+                                                  item.rotate + 4,
+                                                  item.rotate,
+                                              ],
+                                          }
+                                }
+                                transition={{
+                                    duration: item.duration,
+                                    delay: floatDelay,
+                                    repeat: Infinity,
+                                    ease: "easeInOut",
+                                }}
+                            >
+                                <item.icon className="h-6 w-6 text-primary-foreground/80" />
+                            </motion.div>
+                        </motion.div>
+                    );
+                })}
 
                 <h2 className="relative z-20 text-4xl md:text-6xl font-medium leading-tight tracking-tight md:max-w-3xl">
                     {"Let's"} build something without boundaries

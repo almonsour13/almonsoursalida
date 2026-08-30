@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import EdgeDash from "../decorative/edge-dash";
+import EdgeLine from "../decorative/edge-line";
 import ContentContainer from "./content-container";
 
 export default function Footer() {
@@ -9,7 +9,7 @@ export default function Footer() {
 
     return (
         <footer className="relative px-4 flex justify-center items-center">
-            <EdgeDash side="top" />
+            <EdgeLine side="top" />
             <ContentContainer>
                 <div className="flex flex-col md:flex-row items-start md:justify-between gap-4 py-4">
                     <div className="flex flex-col gap-1">

@@ -2,22 +2,17 @@
 
 import { services } from "@/constant/services";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
 import {
     ArrowUpRight,
     LayoutTemplate,
     Lightbulb,
-    PanelsTopLeft,
-    Server,
     Sparkles,
-    Workflow,
     Wrench,
 } from "lucide-react";
 import Link from "next/link";
 import TextAnimate from "../animation/text-animate";
-import EdgeDash from "../decorative/edge-dash";
 import GridLines from "../decorative/grid-lines";
-import SectionWrapper from "../layout/section-wrapper";
+import ContentContainer from "../layout/content-container";
 import { Button } from "../ui/button";
 
 const SOLUTIONS = [
@@ -41,40 +36,14 @@ const SOLUTIONS = [
     },
 ];
 
-export const FLOATING_ICONS = [
-    {
-        icon: Server,
-        className: "bottom-[12%] left-[12%] hidden md:flex",
-        rotate: 8,
-        duration: 4,
-        delay: 1.1,
-    },
-    {
-        icon: Workflow,
-        className: "bottom-[30%] right-[40%] hidden lg:flex",
-        rotate: -10,
-        duration: 5.2,
-        delay: 0.9,
-    },
-    {
-        icon: PanelsTopLeft,
-        className: "bottom-[6%] right-[12%] hidden lg:flex",
-        rotate: -10,
-        duration: 5.2,
-        delay: 0.9,
-    },
-];
-
 const OFFER_WORDS = ["Offer", "Build", "Ship", "Deliver"];
 export default function Services() {
     const visibleServices = services.filter((s) => s.visible);
 
     return (
-        <SectionWrapper id="services">
+        <ContentContainer id="services" className="z-50">
             <div className="flex flex-col">
                 <div className="relative flex flex-col items-start md:items-center gap-2 pt-16 md:pt-20 pb-8 md:pb-12">
-                    <EdgeDash side="right" className="-z-20 hidden md:block" />
-                    <EdgeDash side="left" className="-z-20 hidden md:block" />
                     <span className="text-xs font-medium text-primary uppercase">
                         [ SERVICES ]
                     </span>
@@ -83,7 +52,7 @@ export default function Services() {
                         What I{" "}
                         <TextAnimate
                             words={OFFER_WORDS}
-                            type="scramble"
+                            type="fade"
                             className="text-primary"
                             interval={5000}
                         />
@@ -143,27 +112,7 @@ export default function Services() {
 
                         {/* CTA Section */}
                         <div className="relative flex flex-col justify-between gap-4 bg-primary p-4 rounded overflow-hidden">
-                            <GridLines className="z-10 opacity-100" />
-                            <div className="absolute inset-0 overflow-hidden">
-                                {FLOATING_ICONS.map((item, index) => (
-                                    <motion.div
-                                        key={index}
-                                        className={cn(
-                                            "absolute h-20 w-20 opacity-40 items-center justify-center rounded border border-dashed border-border bg-primary",
-                                            item.className,
-                                        )}
-                                        initial={{ rotate: item.rotate }}
-                                        transition={{
-                                            duration: item.duration,
-                                            delay: item.delay,
-                                            repeat: Infinity,
-                                            ease: "easeInOut",
-                                        }}
-                                    >
-                                        <item.icon className="h-8 w-8 text-primary-foreground/80" />
-                                    </motion.div>
-                                ))}
-                            </div>
+                            <GridLines className="z-10" />
 
                             <div className="relative z-20 flex flex-col gap-4">
                                 <Sparkles className="h-6 w-6 text-primary-foreground/90" />
@@ -199,7 +148,7 @@ export default function Services() {
                                 <div
                                     key={solution.title}
                                     className={cn(
-                                        "p-4 flex flex-col gap-2",
+                                        "p-4 flex flex-col gap-2 bg-background",
 
                                         i > 0 &&
                                             "border-t border-border md:border-t-0 md:border-l",
@@ -221,6 +170,6 @@ export default function Services() {
                     </div>
                 </div>
             </div>
-        </SectionWrapper>
+        </ContentContainer>
     );
 }

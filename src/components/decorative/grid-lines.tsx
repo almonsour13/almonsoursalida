@@ -8,7 +8,7 @@ export default function GridLines({ className }: { className?: string }) {
                 className,
             )}
         >
-            <div className="absolute inset-0 opacity-5">
+            <div className="absolute inset-0 opacity-10">
                 <div
                     className="absolute inset-0"
                     style={{

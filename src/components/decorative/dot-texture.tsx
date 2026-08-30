@@ -1,16 +1,20 @@
-// components/decorative/dot-texture.tsx
 "use client";
 
 import { useEffect, useRef } from "react";
 
 const CELL = 10; // px per dot cell
 const MIN_DOT_RADIUS = 0.4; // resting dot size
-const MAX_DOT_RADIUS = 2.8; // dot size at full ripple intensity
-const RESTING_OPACITY = 0.5; // idle dot opacity — visible at rest
+const MAX_DOT_RADIUS = 2; // dot size at full ripple intensity
+const RESTING_OPACITY = 0.8; // idle dot opacity — visible at rest
 const MAX_OPACITY = 1; // opacity at full ripple intensity
-const MAX_RIPPLES = 14; // more concurrent ripples = a continuously busy field
-const DOT_COLOR = "128,128,128"; // darker gray
+const MAX_RIPPLES = 8; // more concurrent ripples = a continuously busy field
+const DOT_COLOR = "128,128,128"; // resting dot color (gray) — plain R,G,B
+const ACTIVE_COLOR_VAR = "--primary"; // CSS var read at runtime for active dots
 const INTENSITY_BUCKETS = 20; // active-dot opacity/radius levels, reduces fillStyle changes
+
+// Default range (ms) between auto-spawned ripples when no interval prop is
+// given — a new ripple fires at MIN + random()*(MAX-MIN) after the last one.
+const DEFAULT_AUTO_ANIMATE_INTERVAL: [number, number] = [900, 1800];
 
 type Ripple = {
     x: number;
@@ -18,12 +22,49 @@ type Ripple = {
     start: number; // performance.now() timestamp when it was created
 };
 
+// CSS Color 4 functions (oklch(), hsl(), rgb(), lab(), etc.) all accept a
+// trailing "/ alpha" inside their own parens. Rather than assuming a
+// specific format (rgb triplet, oklch triplet, ...), just splice the alpha
+// in before the color string's closing paren — works regardless of which
+// color function your design tokens are actually written in.
+function withAlpha(colorValue: string, alpha: number): string {
+    const trimmed = colorValue.trim();
+    const closeIdx = trimmed.lastIndexOf(")");
+    if (!trimmed || closeIdx === -1) {
+        // not a function-form color (e.g. empty, or a bare hex/named color)
+        // — can't safely splice alpha into those, so return as-is
+        return trimmed || `rgba(0,0,0,${alpha})`;
+    }
+    return `${trimmed.slice(0, closeIdx)} / ${alpha})`;
+}
+
+function readActiveColor(): string {
+    return getComputedStyle(document.documentElement)
+        .getPropertyValue(ACTIVE_COLOR_VAR)
+        .trim();
+}
+
 export default function DotTexture({
     className,
     reduceMotion,
+    autoAnimate = true,
+    interactive = true,
+    autoAnimateInterval = DEFAULT_AUTO_ANIMATE_INTERVAL,
 }: {
     className?: string;
     reduceMotion?: boolean | null;
+    /** When false, no ambient ripples spawn on their own — only mouse-triggered ones (if `interactive`). Defaults to true. */
+    autoAnimate?: boolean;
+    /** When false, mouse movement no longer spawns ripples. Defaults to true. */
+    interactive?: boolean;
+    /**
+     * [min, max] ms between auto-spawned ripples — each gap is
+     * `min + random() * (max - min)`. Lower values = busier/faster field,
+     * higher = calmer/sparser. Pass a single number to use a fixed
+     * (non-random) interval. Defaults to [900, 1800]. Ignored when
+     * `autoAnimate` is false.
+     */
+    autoAnimateInterval?: [number, number] | number;
 }) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const ripples = useRef<Ripple[]>([]);
@@ -35,6 +76,30 @@ export default function DotTexture({
 
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
+
+        // normalize the interval prop to a [min, max] pair once per effect
+        // run, so a bare number becomes a fixed (zero-jitter) interval
+        const [intervalMin, intervalMax] =
+            typeof autoAnimateInterval === "number"
+                ? [autoAnimateInterval, autoAnimateInterval]
+                : autoAnimateInterval;
+
+        // FIX: was a `const` captured once at effect setup, so it never
+        // reflected a runtime theme change. Now mutable, refreshed by the
+        // observer below whenever the theme actually toggles.
+        let activeColorRaw = readActiveColor();
+
+        // Re-read the CSS var only when the theme changes (attribute
+        // mutation on <html>), not every frame — cheap and correct,
+        // covers next-themes / Tailwind darkMode:'class' / data-theme
+        // approaches in one observer.
+        const themeObserver = new MutationObserver(() => {
+            activeColorRaw = readActiveColor();
+        });
+        themeObserver.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class", "data-theme", "style"],
+        });
 
         let cols = 0;
         let rows = 0;
@@ -109,7 +174,7 @@ export default function DotTexture({
             INTENSITY_BUCKETS + 1,
         ).fill(null);
 
-        let nextAutoAt = performance.now() + 400;
+        let nextAutoAt = performance.now() + intervalMin;
 
         const draw = (now: number) => {
             if (!width || !height || !intensityBuffer || !basePath) {
@@ -117,9 +182,12 @@ export default function DotTexture({
                 return;
             }
 
-            if (!reduceMotion && now > nextAutoAt) {
+            if (!reduceMotion && autoAnimate && now > nextAutoAt) {
                 addRipple(Math.random() * width, Math.random() * height);
-                nextAutoAt = now + 900 + Math.random() * 900;
+                nextAutoAt =
+                    now +
+                    intervalMin +
+                    Math.random() * (intervalMax - intervalMin);
             }
 
             ripples.current = ripples.current.filter(
@@ -200,7 +268,8 @@ export default function DotTexture({
 
             // 3) render only the touched cells, bucketed by rounded
             // intensity so we do a handful of fill() calls instead of one
-            // fillStyle change per active dot
+            // fillStyle change per active dot — now using the site's actual
+            // --primary color (whatever format it's defined in)
             for (let i = 0; i < bucketPaths.length; i++) bucketPaths[i] = null;
 
             for (const idx of touched) {
@@ -236,7 +305,9 @@ export default function DotTexture({
                     RESTING_OPACITY +
                     (MAX_OPACITY - RESTING_OPACITY) * bucketIntensity;
 
-                ctx.fillStyle = `rgba(${DOT_COLOR}, ${opacity})`;
+                // reads the mutable, observer-refreshed value instead of
+                // the value frozen at effect setup
+                ctx.fillStyle = withAlpha(activeColorRaw, opacity);
                 ctx.fill(path);
             }
 
@@ -247,15 +318,20 @@ export default function DotTexture({
         const ro = new ResizeObserver(resize);
         ro.observe(container);
 
-        container.addEventListener("mousemove", handleMove);
+        if (interactive) {
+            container.addEventListener("mousemove", handleMove);
+        }
         raf = requestAnimationFrame(draw);
 
         return () => {
             ro.disconnect();
-            container.removeEventListener("mousemove", handleMove);
+            themeObserver.disconnect();
+            if (interactive) {
+                container.removeEventListener("mousemove", handleMove);
+            }
             cancelAnimationFrame(raf);
         };
-    }, [reduceMotion]);
+    }, [reduceMotion, autoAnimate, interactive, autoAnimateInterval]);
 
     return <canvas ref={canvasRef} className={className} aria-hidden="true" />;
 }
