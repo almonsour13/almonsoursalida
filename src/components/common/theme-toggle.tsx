@@ -81,7 +81,7 @@ export default function ThemeToggle() {
                 disabled={isThemeTransitioning}
                 variant="outline"
                 size="icon"
-                className="fixed top-24 right-4 md:right-8  rounded-full z-40"
+                className="fixed top-24 right-4 md:right-8  rounded-full z-50"
             >
                 <motion.div
                     animate={{ rotate: isThemeTransitioning ? 360 : 0 }}
