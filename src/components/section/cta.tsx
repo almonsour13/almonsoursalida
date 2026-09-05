@@ -61,7 +61,6 @@ const FLOATING_ICONS = [
 ];
 
 const ENTRANCE_DURATION = 0.6;
-// Icons stagger in one after another rather than all landing at once
 const ENTRANCE_STAGGER = 0.08;
 
 export default function CTA() {
@@ -74,12 +73,11 @@ export default function CTA() {
             <div className="w-full  md:rounded overflow-hidden relative bg-primary text-primary-foreground p-4 md:py-20 flex flex-col items-start md:items-center gap-4 text-start md:text-center">
                 <DotPingTexture
                     reduceMotion={reduceMotion}
+                    dotColor="--primary-foreground"
                     className="absolute inset-0 pointer-events-none"
                 />
                 {FLOATING_ICONS.map((item, index) => {
                     const entranceDelay = index * ENTRANCE_STAGGER;
-                    // float loop only starts once this icon has finished
-                    // dropping into place, so it doesn't bob mid-entrance
                     const floatDelay =
                         ENTRANCE_DURATION + entranceDelay + item.delay;
 
@@ -135,7 +133,7 @@ export default function CTA() {
                     );
                 })}
 
-                <h2 className="relative z-20 text-4xl md:text-6xl font-medium leading-tight tracking-tight md:max-w-3xl">
+                <h2 className="relative z-20 text-4xl md:text-6xl font-medium leading-tight tracking-tight md:max-w-3xl capitalize">
                     {"Let's"} build something without boundaries
                 </h2>
                 <p className="relative z-20 opacity-90 md:max-w-xl ">

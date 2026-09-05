@@ -47,7 +47,7 @@ export default function Projects() {
                         <span className="text-primary text-xs font-medium uppercase">
                             [ personal feature PROJects ]
                         </span>
-                        <h1 className="text-5xl md:text-6xl font-medium tracking-tight text-foreground items-start md:text-center">
+                        <h1 className="text-5xl md:text-6xl font-medium tracking-tight text-foreground items-start md:text-center capitalize">
                             Built With{" "}
                             <TextAnimate
                                 words={BUILT_WITH_WORDS}

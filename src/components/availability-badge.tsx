@@ -11,8 +11,8 @@ export default function AvailabilityBadge({
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
             </span>
-            <span className="font-mono text-sm text-muted-foreground">
-                Available for new projects
+            <span className="text-sm text-muted-foreground">
+                Available for New Projects
             </span>
         </div>
     );

@@ -76,7 +76,7 @@ export default function Contact() {
                     <span className="text-primary text-xs font-medium uppercase">
                         [ GET IN TOUCH ]
                     </span>
-                    <h1 className="text-5xl md:text-6xl font-medium tracking-tight text-foreground items-start md:text-center">
+                    <h1 className="text-5xl md:text-6xl font-medium tracking-tight text-foreground items-start md:text-center capitalize">
                         {"Let's "}
                         <TextAnimate
                             words={HEADLINE_WORDS}
@@ -111,7 +111,7 @@ export default function Contact() {
                                             "border-b border-border",
                                     )}
                                 >
-                                    <info.icon className="w-5 h-5 text-muted-foreground shrink-0 group-hover:text-primary transition-colors" />
+                                    <info.icon className="w-5 h-5 text-primary shrink-0 group-hover:text-primary transition-colors" />
                                     <div className="flex flex-col min-w-0">
                                         <p className="text-xs text-muted-foreground">
                                             {info.type}
@@ -140,7 +140,7 @@ export default function Contact() {
                                             variant="outline"
                                             className="group"
                                         >
-                                            <social.icon className="h-4 w-4 group-hover:text-primary transition-colors" />
+                                            <social.icon className="h-4 w-4 text-primary transition-colors" />
                                         </Button>
                                     </Link>
                                 ))}

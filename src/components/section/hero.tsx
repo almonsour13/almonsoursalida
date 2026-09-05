@@ -39,16 +39,13 @@ export default function Hero() {
                                     priority
                                 />
                             </div>
-
                             <AvailabilityBadge className="hidden lg:flex" />
                         </div>
-
                         <div className="flex-1 flex flex-col gap-4 justify-between">
                             <h1 className="flex flex-col text-5xl md:text-7xl font-normal tracking-tight text-foreground leading-[1.05]">
                                 <span>Hey, I&apos;m</span>
                                 <span>AL-Monsour M. Salida</span>
                             </h1>
-
                             <p className="text-2xl md:text-4xl text-muted-foreground">
                                 <TextAnimate
                                     words={ROLES}
@@ -56,7 +53,6 @@ export default function Hero() {
                                     type="slide"
                                 />
                             </p>
-
                             <p className="text-base text-muted-foreground leading-relaxed">
                                 I&apos;m a{" "}
                                 <span className="text-primary">
@@ -103,7 +99,7 @@ export default function Hero() {
                                                 size="icon"
                                                 variant="outline"
                                             >
-                                                <social.icon className="h-4 w-4" />
+                                                <social.icon className="h-4 w-4 text-primary" />
                                             </Button>
                                         </Link>
                                     ))}

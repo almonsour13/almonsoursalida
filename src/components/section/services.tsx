@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import TextAnimate from "../animation/text-animate";
-import GridLines from "../decorative/grid-lines";
+import GradientDotGrid from "../decorative/gradient-dot-grid";
 import ContentContainer from "../layout/content-container";
 import { Button } from "../ui/button";
 
@@ -48,7 +48,7 @@ export default function Services() {
                         [ SERVICES ]
                     </span>
 
-                    <h1 className="text-5xl md:text-6xl font-medium tracking-tight text-foreground items-start md:text-center">
+                    <h1 className="text-5xl md:text-6xl font-medium tracking-tight text-foreground items-start md:text-center capitalize">
                         What I{" "}
                         <TextAnimate
                             words={OFFER_WORDS}
@@ -109,24 +109,21 @@ export default function Services() {
                                 );
                             })}
                         </div>
-
-                        {/* CTA Section */}
                         <div className="relative flex flex-col justify-between gap-4 bg-primary p-4 rounded overflow-hidden">
-                            <GridLines className="z-10" />
-
+                            <GradientDotGrid
+                                className="z-10"
+                                color="--primary-foreground"
+                            />
                             <div className="relative z-20 flex flex-col gap-4">
                                 <Sparkles className="h-6 w-6 text-primary-foreground/90" />
-
                                 <h3 className="text-3xl font-medium leading-tight tracking-tight text-primary-foreground md:text-5xl">
                                     Not sure what you need?
                                 </h3>
-
                                 <p className="text-sm leading-relaxed text-primary-foreground/80">
                                     Tell me what {"you're"} building and{" "}
                                     {"I'll"} point you to the right approach —
                                     no obligation, just a conversation.
                                 </p>
-
                                 <Link href="#contact" className="z-20">
                                     <Button
                                         className="bg-primary-foreground text-primary hover:bg-primary-foreground/80"
@@ -154,7 +151,7 @@ export default function Services() {
                                             "border-t border-border md:border-t-0 md:border-l",
                                     )}
                                 >
-                                    <Icon className="h-6 w-6 text-muted-foreground" />
+                                    <Icon className="h-6 w-6 text-primary" />
 
                                     <div className="flex flex-col gap-1">
                                         <h3 className="text-base font-medium text-foreground">

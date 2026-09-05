@@ -5,10 +5,8 @@ import { useEffect, useRef } from "react";
 const CELL = 10; // px per dot cell — slightly larger cells read better at big scale
 const MIN_DOT_RADIUS = 0.4; // resting dot size
 const MAX_DOT_RADIUS = 2; // dot size at full pulse intensity
-const RESTING_OPACITY = 0.4; // idle dot opacity — visible at rest
-const MAX_OPACITY = 0.5; // opacity at full pulse intensity
-const DOT_COLOR = "128,128,128"; // resting dot color (gray)
-const ACTIVE_COLOR_VAR = "--primary-foreground"; // CSS var read at runtime for the ping
+const MIN_ACTIVE_OPACITY = 0.4; // baseline opacity a ping dot ramps up from
+const MAX_OPACITY = 1; // opacity at full pulse intensity
 const INTENSITY_BUCKETS = 20; // active-dot opacity/radius levels, reduces fillStyle changes
 
 const PING_INTERVAL = 12000; // ms for one full pulse cycle (spawn -> fully faded)
@@ -25,9 +23,9 @@ function withAlpha(colorValue: string, alpha: number): string {
     return `${trimmed.slice(0, closeIdx)} / ${alpha})`;
 }
 
-function readActiveColor(): string {
+function readCssVar(name: string): string {
     return getComputedStyle(document.documentElement)
-        .getPropertyValue(ACTIVE_COLOR_VAR)
+        .getPropertyValue(name)
         .trim();
 }
 
@@ -36,6 +34,8 @@ export default function DotPingTexture({
     reduceMotion,
     travelRatio = 0.9,
     ringWidthRatio = 0.22,
+    dotColor = "rgb(128,128,128,0.5)",
+    activeColor = "--primary-foreground",
 }: {
     className?: string;
     /** When true, renders only the static resting grid — no pulsing. */
@@ -52,6 +52,10 @@ export default function DotPingTexture({
      * diagonal. Larger containers get a proportionally wider ring.
      */
     ringWidthRatio?: number;
+    /** Resting dot color — any valid CSS color string, alpha included. */
+    dotColor?: string;
+    /** Name of a CSS custom property (e.g. "--primary") to read for the ping color. */
+    activeColor?: string;
 }) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -63,10 +67,9 @@ export default function DotPingTexture({
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
-        // FIX: was read once here and captured in a `const`, so it never
-        // updated after a theme toggle changed the CSS variable at
-        // runtime. Now mutable, and refreshed by the observer below.
-        let activeColorRaw = readActiveColor();
+        // Mutable so it can be refreshed by the observer below when the
+        // theme changes at runtime.
+        let activeColorRaw = readCssVar(activeColor);
 
         // Re-read the CSS var whenever the theme actually changes, rather
         // than every frame (which would work but wastes a getComputedStyle
@@ -74,12 +77,31 @@ export default function DotPingTexture({
         // toggles (next-themes, Tailwind darkMode: 'class', etc.) flip a
         // class or data-attribute on <html>, so watching those covers it.
         const themeObserver = new MutationObserver(() => {
-            activeColorRaw = readActiveColor();
+            activeColorRaw = readCssVar(activeColor);
         });
         themeObserver.observe(document.documentElement, {
             attributes: true,
             attributeFilter: ["class", "data-theme", "style"],
         });
+
+        // Only draw while the canvas is actually on screen — this loop
+        // would otherwise run at 60fps for the lifetime of the page even
+        // when the section is scrolled far out of view.
+        let isVisible = false;
+        const visibilityObserver = new IntersectionObserver(
+            ([entry]) => {
+                const wasVisible = isVisible;
+                isVisible = entry.isIntersecting;
+                // Coming back into view after being paused — restart the
+                // rAF loop (it exits early and stops re-scheduling itself
+                // once invisible, so it must be kicked off again here).
+                if (isVisible && !wasVisible) {
+                    raf = requestAnimationFrame(draw);
+                }
+            },
+            { threshold: 0 },
+        );
+        visibilityObserver.observe(canvas);
 
         let cols = 0;
         let rows = 0;
@@ -141,6 +163,8 @@ export default function DotPingTexture({
         ).fill(null);
 
         const draw = (now: number) => {
+            if (!isVisible) return; // don't reschedule — the observer restarts us on re-entry
+
             if (!width || !height || !basePath) {
                 raf = requestAnimationFrame(draw);
                 return;
@@ -149,7 +173,7 @@ export default function DotPingTexture({
             ctx.clearRect(0, 0, width, height);
 
             // resting grid — one fill call regardless of grid size
-            ctx.fillStyle = `rgba(${DOT_COLOR}, ${RESTING_OPACITY})`;
+            ctx.fillStyle = dotColor;
             ctx.fill(basePath);
 
             if (!reduceMotion) {
@@ -228,8 +252,8 @@ export default function DotPingTexture({
 
                     const bucketIntensity = bucket / INTENSITY_BUCKETS;
                     const opacity =
-                        RESTING_OPACITY +
-                        (MAX_OPACITY - RESTING_OPACITY) * bucketIntensity;
+                        MIN_ACTIVE_OPACITY +
+                        (MAX_OPACITY - MIN_ACTIVE_OPACITY) * bucketIntensity;
 
                     // now reads the mutable, observer-refreshed value
                     // instead of a value frozen at effect setup
@@ -250,9 +274,10 @@ export default function DotPingTexture({
         return () => {
             ro.disconnect();
             themeObserver.disconnect();
+            visibilityObserver.disconnect();
             cancelAnimationFrame(raf);
         };
-    }, [reduceMotion, travelRatio, ringWidthRatio]);
+    }, [reduceMotion, travelRatio, ringWidthRatio, dotColor, activeColor]);
 
     return <canvas ref={canvasRef} className={className} aria-hidden="true" />;
 }

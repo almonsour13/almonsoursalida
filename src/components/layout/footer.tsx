@@ -25,8 +25,8 @@ export default function Footer() {
                     </div>
                     <AvailabilityBadge className="flex" />
                 </div>
-
-                <div className="relative flex flex-col-reverse md:flex-row items-start md:items-center justify-between gap-2 py-4 border-t border-border">
+                <div className="relative flex flex-col-reverse md:flex-row items-start md:items-center justify-between gap-2 py-4">
+                    <EdgeLine side="top" />
                     <span className="text-sm text-muted-foreground">
                         © {date.getFullYear()} Al-Monsour Salida. All rights
                         reserved.
@@ -43,9 +43,9 @@ export default function Footer() {
                         </Link>
                     </span>
                 </div>
-                <div className="-mx-2 md:-mx-4 pt-12 md:pt-16 pb-0 flex items-center justify-center">
-                    <FitText className="font-medium tracking-tight text-foreground uppercase">
-                        MONSOUR
+                <div className="-mx-2 md:-mx-4 pt-8 pb-0 flex items-center justify-center">
+                    <FitText className="font-medium tracking-tight text-primary uppercase">
+                        AM. SAlida
                     </FitText>
                 </div>
             </ContentContainer>
