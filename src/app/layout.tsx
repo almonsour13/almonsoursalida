@@ -2,6 +2,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 
+import { cn } from "@/lib/utils";
 import "./globals.css";
 import "./style.css";
 
@@ -27,7 +28,11 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body
-                className={`${dmSans.variable} ${dmSans.className} h-full antialiased bg-background`}
+                className={cn(
+                    " h-full antialiased bg-background overflow-x-hidden",
+                    dmSans.variable,
+                    dmSans.className,
+                )}
             >
                 <ThemeProvider
                     attribute="class"

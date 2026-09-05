@@ -1,11 +1,11 @@
 "use client";
 
 import { socials } from "@/constant/social";
-import { useReducedMotion } from "framer-motion";
 import { FileUser, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import TextAnimate from "../animation/text-animate";
+import AvailabilityBadge from "../availability-badge";
 import DotSprayTexture from "../decorative/dot-spray-texture";
 import EdgeLine from "../decorative/edge-line";
 import ContentContainer from "../layout/content-container";
@@ -21,15 +21,9 @@ const ROLES = [
 ];
 
 export default function Hero() {
-    const reduceMotion = useReducedMotion();
-
     return (
         <div className="w-full px-4 relative flex items-center justify-center">
-            <DotSprayTexture
-                // reduceMotion={reduceMotion}
-                className="absolute inset-0 -z-10 pointer-events-none"
-                // autoAnimateInterval={6000}
-            />
+            <DotSprayTexture className="absolute inset-0 -z-10 pointer-events-none" />
             <EdgeLine side="bottom" className="-z-20 hidden md:block" />
             <ContentContainer>
                 <div className="relative flex flex-col gap-2 py-8 md:py-20">
@@ -46,15 +40,7 @@ export default function Hero() {
                                 />
                             </div>
 
-                            <div className="hidden lg:flex items-center gap-2 rounded border px-4 h-10 py-2 bg-background">
-                                <span className="relative flex h-1.5 w-1.5">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
-                                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
-                                </span>
-                                <span className="font-mono text-sm text-muted-foreground">
-                                    Available for new projects
-                                </span>
-                            </div>
+                            <AvailabilityBadge className="hidden lg:flex" />
                         </div>
 
                         <div className="flex-1 flex flex-col gap-4 justify-between">
@@ -124,15 +110,7 @@ export default function Hero() {
                                 </div>
                             </div>
 
-                            <div className="flex lg:hidden items-center gap-2 rounded border px-4 h-10 py-2 w-fit bg-background">
-                                <span className="relative flex shrink-0">
-                                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-                                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
-                                </span>
-                                <span className="font-mono text-sm text-muted-foreground">
-                                    Available for new projects
-                                </span>
-                            </div>
+                            <AvailabilityBadge className="flex lg:hidden w-fit" />
                         </div>
                     </div>
                 </div>

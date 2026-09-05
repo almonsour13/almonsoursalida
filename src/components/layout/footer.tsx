@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import AvailabilityBadge from "../availability-badge";
 import EdgeLine from "../decorative/edge-line";
+import FitText from "../fit-text";
 import ContentContainer from "./content-container";
 
 export default function Footer() {
@@ -21,16 +23,7 @@ export default function Footer() {
                             desktop products end to end.
                         </p>
                     </div>
-
-                    <div className="flex items-center gap-2 rounded border border-border px-4 py-2 shrink-0">
-                        <span className="relative flex h-1.5 w-1.5">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
-                            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
-                        </span>
-                        <span className="text-xs text-foreground">
-                            Available for projects
-                        </span>
-                    </div>
+                    <AvailabilityBadge className="flex" />
                 </div>
 
                 <div className="relative flex flex-col-reverse md:flex-row items-start md:items-center justify-between gap-2 py-4 border-t border-border">
@@ -49,6 +42,11 @@ export default function Footer() {
                             Cloudflare
                         </Link>
                     </span>
+                </div>
+                <div className="-mx-2 md:-mx-4 pt-12 md:pt-16 pb-0 flex items-center justify-center">
+                    <FitText className="font-medium tracking-tight text-foreground uppercase">
+                        MONSOUR
+                    </FitText>
                 </div>
             </ContentContainer>
         </footer>

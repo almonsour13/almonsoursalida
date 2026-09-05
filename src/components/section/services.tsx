@@ -66,7 +66,7 @@ export default function Services() {
                 </div>
                 <div className="flex flex-col gap-2">
                     <div className="grid md:grid-cols-3 gap-2">
-                        <div className="flex flex-col md:col-span-2 border rounded overflow-hidden">
+                        <div className="flex flex-col md:col-span-2 gap-2">
                             {visibleServices.map((service, index) => {
                                 const isLast =
                                     index === visibleServices.length - 1;
@@ -78,10 +78,10 @@ export default function Services() {
                                             service.title,
                                         )}#contact`}
                                         className={cn(
-                                            "group flex items-start gap-4 p-4 transition-colors hover:bg-muted/40",
+                                            "group flex items-start gap-4 p-4 border rounded transition-colors hover:bg-muted/40",
                                             isLast
                                                 ? ""
-                                                : "border-b border-border",
+                                                : "border-ab border-border",
                                         )}
                                     >
                                         <div className="relative size-16 flex flex-shrink-0 items-center justify-center rounded border border-dashed border-border transition-colors group-hover:border-primary/50">

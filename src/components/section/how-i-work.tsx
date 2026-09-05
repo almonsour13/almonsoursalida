@@ -55,7 +55,7 @@ const STEPS = [
 ];
 
 const HEADLINE_WORDS = ["clarity", "speed", "quality", "trust"];
-const STEP_DURATION_MS = 1500;
+const STEP_DURATION_MS = 1200;
 const ALL_DONE_PAUSE_MS = 600;
 const RESET_PAUSE_MS = 2000;
 export default function HowIWork() {
@@ -155,9 +155,9 @@ export default function HowIWork() {
                                             </span>
                                             <div
                                                 className={cn(
-                                                    "relative border-primary-foreground flex h-8 w-8 shrink-0 border items-center justify-center rounded-full",
+                                                    "relative border-primary flex h-8 w-8 shrink-0 border items-center justify-center rounded-full",
                                                     isActive &&
-                                                        "baorder-muted-foreground",
+                                                        "border-background",
                                                     isDone &&
                                                         "bg-primary-foreground",
                                                 )}
