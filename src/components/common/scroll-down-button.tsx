@@ -23,7 +23,7 @@ export default function ScrollToTopButton() {
     return (
         <div
             className={cn(
-                "fixed p-px bg-card z-30 bottom-8 right-4 md:right-8 rounded-full transform transition duration-300 ease-in-out",
+                "fixed p-px bg-card z-50 bottom-8 right-4 md:right-8 rounded-full transform transition duration-300 ease-in-out",
                 scrollProgress === 0 ? "translate-y-24" : "-translate-y-0",
             )}
             style={{
