@@ -10,7 +10,7 @@ export default function Footer() {
     const date = new Date();
 
     return (
-        <footer className="relative px-4 flex justify-center items-center">
+        <footer className="relative px-4 flex justify-center items-center overflow-hidden">
             <EdgeLine side="top" />
             <ContentContainer>
                 <div className="flex flex-col md:flex-row items-start md:justify-between gap-4 py-4">
