@@ -64,11 +64,5 @@ export default function WordReveal({
 
     if (!quotes) return <>{content}</>;
 
-    return (
-        <>
-            &ldquo;
-            {content}
-            &rdquo;
-        </>
-    );
+    return <>&ldquo; {content} &rdquo;</>;
 }

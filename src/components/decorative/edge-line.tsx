@@ -1,7 +1,9 @@
 import { cn } from "@/lib/utils";
 
+type Side = "top" | "bottom" | "left" | "right";
+
 interface EdgeLineProps {
-    side: "top" | "bottom" | "left" | "right";
+    side: Side | Side[];
     type?: "solid" | "dashed";
     dashSize?: number;
     gapSize?: number;
@@ -9,14 +11,21 @@ interface EdgeLineProps {
     className?: string;
 }
 
-export default function EdgeLine({
+function SingleEdgeLine({
     side,
-    type = "solid",
-    dashSize = 12,
-    gapSize = 8,
-    thickness = 0.8,
+    type,
+    dashSize,
+    gapSize,
+    thickness,
     className,
-}: EdgeLineProps) {
+}: {
+    side: Side;
+    type: "solid" | "dashed";
+    dashSize: number;
+    gapSize: number;
+    thickness: number;
+    className?: string;
+}) {
     const isVertical = side === "left" || side === "right";
     const length = 1000;
 
@@ -54,5 +63,41 @@ export default function EdgeLine({
                 strokeLinecap="butt"
             />
         </svg>
+    );
+}
+
+/**
+ * Renders a thin edge line on one side of its nearest positioned
+ * ancestor, or on several at once.
+ *
+ * Usage:
+ *   <EdgeLine side="bottom" />
+ *   <EdgeLine side={["top", "bottom"]} />
+ *   <EdgeLine side={["top", "left", "right"]} type="dashed" />
+ */
+export default function EdgeLine({
+    side,
+    type = "solid",
+    dashSize = 12,
+    gapSize = 8,
+    thickness = 0.8,
+    className,
+}: EdgeLineProps) {
+    const sides = Array.isArray(side) ? side : [side];
+
+    return (
+        <>
+            {sides.map((s) => (
+                <SingleEdgeLine
+                    key={s}
+                    side={s}
+                    type={type}
+                    dashSize={dashSize}
+                    gapSize={gapSize}
+                    thickness={thickness}
+                    className={className}
+                />
+            ))}
+        </>
     );
 }

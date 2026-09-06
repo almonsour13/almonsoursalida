@@ -1,18 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import AvailabilityBadge from "../availability-badge";
+import AvailabilityBadge from "../common/availability-badge";
 import EdgeLine from "../decorative/edge-line";
-import FitText from "../fit-text";
+import FitText from "../common/fit-text";
 import ContentContainer from "./content-container";
 
 export default function Footer() {
     const date = new Date();
 
     return (
-        <footer className="relative px-4 flex justify-center items-center overflow-hidden">
+        <footer className="relative flex justify-center items-center overflow-hidden">
             <EdgeLine side="top" />
-            <ContentContainer>
+            <ContentContainer className="relative px-4">
+                <EdgeLine
+                    side={["left", "right"]}
+                    className="hidden md:block"
+                />
                 <div className="flex flex-col md:flex-row items-start md:justify-between gap-4 py-4">
                     <div className="flex flex-col gap-1">
                         <span className="text-base font-medium text-foreground">
@@ -43,7 +47,7 @@ export default function Footer() {
                         </Link>
                     </span>
                 </div>
-                <div className="-mx-2 md:-mx-4 pt-8 pb-0 flex items-center justify-center">
+                <div className="hidden -mx-2 md:-mx-4 pt-8 pb-0 flex items-center justify-center">
                     <FitText className="font-medium tracking-tight text-primary uppercase">
                         AM. SAlida
                     </FitText>
@@ -52,3 +56,4 @@ export default function Footer() {
         </footer>
     );
 }
+

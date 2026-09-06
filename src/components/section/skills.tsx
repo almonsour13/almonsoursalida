@@ -9,12 +9,14 @@ import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import TextAnimate from "../animation/text-animate";
 import CornerFrame from "../decorative/corner-frame";
 import ContentContainer from "../layout/content-container";
-import { MarqueeCarousel } from "../marquee-carousel";
+import { GutterLayout } from "../layout/gutter-layout";
+import SectionLabel from "../layout/section-label";
+import { MarqueeCarousel } from "../common/marquee-carousel";
 
 const STACK_NOTES = [
     {
         icon: Layers,
-        title: `${skills.length} tools`,
+        title: `${skills.length}+ tools`,
         description: "Spanning frontend, backend, mobile, and infra.",
     },
     {
@@ -254,68 +256,70 @@ export default function Skills() {
     const NoteIcon = note.icon;
 
     return (
-        <ContentContainer id="skills">
-            <div className="relative flex flex-col">
-                <div className="relative flex flex-col items-start gap-2 pt-16 pb-8 md:items-center md:pt-20 md:pb-12">
-                    <span className="text-xs font-medium uppercase text-primary">
-                        [ SKILLS ]
-                    </span>
+        <>
+            <SectionLabel label="skills" side={["top", "bottom"]} />
+            <GutterLayout>
+                <ContentContainer id="skills">
+                    <div className="relative flex flex-col">
+                        <div className="relative flex flex-col items-start md:items-center gap-2 py-8 md:py-12">
+                            <h1 className="text-5xl font-medium tracking-tight text-foreground md:text-center md:text-6xl capitalize">
+                                Tech{" "}
+                                <TextAnimate
+                                    words={STACK_WORDS}
+                                    className="text-primary"
+                                    interval={5000}
+                                />
+                            </h1>
 
-                    <h1 className="text-5xl font-medium tracking-tight text-foreground md:text-center md:text-6xl capitalize">
-                        Tech{" "}
-                        <TextAnimate
-                            words={STACK_WORDS}
-                            className="text-primary"
-                            interval={5000}
-                        />
-                    </h1>
+                            <p className="text-sm text-muted-foreground md:text-center md:text-base">
+                                A curated collection of languages, frameworks,
+                                and tools I use to architect scalable backends,
+                                design responsive interfaces, and build
+                                high-performance web and mobile solutions.
+                            </p>
+                        </div>
 
-                    <p className="text-sm text-muted-foreground md:text-center md:text-base">
-                        A curated collection of languages, frameworks, and tools
-                        I use to architect scalable backends, design responsive
-                        interfaces, and build high-performance web and mobile
-                        solutions.
-                    </p>
-                </div>
+                        <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+                            <div className="relative rounded border min-h-72 md:h-full z-40">
+                                <CornerFrame />
+                                <div className="absolute inset-0 overflow-hidden">
+                                    <OrbitRings
+                                        isDesktop={isDesktop}
+                                        reduceMotion={reduceMotion}
+                                    />
 
-                <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-                    <div className="relative rounded border min-h-72 md:h-full z-40">
-                        <CornerFrame />
-                        <div className="absolute inset-0 overflow-hidden">
-                            <OrbitRings
-                                isDesktop={isDesktop}
-                                reduceMotion={reduceMotion}
-                            />
+                                    <AnimatePresence mode="wait">
+                                        <motion.div
+                                            key={noteIndex}
+                                            initial={{ opacity: 0, scale: 0.9 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            exit={{ opacity: 0, scale: 0.9 }}
+                                            transition={{
+                                                duration: 0.4,
+                                                ease: "easeOut",
+                                            }}
+                                            className="absolute inset-0 z-20 flex flex-col items-center justify-center"
+                                        >
+                                            <div className="flex flex-col items-center gap-1 border rounded bg-background p-2 px-3 text-center md:p-4">
+                                                <NoteIcon className="hidden md:block h-4 w-4 text-muted-foreground" />
+                                                <h3 className="text-sm md:text-base font-medium text-foreground">
+                                                    {note.title}
+                                                </h3>
+                                                <p className="hidden md:block text-sm leading-relaxed text-muted-foreground">
+                                                    {note.description}
+                                                </p>
+                                            </div>
+                                        </motion.div>
+                                    </AnimatePresence>
+                                </div>
+                            </div>
 
-                            <AnimatePresence mode="wait">
-                                <motion.div
-                                    key={noteIndex}
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.9 }}
-                                    transition={{
-                                        duration: 0.4,
-                                        ease: "easeOut",
-                                    }}
-                                    className="absolute inset-0 z-20 flex flex-col items-center justify-center"
-                                >
-                                    <div className="flex flex-col items-center gap-1 border rounded bg-background p-2 px-3 text-center md:p-4">
-                                        <NoteIcon className="hidden md:block h-4 w-4 text-muted-foreground" />
-                                        <h3 className="text-sm md:text-base font-medium text-foreground">
-                                            {note.title}
-                                        </h3>
-                                        <p className="hidden md:block text-sm leading-relaxed text-muted-foreground">
-                                            {note.description}
-                                        </p>
-                                    </div>
-                                </motion.div>
-                            </AnimatePresence>
+                            <SkillsMarquee />
                         </div>
                     </div>
-
-                    <SkillsMarquee />
-                </div>
-            </div>
-        </ContentContainer>
+                </ContentContainer>
+            </GutterLayout>
+        </>
     );
 }
+

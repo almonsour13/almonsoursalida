@@ -6,10 +6,8 @@ import { useEffect, useRef } from "react";
 const CELL = 10; // px per dot cell
 const MIN_DOT_RADIUS = 0.4; // resting dot size
 const MAX_DOT_RADIUS = 2.2; // dot size at peak (freshly touched) intensity
-const RESTING_OPACITY = 0.8; // idle dot opacity — visible at rest
+const RESTING_OPACITY = 0.8; // baseline opacity a touched dot ramps up from
 const MAX_OPACITY = 1; // opacity at peak intensity
-const DOT_COLOR = "128,128,128"; // resting dot color (gray) — plain R,G,B
-const ACTIVE_COLOR_VAR = "--primary"; // CSS var read at runtime for touched dots
 const INTENSITY_BUCKETS = 20; // active-dot opacity/radius levels, reduces fillStyle changes
 const MAX_TRACKED_DOTS = 4000; // safety cap on how many fading dots we track at once
 
@@ -30,10 +28,17 @@ function withAlpha(colorValue: string, alpha: number): string {
     return `${trimmed.slice(0, closeIdx)} / ${alpha})`;
 }
 
-function readActiveColor(): string {
+// Takes the CSS var name as a parameter now that it comes from a prop
+// rather than a module-level constant.
+function readCssVarColor(varName: string): string {
     return getComputedStyle(document.documentElement)
-        .getPropertyValue(ACTIVE_COLOR_VAR)
+        .getPropertyValue(varName)
         .trim();
+}
+
+/** "--primary" -> true, "rgb(128,128,128,0.5)" -> false */
+function isCssVarName(value: string): boolean {
+    return value.trim().startsWith("--");
 }
 
 export default function DotSprayTexture({
@@ -41,6 +46,9 @@ export default function DotSprayTexture({
     hoverRadius = 60,
     falloff = "smooth",
     fadeDuration = 2200,
+    dotColor = "rgb(128,128,128,0.5)",
+    restingOpacity = 0.5,
+    activeColor = "--primary",
 }: {
     className?: string;
     /** px radius around the cursor within which dots get touched. Bigger = wider "brush" size. Defaults to 120. */
@@ -53,6 +61,18 @@ export default function DotSprayTexture({
     falloff?: "smooth" | "linear" | "sharp";
     /** ms a touched dot takes to fade back to resting after the cursor leaves it. Defaults to 2200 (~a couple seconds). */
     fadeDuration?: number;
+    /**
+     * Resting dot color. Either a literal CSS color (e.g.
+     * "rgb(128,128,128,0.5)", alpha included) or a CSS custom property
+     * name (e.g. "--primary") to read at runtime — auto-detected by a
+     * leading "--". A var-based color re-resolves automatically when the
+     * theme changes, just like `activeColor` does.
+     */
+    dotColor?: string;
+    /** Only applied when `dotColor` is a CSS var name (a literal color already carries its own alpha). Defaults to 0.5. */
+    restingOpacity?: number;
+    /** Name of a CSS custom property (e.g. "--primary") to read for the touched-dot color. */
+    activeColor?: string;
 }) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -64,9 +84,14 @@ export default function DotSprayTexture({
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
-        let activeColorRaw = readActiveColor();
+        const dotColorIsVar = isCssVarName(dotColor);
+
+        let dotColorRaw = dotColorIsVar ? readCssVarColor(dotColor) : dotColor;
+        let activeColorRaw = readCssVarColor(activeColor);
+
         const themeObserver = new MutationObserver(() => {
-            activeColorRaw = readActiveColor();
+            if (dotColorIsVar) dotColorRaw = readCssVarColor(dotColor);
+            activeColorRaw = readCssVarColor(activeColor);
         });
         themeObserver.observe(document.documentElement, {
             attributes: true,
@@ -162,8 +187,11 @@ export default function DotSprayTexture({
 
             ctx.clearRect(0, 0, width, height);
 
-            // resting grid — one fill call regardless of grid size
-            ctx.fillStyle = `rgba(${DOT_COLOR}, ${RESTING_OPACITY})`;
+            // resting grid — one fill call regardless of grid size.
+            // `dotColor` is already a complete color string with its own
+            // alpha (e.g. "rgb(128,128,128,0.5)"), so it's used directly
+            // rather than wrapped in a second opacity value.
+            ctx.fillStyle = dotColor;
             ctx.fill(basePath);
 
             // 1) stamp: while the cursor is active, mark/refresh every dot
@@ -224,18 +252,11 @@ export default function DotSprayTexture({
                 }
 
                 // Safety cap so `touched` can't grow without bound during a
-                // long, wide sweep. This used to sort a freshly-allocated
-                // array of every tracked dot by timestamp every single
-                // frame — an O(n log n) allocation + sort that, given
-                // hoverRadius=60 touches ~113 cells per stamp, realistically
-                // fires on most frames during ordinary use, not just as a
-                // rare edge case. That was the actual source of stutter.
-                //
-                // Because Map iteration order now tracks touch recency (see
-                // above), the oldest-touched entries are simply the first
-                // ones the iterator yields — no sort needed, and the cost
-                // is proportional to how far over the cap we are, not to
-                // the total number of tracked dots.
+                // long, wide sweep. Because Map iteration order tracks
+                // touch recency (see above), the oldest-touched entries are
+                // simply the first ones the iterator yields — no sort
+                // needed, and the cost is proportional to how far over the
+                // cap we are, not to the total number of tracked dots.
                 if (touched.size > MAX_TRACKED_DOTS) {
                     let overflow = touched.size - MAX_TRACKED_DOTS;
                     const it = touched.keys();
@@ -320,7 +341,7 @@ export default function DotSprayTexture({
             container.removeEventListener("mouseleave", handleLeave);
             cancelAnimationFrame(raf);
         };
-    }, [hoverRadius, falloff, fadeDuration]);
+    }, [hoverRadius, falloff, fadeDuration, dotColor, activeColor]);
 
     return <canvas ref={canvasRef} className={className} aria-hidden="true" />;
 }

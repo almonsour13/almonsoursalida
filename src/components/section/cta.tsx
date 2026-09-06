@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import DotPingTexture from "../decorative/dote-ping-texture";
 import EdgeLine from "../decorative/edge-line";
+import GradientDotGrid from "../decorative/gradient-dot-grid";
 import { Button } from "../ui/button";
 
 const FLOATING_ICONS = [
@@ -67,14 +68,17 @@ export default function CTA() {
     const reduceMotion = useReducedMotion();
 
     return (
-        <div className="w-full p-0 md:p-4 relative">
+        <div className="w-full pb-4 p-0 md:p-4 relative">
             <EdgeLine side="top" className="hidden md:block" />
-            <EdgeLine side="bottom" className="hidden md:block" />
             <div className="w-full  md:rounded overflow-hidden relative bg-primary text-primary-foreground p-4 md:py-20 flex flex-col items-start md:items-center gap-4 text-start md:text-center">
                 <DotPingTexture
                     reduceMotion={reduceMotion}
                     dotColor="--primary-foreground"
-                    className="absolute inset-0 pointer-events-none"
+                    className="absolute inset-0 pointer-events-none hidden md:block"
+                />
+                <GradientDotGrid
+                    className="z-10 block md:hidden"
+                    color="--primary-foreground"
                 />
                 {FLOATING_ICONS.map((item, index) => {
                     const entranceDelay = index * ENTRANCE_STAGGER;

@@ -50,11 +50,15 @@ export default function Header() {
 
     return (
         <header
-            className="sticky w-full px-4 py-4  top-0 z-[60] bg-background flex justify-center items-center"
+            className="sticky w-full top-0 z-[60] bg-background flex justify-center items-center"
             id="header"
         >
             <EdgeLine side="bottom" />
-            <ContentContainer className="relative">
+            <ContentContainer className="relative px-4 py-4">
+                <EdgeLine
+                    side={["left", "right"]}
+                    className="hidden md:block"
+                />
                 <div className="flex items-center justify-between gap-4">
                     <nav className="hidden md:flex items-center gap-6">
                         {NAV_LINKS.map((link) => {

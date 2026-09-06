@@ -8,7 +8,7 @@ export default function GridLines({ className }: { className?: string }) {
                 className,
             )}
         >
-            <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0 opacity-5">
                 <div
                     className="absolute inset-0"
                     style={{
@@ -16,7 +16,7 @@ export default function GridLines({ className }: { className?: string }) {
                         linear-gradient(rgba(128,128,128,1) 1px, transparent 1px),
                         linear-gradient(90deg, rgba(128,128,128,1) 1px, transparent 1px)
                     `,
-                        backgroundSize: "40px 40px",
+                        backgroundSize: "32px 32px",
                     }}
                 />
             </div>

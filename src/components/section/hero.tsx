@@ -5,9 +5,7 @@ import { FileUser, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import TextAnimate from "../animation/text-animate";
-import AvailabilityBadge from "../availability-badge";
 import DotSprayTexture from "../decorative/dot-spray-texture";
-import EdgeLine from "../decorative/edge-line";
 import ContentContainer from "../layout/content-container";
 import { Button } from "../ui/button";
 
@@ -24,12 +22,11 @@ export default function Hero() {
     return (
         <div className="w-full px-4 relative flex items-center justify-center">
             <DotSprayTexture className="absolute inset-0 -z-10 pointer-events-none" />
-            <EdgeLine side="bottom" className="-z-20 hidden md:block" />
             <ContentContainer>
                 <div className="relative flex flex-col gap-2 py-8 md:py-20">
                     <div className="flex flex-col lg:flex-row gap-8 md:gap-10">
                         <div className="w-full lg:w-xs shrink-0 flex flex-col gap-2">
-                            <div className="relative aspect-square h-full rounded overflow-hidden border">
+                            <div className="relative aspect-square h-full rounded bg-background overflow-hidden    flex items-center justify-center">
                                 <Image
                                     alt="Portrait of AL-Monsour M. Salida"
                                     src="/image/profile.png"
@@ -39,7 +36,6 @@ export default function Hero() {
                                     priority
                                 />
                             </div>
-                            <AvailabilityBadge className="hidden lg:flex" />
                         </div>
                         <div className="flex-1 flex flex-col gap-4 justify-between">
                             <h1 className="flex flex-col text-5xl md:text-7xl font-normal tracking-tight text-foreground leading-[1.05]">
@@ -105,8 +101,6 @@ export default function Hero() {
                                     ))}
                                 </div>
                             </div>
-
-                            <AvailabilityBadge className="flex lg:hidden w-fit" />
                         </div>
                     </div>
                 </div>

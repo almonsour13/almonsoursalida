@@ -22,6 +22,8 @@ import {
 import { memo, useRef, useState } from "react";
 import TextAnimate from "../animation/text-animate";
 import ContentContainer from "../layout/content-container";
+import { GutterLayout } from "../layout/gutter-layout";
+import SectionLabel from "../layout/section-label";
 
 const STEPS = [
     {
@@ -183,42 +185,44 @@ export default function HowIWork() {
     });
 
     return (
-        <ContentContainer id="how-i-work" className="z-50">
-            <div className="flex flex-col" ref={sectionRef}>
-                <div className="relative flex flex-col items-start md:items-center gap-2 pt-16 md:pt-20 pb-8 md:pb-12">
-                    <span className="text-primary text-xs font-medium uppercase">
-                        [ HOW I WORK ]
-                    </span>
-                    <h1 className="text-5xl md:text-6xl font-medium tracking-tight text-foreground items-start md:text-center capitalize">
-                        A process built for{" "}
-                        <TextAnimate
-                            words={HEADLINE_WORDS}
-                            type="flip"
-                            className="text-primary"
-                            interval={5000}
-                        />
-                    </h1>
-                    <p className="text-sm text-muted-foreground md:text-base items-tart md:text-center">
-                        Every engagement follows the same five-stage framework —
-                        transparent, repeatable, and structured to deliver
-                        consistent results.
-                    </p>
-                </div>
+        <>
+            <SectionLabel label="HOW I WORK" side={["top", "bottom"]} />
+            <GutterLayout>
+                <ContentContainer id="how-i-work" className="z-50">
+                    <div className="flex flex-col" ref={sectionRef}>
+                        <div className="relative flex flex-col items-start md:items-center gap-2 py-8 md:py-12">
+                            <h1 className="text-5xl md:text-6xl font-medium tracking-tight text-foreground items-start md:text-center capitalize">
+                                A process built for{" "}
+                                <TextAnimate
+                                    words={HEADLINE_WORDS}
+                                    type="flip"
+                                    className="text-primary"
+                                    interval={5000}
+                                />
+                            </h1>
+                            <p className="text-sm text-muted-foreground md:text-base items-tart md:text-center">
+                                Every engagement follows the same five-stage
+                                framework — transparent, repeatable, and
+                                structured to deliver consistent results.
+                            </p>
+                        </div>
 
-                <LayoutGroup>
-                    <div className="flex flex-col md:flex-row gap-2">
-                        {STEPS.map((step, i) => (
-                            <StepCard
-                                key={step.title}
-                                step={step}
-                                index={i}
-                                isActive={i === active}
-                                isDone={active >= 0 && i < active}
-                            />
-                        ))}
+                        <LayoutGroup>
+                            <div className="flex flex-col md:flex-row gap-2">
+                                {STEPS.map((step, i) => (
+                                    <StepCard
+                                        key={step.title}
+                                        step={step}
+                                        index={i}
+                                        isActive={i === active}
+                                        isDone={active >= 0 && i < active}
+                                    />
+                                ))}
+                            </div>
+                        </LayoutGroup>
                     </div>
-                </LayoutGroup>
-            </div>
-        </ContentContainer>
+                </ContentContainer>
+            </GutterLayout>
+        </>
     );
 }

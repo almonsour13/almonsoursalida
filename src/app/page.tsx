@@ -3,7 +3,6 @@ import ScrollToTopButton from "@/components/common/scroll-down-button";
 import ThemeToggle from "@/components/common/theme-toggle";
 import CursorCircle from "@/components/effects/cursor-circle";
 import Footer from "@/components/layout/footer";
-import { GutterLayout } from "@/components/layout/gutter-layout";
 import Header from "@/components/layout/header";
 import CTA from "@/components/section/cta";
 import HowIWork from "@/components/section/how-i-work";
@@ -19,17 +18,13 @@ export default function Home() {
         <div className="relative flex flex-col">
             <Header />
             <Hero />
-            <GutterLayout>
-                <Services />
-                <Projects />
-                <Skills />
-                <HowIWork />
-                <Testimonials />
-            </GutterLayout>
+            <Services />
+            <Projects />
+            <Skills />
+            <HowIWork />
+            <Testimonials />
             <CTA />
-            <GutterLayout>
-                <Contact />
-            </GutterLayout>
+            <Contact />
             <Footer />
             <CursorCircle />
             <ScrollToTopButton />
