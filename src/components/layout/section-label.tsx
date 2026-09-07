@@ -23,7 +23,12 @@ export default function SectionLabel({
 
     return (
         <div className="w-full relative flex justify-center items-center">
-            <ContentContainer className={cn("relative py-8 flex", className)}>
+            <ContentContainer
+                className={cn(
+                    "relative py-8 flex items-center z-20",
+                    className,
+                )}
+            >
                 <div className="px-4 md:border-l-3 border-primary flex items-center">
                     <span className="text-xs font-medium text-primary uppercase">
                         [ {label} ]

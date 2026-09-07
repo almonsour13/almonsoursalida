@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils";
+
 export default function AvailabilityBadge({
     className,
 }: {
@@ -5,7 +7,10 @@ export default function AvailabilityBadge({
 }) {
     return (
         <div
-            className={`flex items-center gap-2 rounded border px-4 h-10 py-2 bg-background ${className}`}
+            className={cn(
+                "flex items-center gap-2 rounded border px-4 h-10 py-2 bg-background",
+                className,
+            )}
         >
             <span className="relative flex h-1.5 w-1.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />

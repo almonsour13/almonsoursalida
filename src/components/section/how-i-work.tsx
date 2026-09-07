@@ -106,7 +106,7 @@ const StepCard = memo(function StepCard({
                     />
                 )}
             </AnimatePresence>
-            <div className="z-20 flex-1 flex flex-col gap-4 md:gap-16 p-4">
+            <div className="z-20 flex-1 flex flex-col gap-4 md:gap-12 p-4">
                 <div className="flex justify-between">
                     <span
                         className={cn(

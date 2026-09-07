@@ -5,6 +5,7 @@ import { FileUser, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import TextAnimate from "../animation/text-animate";
+import AvailabilityBadge from "../common/availability-badge";
 import DotSprayTexture from "../decorative/dot-spray-texture";
 import ContentContainer from "../layout/content-container";
 import { Button } from "../ui/button";
@@ -23,38 +24,34 @@ export default function Hero() {
         <div className="w-full px-4 relative flex items-center justify-center">
             <DotSprayTexture className="absolute inset-0 -z-10 pointer-events-none" />
             <ContentContainer>
-                <div className="relative flex flex-col gap-2 py-8 md:py-20">
-                    <div className="flex flex-col lg:flex-row gap-8 md:gap-10">
-                        <div className="w-full lg:w-xs shrink-0 flex flex-col gap-2">
-                            <div className="relative aspect-square h-full rounded bg-background overflow-hidden    flex items-center justify-center">
-                                <Image
-                                    alt="Portrait of AL-Monsour M. Salida"
-                                    src="/image/profile.png"
-                                    fill
-                                    sizes="(min-width: 1024px) 320px, 100vw"
-                                    className="object-cover grayscale hover:grayscale-0 duration-500 transition-all"
-                                    priority
-                                />
-                            </div>
+                <div className="relative py-8 md:py-20">
+                    <div className="flex flex-col gap-6">
+                        <div className="relative aspect-video md:aspect-square h-full w-full lg:w-[160px]  rounded bg-background overflow-hidden flex items-center justify-center">
+                            <Image
+                                alt="Portrait of AL-Monsour M. Salida"
+                                src="/image/profile.png"
+                                fill
+                                className="object-cover grayscale hover:grayscale-0 duration-500 transition-all"
+                                priority
+                            />
                         </div>
                         <div className="flex-1 flex flex-col gap-4 justify-between">
-                            <h1 className="flex flex-col text-5xl md:text-7xl font-normal tracking-tight text-foreground leading-[1.05]">
+                            <h1 className="flex flex-col gap-2 md:flex-row text-5xl md:text-6xl font-light tracking-tight text-foreground">
                                 <span>Hey, I&apos;m</span>
-                                <span>AL-Monsour M. Salida</span>
+                                <span className="text-primary">
+                                    AL-Monsour M. Salida
+                                </span>
                             </h1>
-                            <p className="text-2xl md:text-4xl text-muted-foreground">
+                            <p className="text-2xl md:text-2xl text-foreground">
+                                <span>I&apos;m</span>{" "}
                                 <TextAnimate
                                     words={ROLES}
-                                    className="text-primary"
                                     type="slide"
+                                    className="text-primary"
                                 />
                             </p>
                             <p className="text-base text-muted-foreground leading-relaxed">
-                                I&apos;m a{" "}
-                                <span className="text-primary">
-                                    Full-Stack Developer
-                                </span>{" "}
-                                specializing in building high-performance web,
+                                - specializing in building high-performance web,
                                 mobile, and desktop applications. From
                                 architecting scalable{" "}
                                 <span className="text-primary">Backends</span>{" "}
@@ -100,6 +97,8 @@ export default function Hero() {
                                         </Link>
                                     ))}
                                 </div>
+                                <div className="hidden sm:block h-6 w-px bg-border mx-1" />
+                                <AvailabilityBadge className="h-10" />
                             </div>
                         </div>
                     </div>

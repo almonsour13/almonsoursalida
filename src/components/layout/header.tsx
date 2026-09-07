@@ -3,7 +3,7 @@
 import { useObserveSection } from "@/hooks/use-observe-section";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import EdgeLine from "../decorative/edge-line";
@@ -92,7 +92,10 @@ export default function Header() {
                         )}
                     </button>
                     <Link href="#contact" className="block">
-                        <Button>Get in touch</Button>
+                        <Button>
+                            Get in touch
+                            <ArrowUpRight size={14} />
+                        </Button>
                     </Link>
                 </div>
             </ContentContainer>

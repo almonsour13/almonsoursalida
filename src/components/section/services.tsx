@@ -94,7 +94,7 @@ export default function Services() {
                                                 </div>
 
                                                 <div className="flex min-w-0 flex-1 flex-col gap-1">
-                                                    <h2 className="text-sm font-medium text-foreground md:text-base">
+                                                    <h2 className="text-sm font-medium text-foreground md:text-base group-hover:text-primary">
                                                         {service.title}
                                                     </h2>
 

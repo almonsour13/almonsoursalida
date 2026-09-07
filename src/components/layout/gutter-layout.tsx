@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import DotSprayTexture from "../decorative/dot-spray-texture";
 import EdgeLine from "../decorative/edge-line";
+import ContentContainer from "./content-container";
 
 function Gutter() {
     return (
@@ -20,13 +21,13 @@ export function GutterLayout({
     return (
         <div className={cn("flex relative", className)}>
             <Gutter />
-            <div className="w-full relative flex flex-col max-w-6xl pb-4 px-4">
+            <ContentContainer className="w-full relative flex flex-col max-w-6xl p-4">
                 <EdgeLine
                     className="hidden md:block z-20"
                     side={["left", "right"]}
                 />
                 {children}
-            </div>
+            </ContentContainer>
             <Gutter />
         </div>
     );

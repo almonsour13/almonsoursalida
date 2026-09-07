@@ -53,7 +53,7 @@ export default function Testimonials() {
                         </div>
                         <div className="relative flex flex-col gap-4">
                             <div className="">
-                                <div className="bg-card relative flex flex-col bg-caard justify-center border border-solid items-center gap-4 p-4 md:py-20 rounded overflow-hidden h-auto min-h-[320px] md:min-h-[280px]">
+                                <div className="relative flex flex-col bg-caard justify-center border border-solid items-center gap-4 p-4 md:py-20 rounded overflow-hidden h-auto min-h-[320px] md:min-h-[280px]">
                                     <GridLines className="z-10 hidden" />
                                     <AnimatePresence mode="wait">
                                         <motion.div

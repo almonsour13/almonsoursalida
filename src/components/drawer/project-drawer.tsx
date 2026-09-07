@@ -78,10 +78,10 @@ const ProjectDrawer = forwardRef<
                                 className="w-full relative h-[90vh] bg-background overflow-y-auto pointer-events-auto"
                             >
                                 <EdgeLine side="top" />
-                                <GutterLayout className="h-full rounded-t-md px-4">
+                                <GutterLayout className="h-full rounded-t-md">
                                     <ContentContainer className="z-50 py-4 md:py-8 pb-24">
                                         <div className="h-full flex flex-col gap-4  ">
-                                            <div className="w-full flex justify-between items-center gap-4 md:px-4">
+                                            <div className="w-full flex justify-between items-center gap-4">
                                                 <span className="text-primary text-xs font-medium">
                                                     [ PROJECT DETAILS ]
                                                 </span>
