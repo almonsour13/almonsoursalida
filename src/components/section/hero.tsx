@@ -50,18 +50,14 @@ export default function Hero() {
                                     className="text-primary"
                                 />
                             </p>
-                            <p className="text-base text-muted-foreground leading-relaxed">
-                                - specializing in building high-performance web,
-                                mobile, and desktop applications. From
-                                architecting scalable{" "}
-                                <span className="text-primary">Backends</span>{" "}
-                                to crafting seamless{" "}
-                                <span className="text-primary">Frontends</span>,
-                                with additional experience across{" "}
-                                <span className="text-primary">
-                                    CMS platforms
-                                </span>
-                                .
+                           <p className="text-base text-muted-foreground leading-relaxed">
+                                I specialize in building high-performance web, mobile,
+                                and desktop applications — architecting scalable{" "}
+                                <span className="text-primary">backends</span>,
+                                crafting seamless{" "}
+                                <span className="text-primary">frontends</span>, and
+                                delivering solutions across{" "}
+                                <span className="text-primary">CMS platforms</span>.
                             </p>
 
                             <div className="flex flex-wrap items-center gap-2 pt-1">
