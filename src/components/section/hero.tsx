@@ -26,23 +26,23 @@ export default function Hero() {
             <ContentContainer>
                 <div className="relative py-8 md:py-20">
                     <div className="flex flex-col gap-6">
-                        <div className="relative aspect-video md:aspect-square h-full w-full lg:w-[160px]  rounded bg-background overflow-hidden flex items-center justify-center">
+                        <div className="relative aspect-video md:aspect-square h-full w-full lg:w-[180px]  rounded bg-background overflow-hidden flex items-center justify-center">
                             <Image
                                 alt="Portrait of AL-Monsour M. Salida"
                                 src="/image/profile.png"
                                 fill
-                                className="object-cover grayscale hover:grayscale-0 duration-500 transition-all"
+                                className="object-cover md:grayscale hover:grayscale-0 duration-500 transition-all"
                                 priority
                             />
                         </div>
                         <div className="flex-1 flex flex-col gap-4 justify-between">
-                            <h1 className="flex flex-col gap-2 md:flex-row text-5xl md:text-6xl font-light tracking-tight text-foreground">
+                            <h1 className="flex flex-col gap-4 md:flex-row text-5xl md:text-6xl font-light tracking-tight text-foreground">
                                 <span>Hey, I&apos;m</span>
                                 <span className="text-primary">
                                     AL-Monsour M. Salida
                                 </span>
                             </h1>
-                            <p className="text-2xl md:text-2xl text-foreground">
+                            <p className="text-2xl md:text-4xl text-foreground">
                                 <span>I&apos;m</span>{" "}
                                 <TextAnimate
                                     words={ROLES}
