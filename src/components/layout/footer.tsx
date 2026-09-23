@@ -1,9 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import AvailabilityBadge from "../common/availability-badge";
 import EdgeLine from "../decorative/edge-line";
-import FitText from "../common/fit-text";
 import ContentContainer from "./content-container";
 
 export default function Footer() {
@@ -29,31 +27,14 @@ export default function Footer() {
                     </div>
                     <AvailabilityBadge className="flex" />
                 </div>
-                <div className="relative flex flex-col-reverse md:flex-row items-start md:items-center justify-between gap-2 py-4">
+                <div className="relative flex flex-col-reverse md:flex-row items-start md:items-center gap-2 py-4">
                     <EdgeLine side="top" />
                     <span className="text-sm text-muted-foreground">
                         © {date.getFullYear()} Al-Monsour Salida. All rights
                         reserved.
                     </span>
-                    <span className="text-sm text-muted-foreground">
-                        Design inspired by{" "}
-                        <Link
-                            href="https://www.cloudflare.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-orange-500 underline underline-offset-4 decoration-primary/40 hover:decoration-primary transition-colors"
-                        >
-                            Cloudflare
-                        </Link>
-                    </span>
-                </div>
-                <div className="hidden -mx-2 md:-mx-4 pt-8 pb-0 flex items-center justify-center">
-                    <FitText className="font-medium tracking-tight text-primary uppercase">
-                        AM. SAlida
-                    </FitText>
                 </div>
             </ContentContainer>
         </footer>
     );
 }
-
