@@ -31,7 +31,7 @@ export default function ThemeToggle() {
                     <>
                         <motion.div
                             className={cn(
-                                "fixed top-24 right-4 md:right-8 z-[99] h-8 w-8 md:h-12 md:w-12 border-2 rounded-full",
+                                "fixed top-36 right-4 md:right-8 z-[99] h-8 w-8 md:h-12 md:w-12 border-2 rounded-full",
                                 theme === "dark"
                                     ? "border-white/20"
                                     : "border-gray-900/20",
@@ -54,7 +54,7 @@ export default function ThemeToggle() {
                             }}
                         />
                         <motion.div
-                            className="fixed top-24 right-4 md:right-8 z-[99] h-8 w-8 md:h-12 md:w-12 border-2 rounded-full bg-foreground"
+                            className="fixed top-36 right-4 md:right-8 z-[99] h-8 w-8 md:h-12 md:w-12 border-2 rounded-full bg-foreground"
                             initial={{
                                 scale: 1,
                                 opacity: 0,
@@ -81,7 +81,7 @@ export default function ThemeToggle() {
                 disabled={isThemeTransitioning}
                 variant="outline"
                 size="icon"
-                className="fixed top-24 right-4 md:right-8  rounded-full z-50"
+                className="fixed top-36 right-4 md:right-8  rounded-full z-20"
             >
                 <motion.div
                     animate={{ rotate: isThemeTransitioning ? 360 : 0 }}

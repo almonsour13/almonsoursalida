@@ -23,7 +23,7 @@ export default function ScrollToTopButton() {
     return (
         <div
             className={cn(
-                "fixed p-px bg-card z-50 bottom-8 right-4 md:right-8 rounded-full transform transition duration-300 ease-in-out",
+                "fixed p-px bg-card z-20 bottom-8 right-4 md:right-8 rounded-full transform transition duration-300 ease-in-out",
                 scrollProgress === 0 ? "translate-y-24" : "-translate-y-0",
             )}
             style={{
@@ -37,7 +37,7 @@ export default function ScrollToTopButton() {
                 className="rounded-full border-0"
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             >
-                <ArrowUp className="w-4 h-4 relative z-10 text-primary" />
+                <ArrowUp className="w-4 h-4 relative z-20 text-primary" />
             </Button>
         </div>
     );
