@@ -49,7 +49,7 @@ export default function MenuButton() {
             <Button
                 variant="outline"
                 size="icon"
-                className="fixed top-24 right-4 md:right-8 rounded-full z-50"
+                className="fixed top-24 md:top-32 right-4 md:right-8 rounded-full z-50"
                 onClick={() => setOpen((prev) => !prev)}
                 aria-label={open ? "Close menu" : "Open menu"}
                 aria-expanded={open}
