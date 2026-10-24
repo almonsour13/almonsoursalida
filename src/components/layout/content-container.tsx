@@ -6,8 +6,10 @@ export default function ContentContainer({
     ...props
 }: React.ComponentProps<"div">) {
     return (
-        <div className={cn("w-full md:max-w-6xl", className)} {...props}>
-            {children}
+        <div className="w-full px-4 relative flex items-center justify-center">
+            <div className={cn("w-full md:max-w-7xl", className)} {...props}>
+                {children}
+            </div>
         </div>
     );
 }

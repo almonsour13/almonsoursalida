@@ -5,15 +5,13 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { GitHubCalendar } from "react-github-calendar";
-import EdgeLine from "../decorative/edge-line";
 import ContentContainer from "../layout/content-container";
 import { Button } from "../ui/button";
+import { Card } from "../ui/card";
 
 const GITHUB_USERNAME = "almonsour13";
 
 export default function GithubContributions() {
-    // Assumes next-themes (pairs with the shadcn/ui conventions used elsewhere
-    // on the site). If you're using a different theme provider, swap this hook.
     const { resolvedTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
@@ -24,18 +22,11 @@ export default function GithubContributions() {
     return (
         <ContentContainer id="contributions">
             <div className="flex flex-col">
-                <div className="relative flex flex-col items-center gap-2 px-4 py-8 md:py-20">
-                    <EdgeLine side="right" className="-z-20 hidden md:block" />
-                    <EdgeLine side="left" className="-z-20 hidden md:block" />
-                    <span className="text-xs font-medium text-primary uppercase">
-                        [ GITHUB CONTRIBUTIONS ]
-                    </span>
-
-                    <h1 className="text-4xl md:text-6xl font-normal tracking-tight text-foreground text-center">
+                <div className="relative flex flex-col items-start gap-2 pb-8 md:pb-12">
+                    <h1 className="text-5xl font-light tracking-tight text-foreground items-start md:text-center capitalize leading-tight ">
                         Open Source Contributions
                     </h1>
-
-                    <p className="text-sm text-muted-foreground md:text-base text-center">
+                    <p className="text-sm text-muted-foreground md:text-base items-tart md:text-center">
                         A real-time look at my recent engineering activity,
                         version control workflows, and ongoing project
                         iterations.
@@ -43,7 +34,7 @@ export default function GithubContributions() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                    <div className="p-4 border rounded overflow-hidden">
+                    <Card className="overflow-hidden">
                         {!mounted ? (
                             <div className="h-[140px] w-full animate-pulse rounded bg-muted/40" />
                         ) : (
@@ -79,7 +70,7 @@ export default function GithubContributions() {
                                 }}
                             />
                         )}
-                    </div>
+                    </Card>
 
                     <div className="flex">
                         <Link
